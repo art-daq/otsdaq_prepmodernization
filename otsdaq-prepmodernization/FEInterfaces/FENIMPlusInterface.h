@@ -24,11 +24,13 @@ public:
     void pause            (void) override;
     void resume           (void) override;
     void start            (std::string runNumber) override;
+    bool running          (void) override;
     void stop             (void) override;
 
     int universalRead	  (char* address, char* readValue) override;
     void universalWrite	  (char* address, char* writeValue) override;
 
+    void runSequenceOfCommands(const std::string &treeLinkName);
     //void configureFEW     (void);
     //void configureDetector(const DACStream& theDACStream) override;
 
