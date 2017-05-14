@@ -155,7 +155,8 @@ void FENIMPlusInterface::configure(void)
 	writeBuffer.resize(0);
 	OtsUDPFirmware::read(writeBuffer,0x5);
 	OtsUDPHardware::read(writeBuffer,readBuffer);
-
+	
+	return;
 
 	////////////////////////////////////////////////////////////////////////////////
 	//if clock reset is enabled reset clock
@@ -244,7 +245,7 @@ void FENIMPlusInterface::configure(void)
 	    __MOUT__ << "Skipping DAC writing because enable field was not found in tree." << std::endl;
 	  }
 	
-	if(doWriteDACs)
+	if(0 && doWriteDACs)
 	  {
 	    __MOUT__ << "Setting up DACs" << std::endl;
 
@@ -264,24 +265,30 @@ void FENIMPlusInterface::configure(void)
 		OtsUDPFirmware::write(writeBuffer, 0x0, 0x1);
 		OtsUDPHardware::write(writeBuffer);
 
+		sleep(1000);
 		unsigned short dacValue = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode(dacValueField + channelName).getValue<unsigned short>();
 		writeBuffer.resize(0);
 		OtsUDPFirmware::write(writeBuffer, (dacChannelAddress << 12) | (dacValue & 0xFFF), 0x0);
 		OtsUDPHardware::write(writeBuffer);
 		dacChannelAddress += 4;
-
+		
+		sleep(1000);
 		writeBuffer.resize(0);
 		OtsUDPFirmware::write(writeBuffer, 0x2, 0x1);
 		OtsUDPHardware::write(writeBuffer);
+		sleep(1000);
 		writeBuffer.resize(0);
 		OtsUDPFirmware::write(writeBuffer, 0x0, 0x1);
 		OtsUDPHardware::write(writeBuffer);
+		sleep(1000);
 		writeBuffer.resize(0);
 		OtsUDPFirmware::write(writeBuffer, 0x4, 0x1);
 		OtsUDPHardware::write(writeBuffer);
+		sleep(1000);
 		writeBuffer.resize(0);
 		OtsUDPFirmware::write(writeBuffer, 0x0, 0x1);
 		OtsUDPHardware::write(writeBuffer);
+		sleep(1000);
 	      }
 	  }
 
