@@ -155,9 +155,7 @@ void FENIMPlusInterface::configure(void)
 	writeBuffer.resize(0);
 	OtsUDPFirmware::read(writeBuffer,0x5);
 	OtsUDPHardware::read(writeBuffer,readBuffer);
-	
-	return;
-
+      
 	////////////////////////////////////////////////////////////////////////////////
 	//if clock reset is enabled reset clock
 	{
@@ -167,17 +165,17 @@ void FENIMPlusInterface::configure(void)
 		{
 		  __MOUT__ << "Resetting clocks!" << std::endl;
 		  writeBuffer.resize(0);
-		  OtsUDPFirmware::write(writeBuffer, 0x1FFFFFFFF,0x1); //ots Ethernet reset
+		  OtsUDPFirmware::write(writeBuffer, /*address*/ 0x1FFFFFFFF, /*data*/ 0x1); //ots Ethernet reset
 		  OtsUDPHardware::write(writeBuffer);
 		  writeBuffer.resize(0);
 		  OtsUDPFirmware::write(writeBuffer, 0x1FFFFFFFF,0x0);
 		  OtsUDPHardware::write(writeBuffer);
-		  sleep(5000);
+		  sleep(5); //seconds
 
 		  writeBuffer.resize(0);
-		  OtsUDPFirmware::write(writeBuffer, 0x0,0x3); //Choosing internal := 0, external := 1
+		  OtsUDPFirmware::write(writeBuffer, 0x3,0x0); //Choosing internal := 0, external := 1
 		  OtsUDPHardware::write(writeBuffer);
-		  sleep(1000);
+		  sleep(1); //seconds
 		}
 	    }
 	  catch(...)
@@ -199,34 +197,34 @@ void FENIMPlusInterface::configure(void)
 	  // write 3 to disable and reset
 	  
 	  writeBuffer.resize(0);
-	  OtsUDPFirmware::write(writeBuffer, 0x3, 0x4); //disable sig norm
+	  OtsUDPFirmware::write(writeBuffer, /*address*/ 0x4, /*data*/ 0x3); //disable sig norm
 	  OtsUDPHardware::write(writeBuffer);
 	  writeBuffer.resize(0);
-	  OtsUDPFirmware::write(writeBuffer, 0x3, 0x18016); //disable cms1
+	  OtsUDPFirmware::write(writeBuffer, 0x18016, 0x3); //disable cms1
 	  OtsUDPHardware::write(writeBuffer);
 	  writeBuffer.resize(0);
-	  OtsUDPFirmware::write(writeBuffer, 0x3, 0x18017); //disable cms2
+	  OtsUDPFirmware::write(writeBuffer, 0x18017, 0x3); //disable cms2
 	  OtsUDPHardware::write(writeBuffer);
 	  writeBuffer.resize(0);
-	  OtsUDPFirmware::write(writeBuffer, 0x0, 0x5);  //chA output mux to sig_norm
+	  OtsUDPFirmware::write(writeBuffer, 0x5, 0x0);  //chA output mux to sig_norm
 	  OtsUDPHardware::write(writeBuffer);
 	  writeBuffer.resize(0);
-	  OtsUDPFirmware::write(writeBuffer, 0x0, 0x18013);  //chB output mux to sig_norm
+	  OtsUDPFirmware::write(writeBuffer, 0x18013, 0x0);  //chB output mux to sig_norm
 	  OtsUDPHardware::write(writeBuffer);
 	  writeBuffer.resize(0);
-	  OtsUDPFirmware::write(writeBuffer, 0x0, 0x18014);  //chC output mux to sig_norm
+	  OtsUDPFirmware::write(writeBuffer, 0x18014, 0x0);  //chC output mux to sig_norm
 	  OtsUDPHardware::write(writeBuffer);
 	  writeBuffer.resize(0);
-	  OtsUDPFirmware::write(writeBuffer, 0x0, 0x18015);  //chD output mux to sig_norm
-	  OtsUDPHardware::write(writeBuffer);
-
-
-	  writeBuffer.resize(0);
-	  OtsUDPFirmware::write(writeBuffer, 0xF, 0x1800C); //setup output polarity
+	  OtsUDPFirmware::write(writeBuffer, 0x18015, 0x0);  //chD output mux to sig_norm
 	  OtsUDPHardware::write(writeBuffer);
 
+
 	  writeBuffer.resize(0);
-	  OtsUDPFirmware::write(writeBuffer, 0x0, 0x6); //disable AND gate selection logic
+	  OtsUDPFirmware::write(writeBuffer, 0x1800C, 0xF); //setup output polarity
+	  OtsUDPHardware::write(writeBuffer);
+
+	  writeBuffer.resize(0);
+	  OtsUDPFirmware::write(writeBuffer, 0x6, 0x0); //disable AND gate selection logic
 	  OtsUDPHardware::write(writeBuffer);
 	}
 
@@ -243,12 +241,12 @@ void FENIMPlusInterface::configure(void)
 	catch(...)
 	  {
 	    __MOUT__ << "Skipping DAC writing because enable field was not found in tree." << std::endl;
-	  }
+	  }     
 	
-	if(0 && doWriteDACs)
+	if(0 && doWriteDACs) //works, but temporarily disabling
 	  {
 	    __MOUT__ << "Setting up DACs" << std::endl;
-
+	    
 	    //16 bit DAC value
 	    //   - 15:12 channel := 2=A, 6=B, A=C, E=D
 	    //   - 11:0 value  := 0-3.3V 
@@ -256,42 +254,36 @@ void FENIMPlusInterface::configure(void)
 	    std::string dacValueField = "DACValue";
 	    unsigned char dacChannelAddress = 2;
 	    for(const auto &channelName : channelNames)
-	      {
-
+	      {	
+		
 		writeBuffer.resize(0);
-		OtsUDPFirmware::write(writeBuffer, 0x0, 0x1);
+		OtsUDPFirmware::write(writeBuffer, /*address*/ 0x1, /*data*/ 0x0);
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
-		OtsUDPFirmware::write(writeBuffer, 0x0, 0x1);
+		OtsUDPFirmware::write(writeBuffer, /*address*/ 0x1, /*data*/ 0x0);
 		OtsUDPHardware::write(writeBuffer);
-
-		sleep(1000);
+		
 		unsigned short dacValue = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode(dacValueField + channelName).getValue<unsigned short>();
 		writeBuffer.resize(0);
-		OtsUDPFirmware::write(writeBuffer, (dacChannelAddress << 12) | (dacValue & 0xFFF), 0x0);
+		OtsUDPFirmware::write(writeBuffer, /*address*/ 0x0, /*data*/ (dacChannelAddress << 12) | (dacValue & 0xFFF));
 		OtsUDPHardware::write(writeBuffer);
 		dacChannelAddress += 4;
 		
-		sleep(1000);
 		writeBuffer.resize(0);
-		OtsUDPFirmware::write(writeBuffer, 0x2, 0x1);
-		OtsUDPHardware::write(writeBuffer);
-		sleep(1000);
+		OtsUDPFirmware::write(writeBuffer, /*address*/ 0x1, /*data*/ 0x2);
+		OtsUDPHardware::write(writeBuffer);		
 		writeBuffer.resize(0);
-		OtsUDPFirmware::write(writeBuffer, 0x0, 0x1);
+		OtsUDPFirmware::write(writeBuffer, /*address*/ 0x1, /*data*/ 0x0); 
 		OtsUDPHardware::write(writeBuffer);
-		sleep(1000);
 		writeBuffer.resize(0);
-		OtsUDPFirmware::write(writeBuffer, 0x4, 0x1);
+		OtsUDPFirmware::write(writeBuffer, /*address*/ 0x1, /*data*/ 0x4);
 		OtsUDPHardware::write(writeBuffer);
-		sleep(1000);
 		writeBuffer.resize(0);
-		OtsUDPFirmware::write(writeBuffer, 0x0, 0x1);
-		OtsUDPHardware::write(writeBuffer);
-		sleep(1000);
+		OtsUDPFirmware::write(writeBuffer, /*address*/ 0x1, /*data*/ 0x0);
+		OtsUDPHardware::write(writeBuffer);		
 	      }
 	  }
-
+	
 	
 	//setup sig_mod channels, the input delay and width stages and sig_log, and other pre-sig_norm things
 	try
@@ -305,19 +297,21 @@ void FENIMPlusInterface::configure(void)
 	    __MOUT__ << "Setting up input channels..." << std::endl;	    
 	    for(const auto &channelName : channelNames) //setup sig mod for each channel
 	      {
+		if(channelName != "ChannelD") { ++channelCount; continue;}
+
 		enableInput = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("EnableInput" + channelName).getValue<bool>();
 		inputModMask = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("DelayAndWidthInput" + channelName).getValue<unsigned int>();
 				
 		selectionOnOffMask |= ((enableInput?1:0) << channelCount);
 
 		writeBuffer.resize(0);
-		OtsUDPFirmware::write(writeBuffer, 0x3, ((channelCount+1) << 8) | 0x4); //reset channel
+		OtsUDPFirmware::write(writeBuffer, /*address*/((channelCount+1) << 8) | 0x4, /*data*/ 0x3); //reset channel
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
-		OtsUDPFirmware::write(writeBuffer, inputModMask, ((channelCount+1) << 8) | 0x2); //set sig_mod width and delay
+		OtsUDPFirmware::write(writeBuffer, ((channelCount+1) << 8) | 0x2, inputModMask); //set sig_mod width and delay
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
-		OtsUDPFirmware::write(writeBuffer, enableInput?0:1, ((channelCount+1) << 8) | 0x4); //enable/disable channel
+		OtsUDPFirmware::write(writeBuffer, ((channelCount+1) << 8) | 0x4, enableInput?0:1); //enable/disable channel
 		OtsUDPHardware::write(writeBuffer);
 
 		++channelCount;
@@ -325,24 +319,24 @@ void FENIMPlusInterface::configure(void)
 	    
 	    
 	    writeBuffer.resize(0);
-	    OtsUDPFirmware::write(writeBuffer, 0x40, 0x18000); //resets section of 40MHz clock block
+	    OtsUDPFirmware::write(writeBuffer, 0x18000, 0x40); //resets section of 40MHz clock block
 	    OtsUDPHardware::write(writeBuffer);
 	    writeBuffer.resize(0);
 	    OtsUDPFirmware::write(writeBuffer,
-				  theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("TriggerClockMask").getValue<unsigned int>()
-				  , 0x18008); //chooses a section of 40MHz clock
+				  0x18008, //chooses a section of 40MHz clock
+				  theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("TriggerClockMask").getValue<unsigned int>() ); 
 	    OtsUDPHardware::write(writeBuffer);
 	    writeBuffer.resize(0);
-	    OtsUDPFirmware::write(writeBuffer, 0x0, 0x18000); //enables a section of 40MHz clock block
+	    OtsUDPFirmware::write(writeBuffer, 0x18000, 0x0); //enables a section of 40MHz clock block
 	    OtsUDPHardware::write(writeBuffer);
 
 
 	    writeBuffer.resize(0);
-	    OtsUDPFirmware::write(writeBuffer, 1 << selectionOnOffMask, 0x7); //choose proper AND gate
+	    OtsUDPFirmware::write(writeBuffer, 0x7, 1 << selectionOnOffMask); //choose proper AND gate
 	    OtsUDPHardware::write(writeBuffer);
 
 	    writeBuffer.resize(0);
-	    OtsUDPFirmware::write(writeBuffer, 0x2, 0x6); //enable selection logic output
+	    OtsUDPFirmware::write(writeBuffer, 0x6, 0x2); //enable selection logic output
 	    OtsUDPHardware::write(writeBuffer);  
 	    
 	  }
@@ -351,7 +345,7 @@ void FENIMPlusInterface::configure(void)
 	    __MOUT__ << "Failed input stage setup!\n" << e.what() << std::endl;
 	    throw;
 	  }
-
+	return;
 
 	//setup output stage
 	try
@@ -379,27 +373,27 @@ void FENIMPlusInterface::configure(void)
 		backpressureMask |= (outputBackpressureSelect?1:0) << channelCount;
 		
 		writeBuffer.resize(0);
-		OtsUDPFirmware::write(writeBuffer, 0x33, channelCount==0?0x4:(18016 + channelCount - 1)); //reset output channel block (bits 4/5 are reseting ch1/2
+		OtsUDPFirmware::write(writeBuffer, channelCount==0?0x4:(18016 + channelCount - 1), 0x33); //reset output channel block (bits 4/5 are reseting ch1/2
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
-		OtsUDPFirmware::write(writeBuffer, outputModMask, channelCount==0?0x2:(18002 + channelCount - 1)); //set output channel width/delay mask
+		OtsUDPFirmware::write(writeBuffer, channelCount==0?0x2:(18002 + channelCount - 1), outputModMask); //set output channel width/delay mask
 		OtsUDPHardware::write(writeBuffer);
 		
 		if(channelCount)
 		  {
 		    writeBuffer.resize(0);
-		    OtsUDPFirmware::write(writeBuffer, outputChannelSourceSelect, (18018 + channelCount - 1)); //select source (1 := signorm, 0 := siglog)
+		    OtsUDPFirmware::write(writeBuffer, (18018 + channelCount - 1), outputChannelSourceSelect); //select source (1 := signorm, 0 := siglog)
 		    OtsUDPHardware::write(writeBuffer);
 		  }		
 
 		//time veto setup
 		writeBuffer.resize(0);
-		OtsUDPFirmware::write(writeBuffer, outputTimeVetoDuration, channelCount==0?0x1801B:(18011 + channelCount - 1));
+		OtsUDPFirmware::write(writeBuffer, channelCount==0?0x1801B:(18011 + channelCount - 1), outputTimeVetoDuration);
 		OtsUDPHardware::write(writeBuffer);
 		
 		//prescale veto setup
 		writeBuffer.resize(0);
-		OtsUDPFirmware::write(writeBuffer, outputPrescaleCount, 0x1801C + channelCount);
+		OtsUDPFirmware::write(writeBuffer, 0x1801C + channelCount, outputPrescaleCount);
 		OtsUDPHardware::write(writeBuffer);       
 
 
@@ -418,7 +412,7 @@ void FENIMPlusInterface::configure(void)
 	    outputBackpressureSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("EnableBackPressureInputB").getValue<bool>();
 	    backpressureMask |= outputBackpressureSelect << 4;
 	    writeBuffer.resize(0);
-	    OtsUDPFirmware::write(writeBuffer, backpressureMask, 0x1801A);
+	    OtsUDPFirmware::write(writeBuffer, 0x1801A, backpressureMask);
 	    OtsUDPHardware::write(writeBuffer);
 
 	    //and 4 output muxes (first is special)
@@ -445,7 +439,7 @@ void FENIMPlusInterface::configure(void)
 		      outputMuxSelect = 0x7; //ground
 		  }
 		writeBuffer.resize(0);
-		OtsUDPFirmware::write(writeBuffer, outputMuxSelect, channelCount == 0?0x5:(0x18013 + channelCount - 1)); //setup mux select
+		OtsUDPFirmware::write(writeBuffer, channelCount == 0?0x5:(0x18013 + channelCount - 1), outputMuxSelect); //setup mux select
 		OtsUDPHardware::write(writeBuffer);
 
 		++channelCount;
@@ -454,7 +448,7 @@ void FENIMPlusInterface::configure(void)
 	    outputMuxSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("BurstDataMuxSelect").getValue<unsigned char>();		      	  
 	    
 	    writeBuffer.resize(0);
-	    OtsUDPFirmware::write(writeBuffer, outputMuxSelect, 0x1800E); //setup burst output mux select
+	    OtsUDPFirmware::write(writeBuffer, 0x1800E, outputMuxSelect); //setup burst output mux select
 	    OtsUDPHardware::write(writeBuffer);
 	    
 	  }
@@ -507,6 +501,10 @@ void FENIMPlusInterface::start(std::string )//runNumber)
 	
 	if(theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("EnableBurstData").getValue<bool>())
 	  OtsUDPHardware::write(OtsUDPFirmware::startBurst());
+
+
+
+	std::string writeBuffer;
 }
 
 //========================================================================================================================
@@ -525,7 +523,7 @@ void FENIMPlusInterface::stop(void)
 	//there are 3 output channels (alias: signorm, sigcms1, sigcms2)
 	
 	writeBuffer.resize(0);
-	OtsUDPFirmware::write(writeBuffer,0x33, 0x4); //reset output channel blocks synchronously
+	OtsUDPFirmware::write(writeBuffer, 0x4, 0x33); //reset output channel blocks synchronously
 	OtsUDPHardware::write(writeBuffer);	      
 }
 
@@ -533,7 +531,7 @@ void FENIMPlusInterface::stop(void)
 bool FENIMPlusInterface::running(void)
 {
 	__MOUT__ << "\running" << std::endl;
-
+	return false;
 	//		//example!
 	//		//play with array of 8 LEDs at address 0x1003
 
@@ -555,7 +553,7 @@ bool FENIMPlusInterface::running(void)
 		enable40MHzMask = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("EnableClockMask" + outChannelNames[channelCount]).getValue<bool>();
 		
 		writeBuffer.resize(0);
-		OtsUDPFirmware::write(writeBuffer,(enable40MHzMask?0x0:0x8), channelCount==0?0x4:(18016 + channelCount - 1)); //reset output channel block
+		OtsUDPFirmware::write(writeBuffer, channelCount==0?0x4:(18016 + channelCount - 1), (enable40MHzMask?0x0:0x8)); //reset output channel block
 		OtsUDPHardware::write(writeBuffer);
 	      }
 
