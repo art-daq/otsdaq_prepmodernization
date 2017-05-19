@@ -551,7 +551,7 @@ bool FENIMPlusInterface::running(void)
 			enable40MHzMask = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("EnableClockMask" + outChannelNames[channelCount]).getValue<bool>();
 
 			writeBuffer.resize(0);
-			OtsUDPFirmware::write(writeBuffer, channelCount==0?0x4:(0x18016 + channelCount - 1), (enable40MHzMask?0x0:0x8)); //reset output channel block
+			OtsUDPFirmware::write(writeBuffer, /*address*/ channelCount==0?0x4:(0x18016 + channelCount - 1), /*data*/ (enable40MHzMask?0x0:0x8)); //reset output channel block
 			OtsUDPHardware::write(writeBuffer);
 		}
 
