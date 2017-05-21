@@ -520,7 +520,7 @@ void FENIMPlusInterface::stop(void)
 	//there are 3 output channels (alias: signorm, sigcms1, sigcms2)
 
 	writeBuffer.resize(0);
-	OtsUDPFirmware::write(writeBuffer, 0x4, 0x03);//only reset signorm  0x33); //reset output channel blocks synchronously
+	OtsUDPFirmware::write(writeBuffer, 0x4, 0x33);//only reset signorm  0x33); //reset output channel blocks synchronously
 	OtsUDPHardware::write(writeBuffer);	      
 }
 
