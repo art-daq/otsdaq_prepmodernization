@@ -156,12 +156,18 @@ void FENIMPlusInterface::configure(void)
 	OtsUDPFirmware::read(writeBuffer,0x5);
 	OtsUDPHardware::read(writeBuffer,readBuffer);
 
+
+	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
+	bool usingOptionalParams =
+			!optionalLink.isDisconnected();
+
 	////////////////////////////////////////////////////////////////////////////////
 	//if clock reset is enabled reset clock
 	{
 		try
 		{
-			if(theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("EnableClockResetDuringConfigure").getValue<bool>())
+			if(usingOptionalParams &&
+					optionalLink.getNode("theXDAQContextConfigTree_.getNode(theConfigurationPath_)EnableClockResetDuringConfigure").getValue<bool>())
 			{
 				__MOUT__ << "Resetting clocks!" << std::endl;
 				writeBuffer.resize(0);
@@ -236,7 +242,8 @@ void FENIMPlusInterface::configure(void)
 	bool doWriteDACs = false;
 	try 
 	{
-		doWriteDACs = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("EnableDACSetupDuringConfigure").getValue<bool>();
+		doWriteDACs = usingOptionalParams &&
+				optionalLink.getNode("EnableDACSetupDuringConfigure").getValue<bool>();
 	}
 	catch(...)
 	{
@@ -263,7 +270,7 @@ void FENIMPlusInterface::configure(void)
 			OtsUDPFirmware::write(writeBuffer, /*address*/ 0x1, /*data*/ 0x0);
 			OtsUDPHardware::write(writeBuffer);
 
-			unsigned short dacValue = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode(dacValueField + channelName).getValue<unsigned short>();
+			unsigned short dacValue = optionalLink.getNode(dacValueField + channelName).getValue<unsigned short>();
 			writeBuffer.resize(0);
 			OtsUDPFirmware::write(writeBuffer, /*address*/ 0x0, /*data*/ (dacChannelAddress << 12) | (dacValue & 0xFFF));
 			OtsUDPHardware::write(writeBuffer);
@@ -290,10 +297,10 @@ void FENIMPlusInterface::configure(void)
 	try
 	{
 		unsigned char channelCount = 0;
-		bool enableInput;
+		bool enableInput, invertPolarity;
 		unsigned int inputModMask;
 
-		unsigned char selectionOnOffMask = 0;
+		unsigned char selectionOnOffMask = 0, inputPolarityMask = 0;
 
 		__MOUT__ << "Setting up input channels..." << std::endl;
 		for(const auto &channelName : channelNames) //setup sig mod for each channel
@@ -301,9 +308,17 @@ void FENIMPlusInterface::configure(void)
 			//if(channelName != "ChannelD") { ++channelCount; continue;} //For Debugging just one channel
 
 			enableInput = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("EnableInput" + channelName).getValue<bool>();
-			inputModMask = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("DelayAndWidthInput" + channelName).getValue<unsigned int>();
+
+			if(usingOptionalParams)
+				inputModMask = optionalLink.getNode("DelayAndWidthInput" + channelName).getValue<unsigned int>();
+			else
+				inputModMask = 0x7; // b111 default value
 
 			selectionOnOffMask |= ((enableInput?1:0) << channelCount);
+
+			invertPolarity = usingOptionalParams && optionalLink.getNode("InvertPolarityInput" + channelName).getValue<bool>();
+
+			inputPolarityMask |= ((invertPolarity?1:0) << channelCount);
 
 			writeBuffer.resize(0);
 			OtsUDPFirmware::write(writeBuffer, /*address*/((channelCount+1) << 8) | 0x4, /*data*/ 0x3); //reset channel
@@ -319,13 +334,19 @@ void FENIMPlusInterface::configure(void)
 		}
 
 		writeBuffer.resize(0);
+		OtsUDPFirmware::write(writeBuffer, /*address*/0x1800B, /*data*/ inputPolarityMask); //setup input polarity
+		OtsUDPHardware::write(writeBuffer);
+
+		writeBuffer.resize(0);
 		OtsUDPFirmware::write(writeBuffer, 0x18000, 0x40); //resets section of 40MHz clock block
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
 		OtsUDPFirmware::write(writeBuffer,
 				0x18008,
 				(1<<8) |  //disable sig_log masking with 40MHz clock block
-				theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("TriggerClockMask").getValue<unsigned int>() ); //chooses a section of 40MHz clock
+				usingOptionalParams?
+						theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("TriggerClockMask").getValue<unsigned int>():
+						0); //chooses a section of 40MHz clock
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
 		OtsUDPFirmware::write(writeBuffer, 0x18000, 0x0); //enables a section of 40MHz clock block
@@ -368,10 +389,22 @@ void FENIMPlusInterface::configure(void)
 			outputChannelSourceSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("OutputSourceSelect" + channelName).getValue<unsigned int>(); //0: sig_log   or    1: sig_norm/ch0
 			if(outputChannelSourceSelect) //if non-default, subtract 1 so choice 1 evaluates to 0, and so on..
 				--outputChannelSourceSelect;
-			outputModMask = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("DelayAndWidthOutput" + channelName).getValue<unsigned int>();
-			outputTimeVetoDuration = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("OutputTimeVetoDuration" + channelName).getValue<unsigned int>(); //0 ignores time veto, units of 3ns
-			outputPrescaleCount = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("OutputPrescaleCount" + channelName).getValue<unsigned int>();
-			outputBackpressureSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("OutputBackpressureSelect" + channelName).getValue<bool>();
+
+			if(usingOptionalParams)
+			{
+				outputModMask = optionalLink.getNode("DelayAndWidthOutput" + channelName).getValue<unsigned int>();
+				outputTimeVetoDuration = optionalLink.getNode("OutputTimeVetoDuration" + channelName).getValue<unsigned int>(); //0 ignores time veto, units of 3ns
+				outputPrescaleCount = optionalLink.getNode("OutputPrescaleCount" + channelName).getValue<unsigned int>();
+				outputBackpressureSelect = optionalLink.getNode("OutputBackpressureSelect" + channelName).getValue<bool>();
+			}
+			else //defaults
+			{
+				outputModMask = 0xFFF;
+				outputTimeVetoDuration = 0;
+				outputPrescaleCount = 0;
+				outputBackpressureSelect = false;
+			}
+
 			backpressureMask |= (outputBackpressureSelect?1:0) << channelCount;
 
 			writeBuffer.resize(0);
@@ -409,9 +442,9 @@ void FENIMPlusInterface::configure(void)
 		//  bit 3 is 0/1 disable/enable for first input
 		//  bit 4 is 0/1 disable/enable for second input
 		__MOUT__ << "Backpressure Selecting..." << std::endl;
-		outputBackpressureSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("EnableBackPressureInputA").getValue<bool>();
+		outputBackpressureSelect = usingOptionalParams && optionalLink.getNode("EnableBackPressureInputA").getValue<bool>();
 		backpressureMask |= outputBackpressureSelect << 3;
-		outputBackpressureSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("EnableBackPressureInputB").getValue<bool>();
+		outputBackpressureSelect = usingOptionalParams && optionalLink.getNode("EnableBackPressureInputB").getValue<bool>();
 		backpressureMask |= outputBackpressureSelect << 4;
 		writeBuffer.resize(0);
 		OtsUDPFirmware::write(writeBuffer, 0x1801A, backpressureMask);
@@ -428,7 +461,7 @@ void FENIMPlusInterface::configure(void)
 
 			if(outputMuxSelect > 3) throw std::runtime_error("Invalid output mux select!");
 
-
+			//default value is 0 := channel-0, 1:= ch1, 2:= ch2, 3:=ground
 			if(channelCount == 0)
 			{
 				if(outputMuxSelect == 1)
@@ -450,14 +483,32 @@ void FENIMPlusInterface::configure(void)
 			++channelCount;
 		}
 
-		outputMuxSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("BurstDataMuxSelect").getValue<unsigned int>();
-		if(outputMuxSelect) //if non-default, subtract 1 so choice 1 evaluates to 0, and so on..
-			--outputMuxSelect;
+		//setup burst data blocks
+		{
+			unsigned int logicSampleDelay = 0;
+			unsigned int gateChannel = 0;
+			if(usingOptionalParams)
+			{
+				outputMuxSelect = optionalLink.getNode("BurstDataMuxSelect").getValue<unsigned int>();
+				logicSampleDelay = optionalLink.getNode("BurstDataLogicSampleDelay").getValue<unsigned int>();
+				gateChannel = optionalLink.getNode("BurstDataGateInputChannel").getValue<unsigned int>();
+			}
+			else
+				outputMuxSelect = 0;
 
-		writeBuffer.resize(0);
-		OtsUDPFirmware::write(writeBuffer, 0x1800E, outputMuxSelect); //setup burst output mux select
-		OtsUDPHardware::write(writeBuffer);
+			if(outputMuxSelect) //if non-default, subtract 1 so choice 1 evaluates to 0, and so on..
+				--outputMuxSelect;
 
+			writeBuffer.resize(0);
+			OtsUDPFirmware::write(writeBuffer, 0x1800E, outputMuxSelect); //setup burst output mux select
+			OtsUDPHardware::write(writeBuffer);
+			writeBuffer.resize(0);
+			OtsUDPFirmware::write(writeBuffer, 0x18010, logicSampleDelay); //setup burst logic sample delay
+			OtsUDPHardware::write(writeBuffer);
+			writeBuffer.resize(0);
+			OtsUDPFirmware::write(writeBuffer, 0x18004, gateChannel); //setup burst block gate signal choice
+			OtsUDPHardware::write(writeBuffer);
+		}
 	}
 	catch(const std::runtime_error &e)
 	{
@@ -508,7 +559,12 @@ void FENIMPlusInterface::start(std::string )//runNumber)
 	//Run Start Sequence Commands
 	//runSequenceOfCommands("LinkToStartSequence");
 
-	if(theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("EnableBurstData").getValue<bool>())
+
+	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
+	bool usingOptionalParams =
+			!optionalLink.isDisconnected();
+
+	if(usingOptionalParams && optionalLink.getNode("EnableBurstData").getValue<bool>())
 		OtsUDPHardware::write(OtsUDPFirmware::startBurst());
 
 	std::string writeBuffer;
@@ -548,6 +604,9 @@ bool FENIMPlusInterface::running(void)
 	//		//example!
 	//		//play with array of 8 LEDs at address 0x1003
 
+	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
+	bool usingOptionalParams =
+			!optionalLink.isDisconnected();
 	std::string writeBuffer;
 	// 0x0/0x8 to 0x4 to use edge detection
 	try
@@ -563,7 +622,7 @@ bool FENIMPlusInterface::running(void)
 		//must do channel 0 last!! (synchronously enables all 3 channels)
 		for(channelCount = 2; channelCount <= 2; --channelCount)
 		{
-			enable40MHzMask = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("EnableClockMask" + outChannelNames[channelCount]).getValue<bool>();
+			enable40MHzMask = usingOptionalParams && optionalLink.getNode("EnableClockMask" + outChannelNames[channelCount]).getValue<bool>();
 
 			writeBuffer.resize(0);
 			OtsUDPFirmware::write(writeBuffer, /*address*/ channelCount==0?0x4:(0x18016 + channelCount - 1), /*data*/ (enable40MHzMask?0x0:0x8)); //reset output channel block
