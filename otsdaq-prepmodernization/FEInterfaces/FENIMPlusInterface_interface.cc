@@ -281,7 +281,7 @@ void FENIMPlusInterface::configure(void)
 			writeBuffer.resize(0);
 			OtsUDPFirmware::write(writeBuffer, /*address*/ 0x1, /*data*/ 0x0);
 			OtsUDPHardware::write(writeBuffer);
-			sleep(1); // give a little time to the slow DAC ASIC write
+			//sleep(1); // give a little time to the slow DAC ASIC write
 		}
 	}
 
@@ -298,7 +298,7 @@ void FENIMPlusInterface::configure(void)
 		__MOUT__ << "Setting up input channels..." << std::endl;
 		for(const auto &channelName : channelNames) //setup sig mod for each channel
 		{
-			if(channelName != "ChannelD") { ++channelCount; continue;}
+			//if(channelName != "ChannelD") { ++channelCount; continue;} //For Debugging just one channel
 
 			enableInput = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("EnableInput" + channelName).getValue<bool>();
 			inputModMask = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("DelayAndWidthInput" + channelName).getValue<unsigned int>();
@@ -354,8 +354,8 @@ void FENIMPlusInterface::configure(void)
 		bool enableOutput;
 		unsigned int outputModMask;
 
-		unsigned char outputMuxSelect;
-		unsigned char outputChannelSourceSelect;
+		unsigned int outputMuxSelect;
+		unsigned int outputChannelSourceSelect;
 		unsigned int outputTimeVetoDuration, outputPrescaleCount;
 		bool outputBackpressureSelect;
 		unsigned char backpressureMask = 0;
@@ -365,7 +365,9 @@ void FENIMPlusInterface::configure(void)
 		std::array<std::string,3> outChannelNames = {"Channel0","Channel1","Channel2"};
 		for(const auto &channelName : outChannelNames)
 		{
-			outputChannelSourceSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("OutputSourceSelect" + channelName).getValue<unsigned char>(); //0: sig_log   or    1: sig_norm/ch0
+			outputChannelSourceSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("OutputSourceSelect" + channelName).getValue<unsigned int>(); //0: sig_log   or    1: sig_norm/ch0
+			if(outputChannelSourceSelect) //if non-default, subtract 1 so choice 1 evaluates to 0, and so on..
+				--outputChannelSourceSelect;
 			outputModMask = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("DelayAndWidthOutput" + channelName).getValue<unsigned int>();
 			outputTimeVetoDuration = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("OutputTimeVetoDuration" + channelName).getValue<unsigned int>(); //0 ignores time veto, units of 3ns
 			outputPrescaleCount = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("OutputPrescaleCount" + channelName).getValue<unsigned int>();
@@ -420,7 +422,9 @@ void FENIMPlusInterface::configure(void)
 		channelCount = 0;
 		for(const auto &channelName : channelNames)
 		{
-			outputMuxSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("OutputMuxSelect" + channelName).getValue<unsigned char>();
+			outputMuxSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("OutputMuxSelect" + channelName).getValue<unsigned int>();
+			if(outputMuxSelect) //if non-default, subtract 1 so choice 1 evaluates to 0, and so on..
+				--outputMuxSelect;
 
 			if(outputMuxSelect > 3) throw std::runtime_error("Invalid output mux select!");
 
@@ -446,7 +450,9 @@ void FENIMPlusInterface::configure(void)
 			++channelCount;
 		}
 
-		outputMuxSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("BurstDataMuxSelect").getValue<unsigned char>();
+		outputMuxSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("BurstDataMuxSelect").getValue<unsigned int>();
+		if(outputMuxSelect) //if non-default, subtract 1 so choice 1 evaluates to 0, and so on..
+			--outputMuxSelect;
 
 		writeBuffer.resize(0);
 		OtsUDPFirmware::write(writeBuffer, 0x1800E, outputMuxSelect); //setup burst output mux select
@@ -459,6 +465,8 @@ void FENIMPlusInterface::configure(void)
 		throw;
 	}
 
+
+	//at this point sig_log should be active (for chipscope)
 
 
 	__MOUT__ << "Done with configuring."  << std::endl;
@@ -502,6 +510,13 @@ void FENIMPlusInterface::start(std::string )//runNumber)
 
 	if(theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("EnableBurstData").getValue<bool>())
 		OtsUDPHardware::write(OtsUDPFirmware::startBurst());
+
+	std::string writeBuffer;
+
+	//enable nim plus burst data
+	writeBuffer.resize(0);
+	OtsUDPFirmware::write(writeBuffer, /*address*/ 0x1801F, /*data*/0x6);
+	OtsUDPHardware::write(writeBuffer);
 }
 
 //========================================================================================================================
@@ -520,7 +535,7 @@ void FENIMPlusInterface::stop(void)
 	//there are 3 output channels (alias: signorm, sigcms1, sigcms2)
 
 	writeBuffer.resize(0);
-	OtsUDPFirmware::write(writeBuffer, 0x4, 0x33);//only reset signorm  0x33); //reset output channel blocks synchronously
+	OtsUDPFirmware::write(writeBuffer, /*address*/ 0x4, /*data*/0x33);//only reset signorm  0x33); //reset output channel blocks synchronously
 	OtsUDPHardware::write(writeBuffer);	      
 }
 
