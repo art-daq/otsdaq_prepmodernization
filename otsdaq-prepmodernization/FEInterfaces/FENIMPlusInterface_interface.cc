@@ -344,9 +344,9 @@ void FENIMPlusInterface::configure(void)
 		OtsUDPFirmware::write(writeBuffer,
 				0x18008,
 				(1<<8) |  //disable sig_log masking with 40MHz clock block
-				usingOptionalParams?
-						theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("TriggerClockMask").getValue<unsigned int>():
-						0); //chooses a section of 40MHz clock
+				(usingOptionalParams?
+						optionalLink.getNode("TriggerClockMask").getValue<unsigned int>():
+						0)); //chooses a section of 40MHz clock
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
 		OtsUDPFirmware::write(writeBuffer, 0x18000, 0x0); //enables a section of 40MHz clock block
@@ -354,7 +354,10 @@ void FENIMPlusInterface::configure(void)
 
 
 		writeBuffer.resize(0);
-		OtsUDPFirmware::write(writeBuffer, 0x7, 1 << selectionOnOffMask); //choose proper AND gate
+		OtsUDPFirmware::write(writeBuffer, 0x7, 1 << selectionOnOffMask |
+				(usingOptionalParams?
+						optionalLink.getNode("OverrideORWithSelectionLogicRegister").getValue<unsigned int>():
+						0)); //choose proper AND gate
 		OtsUDPHardware::write(writeBuffer);
 
 		writeBuffer.resize(0);
@@ -485,8 +488,14 @@ void FENIMPlusInterface::configure(void)
 
 		//setup burst data blocks
 		{
+			__MOUT__ << "Setting up Burst Data Blocks" << std::endl;
+
 			unsigned int logicSampleDelay = 0;
 			unsigned int gateChannel = 0;
+			unsigned int gateChannelReg = (4<<8) | (4<<4) | (4<<0); //nibbles ... 3:= delta-time, 2:= out-ch2, 1:= out-ch1, 0 := out-ch0
+				//value of 4 is no-gate
+				// 0-3 are input channels A-D depending on polarity
+
 			if(usingOptionalParams)
 			{
 				outputMuxSelect = optionalLink.getNode("BurstDataMuxSelect").getValue<unsigned int>();
@@ -499,6 +508,16 @@ void FENIMPlusInterface::configure(void)
 			if(outputMuxSelect) //if non-default, subtract 1 so choice 1 evaluates to 0, and so on..
 				--outputMuxSelect;
 
+			if(gateChannel > 1) //if non-default, subtract 1 so choice 1 evaluates to 0, and so on..
+			{
+				gateChannel -= 2; //to give range 0 to 3
+				gateChannelReg |= gateChannel<<12;
+			}
+			else //default is no gate
+			{
+				gateChannelReg |= 4<<12;
+			}
+
 			writeBuffer.resize(0);
 			OtsUDPFirmware::write(writeBuffer, 0x1800E, outputMuxSelect); //setup burst output mux select
 			OtsUDPHardware::write(writeBuffer);
@@ -506,7 +525,7 @@ void FENIMPlusInterface::configure(void)
 			OtsUDPFirmware::write(writeBuffer, 0x18010, logicSampleDelay); //setup burst logic sample delay
 			OtsUDPHardware::write(writeBuffer);
 			writeBuffer.resize(0);
-			OtsUDPFirmware::write(writeBuffer, 0x18004, gateChannel); //setup burst block gate signal choice
+			OtsUDPFirmware::write(writeBuffer, 0x18004, gateChannelReg); //setup burst block gate signal choice
 			OtsUDPHardware::write(writeBuffer);
 		}
 	}
