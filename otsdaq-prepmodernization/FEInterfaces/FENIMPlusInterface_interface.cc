@@ -354,9 +354,13 @@ void FENIMPlusInterface::configure(void)
 
 
 		writeBuffer.resize(0);
-		OtsUDPFirmware::write(writeBuffer, 0x7, 1 << selectionOnOffMask |
+		OtsUDPFirmware::write(writeBuffer, 0x7, ((1 << selectionOnOffMask) &
 				(usingOptionalParams?
-						optionalLink.getNode("OverrideORWithSelectionLogicRegister").getValue<unsigned int>():
+										optionalLink.getNode("Override1stANDWithSelectionLogicRegister").getValue<unsigned int>():
+										-1)
+				) |
+				(usingOptionalParams?
+						optionalLink.getNode("Override2ndORWithSelectionLogicRegister").getValue<unsigned int>():
 						0)); //choose proper AND gate
 		OtsUDPHardware::write(writeBuffer);
 
@@ -383,6 +387,7 @@ void FENIMPlusInterface::configure(void)
 		unsigned int outputTimeVetoDuration, outputPrescaleCount;
 		bool outputBackpressureSelect;
 		unsigned char backpressureMask = 0;
+		unsigned int gateChannelVetoSel[3] = {0,0,0};
 
 		__MOUT__ << "Setting up output channels..." << std::endl;
 		//there are 3 output channels (alias: signorm, sigcms1, sigcms2)
@@ -399,6 +404,9 @@ void FENIMPlusInterface::configure(void)
 				outputTimeVetoDuration = optionalLink.getNode("OutputTimeVetoDuration" + channelName).getValue<unsigned int>(); //0 ignores time veto, units of 3ns
 				outputPrescaleCount = optionalLink.getNode("OutputPrescaleCount" + channelName).getValue<unsigned int>();
 				outputBackpressureSelect = optionalLink.getNode("OutputBackpressureSelect" + channelName).getValue<bool>();
+
+				gateChannelVetoSel[channelCount] = optionalLink.getNode("InputChannelVetoSourceForOutput" + channelName).getValue<int>();
+				//0/1 := No Veto, 2-5 := Input_A-D
 			}
 			else //defaults
 			{
@@ -407,6 +415,11 @@ void FENIMPlusInterface::configure(void)
 				outputPrescaleCount = 0;
 				outputBackpressureSelect = false;
 			}
+
+			if(gateChannelVetoSel[channelCount] <= 1)
+				gateChannelVetoSel[channelCount] = 4; //Ground on mux
+			else
+				gateChannelVetoSel[channelCount] -= 2; //0-3 on mux is chA-D
 
 			backpressureMask |= (outputBackpressureSelect?1:0) << channelCount;
 
@@ -492,9 +505,10 @@ void FENIMPlusInterface::configure(void)
 
 			unsigned int logicSampleDelay = 0;
 			unsigned int gateChannel = 0;
-			unsigned int gateChannelReg = (4<<8) | (4<<4) | (4<<0); //nibbles ... 3:= delta-time, 2:= out-ch2, 1:= out-ch1, 0 := out-ch0
+			unsigned int gateChannelReg = (gateChannelVetoSel[2]<<8) | (gateChannelVetoSel[1]<<4) | (gateChannelVetoSel[0]<<0); //nibbles ... 3:= delta-time, 2:= out-ch2, 1:= out-ch1, 0 := out-ch0
 				//value of 4 is no-gate
 				// 0-3 are input channels A-D depending on polarity
+
 
 			if(usingOptionalParams)
 			{
@@ -632,6 +646,7 @@ bool FENIMPlusInterface::running(void)
 	{
 		unsigned char channelCount = 0;
 		bool enable40MHzMask;
+		unsigned int gateChannelVetoSel;
 
 		//there are 3 output channels (alias: signorm, sigcms1, sigcms2)
 		std::array<std::string,3> outChannelNames = {"Channel0","Channel1","Channel2"};
@@ -642,9 +657,14 @@ bool FENIMPlusInterface::running(void)
 		for(channelCount = 2; channelCount <= 2; --channelCount)
 		{
 			enable40MHzMask = usingOptionalParams && optionalLink.getNode("EnableClockMask" + outChannelNames[channelCount]).getValue<bool>();
+			gateChannelVetoSel = usingOptionalParams?
+					optionalLink.getNode("InputChannelVetoSourceForOutput" + outChannelNames[channelCount]).getValue<int>():
+					0;
 
 			writeBuffer.resize(0);
-			OtsUDPFirmware::write(writeBuffer, /*address*/ channelCount==0?0x4:(0x18016 + channelCount - 1), /*data*/ (enable40MHzMask?0x0:0x8)); //reset output channel block
+			OtsUDPFirmware::write(writeBuffer, /*address*/ channelCount==0?0x4:(0x18016 + channelCount - 1),
+					/*data*/ (enable40MHzMask?0x0:0x8) |
+					(gateChannelVetoSel <= 1?0:(1<<2))); //unreset output channel block
 			OtsUDPHardware::write(writeBuffer);
 		}
 
