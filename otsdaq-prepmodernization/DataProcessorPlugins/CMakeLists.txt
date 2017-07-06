@@ -3,6 +3,7 @@
 simple_plugin(BurstDataAndTimeSaverConsumer "processor"
 	DataManager
 	${CETLIB}
+	WorkLoopManager
   )
 
 
