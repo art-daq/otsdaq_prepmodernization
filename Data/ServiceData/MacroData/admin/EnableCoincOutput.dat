@@ -1,0 +1,7 @@
+{
+"name":"EnableCoincOutput",
+"sequence":"95:w:4:3,96:w:2:3FF00,99:w:4:8,97:w:4:8,98:w:5:0",
+"time":"Wed May 03 2017 13:20:32 GMT-0500 (CDT)",
+"notes":"A => 5 (final stage 40Mhz out) , 0 => 5 (sig_mod 320 MHz out). 0x18010 is output gen reg.",
+"LSBF":"false"
+}@

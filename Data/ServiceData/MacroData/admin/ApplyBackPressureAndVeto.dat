@@ -1,0 +1,7 @@
+{
+"name":"ApplyBackPressureAndVeto",
+"sequence":"189:w:1801A:F,190:w:1801B:10,191:w:18016:0,192:w:5:0,193:w:18013:0,194:w:18014:1,195:w:18015:1",
+"time":"Wed May 03 2017 16:18:22 GMT-0500 (CDT)",
+"notes":"[Modified 15:35 5/7/2017] [Modified 15:38 5/5/2017] [Modified 15:10 5/5/2017] Applying BackPressure and Veto to sig_norm=>chmuxsel=0.0x18016 <= is ch0 veto controller (0 enables, 1 disables), 0x18012 <= is ch1 veto controller",
+"LSBF":"false"
+}@

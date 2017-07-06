@@ -1,0 +1,7 @@
+{
+"name":"SetupSigLogWithReset",
+"sequence":"42:w:1FFFFFFFF:1,43:w:1FFFFFFFF:0,44:d:1000,45:w:3:0,46:d:1000,47:w:404:3,48:w:402:FFFFFFFF,49:w:404:0,50:w:1800E:55,51:w:6:0,52:w:18008:100,53:w:7:400,54:w:204:3,55:w:202:FFFFFFFF,56:w:204:0,57:w:5:9,58:w:6:2",
+"time":"Wed May 03 2017 12:54:25 GMT-0500 (CDT)",
+"notes":"[Modified 13:49 5/3/2017] B-D Coincidence with OTS Reset to start.",
+"LSBF":"false"
+}@

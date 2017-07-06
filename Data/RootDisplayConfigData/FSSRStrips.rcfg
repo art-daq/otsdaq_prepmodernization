@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<ROOT>
+
+  <DATA>
+    <numPositionsTiled>12</numPositionsTiled>
+    <runNumWildcard>0</runNumWildcard>
+    <rootObjName>/LIVE_DQM.root/StripTelescope/Planes/Plane_FEPurdueFSSR0_Channel0_Occupancy</rootObjName>
+    <rootPos>0</rootPos>
+    <rootIsTransparent>0</rootIsTransparent>
+    <rootIsAutoRefresh>1</rootIsAutoRefresh>
+    <rootObjName>/LIVE_DQM.root/StripTelescope/Planes/Plane_FEPurdueFSSR0_Channel1_Occupancy</rootObjName>
+    <rootPos>1</rootPos>
+    <rootIsTransparent>0</rootIsTransparent>
+    <rootIsAutoRefresh>1</rootIsAutoRefresh>
+    <rootObjName>/LIVE_DQM.root/StripTelescope/Planes/Plane_FEPurdueFSSR0_Channel2_Occupancy</rootObjName>
+    <rootPos>2</rootPos>
+    <rootIsTransparent>0</rootIsTransparent>
+    <rootIsAutoRefresh>1</rootIsAutoRefresh>
+    <rootObjName>/LIVE_DQM.root/StripTelescope/Planes/Plane_FEPurdueFSSR0_Channel3_Occupancy</rootObjName>
+    <rootPos>3</rootPos>
+    <rootIsTransparent>0</rootIsTransparent>
+    <rootIsAutoRefresh>1</rootIsAutoRefresh>
+    <rootObjName>/LIVE_DQM.root/StripTelescope/Planes/Plane_FEPurdueFSSR1_Channel0_Occupancy</rootObjName>
+    <rootPos>4</rootPos>
+    <rootIsTransparent>0</rootIsTransparent>
+    <rootIsAutoRefresh>1</rootIsAutoRefresh>
+    <rootObjName>/LIVE_DQM.root/StripTelescope/Planes/Plane_FEPurdueFSSR1_Channel1_Occupancy</rootObjName>
+    <rootPos>5</rootPos>
+    <rootIsTransparent>0</rootIsTransparent>
+    <rootIsAutoRefresh>1</rootIsAutoRefresh>
+    <rootObjName>/LIVE_DQM.root/StripTelescope/Planes/Plane_FEPurdueFSSR1_Channel2_Occupancy</rootObjName>
+    <rootPos>6</rootPos>
+    <rootIsTransparent>0</rootIsTransparent>
+    <rootIsAutoRefresh>1</rootIsAutoRefresh>
+    <rootObjName>/LIVE_DQM.root/StripTelescope/Planes/Plane_FEPurdueFSSR1_Channel3_Occupancy</rootObjName>
+    <rootPos>7</rootPos>
+    <rootIsTransparent>0</rootIsTransparent>
+    <rootIsAutoRefresh>1</rootIsAutoRefresh>
+    <rootObjName>/LIVE_DQM.root/StripTelescope/Planes/Plane_FEOtsUDPFSSR2_Channel0_Occupancy</rootObjName>
+    <rootPos>8</rootPos>
+    <rootIsTransparent>0</rootIsTransparent>
+    <rootIsAutoRefresh>1</rootIsAutoRefresh>
+    <rootObjName>/LIVE_DQM.root/StripTelescope/Planes/Plane_FEOtsUDPFSSR2_Channel1_Occupancy</rootObjName>
+    <rootPos>9</rootPos>
+    <rootIsTransparent>0</rootIsTransparent>
+    <rootIsAutoRefresh>1</rootIsAutoRefresh>
+    <rootObjName>/LIVE_DQM.root/StripTelescope/Planes/Plane_FEOtsUDPFSSR2_Channel2_Occupancy</rootObjName>
+    <rootPos>10</rootPos>
+    <rootIsTransparent>0</rootIsTransparent>
+    <rootIsAutoRefresh>1</rootIsAutoRefresh>
+    <rootObjName>/LIVE_DQM.root/StripTelescope/Planes/Plane_FEOtsUDPFSSR2_Channel3_Occupancy</rootObjName>
+    <rootPos>11</rootPos>
+    <rootIsTransparent>0</rootIsTransparent>
+    <rootIsAutoRefresh>1</rootIsAutoRefresh>
+  </DATA>
+
+</ROOT>
