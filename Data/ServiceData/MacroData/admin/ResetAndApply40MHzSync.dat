@@ -1,7 +1,0 @@
-{
-"name":"ResetAndApply40MHzSync",
-"sequence":"0:w:4:0,1:w:18008:2,2:w:18008:2,3:w:18000:40,4:w:18008:2,5:w:18000:0",
-"time":"Mon May 08 2017 13:18:11 GMT-0500 (Central Standard Time)",
-"notes":"",
-"LSBF":"false"
-}@

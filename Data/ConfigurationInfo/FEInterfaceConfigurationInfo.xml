@@ -8,8 +8,6 @@
 				<COLUMN Type="Data" 	 Name="FEInterfacePluginName" 	 StorageName="FE_INTERFACE_PLUGIN_NAME" 		DataType="VARCHAR2"/>
 				<COLUMN Type="ChildLink-0" 	 Name="LinkToFETypeConfiguration" 	 StorageName="LINK_TO_FE_TYPE_CONFIGURATION" 		DataType="VARCHAR2"/>
 				<COLUMN Type="ChildLinkUID-0" 	 Name="LinkToFETypeUID" 	 StorageName="LINK_TO_FE_TYPE_UID" 		DataType="VARCHAR2"/>
-				<COLUMN Type="ChildLink-FEToDetector" 	 Name="LinkToFEToDetectorConfiguration" 	 StorageName="LINK_TO_FE_TO_DETECTOR_CONFIGURATION" 		DataType="VARCHAR2"/>
-				<COLUMN Type="ChildLinkGroupID-FEToDetector" 	 Name="LinkToFEToDetectorGroupID" 	 StorageName="LINK_TO_FE_TO_DETECTOR_GROUP_ID" 		DataType="VARCHAR2"/>
 				<COLUMN Type="ChildLink-SlowControlChannels" 	 Name="LinkToSlowControlChannelsConfiguration" 	 StorageName="LINK_TO_SLOW_CONTROL_CHANNELS_CONFIGURATION" 		DataType="VARCHAR2"/>
 				<COLUMN Type="ChildLinkGroupID-SlowControlChannels" 	 Name="LinkToSlowControlChannelsGroupID" 	 StorageName="LINK_TO_SLOW_CONTROL_CHANNELS_GROUP_ID" 		DataType="VARCHAR2"/>
 				<COLUMN Type="ChildLink-SlowControlsMonitor" 	 Name="LinkToSlowControlsMonitorConfiguration" 	 StorageName="LINK_TO_SLOW_CONTROLS_MONITOR_CONFIGURATION" 		DataType="VARCHAR2"/>
