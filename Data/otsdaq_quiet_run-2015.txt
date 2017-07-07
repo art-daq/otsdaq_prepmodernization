@@ -1,0 +1,433 @@
+07 Jul 2017 17:20:34.542 [140158925945024] INFO  otsdaq.p:2015 <> - xdaq version: 05.02.00, compiled on May 10 2017 at 10:29:39, 64bit
+07 Jul 2017 17:20:34.544 [140158925945024] INFO  otsdaq.p:2015 <> - Loaded profile: /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_demo/NoGitData/XDAQConfigurations/otsConfiguration_CMake.xml
+07 Jul 2017 17:20:34.544 [140158925945024] INFO  otsdaq.p:2015 <> - b2innub version: 02.05.00, compiled on Dec 16 2016 at 17:01:53
+07 Jul 2017 17:20:34.545 [140158925945024] INFO  otsdaq.p:2015 <> - executive version: 04.00.06, compiled on Dec 16 2016 at 17:01:39
+07 Jul 2017 17:20:34.546 [140158925945024] INFO  otsdaq.p:2015 <> - b2inutils version: 04.04.05, compiled on Apr 12 2017 at 14:54:19
+07 Jul 2017 17:20:34.548 [140158925945024] INFO  otsdaq.p:2015 <> - pthttp version: 04.05.05, compiled on Dec 16 2016 at 17:01:13
+07 Jul 2017 17:20:34.549 [140158925945024] INFO  otsdaq.p:2015 <> - ptfifo version: 04.03.01, compiled on Mar 29 2017 at 14:04:58
+07 Jul 2017 17:20:34.549 [140158925945024] INFO  otsdaq.p:2015 <> - xrelay version: 04.01.00, compiled on Dec 16 2016 at 17:01:51
+07 Jul 2017 17:20:34.551 [140158925945024] INFO  otsdaq.p:2015 <> - hyperdaq version: 05.01.07, compiled on May  2 2017 at 15:26:29
+07 Jul 2017 17:20:34.551 [140158925945024] DEBUG otsdaq.p:2015 <> - Create application descriptor for class: executive::Application id: 0
+07 Jul 2017 17:20:34.564 [140158925945024] INFO  otsdaq.p:2015.executive::Application.lid(0) <> - Log URL not set (was already console)
+07 Jul 2017 17:20:34.565 [140158925945024] INFO  otsdaq.p:2015.executive::Application.lid(0) <> - Changed Log level to INFO
+07 Jul 2017 17:20:34.571 [140158925945024] INFO  otsdaq.p:2015.pt::http::PeerTransportHTTP.lid(1) <> - No security policies on this server
+07 Jul 2017 17:20:34.813 [140158925945024] INFO  otsdaq.p:2015 <> - Supervisor version: 01.00.00, compiled on Jul  6 2017 at 16:28:05
+07 Jul 2017 17:20:35.570 [140158925945024] WARN  otsdaq.p:2015 <> - Could not perform version checking on module file://home/otsdaq/Desktop/otsdaq-v1_01_01/build_slf7.x86_64/otsdaq/lib/libCoreSupervisors.so, version declaration missing.
+07 Jul 2017 17:20:35.574 [140158925945024] WARN  otsdaq.p:2015 <> - Could not perform version checking on module file://home/otsdaq/Desktop/otsdaq-v1_01_01/build_slf7.x86_64/otsdaq_utilities/lib/libChat.so, version declaration missing.
+07 Jul 2017 17:20:35.577 [140158925945024] WARN  otsdaq.p:2015 <> - Could not perform version checking on module file://home/otsdaq/Desktop/otsdaq-v1_01_01/build_slf7.x86_64/otsdaq_utilities/lib/libConsole.so, version declaration missing.
+07 Jul 2017 17:20:35.581 [140158925945024] WARN  otsdaq.p:2015 <> - Could not perform version checking on module file://home/otsdaq/Desktop/otsdaq-v1_01_01/build_slf7.x86_64/otsdaq_utilities/lib/libLogbook.so, version declaration missing.
+07 Jul 2017 17:20:35.586 [140158925945024] WARN  otsdaq.p:2015 <> - Could not perform version checking on module file://home/otsdaq/Desktop/otsdaq-v1_01_01/build_slf7.x86_64/otsdaq_utilities/lib/libConfigurationGUI.so, version declaration missing.
+07 Jul 2017 17:20:35.589 [140158925945024] WARN  otsdaq.p:2015 <> - Could not perform version checking on module file://home/otsdaq/Desktop/otsdaq-v1_01_01/build_slf7.x86_64/otsdaq_utilities/lib/libControlsDashboard.so, version declaration missing.
+07 Jul 2017 17:20:35.593 [140158925945024] WARN  otsdaq.p:2015 <> - Could not perform version checking on module file://home/otsdaq/Desktop/otsdaq-v1_01_01/build_slf7.x86_64/otsdaq_utilities/lib/libMacroMaker.so, version declaration missing.
+LogDebug:ots:otsdaq/otsdaq-core/FiniteStateMachine/FiniteStateMachine.cc [17]	Transition? 0
+LogDebug:ots:otsdaq/otsdaq-core/FiniteStateMachine/RunControlStateMachine.cc [81]	Supervisor is in transition?0
+LogDebug:ots:otsdaq/otsdaq-core/FiniteStateMachine/RunControlStateMachine.cc [84]	Supervisor is in transition?0
+LogDebug:ConfigurationBase:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationBase.cc [549]	ConfigurationGroupMetadata: Configuration: ConfigurationGroupMetadata
+LogDebug:ConfigurationBase:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationBase.cc [552]	ConfigurationGroupMetadata: Num of Views: 0 (Temporary Views: 0)
+LogDebug:ConfigurationBase:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationBase.cc [575]	ConfigurationGroupMetadata: Using Mock-up view
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [153]	ACTIVE_GROUP_FILENAME = /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_demo/NoGitData/ServiceData/ActiveConfigurationGroups.cfg
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [676]	Loading Configuration Group: testContext(5)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [692]	Found group meta data. v10
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [718]	memberMap loaded size = 7
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [742]	Activating chosen group:
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/DesktopIconConfiguration_configuration.cc [71]	*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/DesktopIconConfiguration_configuration.cc [72]	DesktopIconConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1154]	Children of node: DesktopIconConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: FSM
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: Chat
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: Logbook
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: Visualizer
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ConfigureGUI
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: FESubConfigGUI
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: MacroMaker
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ControlsDashboard
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: NOvALog
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: DBUtilities
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: Console
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: FEMacroTest
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: NIMPlus
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1224]	Done w/Children of node: DesktopIconConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1154]	Children of node: NimConfigParams
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1224]	Done w/Children of node: NimConfigParams
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/MessageFacilityConfiguration_configuration.cc [69]	*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/MessageFacilityConfiguration_configuration.cc [71]	MessageFacilityConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1154]	Children of node: MessageFacilityConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: MF_Entry
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1224]	Done w/Children of node: MessageFacilityConfiguration
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/MessageFacilityConfiguration_configuration.cc [142]	Forwarding to Web GUI with UDP forward MesageFacility configuration.
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/XDAQContextConfiguration_configuration.cc [203]	*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/XDAQContextConfiguration_configuration.cc [204]	XDAQContextConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1154]	Children of node: XDAQContextConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: mainContext
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1224]	Done w/Children of node: XDAQContextConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1154]	Children of node: testContextApps
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: Supervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: FESupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ChatSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ConsoleSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: DataManagerSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: LogbookSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: VisualSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ConfigurationGUISupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ControlsDashboardSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: MacroMakerSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1224]	Done w/Children of node: testContextApps
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [816]	Context Configuration Group loaded: testContext(5)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [838]	Load complete.
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [676]	Loading Configuration Group: TableEditWizBackbone(5)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [692]	Found group meta data. v11
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [718]	memberMap loaded size = 2
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [742]	Activating chosen group:
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [823]	Backbone Configuration Group loaded: TableEditWizBackbone(5)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [838]	Load complete.
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [676]	Loading Configuration Group: defaultConfig(4)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [692]	Found group meta data. v4
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [718]	memberMap loaded size = 12
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [742]	Activating chosen group:
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [830]	The Configuration Group loaded: defaultConfig(4)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [838]	Load complete.
+LogDebug:WebUsers:otsdaq/otsdaq-core/WebUsersUtilities/WebUsers.cc [339]	/home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_demo/NoGitData/ServiceData/LoginData/HashesData//hashes.xml
+LogDebug:WebUsers:otsdaq/otsdaq-core/WebUsersUtilities/WebUsers.cc [387]	2 Hashes found.
+LogDebug:WebUsers:otsdaq/otsdaq-core/WebUsersUtilities/WebUsers.cc [444]	Found Users database next user Id: 2
+LogDebug:WebUsers:otsdaq/otsdaq-core/WebUsersUtilities/WebUsers.cc [538]	2 Users found.
+LogDebug:WebUsers:otsdaq/otsdaq-core/WebUsersUtilities/WebUsers.cc [2227]	The current security type is NoSecurity
+LogDebug:WebUsers:otsdaq/otsdaq-core/WebUsersUtilities/WebUsers.cc [2237]	CareAboutCookieCodes_: 0
+LogDebug:WebUsers:otsdaq/otsdaq-core/WebUsersUtilities/WebUsers.cc [2179]	Attempting to load username with lock: admin
+LogDebug:WebUsers:otsdaq/otsdaq-core/WebUsersUtilities/WebUsers.cc [2008]	permissions 255
+LogDebug:WebUsers:otsdaq/otsdaq-core/WebUsersUtilities/WebUsers.cc [2009]	usersUsernameWithLock_ 
+LogDebug:WebUsers:otsdaq/otsdaq-core/WebUsersUtilities/WebUsers.cc [2010]	lock 1
+LogDebug:WebUsers:otsdaq/otsdaq-core/WebUsersUtilities/WebUsers.cc [2011]	username admin
+LogDebug:WebUsers:otsdaq/otsdaq-core/WebUsersUtilities/WebUsers.cc [2012]	isUsernameActive(username) 0
+LogDebug:WebUsers:otsdaq/otsdaq-core/WebUsersUtilities/WebUsers.cc [131]	Done with Web Users initialization!
+LogDebug:ots:otsdaq/otsdaq-core/WorkLoopManager/WorkLoopManager.cc [24]	Request name: StateMachine jobName: StateMachine
+LogDebug:ots:otsdaq/otsdaq-core/WorkLoopManager/WorkLoopManager.cc [24]	Request name: InfoRequest jobName: InfoRequest
+otsdaq/otsdaq-core/MessageFacility/configureMessageFacility.cc [17]	#######################################################################
+otsdaq/otsdaq-core/MessageFacility/configureMessageFacility.cc [18]	Initializing MessageFacility with progname Supervisor
+otsdaq/otsdaq-core/MessageFacility/configureMessageFacility.cc [19]	#######################################################################
+otsdaq/otsdaq-core/MessageFacility/configureMessageFacility.cc [77]	Configuring MessageFacility with Parameter Set: debugModules:["*"]  statistics:["stats"]   destinations : { udp: {
+	type: UDP
+	threshold: DEBUG
+	port: 30000
+	host: "127.0.0.1"
+}
+  } 
+LogDebug:OmniSuper:otsdaq/otsdaq-core/Supervisor/Supervisor.cc [64]	
+LogDebug:OmniSuper:otsdaq/otsdaq-core/Supervisor/Supervisor.cc [72]	Security: NoSecurity
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [35]	Can't find application descriptor called "ots::OtsConfigurationWizardSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [53]	Can't find application descriptor called "ots::DataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [72]	Can't find application descriptor called "ots::FEDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [90]	Can't find application descriptor called "ots::ARTDAQFEDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [98]	Can't find application descriptor called "ots::ARTDAQDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [107]	Can't find application descriptor called "ots::EventBuilderApp" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [116]	Can't find application descriptor called "ots::AggregatorApp" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [125]	Can't find application descriptor called "ots::VisualSupervisor" (Must have been removed from the xdaq context configuration)
+LogDebug:OmniSuper:otsdaq/otsdaq-core/Supervisor/Supervisor.cc [122]	Context UID:mainContext
+LogDebug:OmniSuper:otsdaq/otsdaq-core/Supervisor/Supervisor.cc [129]	Application UID:Supervisor
+LogDebug:OmniSuper:otsdaq/otsdaq-core/Supervisor/Supervisor.cc [143]	Supervisor UID:Supervisor0
+LogDebug:ots:otsdaq/otsdaq-core/FiniteStateMachine/FiniteStateMachine.cc [17]	Transition? 0
+LogDebug:ots:otsdaq/otsdaq-core/FiniteStateMachine/RunControlStateMachine.cc [81]	Undefined Name is in transition?0
+LogDebug:ots:otsdaq/otsdaq-core/FiniteStateMachine/RunControlStateMachine.cc [84]	Undefined Name is in transition?0
+LogDebug:ots:otsdaq/otsdaq-core/WorkLoopManager/WorkLoopManager.cc [24]	Request name: StateMachine jobName: StateMachine
+LogDebug:ConfigurationBase:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationBase.cc [549]	ConfigurationGroupMetadata: Configuration: ConfigurationGroupMetadata
+LogDebug:ConfigurationBase:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationBase.cc [552]	ConfigurationGroupMetadata: Num of Views: 0 (Temporary Views: 0)
+LogDebug:ConfigurationBase:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationBase.cc [575]	ConfigurationGroupMetadata: Using Mock-up view
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [153]	ACTIVE_GROUP_FILENAME = /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_demo/NoGitData/ServiceData/ActiveConfigurationGroups.cfg
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [676]	Loading Configuration Group: testContext(5)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [692]	Found group meta data. v10
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [718]	memberMap loaded size = 7
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [742]	Activating chosen group:
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/DesktopIconConfiguration_configuration.cc [71]	*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/DesktopIconConfiguration_configuration.cc [72]	DesktopIconConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1154]	Children of node: DesktopIconConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: FSM
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: Chat
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: Logbook
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: Visualizer
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ConfigureGUI
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: FESubConfigGUI
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: MacroMaker
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ControlsDashboard
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: NOvALog
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: DBUtilities
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: Console
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: FEMacroTest
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: NIMPlus
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1224]	Done w/Children of node: DesktopIconConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1154]	Children of node: NimConfigParams
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1224]	Done w/Children of node: NimConfigParams
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/MessageFacilityConfiguration_configuration.cc [69]	*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/MessageFacilityConfiguration_configuration.cc [71]	MessageFacilityConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1154]	Children of node: MessageFacilityConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: MF_Entry
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1224]	Done w/Children of node: MessageFacilityConfiguration
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/MessageFacilityConfiguration_configuration.cc [142]	Forwarding to Web GUI with UDP forward MesageFacility configuration.
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/XDAQContextConfiguration_configuration.cc [203]	*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/XDAQContextConfiguration_configuration.cc [204]	XDAQContextConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1154]	Children of node: XDAQContextConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: mainContext
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1224]	Done w/Children of node: XDAQContextConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1154]	Children of node: testContextApps
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: Supervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: FESupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ChatSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ConsoleSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: DataManagerSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: LogbookSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: VisualSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ConfigurationGUISupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ControlsDashboardSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: MacroMakerSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1224]	Done w/Children of node: testContextApps
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [816]	Context Configuration Group loaded: testContext(5)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [838]	Load complete.
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [676]	Loading Configuration Group: TableEditWizBackbone(5)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [692]	Found group meta data. v11
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [718]	memberMap loaded size = 2
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [742]	Activating chosen group:
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [823]	Backbone Configuration Group loaded: TableEditWizBackbone(5)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [838]	Load complete.
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [676]	Loading Configuration Group: defaultConfig(4)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [692]	Found group meta data. v4
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [718]	memberMap loaded size = 12
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [742]	Activating chosen group:
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [830]	The Configuration Group loaded: defaultConfig(4)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [838]	Load complete.
+LogDebug:ots:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [44]	Begin!
+LogDebug:ots:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [45]	Begin!
+LogDebug:ots:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [46]	Begin!
+LogDebug:ots:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [47]	Begin!
+LogDebug:ots:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [48]	Begin!
+LogDebug:ots:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [84]	Done!
+LogDebug:ots:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [85]	Done!
+LogDebug:ots:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [86]	Done!
+LogDebug:ots:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [87]	Done!
+LogDebug:ots:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [101]	CONTEXT!
+LogDebug:ots:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [102]	CONTEXT!
+LogDebug:ots:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [103]	CONTEXT!
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [35]	Can't find application descriptor called "ots::OtsConfigurationWizardSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [53]	Can't find application descriptor called "ots::DataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [72]	Can't find application descriptor called "ots::FEDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [90]	Can't find application descriptor called "ots::ARTDAQFEDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [98]	Can't find application descriptor called "ots::ARTDAQDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [107]	Can't find application descriptor called "ots::EventBuilderApp" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [116]	Can't find application descriptor called "ots::AggregatorApp" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [125]	Can't find application descriptor called "ots::VisualSupervisor" (Must have been removed from the xdaq context configuration)
+LogDebug:ots:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [105]	Done!
+LogDebug:ots:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [106]	Done!
+LogDebug:ots:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [107]	Done!
+ots::Configurable::Configurable(const ots::ConfigurationTree&, const string&)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [35]	Can't find application descriptor called "ots::OtsConfigurationWizardSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [53]	Can't find application descriptor called "ots::DataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [72]	Can't find application descriptor called "ots::FEDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [90]	Can't find application descriptor called "ots::ARTDAQFEDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [98]	Can't find application descriptor called "ots::ARTDAQDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [107]	Can't find application descriptor called "ots::EventBuilderApp" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [116]	Can't find application descriptor called "ots::AggregatorApp" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [125]	Can't find application descriptor called "ots::VisualSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [35]	Can't find application descriptor called "ots::OtsConfigurationWizardSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [53]	Can't find application descriptor called "ots::DataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [72]	Can't find application descriptor called "ots::FEDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [90]	Can't find application descriptor called "ots::ARTDAQFEDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [98]	Can't find application descriptor called "ots::ARTDAQDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [107]	Can't find application descriptor called "ots::EventBuilderApp" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [116]	Can't find application descriptor called "ots::AggregatorApp" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [125]	Can't find application descriptor called "ots::VisualSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq_utilities/otsdaq-utilities/Console/ConsoleSupervisor.cc [60]	ApplicationDescriptor LID=260
+otsdaq_utilities/otsdaq-utilities/Console/ConsoleSupervisor.cc [79]	
+LogDebug:ots:otsdaq/otsdaq-core/NetworkUtilities/Socket.cc [43]	
+LogDebug:ots:otsdaq/otsdaq-core/NetworkUtilities/Socket.cc [48]	IPAddress: 127.0.0.1 port: 30001 htons: 12661
+LogDebug:ots:otsdaq/otsdaq-core/NetworkUtilities/Socket.cc [72]	 htons: 12661
+otsdaq/otsdaq-core/NetworkUtilities/Socket.cc [96]	96]	Binding port: 30001
+otsdaq/otsdaq-core/NetworkUtilities/Socket.cc [108]	108]	Socket Number: 10 for port: 30001 initialized.
+otsdaq/otsdaq-core/NetworkUtilities/Socket.cc [119]	:):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):)
+otsdaq/otsdaq-core/NetworkUtilities/Socket.cc [120]	:):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):)
+otsdaq/otsdaq-core/NetworkUtilities/Socket.cc [121]	SOCKET ON PORT: 30001 ON IP: 127.0.0.1 INITIALIZED OK!
+otsdaq/otsdaq-core/NetworkUtilities/Socket.cc [122]	:):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):)
+otsdaq/otsdaq-core/NetworkUtilities/Socket.cc [123]	:):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):)
+otsdaq/otsdaq-core/NetworkUtilities/Socket.cc [127]	127]	Socket Number: 10 for port: 30001 initialized.
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [35]	Can't find application descriptor called "ots::OtsConfigurationWizardSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [53]	Can't find application descriptor called "ots::DataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [72]	Can't find application descriptor called "ots::FEDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [90]	Can't find application descriptor called "ots::ARTDAQFEDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [98]	Can't find application descriptor called "ots::ARTDAQDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [107]	Can't find application descriptor called "ots::EventBuilderApp" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [116]	Can't find application descriptor called "ots::AggregatorApp" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [125]	Can't find application descriptor called "ots::VisualSupervisor" (Must have been removed from the xdaq context configuration)
+LogDebug:Logbook:otsdaq_utilities/otsdaq-utilities/Logbook/LogbookSupervisor.cc [172]	Active Experiment is 
+otsdaq_utilities/otsdaq-utilities/ConfigurationGUI/ConfigurationGUISupervisor.cc [49]	Initializing...
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [35]	Can't find application descriptor called "ots::OtsConfigurationWizardSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [53]	Can't find application descriptor called "ots::DataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [72]	Can't find application descriptor called "ots::FEDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [90]	Can't find application descriptor called "ots::ARTDAQFEDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [98]	Can't find application descriptor called "ots::ARTDAQDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [107]	Can't find application descriptor called "ots::EventBuilderApp" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [116]	Can't find application descriptor called "ots::AggregatorApp" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [125]	Can't find application descriptor called "ots::VisualSupervisor" (Must have been removed from the xdaq context configuration)
+LogDebug:CfgGUI:otsdaq_utilities/otsdaq-utilities/ConfigurationGUI/ConfigurationGUISupervisor.cc [56]	Activating saved context, which may prepare for normal mode...
+LogDebug:CfgGUI:otsdaq_utilities/otsdaq-utilities/ConfigurationGUI/ConfigurationGUISupervisor.cc [4371]	Attempting test activation of the context group.
+LogDebug:ConfigurationBase:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationBase.cc [549]	ConfigurationGroupMetadata: Configuration: ConfigurationGroupMetadata
+LogDebug:ConfigurationBase:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationBase.cc [552]	ConfigurationGroupMetadata: Num of Views: 0 (Temporary Views: 0)
+LogDebug:ConfigurationBase:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationBase.cc [575]	ConfigurationGroupMetadata: Using Mock-up view
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [153]	ACTIVE_GROUP_FILENAME = /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_demo/NoGitData/ServiceData/ActiveConfigurationGroups.cfg
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [676]	Loading Configuration Group: testContext(5)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [692]	Found group meta data. v10
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [718]	memberMap loaded size = 7
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [742]	Activating chosen group:
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/DesktopIconConfiguration_configuration.cc [71]	*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/DesktopIconConfiguration_configuration.cc [72]	DesktopIconConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1154]	Children of node: DesktopIconConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: FSM
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: Chat
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: Logbook
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: Visualizer
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ConfigureGUI
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: FESubConfigGUI
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: MacroMaker
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ControlsDashboard
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: NOvALog
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: DBUtilities
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: Console
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: FEMacroTest
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: NIMPlus
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1224]	Done w/Children of node: DesktopIconConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1154]	Children of node: NimConfigParams
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1224]	Done w/Children of node: NimConfigParams
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/MessageFacilityConfiguration_configuration.cc [69]	*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/MessageFacilityConfiguration_configuration.cc [71]	MessageFacilityConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1154]	Children of node: MessageFacilityConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: MF_Entry
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1224]	Done w/Children of node: MessageFacilityConfiguration
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/MessageFacilityConfiguration_configuration.cc [142]	Forwarding to Web GUI with UDP forward MesageFacility configuration.
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/XDAQContextConfiguration_configuration.cc [203]	*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/XDAQContextConfiguration_configuration.cc [204]	XDAQContextConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1154]	Children of node: XDAQContextConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: mainContext
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1224]	Done w/Children of node: XDAQContextConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1154]	Children of node: testContextApps
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: Supervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: FESupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ChatSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ConsoleSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: DataManagerSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: LogbookSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: VisualSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ConfigurationGUISupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ControlsDashboardSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: MacroMakerSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1224]	Done w/Children of node: testContextApps
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [816]	Context Configuration Group loaded: testContext(5)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [838]	Load complete.
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [676]	Loading Configuration Group: TableEditWizBackbone(5)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [692]	Found group meta data. v11
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [718]	memberMap loaded size = 2
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [742]	Activating chosen group:
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [823]	Backbone Configuration Group loaded: TableEditWizBackbone(5)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [838]	Load complete.
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [676]	Loading Configuration Group: defaultConfig(4)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [692]	Found group meta data. v4
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [718]	memberMap loaded size = 12
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [742]	Activating chosen group:
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [830]	The Configuration Group loaded: defaultConfig(4)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [838]	Load complete.
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [213]	Destroying Context group: 
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [215]	Destroying Backbone group: 
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [217]	Destroying Configuration group: 
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [256]	Destroying Configuration Key: 4
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [267]	Destroying Backbone Key: 5
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [276]	Destroying Context Key: 5
+LogDebug:ConfigurationBase:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationBase.cc [549]	ConfigurationGroupMetadata: Configuration: ConfigurationGroupMetadata
+LogDebug:ConfigurationBase:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationBase.cc [552]	ConfigurationGroupMetadata: Num of Views: 0 (Temporary Views: 0)
+LogDebug:ConfigurationBase:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationBase.cc [575]	ConfigurationGroupMetadata: Using Mock-up view
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [153]	ACTIVE_GROUP_FILENAME = /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_demo/NoGitData/ServiceData/ActiveConfigurationGroups.cfg
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [676]	Loading Configuration Group: testContext(5)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [692]	Found group meta data. v10
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [718]	memberMap loaded size = 7
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [742]	Activating chosen group:
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/DesktopIconConfiguration_configuration.cc [71]	*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/DesktopIconConfiguration_configuration.cc [72]	DesktopIconConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1154]	Children of node: DesktopIconConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: FSM
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: Chat
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: Logbook
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: Visualizer
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ConfigureGUI
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: FESubConfigGUI
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: MacroMaker
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ControlsDashboard
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: NOvALog
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: DBUtilities
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: Console
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: FEMacroTest
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: NIMPlus
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1224]	Done w/Children of node: DesktopIconConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1154]	Children of node: NimConfigParams
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1224]	Done w/Children of node: NimConfigParams
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/MessageFacilityConfiguration_configuration.cc [69]	*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/MessageFacilityConfiguration_configuration.cc [71]	MessageFacilityConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1154]	Children of node: MessageFacilityConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: MF_Entry
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1224]	Done w/Children of node: MessageFacilityConfiguration
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/MessageFacilityConfiguration_configuration.cc [142]	Forwarding to Web GUI with UDP forward MesageFacility configuration.
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/XDAQContextConfiguration_configuration.cc [203]	*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/XDAQContextConfiguration_configuration.cc [204]	XDAQContextConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1154]	Children of node: XDAQContextConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: mainContext
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1224]	Done w/Children of node: XDAQContextConfiguration
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1154]	Children of node: testContextApps
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: Supervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: FESupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ChatSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ConsoleSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: DataManagerSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: LogbookSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: VisualSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ConfigurationGUISupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: ControlsDashboardSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1163]		Child: MacroMakerSupervisor
+LogDebug:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1224]	Done w/Children of node: testContextApps
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [816]	Context Configuration Group loaded: testContext(5)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [838]	Load complete.
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [676]	Loading Configuration Group: TableEditWizBackbone(5)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [692]	Found group meta data. v11
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [718]	memberMap loaded size = 2
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [742]	Activating chosen group:
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [823]	Backbone Configuration Group loaded: TableEditWizBackbone(5)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [838]	Load complete.
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [676]	Loading Configuration Group: defaultConfig(4)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [692]	Found group meta data. v4
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [718]	memberMap loaded size = 12
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [742]	Activating chosen group:
+LogInfo:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [830]	The Configuration Group loaded: defaultConfig(4)
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [838]	Load complete.
+otsdaq_utilities/otsdaq-utilities/ControlsDashboard/ControlsDashboardSupervisor.cc [48]	282
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [35]	Can't find application descriptor called "ots::OtsConfigurationWizardSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [53]	Can't find application descriptor called "ots::DataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [72]	Can't find application descriptor called "ots::FEDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [90]	Can't find application descriptor called "ots::ARTDAQFEDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [98]	Can't find application descriptor called "ots::ARTDAQDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [107]	Can't find application descriptor called "ots::EventBuilderApp" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [116]	Can't find application descriptor called "ots::AggregatorApp" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [125]	Can't find application descriptor called "ots::VisualSupervisor" (Must have been removed from the xdaq context configuration)
+LogDebug:ots:otsdaq_utilities/otsdaq-utilities/ControlsDashboard/ControlsDashboardSupervisor.cc [167]	
+LogDebug:ots:otsdaq_utilities/otsdaq-utilities/ControlsDashboard/ControlsDashboardSupervisor.cc [171]	XDAQContextConfiguration
+LogDebug:ots:otsdaq_utilities/otsdaq-utilities/ControlsDashboard/ControlsDashboardSupervisor.cc [173]	XDAQContextConfiguration
+ots::Configurable::Configurable(const ots::ConfigurationTree&, const string&)
+ots::ControlsVInterface::ControlsVInterface(const string&, const ots::ConfigurationTree&, const string&)
+LogDebug:ots:otsdaq_utilities/otsdaq-utilities/ControlsDashboard/ControlsDashboardSupervisor.cc [180]	
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [35]	Can't find application descriptor called "ots::OtsConfigurationWizardSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [53]	Can't find application descriptor called "ots::DataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [72]	Can't find application descriptor called "ots::FEDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [90]	Can't find application descriptor called "ots::ARTDAQFEDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [98]	Can't find application descriptor called "ots::ARTDAQDataManagerSupervisor" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [107]	Can't find application descriptor called "ots::EventBuilderApp" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [116]	Can't find application descriptor called "ots::AggregatorApp" (Must have been removed from the xdaq context configuration)
+otsdaq/otsdaq-core/SupervisorDescriptorInfo/SupervisorDescriptorInfoBase.cc [125]	Can't find application descriptor called "ots::VisualSupervisor" (Must have been removed from the xdaq context configuration)
+LogDebug:MacroMaker:otsdaq_utilities/otsdaq-utilities/MacroMaker/MacroMakerSupervisor.cc [92]	#######################################
+LogDebug:MacroMaker:otsdaq_utilities/otsdaq-utilities/MacroMaker/MacroMakerSupervisor.cc [93]	#######################################
+LogDebug:MacroMaker:otsdaq_utilities/otsdaq-utilities/MacroMaker/MacroMakerSupervisor.cc [95]	Running in MacroMaker Supervisor
+LogDebug:MacroMaker:otsdaq_utilities/otsdaq-utilities/MacroMaker/MacroMakerSupervisor.cc [97]	#######################################
+LogDebug:MacroMaker:otsdaq_utilities/otsdaq-utilities/MacroMaker/MacroMakerSupervisor.cc [98]	#######################################
+LogDebug:MacroMaker:otsdaq_utilities/otsdaq-utilities/MacroMaker/MacroMakerSupervisor.cc [49]	PixelFESupervisor instance size 1
+LogDebug:MacroMaker:otsdaq_utilities/otsdaq-utilities/MacroMaker/MacroMakerSupervisor.cc [53]	PixelFESupervisor instance 210...and...0x24efcb0
+LogDebug:MacroMaker:otsdaq_utilities/otsdaq-utilities/MacroMaker/MacroMakerSupervisor.cc [55]	Look! Here's a FE! @@@
+07 Jul 2017 17:20:36.282 [140158925945024] INFO  otsdaq.p:2015 <> - Ready.
