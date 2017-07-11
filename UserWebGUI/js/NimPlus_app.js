@@ -215,6 +215,8 @@ var invalidInput = false; //Track if any textbox input is invalid, used to preve
 var columnList = [] //fields that have had changes since last save/page load, [Column Name]
 var dataList = [[null, null]] // All data in form(s), [Column Name, Data]
 var updatedFields = [[null, null]] // Fields to update, [Field Object, data]
+var syncArray = [0,0,0,0,0,0,0,0]
+
 
 
 function testFunc() {
@@ -234,7 +236,7 @@ function savePageValues(e) {
         //#43c130 = green color, alerts user that changes are saved
         $("body").css("background-color", "#43c130");
         //Table Updates Here					
-        Debug.log("NimPlus Configuration Changes Saved", Debug.INFO_PRIORITY);
+        //Debug.log("NimPlus Configuration Changes Saved", Debug.INFO_PRIORITY);
         console.log("Page Values Saved");
         console.log(modifiedList);
         modifiedList = [];
@@ -244,7 +246,7 @@ function savePageValues(e) {
         document.getElementById("saveEl").innerHTML = "Warning! Unable to save, some fields contain invalid values";
         console.log("Warning! Textbox on page has invalid value, aborting save...")
         console.log("Please check the following fields for possible invalid values (some might be correct)");
-        Debug.log("NimPlus Configuration Changes NOT Saved, Invalid value(s) in fields", Debug.HIGH_PRIORITY);
+        //Debug.log("NimPlus Configuration Changes NOT Saved, Invalid value(s) in fields", Debug.HIGH_PRIORITY);
         console.log(modifiedList);
     }
 }
@@ -278,10 +280,16 @@ function DWCalcWord(delay, width) {
     return word;
 }
 
-function syncMaskCalc() {
-    var word = null;
+function syncMaskCalc(val,a) {
+    syncArray[a]=val;
+    var n = 0;
+    var l = syncArray.length;
+    for (var i = 0; i < l; i++) {
+        n = (n << 1) + (syncArray[i]?1:0);
+        }
+    console.log(n)
     //Calculate the 40 Mhz Sync Mask
-    return word;
+    return n;
 }
 
 function elByID(id) {
@@ -323,11 +331,12 @@ function dwValidCheck(firstVal, secondValElId, msgElId) {
 function addModifiedList(tableVal, tableDat) {
     //#fcd125 = yellow color, notifies user that there are unsaved changes on the page
     $("body").css("background-color", "#fcd125")
-    existsAt = $.inArray(tableVal, modifiedList);
+    existsAt = $.inArray(tableVal, modifiedList[0]);
     //document.getElementById("saveEl").innerHTML = "";
     if (existsAt < 0) {
         modifiedList.push([tableVal, tableDat]);
     } else {
+        modifiedList[existsAt] = [tableVal,tableDat];
         //console.log(" element already exists in modified list, not updating list...")
     }
 

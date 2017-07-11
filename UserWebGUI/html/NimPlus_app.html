@@ -72,14 +72,14 @@
     <p>Input Channel Enable Control <button id="InChEnCtlBtn">Show/Hide</button></p>
     <div id="InChEnCtl" class="Dropdown">
         <input type="checkbox" id="ChAInEn" onclick="addModifiedList('ChAInEn');"><label for="ChAInEn">Enable Channel A?</label>
-        <input type="checkbox" id="ChAInInv" onclick="addModifiedList('InvertPolarityInputChannelA');"><label for="ChAInInv">Invert Input?</label>
+        <input type="checkbox" id="ChAInInv" onclick="addModifiedList('InvertPolarityInputChannelA',this.checked?'yes':'no');"><label for="ChAInInv">Invert Input?</label>
         </br><input type="checkbox" id="ChBInEn" onclick="addModifiedList('ChBInEn');"><label for="ChBInEn">Enable Channel B?</label>
-        <input type="checkbox" id="ChBInInv" onclick="addModifiedList('InvertPolarityInputChannelB');"><label for="ChBInInv">Invert Input?</label>
+        <input type="checkbox" id="ChBInInv" onclick="addModifiedList('InvertPolarityInputChannelB',this.checked?'yes':'no');"><label for="ChBInInv">Invert Input?</label>
         </br><input type="checkbox" id="ChCInEn" onclick="addModifiedList('ChCInEn');"><label for="ChCInEn">Enable Channel C?</label>
-        <input type="checkbox" id="ChCInInv" onclick="addModifiedList('InvertPolarityInputChannelC');"><label for="ChCInInv">Invert Input?</label>
+        <input type="checkbox" id="ChCInInv" onclick="addModifiedList('InvertPolarityInputChannelC',this.checked?'yes':'no');"><label for="ChCInInv">Invert Input?</label>
 
         </br><input type="checkbox" id="ChDInEn" onclick="addModifiedList('ChDInEn');"><label for="ChDInEn">Enable Channel D?</label>
-        <input type="checkbox" id="ChDInInv" onclick="addModifiedList('InvertPolarityInputChannelD');"><label for="ChDInInv">Invert Input?</label>
+        <input type="checkbox" id="ChDInInv" onclick="addModifiedList('InvertPolarityInputChannelD',this.checked?'yes':'no');"><label for="ChDInInv">Invert Input?</label>
 
 
     </div>
@@ -232,7 +232,7 @@
 			<option value=30>N/A</option>
 			<option value=31>N/A</option>
 			</select>
-            <!--not in table --><input type="checkbox" id="ChAOutInv" onclick="addModifiedList('ChAOutInv', this.checked);"><label for="ChAOutInv">Invert Output?</label>
+            <!--not in table --><input type="checkbox" id="ChAOutInv" onclick="addModifiedList('ChAOutInv',this.checked?'yes':'no');"><label for="ChAOutInv">Invert Output?</label>
         </p>
 
         <p>Output 2 - <select id="CHBOutMux" oninput="addModifiedList('OutputMuxSelectChannelB', this.value);">
@@ -245,7 +245,7 @@
 			<option value=6>N/A</option>
 			<option value=7>N/A</option>
 			</select>
-            <!--not in table --><input type="checkbox" id="ChBOutInv" onclick="addModifiedList('ChBOutInv', this.checked);"><label for="ChBOutInv">Invert Output?</label>
+            <!--not in table --><input type="checkbox" id="ChBOutInv" onclick="addModifiedList('ChBOutInv',this.checked?'yes':'no');"><label for="ChBOutInv">Invert Output?</label>
         </p>
 
         <p>Output 3 - <select id="ChCOutMux" oninput="addModifiedList('OutputMuxSelectChannelC', this.value);">
@@ -258,7 +258,7 @@
 			<option value=6>N/A</option>
 			<option value=7>N/A</option>
 			</select>
-            <!--not in table --><input type="checkbox" id="ChCOutInv" onclick="addModifiedList('ChCOutInv', this.checked);"><label for="ChCOutInv">Invert Output?</label>
+            <!--not in table --><input type="checkbox" id="ChCOutInv" onclick="addModifiedList('ChCOutInv',this.checked?'yes':'no');"><label for="ChCOutInv">Invert Output?</label>
         </p>
 
         <p>Output 4 - <select id="ChDOutMux" oninput="addModifiedList('OutputMuxSelectChannelD', this.value);">
@@ -271,7 +271,7 @@
 			<option value=6>N/A</option>
 			<option value=7>N/A</option>			
 			</select>
-            <!--not in table --><input type="checkbox" id="ChDOutInv" onclick="addModifiedList('ChDOutInv', this.checked);"><label for="ChDOutInv">Invert Output?</label>
+            <!--not in table --><input type="checkbox" id="ChDOutInv" onclick="addModifiedList('ChDOutInv',this.checked?'yes':'no');"><label for="ChDOutInv">Invert Output?</label>
         </p>
 
     </div>
@@ -306,24 +306,22 @@
     <p>40Mhz Sync Control <button id="SyncCtlBtn">Show/Hide</button></p>
     <div id="SyncCtl" class="Dropdown">
         Trigger Clock Mask/Portion of the 40Mhz Signal to sync with
-        </br><label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync1" onclick="addModifiedList('TriggerClockMask', syncMaskCalc());">1</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync2" onclick="addModifiedList('TriggerClockMask', syncMaskCalc());">2</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync3" onclick="addModifiedList('TriggerClockMask', syncMaskCalc());">3</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync4" onclick="addModifiedList('TriggerClockMask', syncMaskCalc());">4</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync5" onclick="addModifiedList('TriggerClockMask', syncMaskCalc());">5</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync6" onclick="addModifiedList('TriggerClockMask', syncMaskCalc());">6</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync7" onclick="addModifiedList('TriggerClockMask', syncMaskCalc());">7</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync8" onclick="addModifiedList('TriggerClockMask', syncMaskCalc());">8</label>
+        </br><label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync1" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,0));">1</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync2" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,1));">2</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync3" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,2));">3</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync4" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,3));">4</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync5" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,4));">5</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync6" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,5));">6</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync7" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,6));">7</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync8" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,7));">8</label>
         </br>
-
-
-
-
-
-
-
     </div>
 </div>
+
+
+
+
+
 
 <div class="ControlBox">
     <p>Veto(s) Control <button id="VetoCtlBtn">Show/Hide</button></p>
