@@ -306,7 +306,7 @@
     <p>40Mhz Sync Control <button id="SyncCtlBtn">Show/Hide</button></p>
     <div id="SyncCtl" class="Dropdown">
         Trigger Clock Mask/Portion of the 40Mhz Signal to sync with
-        </br><label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync1" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,0));">1</label>
+        <br><label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync1" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,0));">1</label>
         <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync2" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,1));">2</label>
         <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync3" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,2));">3</label>
         <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync4" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,3));">4</label>
@@ -314,7 +314,7 @@
         <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync6" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,5));">6</label>
         <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync7" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,6));">7</label>
         <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync8" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,7));">8</label>
-        </br>
+        <br>
     </div>
 </div>
 
@@ -327,11 +327,11 @@
     <p>Veto(s) Control <button id="VetoCtlBtn">Show/Hide</button></p>
     <div id="VetoCtl" class="Dropdown">
 
-        Veto Count<input type="number" id="VetoCount" min=0 step=1 oninput="addModifiedList('VetoCnt', this.value); validInput();" oninvalid="invalidInput();"></input>
+        Veto Count<input type="number" id="VetoCount" min=0 step=1 oninput="addModifiedList('VetoCnt', this.value); validInput();" oninvalid="invalidInput();">
 
-        <br>Veto 1 Count<input type="number" id="Veto1Count" min=0 step=1 oninput="addModifiedList('Veto1Cnt', this.value); validInput();" oninvalid="invalidInput();"></input>
+        <br>Veto 1 Count<input type="number" id="Veto1Count" min=0 step=1 oninput="addModifiedList('Veto1Cnt', this.value); validInput();" oninvalid="invalidInput();">
 
-        <br>Veto 2 Count<input type="number" id="Veto2Count" min=0 step=1 oninput="addModifiedList('Veto2Cnt', this.value); validInput();" oninvalid="invalidInput();"></input>
+        <br>Veto 2 Count<input type="number" id="Veto2Count" min=0 step=1 oninput="addModifiedList('Veto2Cnt', this.value); validInput();" oninvalid="invalidInput();">
 
     </div>
 </div>
@@ -339,9 +339,9 @@
 <div class="ControlBox">
     <p>Prescaler Control <button id="PsCtlBtn">Show/Hide</button></p>
     <div id="PsCtl" class="Dropdown">
-        Prescaler Count<input type="number" id="PsCount" min=0 step=1 oninput="addModifiedList('PsCnt', this.value); validInput();" oninvalid="invalidInput();"></input>
-        </br>Prescaler 1 Count<input type="number" id="PsCount1" min=0 step=1 oninput="addModifiedList('PsCnt1', this.value); validInput();" oninvalid="invalidInput();"></input>
-        </br>Prescaler 2 Count<input type="number" id="PsCount2" min=0 step=1 oninput="addModifiedList('PsCnt2', this.value); validInput();" oninvalid="invalidInput();"></input>
+        Prescaler Count<input type="number" id="PsCount" min=0 step=1 oninput="addModifiedList('PsCnt', this.value); validInput();" oninvalid="invalidInput();">
+        <br>Prescaler 1 Count<input type="number" id="PsCount1" min=0 step=1 oninput="addModifiedList('PsCnt1', this.value); validInput();" oninvalid="invalidInput();">
+        <br>Prescaler 2 Count<input type="number" id="PsCount2" min=0 step=1 oninput="addModifiedList('PsCnt2', this.value); validInput();" oninvalid="invalidInput();">
     </div>
 </div>
 
@@ -350,19 +350,19 @@
     <div id="SelLogCtl" class="Dropdown">
         <!-- Not in table?-->
         Channels: ABCD , Cases output when true and are OR'd together
-        </br><input type="checkbox" id="SL0FFFF" onclick="addModifiedList('SL0FFFF');"><label for="SL0FFFF">FFFF</label>
+        <br><input type="checkbox" id="SL0FFFF" onclick="addModifiedList('SL0FFFF');"><label for="SL0FFFF">FFFF</label>
         <input type="checkbox" id="SL1TFFF" onclick="addModifiedList('SL1TFFF');"><label for="SL1TFFF">TFFF</label>
         <input type="checkbox" id="SL2FTFF" onclick="addModifiedList('SL2FTFF');"><label for="SL2FTFF">FTFF</label>
         <input type="checkbox" id="SL3TTFF" onclick="addModifiedList('SL3TTFF');"><label for="SL3TTFF">TTFF</label>
-        </br><input type="checkbox" id="SL4FFTF" onclick="addModifiedList('SL4FFTF');"><label for="SL5FTF">FFTF</label>
+        <br><input type="checkbox" id="SL4FFTF" onclick="addModifiedList('SL4FFTF');"><label for="SL5FTF">FFTF</label>
         <input type="checkbox" id="SL5TFTF" onclick="addModifiedList('SL5TFTF');"><label for="SL5TFTF">TFTF</label>
         <input type="checkbox" id="SL6FTTF" onclick="addModifiedList('SL6FTTF');"><label for="SL6FTTF">FTTF</label>
         <input type="checkbox" id="SL7TTTF" onclick="addModifiedList('SL7TTTF');"><label for="SL7TTTF">TTTF</label>
-        </br><input type="checkbox" id="SL8FFFT" onclick="addModifiedList('SL8FFFT');"><label for="SL8FFFT">FFFT</label>
+        <br><input type="checkbox" id="SL8FFFT" onclick="addModifiedList('SL8FFFT');"><label for="SL8FFFT">FFFT</label>
         <input type="checkbox" id="SL9TFFT" onclick="addModifiedList('SL9TFFT');"><label for="SL9TFFT">TFFT</label>
         <input type="checkbox" id="SL10FTFT" onclick="addModifiedList('SL10FTFT');"><label for="SL10FTFT">FTFT</label>
         <input type="checkbox" id="SL11TTFT" onclick="addModifiedList('SL11TTFT');"><label for="SL11TTFT">TTFT</label>
-        </br><input type="checkbox" id="SL12FFTT" onclick="addModifiedList('SL12FFTT');"><label for="SL12FFTT">FFTT</label>
+        <br><input type="checkbox" id="SL12FFTT" onclick="addModifiedList('SL12FFTT');"><label for="SL12FFTT">FFTT</label>
         <input type="checkbox" id="SL13TFTT" onclick="addModifiedList('SL13TFTT');"><label for="SL13TFTT">TFTT</label>
         <input type="checkbox" id="SL14FTTT" onclick="addModifiedList('SL14FTTT');"><label for="SL14FTTT">FTTT</label>
         <input type="checkbox" id="SL15TTTT" onclick="addModifiedList('SL15TTTT');"><label for="SL15TTTT">FTFT</label>
@@ -373,18 +373,18 @@
     <p>Back Pressure Control <button id="BkpCtlBtn">Show/Hide</button></p>
     <div id="BkpCtl" class="Dropdown">
         <input type="checkbox" id="bkpEnableA"><label for="bkpEnableA" oninput="addModifiedList('bkpEnA', this.checked);">Enable Backpressure Veto A?</label>
-        </br><input type="checkbox" id="bkpEnableB"><label for="bkpEnableB" oninput="addModifiedList('bkpEnB', this.checked);">Enable Backpressure Veto B?</label>
+        <br><input type="checkbox" id="bkpEnableB"><label for="bkpEnableB" oninput="addModifiedList('bkpEnB', this.checked);">Enable Backpressure Veto B?</label>
     </div>
 </div>
 
 <div class="ControlBox">
     <p>Signal Generator Control <button id="SigGenCtlBtn">Show/Hide</button></p>
     <div id="SigGenCtl" class="Dropdown">
-        Output Pulse Count (0 for continuous)<input type="number" id="SGPulseCnt" min=0 step=1 oninput="addModifiedList('SGPulseCnt', this.value); validInput();" oninvalid="invalidInput();"></input>
+        Output Pulse Count (0 for continuous)<input type="number" id="SGPulseCnt" min=0 step=1 oninput="addModifiedList('SGPulseCnt', this.value); validInput();" oninvalid="invalidInput();">
 
-        <br>High Period(s)<input type="number" id="SGHighPer" min=0 step=1 oninput="addModifiedList('SGHighPer', this.value); validInput();" oninvalid="invalidInput();"></input>
+        <br>High Period(s)<input type="number" id="SGHighPer" min=0 step=1 oninput="addModifiedList('SGHighPer', this.value); validInput();" oninvalid="invalidInput();">
 
-        <br>Low Period(s)<input type="number" id="SGLowPer" min=0 step=1 oninput="addModifiedList('SGLowPer', this.value); validInput();" oninvalid="invalidInput();"></input>
+        <br>Low Period(s)<input type="number" id="SGLowPer" min=0 step=1 oninput="addModifiedList('SGLowPer', this.value); validInput();" oninvalid="invalidInput();">
     </div>
 </div>
 

@@ -6,7 +6,6 @@ TODO
  - Populate remaining divs with relevant controls
  	- Add input source selection (siglog vs signorm on 3 outputs) 
  - add functionality to Save Page Function to modify table values that have been changed on this GUI
- - Potentially consolidate ColumnList and DataList so that array holds only updated column names with new data?
  - somehow get objects to send back to ConfigurationAPI.setFieldsOfRecords's <fieldObjectArr> that match the fields that need to be updated
  	- $.InArray of DataList and returned objects?
  	- Forge objects from DataList to send back without reading??????? (super hack-ey, avoid if possible)
@@ -121,7 +120,7 @@ function getNimUIDs(nimUids) {
     Debug.log("getNimUIDs ", Debug.INFO_PRIORITY);
 
     ConfigurationAPI.getFieldsOfRecords(
-        _subsetBasePath, ["NIMPlus0"], //nimUids,
+        _subsetBasePath, ["NimPlus0"], //nimUids,
         "", //""/*_editableFieldList*/,
         -1,
         getNimFields,
@@ -144,8 +143,8 @@ function getNimFields(recFields) {
         recFields[i].fieldColumnName + "<br>";
     //document.body.innerHTML = str;		
     console.log(str);
-    ConfigurationAPI.getFieldValuesForRecord(
-        _subsetBasePath, ["NIMPlus0"],
+    ConfigurationAPI.getFieldValuesForRecords(
+        _subsetBasePath, ["NimPlus0"],
         _localFields,
         getNimFieldValues,
         _modifiedTables
@@ -192,8 +191,8 @@ function getNimFieldValues(recFieldValues) {
 function handleSetNimValues(modifiedTables) {
     _modifiedTables = modifiedTables;
 
-    ConfigurationAPI.getFieldValuesForRecord(
-        _subsetBasePath, ["NIMPlus0"],
+    ConfigurationAPI.getFieldValuesForRecords(
+        _subsetBasePath, ["NimPlus0"],
         _localFields,
         getNimFieldValues,
         _modifiedTables
@@ -215,7 +214,7 @@ var invalidInput = false; //Track if any textbox input is invalid, used to preve
 var columnList = [] //fields that have had changes since last save/page load, [Column Name]
 var dataList = [[null, null]] // All data in form(s), [Column Name, Data]
 var updatedFields = [[null, null]] // Fields to update, [Field Object, data]
-var syncArray = [0,0,0,0,0,0,0,0]
+var syncArray = [0,0,0,0,0,0,0,0] //Array representing the 40Mhz "Sync Word"
 
 
 
