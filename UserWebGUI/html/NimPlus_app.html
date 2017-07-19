@@ -90,27 +90,27 @@
     <p>DAC Threshold Configuration <button id="DacCtlBtn">Show/Hide</button></p>
     <div id="DacCtl" class="Dropdown">
         <div class="ControlBox">
-            <p>CH A Dac Steps: 0<input type="range" id="ChADacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChADacEl2','ChADacEl1'); addModifiedList('DACValueChannelA');">4095</p>
-            <p>CH A Dac Steps: <input type=number id="ChADacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChADacEl2','ChADacEl0'); addModifiedList('DACValueChannelA');"></p>
-            <p>Ch A Dac Voltage: <input type="number" id="ChADacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChADacEl0','ChADacEl1'); addModifiedList('DACValueChannelA');"></p>
+            <p>CH A Dac Steps: 0<input type="range" id="ChADacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChADacEl2','ChADacEl1'); addModifiedList('DACValueChannelA',this.value);">4095</p>
+            <p>CH A Dac Steps: <input type=number id="ChADacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChADacEl2','ChADacEl0'); addModifiedList('DACValueChannelA',this.value);"></p>
+            <p>Ch A Dac Voltage: <input type="number" id="ChADacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChADacEl0','ChADacEl1'); addModifiedList('DACValueChannelA',valByID('ChADacEl1'));"></p>
         </div>
 
         <div class="ControlBox">
-            <p>CH B Dac Steps: 0<input type="range" id="ChBDacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChBDacEl2','ChBDacEl1'); addModifiedList('DACValueChannelB');">4095</p>
-            <p>CH B Dac Steps: <input type=number id="ChBDacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChBDacEl2','ChBDacEl0'); addModifiedList('DACValueChannelB');"></p>
-            <p>Ch B Dac Voltage: <input type="number" id="ChBDacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChBDacEl0','ChBDacEl1'); addModifiedList('DACValueChannelB');"></p>
+            <p>CH B Dac Steps: 0<input type="range" id="ChBDacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChBDacEl2','ChBDacEl1'); addModifiedList('DACValueChannelB',this.value);">4095</p>
+            <p>CH B Dac Steps: <input type=number id="ChBDacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChBDacEl2','ChBDacEl0'); addModifiedList('DACValueChannelB',this.value);"></p>
+            <p>Ch B Dac Voltage: <input type="number" id="ChBDacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChBDacEl0','ChBDacEl1'); addModifiedList('DACValueChannelB',valByID('ChBDacEl1'));"></p>
         </div>
 
         <div class="ControlBox">
-            <p>CH C Dac Steps: 0<input type="range" id="ChCDacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChCDacEl2','ChCDacEl1'); addModifiedList('DACValueChannelC');">4095</p>
-            <p>CH C Dac Steps: <input type=number id="ChCDacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChCDacEl2','ChCDacEl0'); addModifiedList('DACValueChannelC');"></p>
-            <p>Ch C Dac Voltage: <input type="number" id="ChCDacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChCDacEl0','ChCDacEl1'); addModifiedList('DACValueChannelC');"></p>
+            <p>CH C Dac Steps: 0<input type="range" id="ChCDacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChCDacEl2','ChCDacEl1'); addModifiedList('DACValueChannelC',this.value);">4095</p>
+            <p>CH C Dac Steps: <input type=number id="ChCDacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChCDacEl2','ChCDacEl0'); addModifiedList('DACValueChannelC',this.value);"></p>
+            <p>Ch C Dac Voltage: <input type="number" id="ChCDacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChCDacEl0','ChCDacEl1'); addModifiedList('DACValueChannelC',valByID('ChCDacEl1'));"></p>
         </div>
 
         <div class="ControlBox">
-            <p>CH D Dac Steps: 0<input type="range" id="ChDDacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChDDacEl2','ChDDacEl1'); addModifiedList('DACValueChannelD');">4095</p>
-            <p>CH D Dac Steps: <input type=number id="ChDDacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChDDacEl2','ChDDacEl0'); addModifiedList('DACValueChannelD');"></p>
-            <p>Ch D Dac Voltage: <input type="number" id="ChDDacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChDDacEl0','ChDDacEl1'); addModifiedList('DACValueChannelD');"></p>
+            <p>CH D Dac Steps: 0<input type="range" id="ChDDacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChDDacEl2','ChDDacEl1'); addModifiedList('DACValueChannelD',this.value);">4095</p>
+            <p>CH D Dac Steps: <input type=number id="ChDDacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChDDacEl2','ChDDacEl0'); addModifiedList('DACValueChannelD',this.value);"></p>
+            <p>Ch D Dac Voltage: <input type="number" id="ChDDacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChDDacEl0','ChDDacEl1'); addModifiedList('DACValueChannelD',valByID('ChDDacEl1');"></p>
         </div>
 
 

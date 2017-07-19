@@ -2,34 +2,12 @@
 /* 
 TODO
 
- - Change ModifiedTable names to be names of corresponding collumns in FENimPlusConfig.. Table
+ - Change ModifiedList names to be names of corresponding columns in FENimPlusConfig.. Table
  - Populate remaining divs with relevant controls
  	- Add input source selection (siglog vs signorm on 3 outputs) 
  - add functionality to Save Page Function to modify table values that have been changed on this GUI
- - somehow get objects to send back to ConfigurationAPI.setFieldsOfRecords's <fieldObjectArr> that match the fields that need to be updated
- 	- $.InArray of DataList and returned objects?
- 	- Forge objects from DataList to send back without reading??????? (super hack-ey, avoid if possible)
- 	
- 	Get objects and data to write
- 
- 	where dataList=[[fieldName,data]]
- 	where Objects returned from getFieldsOfRecords = 
- 		      {{obj.fieldTableName 
-//			obj.fieldUID 
-//			obj.fieldColumnName
-//			obj.fieldRelativePath b
-//			obj.fieldColumnType}}
- 	for a in dataList(
- 		for b in Objects(
- 			if dataList[a,0] == Objects[b].fieldRelitivePath(
- 				datToSend[a,0] = Objects[b]
- 				datToSend[a,1] = dataList[a,1]
- 			) 
- 		)
- 	)
- - Figure out actual table config, 1 or 2 tables? functional reasoning for 2 tables?
-	- if 2 tables nessicary, figure out what needs to be done to modify second table values
  - add support for more than one nimplus/ saving to a different UID 
+ - (Later) Potentially load table data (on page load?) to populate controls with current config
 
 
 
@@ -92,8 +70,8 @@ var _TABLE_BOOL_TYPE_FALSE_COLOR = "rgb(255, 178, 178)";
 
 
 
-var _subsetBasePath = "FENIMPlusInterfaceConfiguration";
-var _modifiedTables;
+
+
 //Not Used
 //init called once body has loaded
 function init() {
@@ -116,11 +94,13 @@ function getNimUIDs(nimUids) {
         Debug.log("getNimUIDs err ", Debug.HIGH_PRIORITY);
         return;
     }
-
+    console.log("getNimUIDs' Input: \n")
+    console.log(nimUids);
+    console.log("\n");
     Debug.log("getNimUIDs ", Debug.INFO_PRIORITY);
 
     ConfigurationAPI.getFieldsOfRecords(
-        _subsetBasePath, ["NimPlus0"], //nimUids,
+        _subsetBasePath, nimUids,//["NimPlus0"]
         "", //""/*_editableFieldList*/,
         -1,
         getNimFields,
@@ -129,7 +109,7 @@ function getNimUIDs(nimUids) {
 }
 
 var _localFields;
-var datToSend = [["DACValueChannelA", 1400]];
+var datToSend = [];
 
 function getNimFields(recFields) {
     _localFields = recFields;
@@ -142,23 +122,41 @@ function getNimFields(recFields) {
         str += i + ": " + recFields[i].fieldRelativePath +
         recFields[i].fieldColumnName + "<br>";
     //document.body.innerHTML = str;		
+    
+    /*
+    console.log("getNimFields input: \n");
+    console.log(recFields);
+    console.log("\n");
     console.log(str);
+    */
+    
     ConfigurationAPI.getFieldValuesForRecords(
         _subsetBasePath, ["NimPlus0"],
         _localFields,
         getNimFieldValues,
         _modifiedTables
     )
-    var aRelPath
-    for (let i of dataList) {
-        /*TODO*/
-        for (let a of recFields) {
-            if (i[0] == a.fieldRelitivePath) {
-                datToSend.push([a, i[1]]) //Object,Data
-            }
-        }
-    }
+    
 
+      
+    
+    
+//Compare Modified list and list of returned fields, populate a 2d array with the objects and data to write 
+//to the table of the elements of the page that have been modified since last save    
+    for (let i of modifiedList) {
+        for (let a of recFields) {
+          if(a.fieldColumnName == i[0]) {
+                datToSend.push([a, i[1]]); //Object,Data    
+	    }
+	    else{
+	    //console.log("\nno match for " + a.fieldColumnName);
+	    }
+	}
+    }
+  console.log("DatToSend\n");
+  console.log(datToSend);
+  console.log("\n");
+  
 
 };
 
@@ -173,7 +171,12 @@ function getNimFieldValues(recFieldValues) {
         recFieldValues[i].fieldPath + ": " +
         recFieldValues[i].fieldValue + "<br>";
     //document.body.innerHTML = str;
-    console.log(str)
+   /*
+    console.log("getNimFieldValues Input \n")
+    console.log(recFieldValues);
+    console.log("\n");
+    console.log(str);
+    */
     /*
     if(firstTime)			
     	ConfigurationAPI.setFieldValuesForRecords(
@@ -211,19 +214,18 @@ function handleSetNimValues(modifiedTables) {
 var timeout = null; //voltField timeout value, used to wait till user done entering a value		
 var modifiedList = []; //List of values that are modified, used to keep track of what values need to be updated
 var invalidInput = false; //Track if any textbox input is invalid, used to prevent saving if there is
-var columnList = [] //fields that have had changes since last save/page load, [Column Name]
-var dataList = [[null, null]] // All data in form(s), [Column Name, Data]
 var updatedFields = [[null, null]] // Fields to update, [Field Object, data]
 var syncArray = [0,0,0,0,0,0,0,0] //Array representing the 40Mhz "Sync Word"
-
+var _subsetBasePath = "FENIMPlusInterfaceConfiguration";
+var _modifiedTables;
 
 
 function testFunc() {
-    console.log(ConfigurationAPI.getSubsetRecords(
+    ConfigurationAPI.getSubsetRecords(
         _subsetBasePath /*subsetBasePath*/ ,
         "", //"FEInterfacePluginName=FEOtsUDPTemplateInterface"/*filterList*/,
         getNimUIDs /*responseHandler*/ ,
-        _modifiedTables /*modifiedTables*/ ))
+        _modifiedTables /*modifiedTables*/ )
 }
 
 
@@ -249,10 +251,7 @@ function savePageValues(e) {
         console.log(modifiedList);
     }
 }
-//Updates all data in dataList
-function updateDataList() {
 
-}
 
 
 
@@ -327,15 +326,22 @@ function dwValidCheck(firstVal, secondValElId, msgElId) {
 
 }
 
-function addModifiedList(tableVal, tableDat) {
+ function addModifiedList(tableVal, tableDat) {
     //#fcd125 = yellow color, notifies user that there are unsaved changes on the page
     $("body").css("background-color", "#fcd125")
-    existsAt = $.inArray(tableVal, modifiedList[0]);
+    var modifiedListNames = modifiedList.map(function(value,index) { return value[0]; });
+    existsAt = null;
+    existsAt = $.inArray(tableVal, modifiedListNames);
     //document.getElementById("saveEl").innerHTML = "";
     if (existsAt < 0) {
-        modifiedList.push([tableVal, tableDat]);
+       console.log(existsAt);
+       console.log($.inArray(tableVal, modifiedList[0]));
+       console.log(tableVal);
+       console.log(modifiedList[0]);
+       modifiedList.push([tableVal, tableDat]);
+       console.log(modifiedList);
     } else {
-        modifiedList[existsAt] = [tableVal,tableDat];
+       modifiedList[existsAt] = [tableVal,tableDat];
         //console.log(" element already exists in modified list, not updating list...")
     }
 
