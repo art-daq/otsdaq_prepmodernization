@@ -71,14 +71,13 @@
 <div class="ControlBox">
     <p>Input Channel Enable Control <button id="InChEnCtlBtn">Show/Hide</button></p>
     <div id="InChEnCtl" class="Dropdown">
-        <input type="checkbox" id="ChAInEn" onclick="addModifiedList('ChAInEn');"><label for="ChAInEn">Enable Channel A?</label>
+        <input type="checkbox" id="ChAInEn" onclick="addModifiedList('EnableInputChannelA',this.checked?'ON':'OFF');"><label for="ChAInEn">Enable Channel A?</label>
         <input type="checkbox" id="ChAInInv" onclick="addModifiedList('InvertPolarityInputChannelA',this.checked?'yes':'no');"><label for="ChAInInv">Invert Input?</label>
-        </br><input type="checkbox" id="ChBInEn" onclick="addModifiedList('ChBInEn');"><label for="ChBInEn">Enable Channel B?</label>
+        </br><input type="checkbox" id="ChBInEn" onclick="addModifiedList('EnableInputChannelB',this.checked?'ON':'OFF');"><label for="ChBInEn">Enable Channel B?</label>
         <input type="checkbox" id="ChBInInv" onclick="addModifiedList('InvertPolarityInputChannelB',this.checked?'yes':'no');"><label for="ChBInInv">Invert Input?</label>
-        </br><input type="checkbox" id="ChCInEn" onclick="addModifiedList('ChCInEn');"><label for="ChCInEn">Enable Channel C?</label>
+        </br><input type="checkbox" id="ChCInEn" onclick="addModifiedList('EnableInputChannelC',this.checked?'ON':'OFF');"><label for="ChCInEn">Enable Channel C?</label>
         <input type="checkbox" id="ChCInInv" onclick="addModifiedList('InvertPolarityInputChannelC',this.checked?'yes':'no');"><label for="ChCInInv">Invert Input?</label>
-
-        </br><input type="checkbox" id="ChDInEn" onclick="addModifiedList('ChDInEn');"><label for="ChDInEn">Enable Channel D?</label>
+        </br><input type="checkbox" id="ChDInEn" onclick="addModifiedList('EnableInputChannelD',this.checked?'ON':'OFF');"><label for="ChDInEn">Enable Channel D?</label>
         <input type="checkbox" id="ChDInInv" onclick="addModifiedList('InvertPolarityInputChannelD',this.checked?'yes':'no');"><label for="ChDInInv">Invert Input?</label>
 
 

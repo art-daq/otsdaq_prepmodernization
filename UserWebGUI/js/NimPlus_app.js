@@ -1,4 +1,6 @@
 //NimPlus_app JS
+//Created by Ben Hawks (bhawks at fnal.gov)
+//last updated July 20th 2017
 /* 
 TODO
 
@@ -8,9 +10,19 @@ TODO
  - add functionality to Save Page Function to modify table values that have been changed on this GUI
  - add support for more than one nimplus/ saving to a different UID 
  - (Later) Potentially load table data (on page load?) to populate controls with current config
+ - (Later) Have the ability to load previous versions of config? 
 
+ --- Save Procedure ---
+ set subsetBasePath value
+ -> getSubsetRecords
+    -> getFieldsOfRecords
+       -> setFieldValuesForRecords
+	  -> popUpSaveModifiedTablesForm
+	    -> activateGroup
+      -> getFieldValuesForRecords
 
-
+      
+      
 */
 //---------------------------------OTS Table Stuff---------------------------------------------------
 
@@ -72,22 +84,6 @@ var _TABLE_BOOL_TYPE_FALSE_COLOR = "rgb(255, 178, 178)";
 
 
 
-//Not Used
-//init called once body has loaded
-function init() {
-
-    Debug.log("CfgGUI_sebset init ");
-
-    ConfigurationAPI.getSubsetRecords(
-        _subsetBasePath /*subsetBasePath*/ ,
-        "FEInterfacePluginName=FENIMPlusInterface" /*filterList*/ ,
-        getNimUIDs /*responseHandler*/ ,
-        _modifiedTables /*modifiedTables*/ );
-
-    return;
-
-
-} //end init()
 
 function getNimUIDs(nimUids) {
     if (nimUids.length == 0) {
@@ -97,7 +93,7 @@ function getNimUIDs(nimUids) {
     console.log("getNimUIDs' Input: \n")
     console.log(nimUids);
     console.log("\n");
-    Debug.log("getNimUIDs ", Debug.INFO_PRIORITY);
+    //Debug.log("getNimUIDs ", Debug.INFO_PRIORITY);
 
     ConfigurationAPI.getFieldsOfRecords(
         _subsetBasePath, nimUids,//["NimPlus0"]
@@ -203,11 +199,91 @@ function handleSetNimValues(modifiedTables) {
 }
 
 
+//----------------------------------------- Save Functions -----------------------------------------
+var _nimUids = null;
+function getNimFieldsForSave(nimUids) {
+    if (nimUids.length == 0) {
+        Debug.log("No NIMPlus UID's found", Debug.HIGH_PRIORITY);
+        return;
+    }
+    _nimUids = nimUids;
+    console.log("getNimUIDs' Input: \n")
+    console.log(nimUids);
+    console.log("\n");
+    Debug.log("getNimUIDs ", Debug.INFO_PRIORITY);
 
+    ConfigurationAPI.getFieldsOfRecords(
+        _subsetBasePath, nimUids,//["NimPlus0"]
+        "",/*_editableFieldList*/
+        -1,//maxDepth
+        setNimFieldValuesForSave,//responseHandler
+        _modifiedTables//modifiedTables
+    );
+}
+var valsToWrite = [];
+var objToWrite = [];
+function setNimFieldValuesForSave(recFields) {
+  var valsToWrite = [];
+  var objToWrite = [];
+  //Debug.log("recFields found = " + recFields.length);	
+    
+    console.log("setNimFields input: \n");
+    console.log(recFields);
+    console.log("\n");
 
+      
+//Compare Modified list and list of returned fields, populate a 2 arrays with the objects and data to write 
+//to the table of the elements of the page that have been modified since last save    
+    for (let i of modifiedList) {
+      console.log("got to 1");
+        for (let a of recFields) {
+	  console.log("got to 2");
+          if(a.fieldColumnName == i[0]) {
+		
+		objToWrite.push(a); //objects to update
+		valsToWrite.push(i[1]); //values for the corresponding objects
+                console.log("Object found");
+		console.log(a);
+		console.log(i);
+		
+	    }
+	    else{
+	    console.log("\nno match for " + a.fieldColumnName);
+	    console.log(a);
+	    console.log(i);
+	      
+	    }
+	}
+    }
+    console.log(objToWrite);
+    console.log(valsToWrite);
+    
+    ConfigurationAPI.setFieldValuesForRecords(
+        _subsetBasePath,//subsetBasePath 
+	_nimUids,//recordArr
+        objToWrite,//fieldObjArr
+	valsToWrite,//valueArr
+        saveNimTableDialog,//responseHandler
+        _modifiedTables//modifiedTables
+    )
 
+};
 
-
+function saveNimTableDialog(modifiedTables){
+  modifiedList = [];  
+  console.log(modifiedTables);
+    _modifiedTables = modifiedTables;
+    ConfigurationAPI.popUpSaveModifiedTablesForm(
+    modifiedTables,
+    activateNimTables
+    )
+};
+function activateNimTables(SavedTable,SavedGroup,SavedAlias){
+  for(let i of SavedGroup) {
+    ConfigurationAPI.activateGroup(i.groupName, i.groupKey, false)
+  }
+    
+};
 
 
 //------------------------------------Error Check etc. Functions------------------------------------
@@ -231,25 +307,39 @@ function testFunc() {
 
 //TODO Save Page Function
 function savePageValues(e) {
+  if(modifiedList.length > 0){ 
     if (invalidInput == false) {
 
         //do stuff to save here					
-        //#43c130 = green color, alerts user that changes are saved
+	
+	ConfigurationAPI.getSubsetRecords(
+        _subsetBasePath /*subsetBasePath*/ ,
+        "", //"FEInterfacePluginName=FEOtsUDPTemplateInterface"/*filterList*/,
+        getNimFieldsForSave /*responseHandler*/ ,
+        _modifiedTables /*modifiedTables*/ )      
+      
+      
+      
+      
+      //#43c130 = green color, alerts user that changes are saved
         $("body").css("background-color", "#43c130");
         //Table Updates Here					
-        //Debug.log("NimPlus Configuration Changes Saved", Debug.INFO_PRIORITY);
+        Debug.log("NimPlus Configuration Changes Saved", Debug.INFO_PRIORITY);
         console.log("Page Values Saved");
         console.log(modifiedList);
-        modifiedList = [];
 
         document.getElementById("saveEl").innerHTML = "Save Successful!";
     } else {
         document.getElementById("saveEl").innerHTML = "Warning! Unable to save, some fields contain invalid values";
         console.log("Warning! Textbox on page has invalid value, aborting save...")
         console.log("Please check the following fields for possible invalid values (some might be correct)");
-        //Debug.log("NimPlus Configuration Changes NOT Saved, Invalid value(s) in fields", Debug.HIGH_PRIORITY);
+        Debug.log("NimPlus Configuration Changes NOT Saved, Invalid value(s) in fields", Debug.HIGH_PRIORITY);
         console.log(modifiedList);
     }
+  }
+  else{
+    Debug.log("Error! No Changes to Save!", Debug.WARN_PRIORITY);
+  }
 }
 
 
