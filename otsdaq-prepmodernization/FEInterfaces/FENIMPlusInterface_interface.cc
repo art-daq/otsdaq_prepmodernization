@@ -486,6 +486,9 @@ void FENIMPlusInterface::configure(void)
 					outputMuxSelect = 0xC;
 				else if(outputMuxSelect == 3)
 					outputMuxSelect = 31; //ground
+				else if(outputMuxSelect >= 4 && outputMuxSelect <= 12) //4x inputs after polarity mod, 4x after delayAndWidth, coincident output
+				      outputMuxSelect -= 3; //ground
+				  
 			}
 			else
 			{
