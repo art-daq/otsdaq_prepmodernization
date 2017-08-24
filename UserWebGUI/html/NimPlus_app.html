@@ -71,13 +71,13 @@
 <div class="ControlBox">
     <p>Input Channel Enable Control <button id="InChEnCtlBtn">Show/Hide</button></p>
     <div id="InChEnCtl" class="Dropdown">
-        <input type="checkbox" id="ChAInEn" onclick="addModifiedList('EnableInputChannelA');"><label for="ChAInEn">Enable Channel A?</label>
+        <input type="checkbox" id="ChAInEn" onclick="addModifiedList('EnableInputChannelA',this.checked?'ON':'OFF');"><label for="ChAInEn">Enable Channel A?</label>
         <input type="checkbox" id="ChAInInv" onclick="addModifiedList('InvertPolarityInputChannelA',this.checked?'yes':'no');"><label for="ChAInInv">Invert Input?</label>
-        </br><input type="checkbox" id="ChBInEn" onclick="addModifiedList('EnableInputChannelB');"><label for="ChBInEn">Enable Channel B?</label>
+        </br><input type="checkbox" id="ChBInEn" onclick="addModifiedList('EnableInputChannelB',this.checked?'ON':'OFF');"><label for="ChBInEn">Enable Channel B?</label>
         <input type="checkbox" id="ChBInInv" onclick="addModifiedList('InvertPolarityInputChannelB',this.checked?'yes':'no');"><label for="ChBInInv">Invert Input?</label>
-        </br><input type="checkbox" id="ChCInEn" onclick="addModifiedList('EnableInputChannelC');"><label for="ChCInEn">Enable Channel C?</label>
+        </br><input type="checkbox" id="ChCInEn" onclick="addModifiedList('EnableInputChannelC',this.checked?'ON':'OFF');"><label for="ChCInEn">Enable Channel C?</label>
         <input type="checkbox" id="ChCInInv" onclick="addModifiedList('InvertPolarityInputChannelC',this.checked?'yes':'no');"><label for="ChCInInv">Invert Input?</label>
-        </br><input type="checkbox" id="ChDInEn" onclick="addModifiedList('EnableInputChannelD');"><label for="ChDInEn">Enable Channel D?</label>
+        </br><input type="checkbox" id="ChDInEn" onclick="addModifiedList('EnableInputChannelD',this.checked?'ON':'OFF');"><label for="ChDInEn">Enable Channel D?</label>
         <input type="checkbox" id="ChDInInv" onclick="addModifiedList('InvertPolarityInputChannelD',this.checked?'yes':'no');"><label for="ChDInInv">Invert Input?</label>
 
 
@@ -89,27 +89,27 @@
     <p>DAC Threshold Configuration <button id="DacCtlBtn">Show/Hide</button></p>
     <div id="DacCtl" class="Dropdown">
         <div class="ControlBox">
-            <p>CH A Dac Steps: 0<input type="range" id="ChADacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChADacEl2','ChADacEl1'); addModifiedList('DACValueChannelA');">4095</p>
-            <p>CH A Dac Steps: <input type=number id="ChADacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChADacEl2','ChADacEl0'); addModifiedList('DACValueChannelA');"></p>
-            <p>Ch A Dac Voltage: <input type="number" id="ChADacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChADacEl0','ChADacEl1'); addModifiedList('DACValueChannelA');"></p>
+            <p>CH A Dac Steps: 0<input type="range" id="ChADacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChADacEl2','ChADacEl1'); addModifiedList('DACValueChannelA',this.value);">4095</p>
+            <p>CH A Dac Steps: <input type=number id="ChADacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChADacEl2','ChADacEl0'); addModifiedList('DACValueChannelA',this.value);"></p>
+            <p>Ch A Dac Voltage: <input type="number" id="ChADacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChADacEl0','ChADacEl1'); addModifiedList('DACValueChannelA',valByID('ChADacEl1'));"></p>
         </div>
 
         <div class="ControlBox">
-            <p>CH B Dac Steps: 0<input type="range" id="ChBDacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChBDacEl2','ChBDacEl1'); addModifiedList('DACValueChannelB');">4095</p>
-            <p>CH B Dac Steps: <input type=number id="ChBDacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChBDacEl2','ChBDacEl0'); addModifiedList('DACValueChannelB');"></p>
-            <p>Ch B Dac Voltage: <input type="number" id="ChBDacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChBDacEl0','ChBDacEl1'); addModifiedList('DACValueChannelB');"></p>
+            <p>CH B Dac Steps: 0<input type="range" id="ChBDacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChBDacEl2','ChBDacEl1'); addModifiedList('DACValueChannelB',this.value);">4095</p>
+            <p>CH B Dac Steps: <input type=number id="ChBDacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChBDacEl2','ChBDacEl0'); addModifiedList('DACValueChannelB',this.value);"></p>
+            <p>Ch B Dac Voltage: <input type="number" id="ChBDacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChBDacEl0','ChBDacEl1'); addModifiedList('DACValueChannelB',valByID('ChBDacEl1'));"></p>
         </div>
 
         <div class="ControlBox">
-            <p>CH C Dac Steps: 0<input type="range" id="ChCDacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChCDacEl2','ChCDacEl1'); addModifiedList('DACValueChannelC');">4095</p>
-            <p>CH C Dac Steps: <input type=number id="ChCDacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChCDacEl2','ChCDacEl0'); addModifiedList('DACValueChannelC');"></p>
-            <p>Ch C Dac Voltage: <input type="number" id="ChCDacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChCDacEl0','ChCDacEl1'); addModifiedList('DACValueChannelC');"></p>
+            <p>CH C Dac Steps: 0<input type="range" id="ChCDacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChCDacEl2','ChCDacEl1'); addModifiedList('DACValueChannelC',this.value);">4095</p>
+            <p>CH C Dac Steps: <input type=number id="ChCDacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChCDacEl2','ChCDacEl0'); addModifiedList('DACValueChannelC',this.value);"></p>
+            <p>Ch C Dac Voltage: <input type="number" id="ChCDacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChCDacEl0','ChCDacEl1'); addModifiedList('DACValueChannelC',valByID('ChCDacEl1'));"></p>
         </div>
 
         <div class="ControlBox">
-            <p>CH D Dac Steps: 0<input type="range" id="ChDDacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChDDacEl2','ChDDacEl1'); addModifiedList('DACValueChannelD');">4095</p>
-            <p>CH D Dac Steps: <input type=number id="ChDDacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChDDacEl2','ChDDacEl0'); addModifiedList('DACValueChannelD');"></p>
-            <p>Ch D Dac Voltage: <input type="number" id="ChDDacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChDDacEl0','ChDDacEl1'); addModifiedList('DACValueChannelD');"></p>
+            <p>CH D Dac Steps: 0<input type="range" id="ChDDacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChDDacEl2','ChDDacEl1'); addModifiedList('DACValueChannelD',this.value);">4095</p>
+            <p>CH D Dac Steps: <input type=number id="ChDDacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChDDacEl2','ChDDacEl0'); addModifiedList('DACValueChannelD',this.value);"></p>
+            <p>Ch D Dac Voltage: <input type="number" id="ChDDacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChDDacEl0','ChDDacEl1'); addModifiedList('DACValueChannelD',valByID('ChDDacEl1');"></p>
         </div>
 
 
@@ -305,7 +305,7 @@
     <p>40Mhz Sync Control <button id="SyncCtlBtn">Show/Hide</button></p>
     <div id="SyncCtl" class="Dropdown">
         Trigger Clock Mask/Portion of the 40Mhz Signal to sync with
-        </br><label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync1" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,0));">1</label>
+        <br><label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync1" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,0));">1</label>
         <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync2" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,1));">2</label>
         <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync3" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,2));">3</label>
         <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync4" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,3));">4</label>
@@ -313,7 +313,7 @@
         <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync6" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,5));">6</label>
         <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync7" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,6));">7</label>
         <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync8" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,7));">8</label>
-        </br>
+        <br>
     </div>
 </div>
 
@@ -325,7 +325,6 @@
 <div class="ControlBox">
     <p>Veto(s) Control <button id="VetoCtlBtn">Show/Hide</button></p>
     <div id="VetoCtl" class="Dropdown">
-
         Veto Count<input type="number" id="VetoCount" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel0', this.value); validInput();" oninvalid="invalidInput();"></input>
 
         <br>Veto 1 Count<input type="number" id="Veto1Count" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel1', this.value); validInput();" oninvalid="invalidInput();"></input>
@@ -345,7 +344,7 @@
 		<option value="Input Channel-B">Input Channel-B</option>
 		<option value="Input Channel-C">Input Channel-C</option>
 		<option value="Input Channel-D">Input Channel-D</option>
-
+		
 	<p>Veto Source for Output Ch 2 - <select id="VetoSourceOutput2" oninput="addModifiedList('InputChannelVetoSourceForOutputChannel2', this.value);">
 		<option value="No Veto">No Veto</option>
 		<option value="Input Channel-A">Input Channel-A</option>
@@ -393,17 +392,18 @@
     <div id="BkpCtl" class="Dropdown">
         <input type="checkbox" id="bkpEnableA"><label for="bkpEnableA" oninput="addModifiedList('EnableBackPressureInputA', this.checked);">Enable Backpressure Veto A?</label>
         </br><input type="checkbox" id="bkpEnableB"><label for="bkpEnableB" oninput="addModifiedList('EnableBackPressureInput', this.checked);">Enable Backpressure Veto B?</label>
+
     </div>
 </div>
 
 <div class="ControlBox">
     <p>Signal Generator Control <button id="SigGenCtlBtn">Show/Hide</button></p>
     <div id="SigGenCtl" class="Dropdown">
-        Output Pulse Count (0 for continuous)<input type="number" id="SGPulseCnt" min=0 step=1 oninput="addModifiedList('SGPulseCnt', this.value); validInput();" oninvalid="invalidInput();"></input>
+        Output Pulse Count (0 for continuous)<input type="number" id="SGPulseCnt" min=0 step=1 oninput="addModifiedList('SGPulseCnt', this.value); validInput();" oninvalid="invalidInput();">
 
-        <br>High Period(s)<input type="number" id="SGHighPer" min=0 step=1 oninput="addModifiedList('SGHighPer', this.value); validInput();" oninvalid="invalidInput();"></input>
+        <br>High Period(s)<input type="number" id="SGHighPer" min=0 step=1 oninput="addModifiedList('SGHighPer', this.value); validInput();" oninvalid="invalidInput();">
 
-        <br>Low Period(s)<input type="number" id="SGLowPer" min=0 step=1 oninput="addModifiedList('SGLowPer', this.value); validInput();" oninvalid="invalidInput();"></input>
+        <br>Low Period(s)<input type="number" id="SGLowPer" min=0 step=1 oninput="addModifiedList('SGLowPer', this.value); validInput();" oninvalid="invalidInput();">
     </div>
 </div>
 
