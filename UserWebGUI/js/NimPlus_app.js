@@ -2,34 +2,11 @@
 /* 
 TODO
 
- - Change ModifiedTable names to be names of corresponding collumns in FENimPlusConfig.. Table
+ - Change ModifiedTable names to be names of corresponding collumns in FENimPlusConfig.. Table <
  - Populate remaining divs with relevant controls
  	- Add input source selection (siglog vs signorm on 3 outputs) 
  - add functionality to Save Page Function to modify table values that have been changed on this GUI
- - Potentially consolidate ColumnList and DataList so that array holds only updated column names with new data?
- - somehow get objects to send back to ConfigurationAPI.setFieldsOfRecords's <fieldObjectArr> that match the fields that need to be updated
- 	- $.InArray of DataList and returned objects?
- 	- Forge objects from DataList to send back without reading??????? (super hack-ey, avoid if possible)
- 	
- 	Get objects and data to write
- 
- 	where dataList=[[fieldName,data]]
- 	where Objects returned from getFieldsOfRecords = 
- 		      {{obj.fieldTableName 
-//			obj.fieldUID 
-//			obj.fieldColumnName
-//			obj.fieldRelativePath b
-//			obj.fieldColumnType}}
- 	for a in dataList(
- 		for b in Objects(
- 			if dataList[a,0] == Objects[b].fieldRelitivePath(
- 				datToSend[a,0] = Objects[b]
- 				datToSend[a,1] = dataList[a,1]
- 			) 
- 		)
- 	)
- - Figure out actual table config, 1 or 2 tables? functional reasoning for 2 tables?
-	- if 2 tables nessicary, figure out what needs to be done to modify second table values
+ - confirm that the bit assignments on the coincidence logic match the actual values 
  - add support for more than one nimplus/ saving to a different UID 
 
 
@@ -215,8 +192,8 @@ var invalidInput = false; //Track if any textbox input is invalid, used to preve
 var columnList = [] //fields that have had changes since last save/page load, [Column Name]
 var dataList = [[null, null]] // All data in form(s), [Column Name, Data]
 var updatedFields = [[null, null]] // Fields to update, [Field Object, data]
-var syncArray = [0,0,0,0,0,0,0,0]
-
+var syncArray = [0,0,0,0,0,0,0,0] //empty array for 40Mhz Sync Word
+var logicArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] //empty array for coincidence logic word
 
 
 function testFunc() {
@@ -251,9 +228,7 @@ function savePageValues(e) {
     }
 }
 //Updates all data in dataList
-function updateDataList() {
 
-}
 
 
 
@@ -289,6 +264,18 @@ function syncMaskCalc(val,a) {
         }
     console.log(n)
     //Calculate the 40 Mhz Sync Mask
+    return n;
+}
+
+function LogicWordCalc(val,a) {
+    logicArray[a]=val;
+    var n = 0;
+    var l = logicArray.length;
+    for (var i = 0; i < l; i++) {
+        n = (n << 1) + (logicArray[i]?1:0);
+        }
+    console.log(n)
+    //Calculate the Coincidence Logic Word
     return n;
 }
 

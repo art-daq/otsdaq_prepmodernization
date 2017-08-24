@@ -22,6 +22,7 @@
 				<COLUMN Type="FixedChoiceData" 	 Name="OutputMuxSelectChannelB" 	 StorageName="OUTPUT_MUX_SELECT_CHANNEL_B" 		DataType="VARCHAR2" 		DataChoices="Output%20Channel-0,Output%20Channel-1,Output%20Channel-2,Tie-Low"/>
 				<COLUMN Type="FixedChoiceData" 	 Name="OutputMuxSelectChannelC" 	 StorageName="OUTPUT_MUX_SELECT_CHANNEL_C" 		DataType="VARCHAR2" 		DataChoices="Output%20Channel-0,Output%20Channel-1,Output%20Channel-2,Tie-Low"/>
 				<COLUMN Type="FixedChoiceData" 	 Name="OutputMuxSelectChannelD" 	 StorageName="OUTPUT_MUX_SELECT_CHANNEL_D" 		DataType="VARCHAR2" 		DataChoices="Output%20Channel-0,Output%20Channel-1,Output%20Channel-2,Tie-Low"/>
+				<COLUMN Type="Data" 	 Name="CoincidenceLogicWord" 	 StorageName="COINCIDENCE_LOGIC_WORD" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="ChildLink-optionalParameters" 	 Name="LinkToOptionalParameters" 	 StorageName="LINK_TO_OPTIONAL_PARAMETERS" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="ChildLinkUID-optionalParameters" 	 Name="LinkToOptionalParametersUID" 	 StorageName="LINK_TO_OPTIONAL_PARAMETERS_UID" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="Comment" 	 Name="CommentDescription" 	 StorageName="COMMENT_DESCRIPTION" 		DataType="VARCHAR2" 		DataChoices=""/>
