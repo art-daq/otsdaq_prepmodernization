@@ -429,7 +429,7 @@ void FENIMPlusInterface::configure(void)
 				outputTimeVetoDuration = 0;
 				outputPrescaleCount = 0;
 				outputBackpressureSelect = false;
-				ouputPolarityMask = 0xF;
+				outputPolarityMask = 0xF;
 			}
 
 			if(gateChannelVetoSel[channelCount] <= 1)
