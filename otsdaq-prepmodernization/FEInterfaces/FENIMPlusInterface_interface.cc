@@ -310,7 +310,9 @@ void FENIMPlusInterface::configure(void)
 			enableInput = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("EnableInput" + channelName).getValue<bool>();
 
 			if(usingOptionalParams)
-				inputModMask = optionalLink.getNode("DelayAndWidthInput" + channelName).getValue<unsigned int>();
+				inputDelay = optionalLink.getNode("DelayInput" + channelName).getValue<unsigned int>();
+				inputWidth = optionalLink.getNode("WidthInput" + channelName).getValue<unsigned int>();
+				inputModMask = (0xFFFFFFFFFFFFFFFF << (64-inputWidth)) >> inputDelay;
 			else
 				inputModMask = 0x7; // b111 default value
 
@@ -356,8 +358,8 @@ void FENIMPlusInterface::configure(void)
 		writeBuffer.resize(0);
 		OtsUDPFirmware::write(writeBuffer, 0x7, ((1 << selectionOnOffMask) &
 				(usingOptionalParams?
-										optionalLink.getNode("Override1stANDWithSelectionLogicRegister").getValue<unsigned int>():
-										-1)
+						optionalLink.getNode("Override1stANDWithSelectionLogicRegister").getValue<unsigned int>():
+						-1)
 				) |
 				(usingOptionalParams?
 						optionalLink.getNode("Override2ndORWithSelectionLogicRegister").getValue<unsigned int>():
@@ -374,6 +376,7 @@ void FENIMPlusInterface::configure(void)
 		__MOUT__ << "Failed input stage setup!\n" << e.what() << std::endl;
 		throw;
 	}
+
 
 	//setup output stage
 	try
@@ -400,7 +403,9 @@ void FENIMPlusInterface::configure(void)
 
 			if(usingOptionalParams)
 			{
-				outputModMask = optionalLink.getNode("DelayAndWidthOutput" + channelName).getValue<unsigned int>();
+				outputDelay = optionalLink.getNode("DelayOutput" + channelName).getValue<unsigned int>();
+				outputWidth = optionalLink.getNode("WidthOutput" + channelName).getValue<unsigned int>();
+				outputModMask = (0xFFFFFFFFFFFFFFFF << (64-outputWidth)) >> outputDelay;
 				outputTimeVetoDuration = optionalLink.getNode("OutputTimeVetoDuration" + channelName).getValue<unsigned int>(); //0 ignores time veto, units of 3ns
 				outputPrescaleCount = optionalLink.getNode("OutputPrescaleCount" + channelName).getValue<unsigned int>();
 				outputBackpressureSelect = optionalLink.getNode("OutputBackpressureSelect" + channelName).getValue<bool>();
@@ -475,8 +480,8 @@ void FENIMPlusInterface::configure(void)
 			if(outputMuxSelect) //if non-default, subtract 1 so choice 1 evaluates to 0, and so on..
 				--outputMuxSelect;
 
-			if(outputMuxSelect > 3) throw std::runtime_error("Invalid output mux select!");
-
+			if(outputMuxSelect > 31) throw std::runtime_error("Invalid output mux select!");
+/* Let any mux selection through so the Test/Debug mux can be used, along with other mux selections, add "used advanced mux?" selector on JS app?
 			//default value is 0 := channel-0, 1:= ch1, 2:= ch2, 3:=ground
 			if(channelCount == 0)
 			{
@@ -495,6 +500,8 @@ void FENIMPlusInterface::configure(void)
 				if(outputMuxSelect == 3)
 					outputMuxSelect = 0x7; //ground
 			}
+	*/
+			
 			writeBuffer.resize(0);
 			OtsUDPFirmware::write(writeBuffer, channelCount == 0?0x5:(0x18013 + channelCount - 1), outputMuxSelect); //setup mux select
 			OtsUDPHardware::write(writeBuffer);
@@ -545,6 +552,22 @@ void FENIMPlusInterface::configure(void)
 			OtsUDPFirmware::write(writeBuffer, 0x18004, gateChannelReg); //setup burst block gate signal choice
 			OtsUDPHardware::write(writeBuffer);
 		}
+		
+		//selection logic setup
+		unsigned int coincidenceLogicWord = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("CoincidenceLogicWord").getValue<unsigned int>();
+		writeBuffer.resize(0);
+		OtsUDPFirmware::write(writeBuffer, 0x06, 0x01); //reset selection logic
+		OtsUDPHardware::write(writeBuffer);
+		writeBuffer.resize(0);
+		OtsUDPFirmware::write(writeBuffer, 0x06, 0x00); //disable selection logic, take out of reset 
+		OtsUDPHardware::write(writeBuffer);
+		writeBuffer.resize(0);
+		OtsUDPFirmware::write(writeBuffer, 0x07, coincidenceLogicWord); //setup burst output mux select
+		OtsUDPHardware::write(writeBuffer);
+		writeBuffer.resize(0);
+		OtsUDPFirmware::write(writeBuffer, 0x06, 0x02); //renable selection  logic  
+		OtsUDPHardware::write(writeBuffer);
+	
 	}
 	catch(const std::runtime_error &e)
 	{
