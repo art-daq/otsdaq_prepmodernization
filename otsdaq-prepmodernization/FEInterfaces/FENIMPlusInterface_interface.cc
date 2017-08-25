@@ -300,7 +300,7 @@ void FENIMPlusInterface::configure(void)
 		bool enableInput, invertPolarity;
 		unsigned int inputModMask;
 		unsigned int inputDelay;
-		unsigned int InputWidth;
+		unsigned int inputWidth;
 		
 		
 		unsigned char selectionOnOffMask = 0, inputPolarityMask = 0;
@@ -312,12 +312,14 @@ void FENIMPlusInterface::configure(void)
 
 			enableInput = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("EnableInput" + channelName).getValue<bool>();
 
-			if(usingOptionalParams)
+			if(usingOptionalParams){
 				inputDelay = optionalLink.getNode("DelayInput" + channelName).getValue<unsigned int>();
 				inputWidth = optionalLink.getNode("WidthInput" + channelName).getValue<unsigned int>();
 				inputModMask = (0xFFFFFFFFFFFFFFFF << (64-inputWidth)) >> inputDelay;
-			else
+			}
+			else{
 				inputModMask = 0x7; // b111 default value
+			}
 
 			selectionOnOffMask |= ((enableInput?1:0) << channelCount);
 
@@ -396,7 +398,7 @@ void FENIMPlusInterface::configure(void)
 		bool outputBackpressureSelect;
 		unsigned char backpressureMask = 0;
 		unsigned int gateChannelVetoSel[3] = {0,0,0};
-		unsigned int ouputPolarityMask = 0; 
+		unsigned int outputPolarityMask = 0; 
 		bool outputInvertPolarity;
 		__MOUT__ << "Setting up output channels..." << std::endl;
 		//there are 3 output channels (alias: signorm, sigcms1, sigcms2)
@@ -418,7 +420,7 @@ void FENIMPlusInterface::configure(void)
 				gateChannelVetoSel[channelCount] = optionalLink.getNode("InputChannelVetoSourceForOutput" + channelName).getValue<int>();
 				//0/1 := No Veto, 2-5 := Input_A-D
 				outputInvertPolarity = usingOptionalParams && optionalLink.getNode("InvertPolarityOutput" + channelName).getValue<bool>();
-				ouputPolarityMask |= ((outputInvertPolarity?1:0) << channelCount);
+				outputPolarityMask |= ((outputInvertPolarity?1:0) << channelCount);
 			
 			}
 			else //defaults
