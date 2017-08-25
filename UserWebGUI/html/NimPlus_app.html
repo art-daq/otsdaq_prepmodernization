@@ -121,31 +121,31 @@
     <div id="DWConfigCtl" class="Dropdown">
 
         <div class="ControlBox">
-            <p>CH A Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChADelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChAWidthEl','ChAMsgEl'); addModifiedList('DelayAndWidthInputChannelA');"> Width (Clock Periods) <input type="number" id="ChAWidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChADelayEl','ChAMsgEl'); addModifiedList('DelayAndWidthInputChannelA');">
+            <p>CH A Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChADelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChAWidthEl','ChAMsgEl'); addModifiedList('DelayInputChannelA',this.value);"> Width (Clock Periods) <input type="number" id="ChAWidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChADelayEl','ChAMsgEl'); addModifiedList('WidthInputChannelA',this.value);">
             <div id="ChAMsgEl"></div>
         </div>
         <div class="ControlBox">
-            <p>CH B Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChBDelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChBWidthEl','ChBMsgEl'); addModifiedList('DelayAndWidthInputChannelB');"> Width (Clock Periods) <input type="number" id="ChBWidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChBDelayEl','ChBMsgEl'); addModifiedList('DelayAndWidthInputChannelB');">
+            <p>CH B Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChBDelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChBWidthEl','ChBMsgEl'); addModifiedList('DelayInputChannelB',this.value);"> Width (Clock Periods) <input type="number" id="ChBWidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChBDelayEl','ChBMsgEl'); addModifiedList('WidthInputChannelB',this.value);">
             <div id="ChBMsgEl"></div>
         </div>
         <div class="ControlBox">
-            <p>CH C Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChCDelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChCWidthEl','ChCMsgEl'); addModifiedList('DelayAndWidthInputChannelC');"> Width (Clock Periods) <input type="number" id="ChCWidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChCDelayEl','ChCMsgEl'); addModifiedList('DelayAndWidthInputChannelC');">
+            <p>CH C Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChCDelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChCWidthEl','ChCMsgEl'); addModifiedList('DelayInputChannelC',this.value);"> Width (Clock Periods) <input type="number" id="ChCWidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChCDelayEl','ChCMsgEl'); addModifiedList('WidthInputChannelC',this.value);">
             <div id="ChCMsgEl"></div>
         </div>
         <div class="ControlBox">
-            <p>CH D Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChDDelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChDWidthEl','ChDMsgEl'); addModifiedList('DelayAndWidthInputChannelD');"> Width (Clock Periods) <input type="number" id="ChDWidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChDDelayEl','ChDMsgEl'); addModifiedList('DelayAndWidthInputChannelD');">
+            <p>CH D Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChDDelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChDWidthEl','ChDMsgEl'); addModifiedList('DelayInputChannelD',this.value);"> Width (Clock Periods) <input type="number" id="ChDWidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChDDelayEl','ChDMsgEl'); addModifiedList('WidthInputChannelD',this.value);">
             <div id="ChDMsgEl"></div>
         </div>
         <div class="ControlBox">
-            <p>SigNorm Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChSNDelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChSNWidthEl','ChSNMsgEl'); addModifiedList('DelayAndWidthOutputChannel0');"> Width (Clock Periods) <input type="number" id="ChSNWidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChSNDelayEl','ChSNMsgEl'); addModifiedList('DelayAndWidthOutputChannel0');">
+            <p>SigNorm Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChSNDelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChSNWidthEl','ChSNMsgEl'); addModifiedList('DelayOutputChannel0',this.value);"> Width (Clock Periods) <input type="number" id="ChSNWidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChSNDelayEl','ChSNMsgEl'); addModifiedList('WidthOutputChannel0',this.value);">
             <div id="ChSNMsgEl"></div>
         </div>
         <div class="ControlBox">
-            <p>SigCMS1 Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChSCMS1DelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChSCMS1WidthEl','ChSCMS1MsgEl'); addModifiedList('DelayAndWidthOutputChannel1');"> Width (Clock Periods) <input type="number" id="ChSCMS1WidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChSCMS1DelayEl','ChSCMS1MsgEl'); addModifiedList('DelayAndWidthOutputChannel0');">
+            <p>SigCMS1 Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChSCMS1DelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChSCMS1WidthEl','ChSCMS1MsgEl'); addModifiedList('DelayOutputChannel1',this.value);"> Width (Clock Periods) <input type="number" id="ChSCMS1WidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChSCMS1DelayEl','ChSCMS1MsgEl'); addModifiedList('WidthOutputChannel1',this.value);">
             <div id="ChSCMS1MsgEl"></div>
         </div>
         <div class="ControlBox">
-            <p>SigCMS2 Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChSCMS2DelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChSCMS2WidthEl','ChSCMS2MsgEl'); addModifiedList('DelayAndWidthOutputChannel2',DWCalcWord(this.value,valByID('ChSCMS2WidthEl')));"> Width (Clock Periods) <input type="number" id="ChSCMS2WidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChSCMS2DelayEl','ChSCMS2MsgEl'); addModifiedList('DelayAndWidthOutputChannel2',DWCalcWord(valByID('ChSCMS2DelayEl'),this.value));">
+            <p>SigCMS2 Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChSCMS2DelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChSCMS2WidthEl','ChSCMS2MsgEl'); addModifiedList('DelayOutputChannel2',this.value);"> Width (Clock Periods) <input type="number" id="ChSCMS2WidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChSCMS2DelayEl','ChSCMS2MsgEl'); addModifiedList('WidthOutputChannel2',this.value));">
             <div id="ChSCMS2MsgEl"></div>
         </div>
 

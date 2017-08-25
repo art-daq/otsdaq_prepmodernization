@@ -349,14 +349,14 @@ function savePageValues(e) {
 
 
 
-
+/*
 function DWCalcWord(delay, width) {
     //calculate the delay/width word for a given delay and width
     /*
     shiftval = 64 - width 
     WMask = TMask << shiftval
     word = WMask >>> delay
-    */
+
     width = parseInt(width);
     delay = parseInt(delay);
     var word = null;
@@ -371,6 +371,9 @@ function DWCalcWord(delay, width) {
     console.log("Output DW Word: " + printWord)
     return word;
 }
+*/
+    
+
 
 function syncMaskCalc(val,a) {
     syncArray[a]=val;
