@@ -299,7 +299,10 @@ void FENIMPlusInterface::configure(void)
 		unsigned char channelCount = 0;
 		bool enableInput, invertPolarity;
 		unsigned int inputModMask;
-
+		unsigned int inputDelay;
+		unsigned int InputWidth;
+		
+		
 		unsigned char selectionOnOffMask = 0, inputPolarityMask = 0;
 
 		__MOUT__ << "Setting up input channels..." << std::endl;
@@ -383,6 +386,8 @@ void FENIMPlusInterface::configure(void)
 	{
 		unsigned char channelCount = 0;
 		bool enableOutput;
+		unsigned int outputDelay;
+		unsigned int outputWidth;
 		unsigned int outputModMask;
 
 		unsigned int outputMuxSelect;
@@ -391,7 +396,8 @@ void FENIMPlusInterface::configure(void)
 		bool outputBackpressureSelect;
 		unsigned char backpressureMask = 0;
 		unsigned int gateChannelVetoSel[3] = {0,0,0};
-
+		unsigned int ouputPolarityMask = 0; 
+		bool outputInvertPolarity;
 		__MOUT__ << "Setting up output channels..." << std::endl;
 		//there are 3 output channels (alias: signorm, sigcms1, sigcms2)
 		std::array<std::string,3> outChannelNames = {"Channel0","Channel1","Channel2"};
@@ -409,9 +415,11 @@ void FENIMPlusInterface::configure(void)
 				outputTimeVetoDuration = optionalLink.getNode("OutputTimeVetoDuration" + channelName).getValue<unsigned int>(); //0 ignores time veto, units of 3ns
 				outputPrescaleCount = optionalLink.getNode("OutputPrescaleCount" + channelName).getValue<unsigned int>();
 				outputBackpressureSelect = optionalLink.getNode("OutputBackpressureSelect" + channelName).getValue<bool>();
-
 				gateChannelVetoSel[channelCount] = optionalLink.getNode("InputChannelVetoSourceForOutput" + channelName).getValue<int>();
 				//0/1 := No Veto, 2-5 := Input_A-D
+				outputInvertPolarity = usingOptionalParams && optionalLink.getNode("InvertPolarityOutput" + channelName).getValue<bool>();
+				ouputPolarityMask |= ((outputInvertPolarity?1:0) << channelCount);
+			
 			}
 			else //defaults
 			{
@@ -419,6 +427,7 @@ void FENIMPlusInterface::configure(void)
 				outputTimeVetoDuration = 0;
 				outputPrescaleCount = 0;
 				outputBackpressureSelect = false;
+				ouputPolarityMask = 0xF;
 			}
 
 			if(gateChannelVetoSel[channelCount] <= 1)
@@ -441,7 +450,13 @@ void FENIMPlusInterface::configure(void)
 				OtsUDPFirmware::write(writeBuffer, (0x18018 + channelCount - 1), outputChannelSourceSelect); //select source (1 := signorm, 0 := siglog)
 				OtsUDPHardware::write(writeBuffer);
 			}
+			
 
+			
+			writeBuffer.resize(0);
+			OtsUDPFirmware::write(writeBuffer, /*address*/0x1800C, /*data*/ outputPolarityMask); //setup output polarity
+			OtsUDPHardware::write(writeBuffer);
+			
 			//time veto setup
 			writeBuffer.resize(0);
 			OtsUDPFirmware::write(writeBuffer, channelCount==0?0x1801B:(18011 + channelCount - 1), outputTimeVetoDuration);
