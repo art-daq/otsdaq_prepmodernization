@@ -275,7 +275,7 @@ function saveNimTableDialog(modifiedTables){
   modifiedList = [];  
   console.log(modifiedTables);
     _modifiedTables = modifiedTables;
-    ConfigurationAPI.popUpSaveModifiedTablesForm(
+    ConfigurationAPI.saveModifiedTables(
     modifiedTables,
     activateNimTables
     )
@@ -284,6 +284,15 @@ function activateNimTables(SavedTable,SavedGroup,SavedAlias){
   for(let i of SavedGroup) {
     ConfigurationAPI.activateGroup(i.groupName, i.groupKey, false)
   }
+  
+        //#43c130 = green color, alerts user that changes are saved
+        $("body").css("background-color", "#43c130");
+        //Table Updates Here					
+        Debug.log("NimPlus Configuration Changes Saved", Debug.INFO_PRIORITY);
+        console.log("Page Values Saved");
+        console.log(modifiedList);
+
+        document.getElementById("saveEl").innerHTML = "Save Successful!";
     
 };
 
@@ -299,13 +308,13 @@ var _modifiedTables;
 
 
 
-function testFunc() {
-    ConfigurationAPI.getSubsetRecords(
-        _subsetBasePath /*subsetBasePath*/ ,
-        "", //"FEInterfacePluginName=FEOtsUDPTemplateInterface"/*filterList*/,
-        getNimUIDs /*responseHandler*/ ,
-        _modifiedTables /*modifiedTables*/ )
-}
+//function testFunc() {
+//    ConfigurationAPI.getSubsetRecords(
+//        _subsetBasePath /*subsetBasePath*/ ,
+//        "", //"FEInterfacePluginName=FEOtsUDPTemplateInterface"/*filterList*/,
+//        getNimUIDs /*responseHandler*/ ,
+//        _modifiedTables /*modifiedTables*/ )
+//}
 
 
 //TODO Save Page Function
@@ -324,14 +333,7 @@ function savePageValues(e) {
       
       
       
-      //#43c130 = green color, alerts user that changes are saved
-        $("body").css("background-color", "#43c130");
-        //Table Updates Here					
-        Debug.log("NimPlus Configuration Changes Saved", Debug.INFO_PRIORITY);
-        console.log("Page Values Saved");
-        console.log(modifiedList);
 
-        document.getElementById("saveEl").innerHTML = "Save Successful!";
     } else {
         document.getElementById("saveEl").innerHTML = "Warning! Unable to save, some fields contain invalid values";
         console.log("Warning! Textbox on page has invalid value, aborting save...")
@@ -438,6 +440,8 @@ function dwValidCheck(firstVal, secondValElId, msgElId) {
  function addModifiedList(tableVal, tableDat) {
     //#fcd125 = yellow color, notifies user that there are unsaved changes on the page
     $("body").css("background-color", "#fcd125")
+    document.getElementById("saveEl").innerHTML = "Unsaved Changes are Present";
+
     var modifiedListNames = modifiedList.map(function(value,index) { return value[0]; });
     existsAt = null;
     existsAt = $.inArray(tableVal, modifiedListNames);

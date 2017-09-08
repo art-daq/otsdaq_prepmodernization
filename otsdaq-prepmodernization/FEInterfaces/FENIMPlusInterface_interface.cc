@@ -4,6 +4,8 @@
 #include "otsdaq-core/Macros/InterfacePluginMacros.h"
 #include <iostream>
 #include <set>
+#include <stdint.h>
+#include <bitset>
 
 using namespace ots;
 
@@ -177,7 +179,7 @@ void FENIMPlusInterface::configure(void)
 				OtsUDPFirmwareCore::write(writeBuffer, 0x1FFFFFFFF,0x0);
 				OtsUDPHardware::write(writeBuffer);
 				sleep(5); //seconds
-
+				
 				writeBuffer.resize(0);
 				OtsUDPFirmwareCore::write(writeBuffer, 0x3,0x0); //Choosing internal := 0, external := 1
 				OtsUDPHardware::write(writeBuffer);
@@ -186,7 +188,7 @@ void FENIMPlusInterface::configure(void)
 		}
 		catch(...)
 		{
-			__MOUT__ << "Could not find reset clock flag, so no resetting... " << std::endl;
+			__MOUT__ << "Could not find reset clock flag, so not resetting... " << std::endl;
 		}
 	}
 
@@ -238,7 +240,7 @@ void FENIMPlusInterface::configure(void)
 
 
 	std::array<std::string,4> channelNames({"ChannelA","ChannelB","ChannelC","ChannelD"});
-
+	//set up DACs
 	bool doWriteDACs = false;
 	try 
 	{
@@ -298,7 +300,7 @@ void FENIMPlusInterface::configure(void)
 	{
 		unsigned char channelCount = 0;
 		bool enableInput, invertPolarity;
-		unsigned int inputModMask;
+		uint64_t inputModMask;
 		unsigned int inputDelay;
 		unsigned int inputWidth;
 		
@@ -310,36 +312,43 @@ void FENIMPlusInterface::configure(void)
 		{
 			//if(channelName != "ChannelD") { ++channelCount; continue;} //For Debugging just one channel
 
-			enableInput = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("EnableInput" + channelName).getValue<bool>();
-
+		  	enableInput = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("EnableInput" + channelName).getValue<bool>();
+			
 			if(usingOptionalParams){
 				inputDelay = optionalLink.getNode("DelayInput" + channelName).getValue<unsigned int>();
 				inputWidth = optionalLink.getNode("WidthInput" + channelName).getValue<unsigned int>();
-				inputModMask = (0xFFFFFFFFFFFFFFFF << (64-inputWidth)) >> inputDelay;
+				inputModMask = (0xFFFFFFFFFFFFFFFF >> (64-inputWidth)) << inputDelay;
 			}
 			else{
 				inputModMask = 0x7; // b111 default value
 			}
-
+			
+			
 			selectionOnOffMask |= ((enableInput?1:0) << channelCount);
 
 			invertPolarity = usingOptionalParams && optionalLink.getNode("InvertPolarityInput" + channelName).getValue<bool>();
 
 			inputPolarityMask |= ((invertPolarity?1:0) << channelCount);
 
+			
+			__MOUT__ << "Output word for " << channelName << " is " << std::bitset<64>(inputModMask) << std::endl << " with a delay of " << inputDelay << " and a width of " << inputWidth << std::endl;
+			
+			
 			writeBuffer.resize(0);
 			OtsUDPFirmwareCore::write(writeBuffer, /*address*/((channelCount+1) << 8) | 0x4, /*data*/ 0x3); //reset channel
 			OtsUDPHardware::write(writeBuffer);
+			
 			writeBuffer.resize(0);
 			OtsUDPFirmwareCore::write(writeBuffer, ((channelCount+1) << 8) | 0x2, inputModMask); //set sig_mod width and delay
 			OtsUDPHardware::write(writeBuffer);
+
 			writeBuffer.resize(0);
 			OtsUDPFirmwareCore::write(writeBuffer, ((channelCount+1) << 8) | 0x4, enableInput?0:1); //enable/disable channel
 			OtsUDPHardware::write(writeBuffer);
 
 			++channelCount;
 		}
-
+		__MOUT__ << "Input polariy mask is " << std::bitset<8>(inputPolarityMask) << std::endl;
 		writeBuffer.resize(0);
 		OtsUDPFirmwareCore::write(writeBuffer, /*address*/0x1800B, /*data*/ inputPolarityMask); //setup input polarity
 		OtsUDPHardware::write(writeBuffer);
@@ -390,7 +399,7 @@ void FENIMPlusInterface::configure(void)
 		bool enableOutput;
 		unsigned int outputDelay;
 		unsigned int outputWidth;
-		unsigned int outputModMask;
+		uint64_t outputModMask;
 
 		unsigned int outputMuxSelect;
 		unsigned int outputChannelSourceSelect;
@@ -398,29 +407,27 @@ void FENIMPlusInterface::configure(void)
 		bool outputBackpressureSelect;
 		unsigned char backpressureMask = 0;
 		unsigned int gateChannelVetoSel[3] = {0,0,0};
-		unsigned int outputPolarityMask = 0; 
-		bool outputInvertPolarity;
+		
 		__MOUT__ << "Setting up output channels..." << std::endl;
 		//there are 3 output channels (alias: signorm, sigcms1, sigcms2)
 		std::array<std::string,3> outChannelNames = {"Channel0","Channel1","Channel2"};
 		for(const auto &channelName : outChannelNames)
 		{
 			outputChannelSourceSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("OutputSourceSelect" + channelName).getValue<unsigned int>(); //0: sig_log   or    1: sig_norm/ch0
+			__MOUT__ << "OutputSourceSelect = " << outputChannelSourceSelect << std::endl;
 			if(outputChannelSourceSelect) //if non-default, subtract 1 so choice 1 evaluates to 0, and so on..
 				--outputChannelSourceSelect;
-
+			
 			if(usingOptionalParams)
 			{
 				outputDelay = optionalLink.getNode("DelayOutput" + channelName).getValue<unsigned int>();
 				outputWidth = optionalLink.getNode("WidthOutput" + channelName).getValue<unsigned int>();
-				outputModMask = (0xFFFFFFFFFFFFFFFF << (64-outputWidth)) >> outputDelay;
+				outputModMask = (0xFFFFFFFFFFFFFFFF >> (64-outputWidth)) << outputDelay;
 				outputTimeVetoDuration = optionalLink.getNode("OutputTimeVetoDuration" + channelName).getValue<unsigned int>(); //0 ignores time veto, units of 3ns
 				outputPrescaleCount = optionalLink.getNode("OutputPrescaleCount" + channelName).getValue<unsigned int>();
 				outputBackpressureSelect = optionalLink.getNode("OutputBackpressureSelect" + channelName).getValue<bool>();
 				gateChannelVetoSel[channelCount] = optionalLink.getNode("InputChannelVetoSourceForOutput" + channelName).getValue<int>();
-				//0/1 := No Veto, 2-5 := Input_A-D
-				outputInvertPolarity = usingOptionalParams && optionalLink.getNode("InvertPolarityOutput" + channelName).getValue<bool>();
-				outputPolarityMask |= ((outputInvertPolarity?1:0) << channelCount);
+				//0/1 := No Veto, 2-5 := Input_A-D		
 			
 			}
 			else //defaults
@@ -429,7 +436,6 @@ void FENIMPlusInterface::configure(void)
 				outputTimeVetoDuration = 0;
 				outputPrescaleCount = 0;
 				outputBackpressureSelect = false;
-				outputPolarityMask = 0xF;
 			}
 
 			if(gateChannelVetoSel[channelCount] <= 1)
@@ -445,7 +451,9 @@ void FENIMPlusInterface::configure(void)
 			writeBuffer.resize(0);
 			OtsUDPFirmwareCore::write(writeBuffer, channelCount==0?0x2:(0x18002 + channelCount - 1), outputModMask); //set output channel width/delay mask
 			OtsUDPHardware::write(writeBuffer);
-
+			
+			__MOUT__ << "Output word for " << channelName << " is " << std::bitset<64>(outputModMask) << std::endl << " with a delay of " << outputDelay << " and a width of " << outputWidth << std::endl;
+			
 			if(channelCount)
 			{
 				writeBuffer.resize(0);
@@ -454,10 +462,6 @@ void FENIMPlusInterface::configure(void)
 			}
 			
 
-			
-			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, /*address*/0x1800C, /*data*/ outputPolarityMask); //setup output polarity
-			OtsUDPHardware::write(writeBuffer);
 			
 			//time veto setup
 			writeBuffer.resize(0);
@@ -490,14 +494,21 @@ void FENIMPlusInterface::configure(void)
 
 		//and 4 output muxes (first is special)
 		__MOUT__ << "Setting output muxes..." << std::endl;
+		unsigned int outputPolarityMask = 0; 
+		bool outputInvertPolarity;
 		channelCount = 0;
 		for(const auto &channelName : channelNames)
 		{
 			outputMuxSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("OutputMuxSelect" + channelName).getValue<unsigned int>();
-			if(outputMuxSelect) //if non-default, subtract 1 so choice 1 evaluates to 0, and so on..
-				--outputMuxSelect;
-
 			if(outputMuxSelect > 31) throw std::runtime_error("Invalid output mux select!");
+			if(usingOptionalParams)
+			{
+			  outputInvertPolarity = usingOptionalParams && optionalLink.getNode("InvertPolarityOutput" + channelName).getValue<bool>();
+			  outputPolarityMask |= ((outputInvertPolarity?1:0) << channelCount);
+			}
+			else {
+			  outputPolarityMask = 0xF;
+			}
 /* Let any mux selection through so the Test/Debug mux can be used, along with other mux selections, add "used advanced mux?" selector on JS app?
 			//default value is 0 := channel-0, 1:= ch1, 2:= ch2, 3:=ground
 			if(channelCount == 0)
@@ -522,6 +533,12 @@ void FENIMPlusInterface::configure(void)
 			writeBuffer.resize(0);
 			OtsUDPFirmwareCore::write(writeBuffer, channelCount == 0?0x5:(0x18013 + channelCount - 1), outputMuxSelect); //setup mux select
 			OtsUDPHardware::write(writeBuffer);
+			__MOUT__ << "Mux value for output channel " << channelName << " is " << outputMuxSelect << ", written to " << (channelCount == 0?0x5:(0x18013 + channelCount - 1)) << std::endl;
+						
+			writeBuffer.resize(0);
+			OtsUDPFirmwareCore::write(writeBuffer, /*address*/0x1800C, /*data*/ outputPolarityMask); //setup output polarity
+			OtsUDPHardware::write(writeBuffer);
+			__MOUT__ << "Input polariy mask is " << std::bitset<8>(outputPolarityMask) << std::endl;
 
 			++channelCount;
 		}
@@ -579,11 +596,13 @@ void FENIMPlusInterface::configure(void)
 		OtsUDPFirmwareCore::write(writeBuffer, 0x06, 0x00); //disable selection logic, take out of reset 
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x07, coincidenceLogicWord); //setup burst output mux select
+		OtsUDPFirmwareCore::write(writeBuffer, 0x07, coincidenceLogicWord); //setup selection logic
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
 		OtsUDPFirmwareCore::write(writeBuffer, 0x06, 0x02); //renable selection  logic  
 		OtsUDPHardware::write(writeBuffer);
+		__MOUT__ << "Selection Logic word is  " << std::bitset<16>(coincidenceLogicWord) << std::endl;
+
 	
 	}
 	catch(const std::runtime_error &e)
