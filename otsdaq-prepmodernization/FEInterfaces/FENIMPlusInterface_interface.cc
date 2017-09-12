@@ -235,8 +235,13 @@ void FENIMPlusInterface::configure(void)
 		OtsUDPFirmwareCore::write(writeBuffer, 0x6, 0x0); //disable AND gate selection logic
 		OtsUDPHardware::write(writeBuffer);
 	}
-
-
+	//Reset everything for configure
+		writeBuffer.resize(0);
+		OtsUDPFirmwareCore::write(writeBuffer, 0x18000, 0xFFFF); //reset everything (counters and vetos/ps)
+		OtsUDPHardware::write(writeBuffer);
+		writeBuffer.resize(0);
+		OtsUDPFirmwareCore::write(writeBuffer, 0x18000, 0x0); //unreset everything
+		OtsUDPHardware::write(writeBuffer);
 
 
 	std::array<std::string,4> channelNames({"ChannelA","ChannelB","ChannelC","ChannelD"});
@@ -352,7 +357,7 @@ void FENIMPlusInterface::configure(void)
 		writeBuffer.resize(0);
 		OtsUDPFirmwareCore::write(writeBuffer, /*address*/0x1800B, /*data*/ inputPolarityMask); //setup input polarity
 		OtsUDPHardware::write(writeBuffer);
-
+// 40Mhz Clock Stuff - Update to reflect firmware changes
 		writeBuffer.resize(0);
 		OtsUDPFirmwareCore::write(writeBuffer, 0x18000, 0x40); //resets section of 40MHz clock block
 		OtsUDPHardware::write(writeBuffer);
@@ -459,6 +464,7 @@ void FENIMPlusInterface::configure(void)
 				writeBuffer.resize(0);
 				OtsUDPFirmwareCore::write(writeBuffer, (0x18018 + channelCount - 1), outputChannelSourceSelect); //select source (1 := signorm, 0 := siglog)
 				OtsUDPHardware::write(writeBuffer);
+				__MOUT__ << "Output src select is " << outputChannelSourceSelect << " for " << channelName << std::endl;
 			}
 			
 
@@ -468,12 +474,18 @@ void FENIMPlusInterface::configure(void)
 			OtsUDPFirmwareCore::write(writeBuffer, channelCount==0?0x1801B:(18011 + channelCount - 1), outputTimeVetoDuration);
 			OtsUDPHardware::write(writeBuffer);
 
+			__MOUT__ << "Veto count for " << channelName << " is " << outputTimeVetoDuration << " writing to ch "  << (channelCount==0?0x1801B:(18011 + channelCount - 1)) << std::endl;
+			
 			//prescale veto setup
+						writeBuffer.resize(0);
+			OtsUDPFirmwareCore::write(writeBuffer, 0x1801C + channelCount, 0); //Set to 0, then set to value
+			OtsUDPHardware::write(writeBuffer);
 			writeBuffer.resize(0);
 			OtsUDPFirmwareCore::write(writeBuffer, 0x1801C + channelCount, outputPrescaleCount);
 			OtsUDPHardware::write(writeBuffer);
 
-
+			__MOUT__ << "Prescaler count for " << channelName << " is " << outputPrescaleCount << " writing to ch " <<  0x1801C + channelCount << std::endl;
+			  
 			++channelCount;
 		}
 
@@ -727,9 +739,7 @@ bool FENIMPlusInterface::running(void)
 					0;
 
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, /*address*/ channelCount==0?0x4:(0x18016 + channelCount - 1),
-					/*data*/ (enable40MHzMask?0x0:0x8) |
-					(gateChannelVetoSel <= 1?0:(1<<2))); //unreset output channel block
+			OtsUDPFirmwareCore::write(writeBuffer, /*address*/ channelCount==0?0x4:(0x18016 + channelCount - 1),/*data*/ (enable40MHzMask?0x0:0x8) | (gateChannelVetoSel <= 1?0:(1<<2))); //unreset output channel block
 			OtsUDPHardware::write(writeBuffer);
 		}
 

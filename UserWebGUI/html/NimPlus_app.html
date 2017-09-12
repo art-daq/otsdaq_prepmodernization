@@ -145,7 +145,7 @@
             <div id="ChSCMS1MsgEl"></div>
         </div>
         <div class="ControlBox">
-            <p>SigCMS2 Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChSCMS2DelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChSCMS2WidthEl','ChSCMS2MsgEl'); addModifiedList('DelayOutputChannel2',this.value);"> Width (Clock Periods) <input type="number" id="ChSCMS2WidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChSCMS2DelayEl','ChSCMS2MsgEl'); addModifiedList('WidthOutputChannel2',this.value));">
+            <p>SigCMS2 Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChSCMS2DelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChSCMS2WidthEl','ChSCMS2MsgEl'); addModifiedList('DelayOutputChannel2',this.value);"> Width (Clock Periods) <input type="number" id="ChSCMS2WidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChSCMS2DelayEl','ChSCMS2MsgEl'); addModifiedList('WidthOutputChannel2',this.value);">
             <div id="ChSCMS2MsgEl"></div>
         </div>
 
@@ -369,22 +369,22 @@
     <div id="SelLogCtl" class="Dropdown">
         <!-- Not in table?-->
         Channels: ABCD , Cases output when true and are OR'd together
-        </br><input type="checkbox" id="SL0FFFF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,0));"><label for="SL0FFFF">FFFF</label>
-        <input type="checkbox" id="SL1TFFF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,1));"><label for="SL1TFFF">TFFF</label>
-        <input type="checkbox" id="SL2FTFF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,2));"><label for="SL2FTFF">FTFF</label>
-        <input type="checkbox" id="SL3TTFF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,3));"><label for="SL3TTFF">TTFF</label>
-        </br><input type="checkbox" id="SL4FFTF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,4));"><label for="SL5FFTF">FFTF</label>
-        <input type="checkbox" id="SL5TFTF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,5));"><label for="SL5TFTF">TFTF</label>
-        <input type="checkbox" id="SL6FTTF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,6));"><label for="SL6FTTF">FTTF</label>
-        <input type="checkbox" id="SL7TTTF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,7));"><label for="SL7TTTF">TTTF</label>
-        </br><input type="checkbox" id="SL8FFFT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,8));"><label for="SL8FFFT">FFFT</label>
-        <input type="checkbox" id="SL9TFFT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,9));"><label for="SL9TFFT">TFFT</label>
-        <input type="checkbox" id="SL10FTFT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,10));"><label for="SL10FTFT">FTFT</label>
-        <input type="checkbox" id="SL11TTFT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,11));"><label for="SL11TTFT">TTFT</label>
-        </br><input type="checkbox" id="SL12FFTT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,12));"><label for="SL12FFTT">FFTT</label>
-        <input type="checkbox" id="SL13TFTT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,13));"><label for="SL13TFTT">TFTT</label>
-        <input type="checkbox" id="SL14FTTT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,14));"><label for="SL14FTTT">FTTT</label>
-        <input type="checkbox" id="SL15TTTT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,15));"><label for="SL15TTTT">TTTT</label>
+        </br><input type="checkbox" id="SL0FFFF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,15));"><label for="SL0FFFF">FFFF</label>
+        <input type="checkbox" id="SL1TFFF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,14));"><label for="SL1TFFF">TFFF</label>
+        <input type="checkbox" id="SL2FTFF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,13));"><label for="SL2FTFF">FTFF</label>
+        <input type="checkbox" id="SL3TTFF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,12));"><label for="SL3TTFF">TTFF</label>
+        </br><input type="checkbox" id="SL4FFTF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,11));"><label for="SL5FFTF">FFTF</label>
+        <input type="checkbox" id="SL5TFTF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,10));"><label for="SL5TFTF">TFTF</label>
+        <input type="checkbox" id="SL6FTTF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,9));"><label for="SL6FTTF">FTTF</label>
+        <input type="checkbox" id="SL7TTTF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,8));"><label for="SL7TTTF">TTTF</label>
+        </br><input type="checkbox" id="SL8FFFT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,7));"><label for="SL8FFFT">FFFT</label>
+        <input type="checkbox" id="SL9TFFT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,6));"><label for="SL9TFFT">TFFT</label>
+        <input type="checkbox" id="SL10FTFT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,5));"><label for="SL10FTFT">FTFT</label>
+        <input type="checkbox" id="SL11TTFT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,4));"><label for="SL11TTFT">TTFT</label>
+        </br><input type="checkbox" id="SL12FFTT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,3));"><label for="SL12FFTT">FFTT</label>
+        <input type="checkbox" id="SL13TFTT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,2));"><label for="SL13TFTT">TFTT</label>
+        <input type="checkbox" id="SL14FTTT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,1));"><label for="SL14FTTT">FTTT</label>
+        <input type="checkbox" id="SL15TTTT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,0));"><label for="SL15TTTT">TTTT</label>
     </div>
 </div>
 
