@@ -290,7 +290,8 @@
 		 <input type="checkbox" id="SSDRst" onclick="addModifiedList('SSDRst');"><label for="SSDRst">Start Stop D Counter</label> 
 		 </br><input type="checkbox" id="Ctr11Rst" onclick="addModifiedList('Ctr11Rst');"><label for="Ctr11Rst">Counter 11</label>  
 		 <input type="checkbox" id="Ctr12Rst" onclick="addModifiedList('Ctr12Rst');"><label for="Ctr12Rst">Counter 12</label>
-		 <input type="checkbox" id="Ctr13Rst" onclick="addModifiedList('Ctr13Rst');"><label for="Ctr13Rst">Counter 13</label> 
+		 <input type="checkbox" id="Ctr13Rst" onclick="addModifiedList('Ctr1        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync8" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,7));">8</label>
+3Rst');"><label for="Ctr13Rst">Counter 13</label> 
 		 </br> <input type="checkbox" id="TVetoRst" onclick="addModifiedList('TVetoRst');"><label for="TVetoRst">Time Veto</label>
 		 <input type="checkbox" id="PsRst" onclick="addModifiedList('PsRst');"><label for="PsRst">Prescaler</label>
  		
@@ -325,11 +326,11 @@
 <div class="ControlBox">
     <p>Veto(s) Control <button id="VetoCtlBtn">Show/Hide</button></p>
     <div id="VetoCtl" class="Dropdown">
-        Veto Count<input type="number" id="VetoCount" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel0', this.value); validInput();" oninvalid="invalidInput();"></input>
+        Veto Count<input type="number" id="VetoCount" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel0', this.value); addModifiedList('OutputPrescaleCountChannel0', 0); elByID('PsCount').value=0; validInput();" oninvalid="invalidInput();"></input>
 
-        <br>Veto 1 Count<input type="number" id="Veto1Count" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel1', this.value); validInput();" oninvalid="invalidInput();"></input>
+        <br>Veto 1 Count<input type="number" id="Veto1Count" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel1', this.value); addModifiedList('OutputPrescaleCountChannel1', 0); elByID('PsCount1').value=0; validInput();" oninvalid="invalidInput();"></input>
 
-        <br>Veto 2 Count<input type="number" id="Veto2Count" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel2', this.value); validInput();" oninvalid="invalidInput();"></input>
+        <br>Veto 2 Count<input type="number" id="Veto2Count" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel2', this.value); addModifiedList('OutputPrescaleCountChannel2', 0); elByID('PsCount2').value=0; validInput();" oninvalid="invalidInput();"></input>
 
 	<p>Veto Source for Output Ch 0 - <select id="VetoSourceOutput0" oninput="addModifiedList('InputChannelVetoSourceForOutputChannel0', this.value);">
 		<option value="No Veto">No Veto</option>
@@ -358,9 +359,9 @@
 <div class="ControlBox">
     <p>Prescaler Control <button id="PsCtlBtn">Show/Hide</button></p>
     <div id="PsCtl" class="Dropdown">
-        Prescaler Count<input type="number" id="PsCount" min=0 step=1 oninput="addModifiedList('OutputPrescaleCountChannel0', this.value); validInput();" oninvalid="invalidInput();"></input>
-        </br>Prescaler 1 Count<input type="number" id="PsCount1" min=0 step=1 oninput="addModifiedList('OutputPrescaleCountChannel1', this.value); validInput();" oninvalid="invalidInput();"></input>
-        </br>Prescaler 2 Count<input type="number" id="PsCount2" min=0 step=1 oninput="addModifiedList('OutputPrescaleCountChannel2', this.value); validInput();" oninvalid="invalidInput();"></input>
+        Prescaler Count<input type="number" id="PsCount" min=0 step=1 oninput="addModifiedList('OutputPrescaleCountChannel0', this.value); addModifiedList('OutputTimeVetoDurationChannel0', 0); elByID('VetoCount').value=0; validInput();" oninvalid="invalidInput();"></input>
+        </br>Prescaler 1 Count<input type="number" id="PsCount1" min=0 step=1 oninput="addModifiedList('OutputPrescaleCountChannel1', this.value); addModifiedList('OutputTimeVetoDurationChannel1', 0); elByID('Veto1Count').value=0; validInput();" oninvalid="invalidInput();"></input>
+        </br>Prescaler 2 Count<input type="number" id="PsCount2" min=0 step=1 oninput="addModifiedList('OutputPrescaleCountChannel2', this.value); addModifiedList('OutputTimeVetoDurationChannel2', 0); elByID('Veto2Count').value=0; validInput();" oninvalid="invalidInput();"></input>
     </div>
 </div>
 
@@ -373,7 +374,7 @@
         <input type="checkbox" id="SL1TFFF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,14));"><label for="SL1TFFF">TFFF</label>
         <input type="checkbox" id="SL2FTFF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,13));"><label for="SL2FTFF">FTFF</label>
         <input type="checkbox" id="SL3TTFF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,12));"><label for="SL3TTFF">TTFF</label>
-        </br><input type="checkbox" id="SL4FFTF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,11));"><label for="SL5FFTF">FFTF</label>
+        </br><input type="checkbox" id="SL4FFTF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1this.checked:0,11));"><label for="SL5FFTF">FFTF</label>
         <input type="checkbox" id="SL5TFTF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,10));"><label for="SL5TFTF">TFTF</label>
         <input type="checkbox" id="SL6FTTF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,9));"><label for="SL6FTTF">FTTF</label>
         <input type="checkbox" id="SL7TTTF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,8));"><label for="SL7TTTF">TTTF</label>
@@ -391,8 +392,8 @@
 <div class="ControlBox">
     <p>Back Pressure Control <button id="BkpCtlBtn">Show/Hide</button></p>
     <div id="BkpCtl" class="Dropdown">
-        <input type="checkbox" id="bkpEnableA"><label for="bkpEnableA" oninput="addModifiedList('EnableBackPressureInputA', this.checked);">Enable Backpressure Veto A?</label>
-        </br><input type="checkbox" id="bkpEnableB"><label for="bkpEnableB" oninput="addModifiedList('EnableBackPressureInput', this.checked);">Enable Backpressure Veto B?</label>
+        <input type="checkbox" id="bkpEnableA" onclick="addModifiedList('EnableBackPressureInputA', this.checked);"><label for="bkpEnableA" >Enable Backpressure Veto A?</label>
+        </br><input type="checkbox" id="bkpEnableB" onclick="addModifiedList('EnableBackPressureInput', this.checked);"><label for="bkpEnableB" >Enable Backpressure Veto B?</label>
 
     </div>
 </div>
@@ -400,11 +401,14 @@
 <div class="ControlBox">
     <p>Signal Generator Control <button id="SigGenCtlBtn">Show/Hide</button></p>
     <div id="SigGenCtl" class="Dropdown">
-        Output Pulse Count (0 for continuous)<input type="number" id="SGPulseCnt" min=0 step=1 oninput="addModifiedList('SGPulseCnt', this.value); validInput();" oninvalid="invalidInput();">
+        Output Pulse Count (0 for continuous)<input type="number" id="SGPulseCnt" min=0 step=1 oninput="addModifiedList('SignalGeneratorPulseCount', this.value); validInput();" oninvalid="invalidInput();">
 
-        <br>High Period(s)<input type="number" id="SGHighPer" min=0 step=1 oninput="addModifiedList('SGHighPer', this.value); validInput();" oninvalid="invalidInput();">
+        <br>High Period(s)<input type="number" id="SGHighPer" min=0 step=1 oninput="addModifiedList('SignalGeneratorHighPeriod', this.value); validInput();" oninvalid="invalidInput();">
 
-        <br>Low Period(s)<input type="number" id="SGLowPer" min=0 step=1 oninput="addModifiedList('SGLowPer', this.value); validInput();" oninvalid="invalidInput();">
+        <br>Low Period(s)<input type="number" id="SGLowPer" min=0 step=1 oninput="addModifiedList('SignalGeneratorLowPeriod', this.value); validInput();" oninvalid="invalidInput();">
+        <br><input type="checkbox" id="sigGenEn" onclick="addModifiedList('SignalGeneratorEnable', this.checked?'yes':'no');"><label for="sigGenEn">Enable Signal Generator?</label>
+        <br><input type="checkbox" id="sigGenInv" onclick="addModifiedList('SignalGeneratorInvertPolarity', this.checked?'yes':'no');"><label for="sigGenInv">Invert Signal Generator Output?</label>
+
     </div>
 </div>
 

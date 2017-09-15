@@ -235,12 +235,18 @@ void FENIMPlusInterface::configure(void)
 		OtsUDPFirmwareCore::write(writeBuffer, 0x6, 0x0); //disable AND gate selection logic
 		OtsUDPHardware::write(writeBuffer);
 	}
+	//bitsets for enables and resets
+	 std::bitset<16> nimResets; 
+	 std::bitset<16> nimEnables;
+	 
 	//Reset everything for configure
+		nimResets.set(); //set all bits to 1
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x18000, 0xFFFF); //reset everything (counters and vetos/ps)
+		OtsUDPFirmwareCore::write(writeBuffer, 0x18000, nimResets.to_ulong()); //reset everything (counters and vetos/ps)
 		OtsUDPHardware::write(writeBuffer);
+		nimResets.reset(); //set all bits to 0
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x18000, 0x0); //unreset everything
+		OtsUDPFirmwareCore::write(writeBuffer, 0x18000, nimResets.to_ulong()); //unreset everything
 		OtsUDPHardware::write(writeBuffer);
 
 
@@ -471,10 +477,10 @@ void FENIMPlusInterface::configure(void)
 			
 			//time veto setup
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, channelCount==0?0x1801B:(18011 + channelCount - 1), outputTimeVetoDuration);
+			OtsUDPFirmwareCore::write(writeBuffer, channelCount==0?0x1801B:(0x18011 + channelCount - 1), outputTimeVetoDuration);
 			OtsUDPHardware::write(writeBuffer);
 
-			__MOUT__ << "Veto count for " << channelName << " is " << outputTimeVetoDuration << " writing to ch "  << (channelCount==0?0x1801B:(18011 + channelCount - 1)) << std::endl;
+			__MOUT__ << "Veto count for " << channelName << " is " << outputTimeVetoDuration << " writing to ch "  << (channelCount==0?0x1801B:(0x18011 + channelCount - 1)) << std::endl;
 			
 			//prescale veto setup
 						writeBuffer.resize(0);
@@ -614,8 +620,52 @@ void FENIMPlusInterface::configure(void)
 		OtsUDPFirmwareCore::write(writeBuffer, 0x06, 0x02); //renable selection  logic  
 		OtsUDPHardware::write(writeBuffer);
 		__MOUT__ << "Selection Logic word is  " << std::bitset<16>(coincidenceLogicWord) << std::endl;
-
-	
+		
+		 
+		
+		unsigned int sigGenCount = optionalLink.getNode("SignalGeneratorPulseCount").getValue<unsigned int>();
+		unsigned int sigGenHighPer = optionalLink.getNode("SignalGeneratorHighPeriod").getValue<unsigned int>();
+		unsigned int sigGenLowPer = optionalLink.getNode("SignalGeneratorLowPeriod").getValue<unsigned int>();
+		bool sigGenPolarity = optionalLink.getNode("SignalGeneratorInvertPolarity").getValue<bool>();
+		unsigned int sigGenPolarityMask = (sigGenPolarity?1:0);
+		
+		
+		if (optionalLink.getNode("SignalGeneratorEnable").getValue<bool>()) {
+		  nimResets.reset(5); //set bit 5 in resets to 0 to take sig gen out of reset
+		  nimEnables.set(5); //set bit 5 in enables to 1 to enable sig gen
+		  //signal generator setup
+		writeBuffer.resize(0);
+		OtsUDPFirmwareCore::write(writeBuffer, 0x18005, sigGenCount); //sig gen pulse count
+		OtsUDPHardware::write(writeBuffer);
+		writeBuffer.resize(0);
+		OtsUDPFirmwareCore::write(writeBuffer, 0x18006, sigGenHighPer); //sig gen high per 
+		OtsUDPHardware::write(writeBuffer);
+		writeBuffer.resize(0);
+		OtsUDPFirmwareCore::write(writeBuffer, 0x18007, sigGenLowPer); //sig gen low per
+		OtsUDPHardware::write(writeBuffer);
+		writeBuffer.resize(0);
+		OtsUDPFirmwareCore::write(writeBuffer, 0x1800D, sigGenPolarityMask); //sig gen polaity
+		OtsUDPHardware::write(writeBuffer);
+		
+		__MOUT__ << "Configured signal generator with a count of " << sigGenCount << " (0 is continuous output), a high period of " << sigGenHighPer << ", a low period of " << sigGenLowPer << ", and output inversion set to " << sigGenPolarity << std::endl;
+		}
+		else{
+		nimResets.set(5); //set bit 5 in resets to 1 to take sig gen out of reset
+		nimEnables.reset(5); //set bit 5 in enables to 0 to disable sig gen 
+		__MOUT__ << "Signal Generator disabled" << std::endl;
+		}
+		
+		writeBuffer.resize(0);
+		OtsUDPFirmwareCore::write(writeBuffer, 0x18000, nimResets.to_ulong()); //set sig gen in or out of reset
+		OtsUDPHardware::write(writeBuffer);
+		__MOUT__ << "Nim Resets set to " << nimResets << std::endl;
+		writeBuffer.resize(0);
+		OtsUDPFirmwareCore::write(writeBuffer, 0x18001, nimEnables.to_ulong()); //enable or disable sig gen
+		OtsUDPHardware::write(writeBuffer);
+		__MOUT__ << "Nim Enables set to " << nimEnables << std::endl;
+		
+		
+		
 	}
 	catch(const std::runtime_error &e)
 	{
