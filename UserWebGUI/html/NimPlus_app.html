@@ -66,8 +66,15 @@
 </head>
 
 
-<h1>NimPlus Configuration GUI</h1> <input type="submit" id="saveBtn" onclick="savePageValues()" value="Save Values">   <select id="nimUIDSelect" oninput="getNimValuesOnUIDSelect(this.value)"></select>
+<h1>NimPlus Configuration GUI</h1> <input type="submit" id="saveBtn" onclick="savePageValues()" value="Save Values">   
 <p id="saveEl"></p>
+<div id="NimPlusSelectStatus"> 
+<p>Select NIMPlus: <select id="nimUIDSelect" oninput="getNimValuesOnUIDSelect(this.value)"></select> Board State: <select id="NimStatus" oninput="addModifiedList('Status',this.value)">
+<option value="On">On/Enabled</option>
+<option value="Off">Off/Disabled</option>
+</select></p>
+</div>
+
 
 <div class="ControlBox">
     <p>Connection Configuation <button id="ConnCtlBtn">Show/Hide</button></p>

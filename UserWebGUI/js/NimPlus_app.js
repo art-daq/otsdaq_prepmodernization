@@ -1,17 +1,11 @@
 //NimPlus_app JS
 //Created by Ben Hawks (bhawks at fnal.gov)
-//last updated July 20th 2017
 /* 
 TODO
 
 
- - Change ModifiedTable names to be names of corresponding collumns in FENimPlusConfig.. Table <
  - Populate remaining divs with relevant controls
- 	- Add input source selection (siglog vs signorm on 3 outputs) 
- - add functionality to Save Page Function to modify table values that have been changed on this GUI
- - confirm that the bit assignments on the coincidence logic match the actual values 
- - add support for more than one nimplus/ saving to a different UID 
- - (Later) Potentially load table data (on page load?) to populate controls with current config
+ 	- Add input source selection (siglog vs signorm on 3 outputs)  
  - (Later) Have the ability to load previous versions of config? 
 
  --- Save Procedure ---
@@ -26,42 +20,6 @@ TODO
       
       
 */
-//---------------------------------OTS Table Stuff---------------------------------------------------
-
-//	Description of Configuration-Subset Functionality/Behavior:
-//	
-//	GET parameters:
-//		<subsetBasePath> = Records at this path are the target of this GUI, e.g. “FEInterfaceConfiguration”
-//		<groupingFieldList> = CSV list of tree paths relative to <baseTable>, e.g. “LinkToFETypeConfiguration,FEInterfacePluginName”
-//									- these are the fields that can be used to filter UID records by (and these will cause grouping in square-view)	
-//		<editableFieldList> = empty string or "DEFAULT" for all, or CSV list of fields to show for editing
-//		<filterFieldList> = CSV list (of forced filter) of tree paths relative to <baseTable> and = value, e.g. "LinkToFETypeConfiguration=NIMPlus,FEInterfacePluginName=NIMPlusPlugin"
-//									- this is like a pre-filter (filter on records UID that user can not control)	
-//	- Requires user to have LOCK
-//	
-//	- Split window into two panes: Left and Right; Left is fixed width and hideable.	
-//	
-//	- Left Pane:
-//		* Fixed width, vertical auto scroll, hideable.
-//		* Filter icon that toggles display of multi-select boxes for each <subLevelGrouping>. 
-//		* Filtering:
-//		 	- AND/OR option if multiple sublevels
-//			- multi-select for each <subLevelGrouping>
-//		* Icon to toggle record representation (Multi-select or Square Grid groupings)
-//		* Record UID Selector:
-//			- Multi-select box for selection of UID (based on sublevelgrouping filters)
-//		* Alternatively can represent the detectors as squares (with mouse over UID names)
-//			- Squares will be grouped by SubLevel using AND logic with a sublevel-label
-//					
-//	- Right Pane:
-//		* Show fields that are common based on SubLevelGrouping filters
-//			- E.g. if *,* then can only show SlowControls fields
-//			- Challenge: show all common fields, even through links
-//			- Allow editing the field (based on type) .. same as tree edit, but like already clicked 
-//		
-//	- Save functionality should be same as saving tree	
-//		* If admin, give options to target a certain system alias.. Etc.
-//		* Else assume saving to currently active groups
 
 
 
@@ -81,125 +39,6 @@ var _TABLE_BOOL_TYPE_FALSE_COLOR = "rgb(255, 178, 178)";
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-/*
-function getNimUIDs(nimUids) {
-    if (nimUids.length == 0) {
-        Debug.log("getNimUIDs err ", Debug.HIGH_PRIORITY);
-        return;
-    }
-    console.log("getNimUIDs' Input: \n")
-    console.log(nimUids);
-    console.log("\n");
-    //Debug.log("getNimUIDs ", Debug.INFO_PRIORITY);
-
-    ConfigurationAPI.getFieldsOfRecords(
-        _subsetBasePath, nimUids,//["NimPlus0"]
-        "", //""_editableFieldList,
-        -1,
-        getNimFields,
-        _modifiedTables
-    );
-}
-
-var _localFields;
-var datToSend = [];
-sigGenInv
-function getNimFields(recFields) {
-    _localFields = recFields;
-    Debug.log("recFields found = " + recFields.length);
-
-    var str //= document.body.innerHTML;
-    str += "<br>GetFields";
-    str += "<br>";
-    for (var i in recFields)
-        str += i + ": " + recFields[i].fieldRelativePath +
-        recFields[i].fieldColumnName + "<br>";
-    //document.body.innerHTML = str;		
-    
-    
-    //console.log("getNimFields input: \n");
-    //console.log(recFields);
-    //console.log("\n");
-    //console.log(str);
-   
-    
-    ConfigurationAPI.getFieldValuesForRecords(
-        _subsetBasePath, ["NimPlus0"],
-        _localFields,
-        getNimFieldValues,
-        _modifiedTables
-    )
-    
-
-      
-    
-    
-//Compare Modified list and list of returned fields, populate a 2d array with the objects and data to write 
-//to the table of the elements of the page that have been modified since last save    
-    for (let i of modifiedList) {
-        for (let a of recFields) {
-          if(a.fieldColumnName == i[0]) {
-                datToSend.push([a, i[1]]); //Object,Data    
-	    }
-	    else{
-	    //console.log("\nno match for " + a.fieldColumnName);
-	    }
-	}
-    }
-  console.log("DatToSend\n");
-  console.log(datToSend);
-  console.log("\n");
-  
-
-};
-
-var firstTime = true;
-
-function getNimFieldValues(recFieldValues) {
-    var str //= document.body.innerHTML;
-    str += "<br>GetFieldValues ";
-    str += "<br>";
-    for (var i in recFieldValues)
-        str += recFieldValues[i].fieldUID + ": " +
-        recFieldValues[i].fieldPath + ": " +
-        recFieldValues[i].fieldValue + "<br>";
-   //document.body.innerHTML = str;
-   
-   // console.log("getNimFieldValues Input \n")
-   // console.log(recFieldValues);
-   // console.log("\n");
-   // console.log(str);
-   
-   
-   // if(firstTime)			
-   // 	ConfigurationAPI.setFieldValuesForRecords(
-   // 				_subsetBasePath,
-   // 				["FENimPlus0"],
-   // 				[_localFields[3],_localFields[1]], //fieldArr
-   // 				["0","0"], //valueArr
-   // 				handleSetNimValues,
-   // 				_modifiedTables);
-   // 				
-   // 
-   //firstTime = false;
-}
-
-function handleSetNimValues(modifiedTables) {
-    _modifiedTables = modifiedTables;
-
-    ConfigurationAPI.getFieldValuesForRecords(
-        _subsetBasePath, ["NimPlus0"],
-        _localFields,
-        getNimFieldValues,
-        _modifiedTables
-    )
-}
-*/
 
 //----------------------------------------- Save Functions -----------------------------------------
 var _nimUids = null;
@@ -305,7 +144,8 @@ var syncArray = [0,0,0,0,0,0,0,0] //empty array for 40Mhz Sync Word
 var logicArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] //empty array for coincidence logic word
 var _subsetBasePath = "FENIMPlusInterfaceConfiguration";
 var _modifiedTables;
-var fieldList = [["NimPlusIP","InterfaceIPAddress"],
+var fieldList = [["NimStatus","Status"],
+["NimPlusIP","InterfaceIPAddress"],
 ["NimPlusPort","InterfacePort"],
 ["otsHostIP","HostIPAddress"],
 ["otsHostPort","HostPort"],
@@ -373,12 +213,12 @@ var fieldList = [["NimPlusIP","InterfaceIPAddress"],
 //}
 
 
-//TODO Save Page Function
+// Save Page Function
 function savePageValues(e) {
   if(modifiedList.length > 0){ 
     if (invalidInput == false) {
 
-        //do stuff to save here					
+				
 	
 //	ConfigurationAPI.getSubsetRecords(
 //      _subsetBasePath /*subsetBasePath*/ ,
@@ -408,37 +248,8 @@ function savePageValues(e) {
     Debug.log("Error! No Changes to Save!", Debug.WARN_PRIORITY);
   }
 }
-//Updates all data in dataList
 
-
-
-
-/*
-function DWCalcWord(delay, width) {
-    //calculate the delay/width word for a given delay and width
-    /*
-    shiftval = 64 - width 
-    WMask = TMask << shiftval
-    word = WMask >>> delay
-
-    width = parseInt(width);
-    delay = parseInt(delay);
-    var word = null;
-    var FMask = 0x0000000000000000; //false/0 mask
-    var TMask = 0xFFFFFFFFFFFFFFFF; //True/1 mask	
-    var shiftval = 64 - width;
-    var WMask = TMask * Math.pow(2, shiftval); //Left Shift 
-    console.log("WMask: " + WMask.toString(2));
-    word = WMask * Math.pow(2, (-1 * delay)); //Right Shift
-    printWord = word.toString(2)
-    //printWord = "0000000000000000000000000000000000000000000000000000000000000000".substr(printWord.length)+printWord;
-    console.log("Output DW Word: " + printWord)
-    return word;
-}
-*/
-    
-
-
+//Calculate the 40 Mhz Sync Mask
 function syncMaskCalc(val,a) {
     syncArray[a]=val;
     var n = 0;
@@ -447,10 +258,10 @@ function syncMaskCalc(val,a) {
         n = (n << 1) + (syncArray[i]?1:0);
         }
     console.log(n)
-    //Calculate the 40 Mhz Sync Mask
     return n;
 }
 
+//Calculate the Coincidence Logic Word
 function LogicWordCalc(val,a) {
     logicArray[a]=val;
     var n = 0;
@@ -459,25 +270,26 @@ function LogicWordCalc(val,a) {
         n = (n << 1) + (logicArray[i]?1:0);
         }
     console.log(n)
-    //Calculate the Coincidence Logic Word
     return n;
 }
 
+//Return an element by it's ID string
 function elByID(id) {
     e = document.getElementById(id);
     return e;
 }
-
+//Return an element's value by it's ID String
 function valByID(id) {
     e = document.getElementById(id);
     return e.value;
 }
 
+//Set invalid input flag to false to allow saving
 function validInput(e) {
     invalidInput = false;
 }
 
-
+//Set invalid input flag to true to disallow saving
 function invalidValue(e) {
     invalidInput = true;
 }
@@ -501,7 +313,7 @@ function dwValidCheck(firstVal, secondValElId, msgElId) {
 
 
 
-
+//Add a value to the list to save into the selected row (UID) of the NIMPlus table
  function addModifiedList(tableVal, tableDat) {
     //#fcd125 = yellow color, notifies user that there are unsaved changes on the page
     $("body").css("background-color", "#fcd125")
@@ -527,7 +339,7 @@ function dwValidCheck(firstVal, secondValElId, msgElId) {
 //Dac Control Functions to link all 3 inputs together
 //Dac ranges from 0-3.3 volts with 4096 (0-4095) steps of resolution, input must be step value
 
-
+//Update the volt field and steps when the slider is changed
 function voltSlider(myValue, VoltElId, StepsElId) {
     voltVal = (((10000 * ((myValue * (33 / 40950)))) + (((8 - (10000 * ((myValue * (33 / 40950)))) % 8)))) / 10000) - 0.0008;
     document.getElementById(StepsElId).value = myValue;
@@ -536,6 +348,7 @@ function voltSlider(myValue, VoltElId, StepsElId) {
 }
 
 //A litte ugly, but it works 
+//Update the volt slider and steps when the field is changed
 function voltField(VoltElId, SlideElId, StepElId) {
     clearTimeout(timeout);
     timeout = setTimeout(function () {
@@ -551,7 +364,7 @@ function voltField(VoltElId, SlideElId, StepElId) {
 
 
 }
-
+// update the slider and field when the steps are changed
 function voltSteps(myValue, VoltElId, SlideElId) {
     voltVal = (((10000 * ((myValue * (33 / 40950)))) + (((8 - (10000 * ((myValue * (33 / 40950)))) % 8)))) / 10000) - 0.0008;
     document.getElementById(SlideElId).value = (myValue);
@@ -568,6 +381,7 @@ $(document).ready(function () {
     $("body").css("background-color", "#6b86ff")
 
     // CSS for Inner (hidden) divs
+    //Hide the divs by default
 
 
     //InChEnCtl
@@ -607,14 +421,12 @@ $(document).ready(function () {
     $("#BkpCtl").hide();
 
     //SigGenCtl
-    //				$("#SigGenCtl").css( "background-color","lightgrey"  );
-    //				$("#SigGenCtl").css( "border-left", "3px solid red" );
     $("#SigGenCtl").hide();
     
     //ConnCtl
     $("#ConnCtl").hide();
 
-    // Hide/Show Divs
+    //Setup button actions to hide/show the divs
 
     $("#InChEnCtlBtn").click(function () {
         $("#InChEnCtl").toggle(400);
@@ -636,13 +448,13 @@ $(document).ready(function () {
         $("#OutMuxCtl").toggle(400);
     });
     /*    
-				$("#ResetCtlBtn").click(function(){
-					$("#ResetCtl").toggle(400);
-				});
-					  
-				$("#EnableCtlBtn").click(function(){
-					$("#EnableCtl").toggle(400);
-				});  
+    $("#ResetCtlBtn").click(function(){
+	    $("#ResetCtl").toggle(400);
+    });
+	      
+    $("#EnableCtlBtn").click(function(){
+	    $("#EnableCtl").toggle(400);
+    });  
 	    			*/
     $("#SyncCtlBtn").click(function () {
         $("#SyncCtl").toggle(400);
@@ -672,9 +484,10 @@ $(document).ready(function () {
         $("#ConnCtl").toggle(400);
     });
 
-    $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {translation: {'Z': {pattern: /[0-9]/, optional: true}}});
+    //Setup IP Address Mask for input
+    $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {translation: {'Z': {pattern: /[0-9]/, optional: true}}}); 
 
-    
+    //Grab values to populate fields
     	ConfigurationAPI.getSubsetRecords(
         _subsetBasePath /*subsetBasePath*/ ,
         "", //"FEInterfacePluginName=FEOtsUDPTemplateInterface"/*filterList*/,
@@ -683,8 +496,12 @@ $(document).ready(function () {
 		
     
 });
+
+// ---------------------------------------------- Field Population ------------------------------------------------------
+
 var selUID;
 var bitCnt;
+
 function getNimUidsForList(nimUids) {
     if (nimUids.length == 0) {
         Debug.log("No NIMPlus UID's found", Debug.HIGH_PRIORITY);
@@ -731,10 +548,7 @@ function getNimValuesForPage(recFields) {
     console.log("getNimValuesForPage input: \n");
     console.log(recFields);
     console.log("\n");
-
-      
-//Compare Modified list and list of returned fields, populate a 2 arrays with the objects and data to write 
-//to the table of the elements of the page that have been modified since last save   //INCLUDES S 
+    
     for (let i of fieldList) {
         for (let a of recFields) {
           if(a.fieldPath.includes(i[1])) { //found value
@@ -759,8 +573,8 @@ function getNimValuesForPage(recFields) {
 			}
 			else if(a.fieldPath.includes("TriggerClockMask")){
 			  	for(bitCnt=0; bitCnt<=7; bitCnt++){
-				elByID("Sync"+(bitCnt+1).toString()).checked=((a.fieldValue>>(7-bitCnt)) % 2 != 0);
-				syncArray[bitCnt]=((a.fieldValue>>(7-bitCnt)) % 2 != 0);  
+				elByID("Sync"+(bitCnt+1).toString()).checked=((a.fieldValue>>(7-bitCnt)) % 2 != 0); //intentionally reversing bit order
+				syncArray[bitCnt]=((a.fieldValue>>(7-bitCnt)) % 2 != 0);  //intentionally reversing bit order
 				}
 				console.log("Trigger Clock Mask set")			
 			}
@@ -794,7 +608,7 @@ function getNimValuesForPage(recFields) {
 	      console.log("Exception occured while trying to set an element supposedly named " + i[0] + " to the value of " + a.fieldValue + " from the field " + a.fieldPath);
 	      console.log("Incoming exception data...\n");
 	      console.log(e);
-	      console.log("\n!!!_-_-_WARNING_-_-_!!!\n");
+	      console.log("\n!!!_-_-_END WARNING_-_-_!!!\n");
 			  } 
 		
 	    }
@@ -812,6 +626,7 @@ function getNimValuesForPage(recFields) {
 
 };
 
+//Update form data when UID is swiched
 function getNimValuesOnUIDSelect(selValue) {
 	  
   selUID = [selValue];
