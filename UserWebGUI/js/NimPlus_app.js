@@ -86,7 +86,7 @@ var _TABLE_BOOL_TYPE_FALSE_COLOR = "rgb(255, 178, 178)";
 
 
 
-
+/*
 function getNimUIDs(nimUids) {
     if (nimUids.length == 0) {
         Debug.log("getNimUIDs err ", Debug.HIGH_PRIORITY);
@@ -99,7 +99,7 @@ function getNimUIDs(nimUids) {
 
     ConfigurationAPI.getFieldsOfRecords(
         _subsetBasePath, nimUids,//["NimPlus0"]
-        "", //""/*_editableFieldList*/,
+        "", //""_editableFieldList,
         -1,
         getNimFields,
         _modifiedTables
@@ -108,7 +108,7 @@ function getNimUIDs(nimUids) {
 
 var _localFields;
 var datToSend = [];
-
+sigGenInv
 function getNimFields(recFields) {
     _localFields = recFields;
     Debug.log("recFields found = " + recFields.length);
@@ -121,12 +121,12 @@ function getNimFields(recFields) {
         recFields[i].fieldColumnName + "<br>";
     //document.body.innerHTML = str;		
     
-    /*
-    console.log("getNimFields input: \n");
-    console.log(recFields);
-    console.log("\n");
-    console.log(str);
-    */
+    
+    //console.log("getNimFields input: \n");
+    //console.log(recFields);
+    //console.log("\n");
+    //console.log(str);
+   
     
     ConfigurationAPI.getFieldValuesForRecords(
         _subsetBasePath, ["NimPlus0"],
@@ -168,25 +168,25 @@ function getNimFieldValues(recFieldValues) {
         str += recFieldValues[i].fieldUID + ": " +
         recFieldValues[i].fieldPath + ": " +
         recFieldValues[i].fieldValue + "<br>";
-    //document.body.innerHTML = str;
-   /*
-    console.log("getNimFieldValues Input \n")
-    console.log(recFieldValues);
-    console.log("\n");
-    console.log(str);
-    */
-    /*
-    if(firstTime)			
-    	ConfigurationAPI.setFieldValuesForRecords(
-    				_subsetBasePath,
-    				["FENimPlus0"],
-    				[_localFields[3],_localFields[1]], //fieldArr
-    				["0","0"], //valueArr
-    				handleSetNimValues,
-    				_modifiedTables);
-    				
-    */
-    firstTime = false;
+   //document.body.innerHTML = str;
+   
+   // console.log("getNimFieldValues Input \n")
+   // console.log(recFieldValues);
+   // console.log("\n");
+   // console.log(str);
+   
+   
+   // if(firstTime)			
+   // 	ConfigurationAPI.setFieldValuesForRecords(
+   // 				_subsetBasePath,
+   // 				["FENimPlus0"],
+   // 				[_localFields[3],_localFields[1]], //fieldArr
+   // 				["0","0"], //valueArr
+   // 				handleSetNimValues,
+   // 				_modifiedTables);
+   // 				
+   // 
+   //firstTime = false;
 }
 
 function handleSetNimValues(modifiedTables) {
@@ -199,7 +199,7 @@ function handleSetNimValues(modifiedTables) {
         _modifiedTables
     )
 }
-
+*/
 
 //----------------------------------------- Save Functions -----------------------------------------
 var _nimUids = null;
@@ -250,9 +250,9 @@ function setNimFieldValuesForSave(recFields) {
 		
 	    }
 	    else{
-	    console.log("\nno match for " + a.fieldColumnName);
-	    console.log(a);
-	    console.log(i);
+	    //console.log("\nno match for " + a.fieldColumnName);
+	   //console.log(a);
+	    //console.log(i);
 	      
 	    }
 	}
@@ -262,7 +262,7 @@ function setNimFieldValuesForSave(recFields) {
     
     ConfigurationAPI.setFieldValuesForRecords(
         _subsetBasePath,//subsetBasePath 
-	_nimUids,//recordArr
+	selUID,//recordArr
         objToWrite,//fieldObjArr
 	valsToWrite,//valueArr
         saveNimTableDialog,//responseHandler
@@ -288,7 +288,7 @@ function activateNimTables(SavedTable,SavedGroup,SavedAlias){
         //#43c130 = green color, alerts user that changes are saved
         $("body").css("background-color", "#43c130");
         //Table Updates Here					
-        Debug.log("NimPlus Configuration Changes Saved", Debug.INFO_PRIORITY);
+        Debug.log("NimPlus Configuration Changes Saved to UID " + selUID[0], Debug.INFO_PRIORITY);
         console.log("Page Values Saved");
         console.log(modifiedList);
 
@@ -305,7 +305,63 @@ var syncArray = [0,0,0,0,0,0,0,0] //empty array for 40Mhz Sync Word
 var logicArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] //empty array for coincidence logic word
 var _subsetBasePath = "FENIMPlusInterfaceConfiguration";
 var _modifiedTables;
-
+var fieldList = [["NimPlusIP","InterfaceIPAddress"],
+["NimPlusPort","InterfacePort"],
+["otsHostIP","HostIPAddress"],
+["otsHostPort","HostPort"],
+["ChAInEn","EnableInputChannelA"],
+["ChBInEn","EnableInputChannelB"],
+["ChCInEn","EnableInputChannelC"],
+["ChDInEn","EnableInputChannelD"],
+["ChAInInv","InvertPolarityInputChannelA"],
+["ChBInInv","InvertPolarityInputChannelB"],
+["ChCInInv","InvertPolarityInputChannelC"],
+["ChDInInv","InvertPolarityInputChannelD"],
+["ChADacEl1","DACValueChannelA"],
+["ChBDacEl1","DACValueChannelB"],
+["ChCDacEl1","DACValueChannelC"],
+["ChDDacEl1","DACValueChannelD"],
+["ChAOutMux","OutputMuxSelectChannelA"],
+["ChBOutMux","OutputMuxSelectChannelB"],
+["ChCOutMux","OutputMuxSelectChannelC"],
+["ChDOutMux","OutputMuxSelectChannelD"],
+["ChAOutInv","InvertPolarityOutputChannelA"],
+["ChBOutInv","InvertPolarityOutputChannelB"],
+["ChCOutInv","InvertPolarityOutputChannelC"],
+["ChDOutInv","InvertPolarityOutputChannelD"],
+["Sync1","TriggerClockMask"],
+["VetoCount","OutputTimeVetoDurationChannel0"],
+["Veto1Count","OutputTimeVetoDurationChannel1"],
+["Veto2Count","OutputTimeVetoDurationChannel2"],
+["VetoSourceOutput0","InputChannelVetoSourceForOutputChannel0"],
+["VetoSourceOutput1","InputChannelVetoSourceForOutputChannel1"],
+["VetoSourceOutput2","InputChannelVetoSourceForOutputChannel2"],
+["PsCount","OutputPrescaleCountChannel0"],
+["PsCount1","OutputPrescaleCountChannel1"],
+["PsCount2","OutputPrescaleCountChannel2"],
+["SL0","CoincidenceLogicWord"],
+["bkpEnableA","EnableBackPressureInputA"],
+["bkpEnableB","EnableBackPressureInputB"],
+["SGPulseCnt","SignalGeneratorPulseCount"],
+["SGHighPer","SignalGeneratorHighPeriod"],
+["SGLowPer","SignalGeneratorLowPeriod"],
+["sigGenEn","SignalGeneratorEnable"],
+["sigGenInv","SignalGeneratorInvertPolarity"],
+["ChADelayEl","DelayInputChannelA"],
+["ChAWidthEl","WidthInputChannelA"],
+["ChBDelayEl","DelayInputChannelB"],
+["ChBWidthEl","WidthInputChannelB"],
+["ChCDelayEl","DelayInputChannelC"],
+["ChCWidthEl","WidthInputChannelC"],
+["ChDDelayEl","DelayInputChannelD"],
+["ChDWidthEl","WidthInputChannelD"],
+["ChSNDelayEl","DelayOutputChannel0"],
+["ChSNWidthEl","WidthOutputChannel0"],
+["ChSCMS1DelayEl","DelayOutputChannel1"],
+["ChSCMS1WidthEl","WidthOutputChannel1"],
+["ChSCMS2DelayEl","DelayOutputChannel2"],
+["ChSCMS2WidthEl","WidthOutputChannel2"]
+]
 
 
 //function testFunc() {
@@ -324,13 +380,19 @@ function savePageValues(e) {
 
         //do stuff to save here					
 	
-	ConfigurationAPI.getSubsetRecords(
-        _subsetBasePath /*subsetBasePath*/ ,
-        "", //"FEInterfacePluginName=FEOtsUDPTemplateInterface"/*filterList*/,
-        getNimFieldsForSave /*responseHandler*/ ,
-        _modifiedTables /*modifiedTables*/ )      
-      
-      
+//	ConfigurationAPI.getSubsetRecords(
+//      _subsetBasePath /*subsetBasePath*/ ,
+//        "", //"FEInterfacePluginName=FEOtsUDPTemplateInterface"/*filterList*/,
+//        getNimFieldsForSave /*responseHandler*/ ,
+//        _modifiedTables /*modifiedTables*/ )      
+	
+	ConfigurationAPI.getFieldsOfRecords(
+        _subsetBasePath, selUID,//["NimPlus0"]
+        "",/*_editableFieldList*/
+        -1,//maxDepth
+        setNimFieldValuesForSave,//responseHandler
+        _modifiedTables//modifiedTables
+			 )
       
       
 
@@ -463,6 +525,7 @@ function dwValidCheck(firstVal, secondValElId, msgElId) {
 
 }
 //Dac Control Functions to link all 3 inputs together
+//Dac ranges from 0-3.3 volts with 4096 (0-4095) steps of resolution, input must be step value
 
 
 function voltSlider(myValue, VoltElId, StepsElId) {
@@ -547,6 +610,9 @@ $(document).ready(function () {
     //				$("#SigGenCtl").css( "background-color","lightgrey"  );
     //				$("#SigGenCtl").css( "border-left", "3px solid red" );
     $("#SigGenCtl").hide();
+    
+    //ConnCtl
+    $("#ConnCtl").hide();
 
     // Hide/Show Divs
 
@@ -601,4 +667,163 @@ $(document).ready(function () {
     $("#SigGenCtlBtn").click(function () {
         $("#SigGenCtl").toggle(400);
     });
+    
+    $("#ConnCtlBtn").click(function () {
+        $("#ConnCtl").toggle(400);
+    });
+
+    $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {translation: {'Z': {pattern: /[0-9]/, optional: true}}});
+
+    
+    	ConfigurationAPI.getSubsetRecords(
+        _subsetBasePath /*subsetBasePath*/ ,
+        "", //"FEInterfacePluginName=FEOtsUDPTemplateInterface"/*filterList*/,
+        getNimUidsForList /*responseHandler*/ ,
+        _modifiedTables /*modifiedTables*/ )     
+		
+    
 });
+var selUID;
+var bitCnt;
+function getNimUidsForList(nimUids) {
+    if (nimUids.length == 0) {
+        Debug.log("No NIMPlus UID's found", Debug.HIGH_PRIORITY);
+        return;
+    }
+	else{
+    _nimUids = nimUids;
+    console.log("getNimUIDs' Input: \n")
+    console.log(nimUids);
+    console.log("\n");
+    //Debug.log("getNimUIDs ", Debug.INFO_PRIORITY);
+    console.log(nimUids)
+    console.log("first index: " + nimUids[0])
+	$.each(nimUids, function(val, text) {
+            $('#nimUIDSelect').append( $('<option></option>').val(text).html(text) )
+	    console.log(val)
+	    console.log(text)
+            }); 
+    selUID = [nimUids[0]];
+    console.log(selUID);
+    ConfigurationAPI.getFieldsOfRecords(
+        _subsetBasePath, selUID,//["NimPlus0"]
+        "",/*_editableFieldList*/
+        -1,//maxDepth
+        getNimFieldsForPage,//responseHandler
+        _modifiedTables//modifiedTables
+    );
+	}
+}
+
+function getNimFieldsForPage(recFields){
+      console.log("recFields:  \n");
+      console.log(recFields);
+      ConfigurationAPI.getFieldValuesForRecords(
+        _subsetBasePath, selUID,
+        recFields,
+        getNimValuesForPage,
+        _modifiedTables)
+}
+
+function getNimValuesForPage(recFields) {
+  //Debug.log("recFields found = " + recFields.length);	
+    
+    console.log("getNimValuesForPage input: \n");
+    console.log(recFields);
+    console.log("\n");
+
+      
+//Compare Modified list and list of returned fields, populate a 2 arrays with the objects and data to write 
+//to the table of the elements of the page that have been modified since last save   //INCLUDES S 
+    for (let i of fieldList) {
+        for (let a of recFields) {
+          if(a.fieldPath.includes(i[1])) { //found value
+	    try{
+			if(elByID(i[0]).type == "checkbox" && !a.fieldPath.includes("CoincidenceLogicWord") && !a.fieldPath.includes("TriggerClockMask")){
+				if(a.fieldValue == "Yes" || a.fieldValue == "True" || a.fieldValue == "On"){
+					elByID(i[0]).checked = true;
+					console.log("checkbox element " + i[0] + " set to checked = true")
+				}
+				else{
+					elByID(i[0]).checked = false;
+					console.log("checkbox element " + i[0] + " set to checked = false")
+				}
+			}
+			else if(a.fieldPath.includes("CoincidenceLogicWord")){
+				for(bitCnt=0; bitCnt<=15; bitCnt++){
+				elByID("SL"+bitCnt.toString()).checked=((a.fieldValue>>(bitCnt)) % 2 != 0);
+				logicArray[bitCnt]=((a.fieldValue>>(15-bitCnt)) % 2 != 0); //intentionally reversing bit order
+				}
+			  
+				console.log("Coincidence Logic Word set");
+			}
+			else if(a.fieldPath.includes("TriggerClockMask")){
+			  	for(bitCnt=0; bitCnt<=7; bitCnt++){
+				elByID("Sync"+(bitCnt+1).toString()).checked=((a.fieldValue>>(7-bitCnt)) % 2 != 0);
+				syncArray[bitCnt]=((a.fieldValue>>(7-bitCnt)) % 2 != 0);  
+				}
+				console.log("Trigger Clock Mask set")			
+			}
+			else if(elByID(i[0]).id=="ChADacEl1"){
+			  voltSteps(a.fieldValue, "ChADacEl2", "ChADacEl0")
+			  elByID(i[0]).value = a.fieldValue
+			  console.log("Set CH A Dac")
+			}
+			else if(elByID(i[0]).id=="ChBDacEl1"){
+			  voltSteps(a.fieldValue, "ChBDacEl2", "ChBDacEl0")
+			  elByID(i[0]).value = a.fieldValue
+			  console.log("Set CH B Dac")
+			}
+			else if(elByID(i[0]).id=="ChCDacEl1"){
+			  voltSteps(a.fieldValue, "ChCDacEl2", "ChCDacEl0")
+			  elByID(i[0]).value = a.fieldValue
+			  console.log("Set CH C Dac")
+			}
+			else if(elByID(i[0]).id=="ChDDacEl1"){
+			  voltSteps(a.fieldValue, "ChDDacEl2", "ChDDacEl0")
+			  elByID(i[0]).value = a.fieldValue
+			  console.log("Set CH D Dac")
+			}
+			else{
+				elByID(i[0]).value = a.fieldValue;
+				console.log("set element " + i[0] + " to value " + a.fieldValue)
+			  }
+	    }
+	    catch(e){
+	      console.log("\n!!!_-_-_WARNING_-_-_!!!\n");
+	      console.log("Exception occured while trying to set an element supposedly named " + i[0] + " to the value of " + a.fieldValue + " from the field " + a.fieldPath);
+	      console.log("Incoming exception data...\n");
+	      console.log(e);
+	      console.log("\n!!!_-_-_WARNING_-_-_!!!\n");
+			  } 
+		
+	    }
+	    else{/*
+	    console.log("\nno match for " + a.fieldColumnName);
+	    console.log(a.fieldColumnName);
+	    console.log(i[1]);
+	    console.log(a.fieldColumnName == i[1]);
+	     */ 
+	    }
+	}
+    }
+
+   
+
+};
+
+function getNimValuesOnUIDSelect(selValue) {
+	  
+  selUID = [selValue];
+  console.log(selUID);
+    ConfigurationAPI.getFieldsOfRecords(
+        _subsetBasePath, selUID,//["NimPlus0"]
+        "",/*_editableFieldList*/
+        -1,//maxDepth
+        getNimFieldsForPage,//responseHandler
+        _modifiedTables//modifiedTables
+    );
+
+};
+
+

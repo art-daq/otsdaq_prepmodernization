@@ -59,14 +59,26 @@
 
     
     <script src="../js/NimPlus_app.js"></script>
+    <script src="../js/jquery.mask.min.js"></script>
 
 
 
 </head>
 
 
-<h1>NimPlus Configuration GUI</h1> <input type="submit" id="saveBtn" onclick="savePageValues()" value="Save Values">
-<p id="saveEl"><button onclick="testFunc()">TestFunc</button></p>
+<h1>NimPlus Configuration GUI</h1> <input type="submit" id="saveBtn" onclick="savePageValues()" value="Save Values">   <select id="nimUIDSelect" oninput="getNimValuesOnUIDSelect(this.value)"></select>
+<p id="saveEl"></p>
+
+<div class="ControlBox">
+    <p>Connection Configuation <button id="ConnCtlBtn">Show/Hide</button></p>
+    <div id="ConnCtl" class="Dropdown">
+      <p>NimPlus IP Address: <input type="text" id="NimPlusIP" class='ip_address' oninput="addModifiedList('InterfaceIPAddress',this.value);">
+      <p>NimPlus Port: <input type="number" id="NimPlusPort" oninput="addModifiedList('InterfacePort',this.value);">
+      <p>Host IP Address: <input type="text" id="otsHostIP" class='ip_address' oninput="addModifiedList('HostIPAddress',this.value);">
+      <p>Host Port: <input type="number" id="otsHostPort" oninput="addModifiedList('HostPort',this.value);">
+    </div>
+</div>
+
 
 <div class="ControlBox">
     <p>Input Channel Enable Control <button id="InChEnCtlBtn">Show/Hide</button></p>
@@ -234,7 +246,7 @@
             <!--not in table --><input type="checkbox" id="ChAOutInv" onclick="addModifiedList('InvertPolarityOutputChannelA',this.checked?'yes':'no');"><label for="ChAOutInv">Invert Output?</label>
         </p>
 
-        <p>Output 2 - <select id="CHBOutMux" oninput="addModifiedList('OutputMuxSelectChannelB', this.value);">
+        <p>Output 2 - <select id="ChBOutMux" oninput="addModifiedList('OutputMuxSelectChannelB', this.value);">
 			<option value=0>SigCMS</option>
 			<option value=1>SigCMS1</option>
 			<option value=2>SigCMS2</option>
@@ -270,7 +282,7 @@
 			<option value=6>N/A</option>
 			<option value=7>N/A</option>			
 			</select>
-            <!--not in table --><input type="checkbox" id="ChDOutInv" onclick="addModifiedList('InvertPolarityOutputChannelC',this.checked?'yes':'no');"><label for="ChDOutInv">Invert Output?</label>
+            <!--not in table --><input type="checkbox" id="ChDOutInv" onclick="addModifiedList('InvertPolarityOutputChannelD',this.checked?'yes':'no');"><label for="ChDOutInv">Invert Output?</label>
         </p>
 
     </div>
@@ -331,7 +343,7 @@
         <br>Veto 1 Count<input type="number" id="Veto1Count" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel1', this.value); addModifiedList('OutputPrescaleCountChannel1', 0); elByID('PsCount1').value=0; validInput();" oninvalid="invalidInput();"></input>
 
         <br>Veto 2 Count<input type="number" id="Veto2Count" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel2', this.value); addModifiedList('OutputPrescaleCountChannel2', 0); elByID('PsCount2').value=0; validInput();" oninvalid="invalidInput();"></input>
-
+<!--
 	<p>Veto Source for Output Ch 0 - <select id="VetoSourceOutput0" oninput="addModifiedList('InputChannelVetoSourceForOutputChannel0', this.value);">
 		<option value="No Veto">No Veto</option>
 		<option value="Input Channel-A">Input Channel-A</option>
@@ -353,6 +365,7 @@
 		<option value="Input Channel-C">Input Channel-C</option>
 		<option value="Input Channel-D">Input Channel-D</option>
 		</select>
+-->   
    </div>
 </div>
 
@@ -370,22 +383,22 @@
     <div id="SelLogCtl" class="Dropdown">
         <!-- Not in table?-->
         Channels: ABCD , Cases output when true and are OR'd together
-        </br><input type="checkbox" id="SL0FFFF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,15));"><label for="SL0FFFF">FFFF</label>
-        <input type="checkbox" id="SL1TFFF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,14));"><label for="SL1TFFF">TFFF</label>
-        <input type="checkbox" id="SL2FTFF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,13));"><label for="SL2FTFF">FTFF</label>
-        <input type="checkbox" id="SL3TTFF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,12));"><label for="SL3TTFF">TTFF</label>
-        </br><input type="checkbox" id="SL4FFTF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1this.checked:0,11));"><label for="SL5FFTF">FFTF</label>
-        <input type="checkbox" id="SL5TFTF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,10));"><label for="SL5TFTF">TFTF</label>
-        <input type="checkbox" id="SL6FTTF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,9));"><label for="SL6FTTF">FTTF</label>
-        <input type="checkbox" id="SL7TTTF" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,8));"><label for="SL7TTTF">TTTF</label>
-        </br><input type="checkbox" id="SL8FFFT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,7));"><label for="SL8FFFT">FFFT</label>
-        <input type="checkbox" id="SL9TFFT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,6));"><label for="SL9TFFT">TFFT</label>
-        <input type="checkbox" id="SL10FTFT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,5));"><label for="SL10FTFT">FTFT</label>
-        <input type="checkbox" id="SL11TTFT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,4));"><label for="SL11TTFT">TTFT</label>
-        </br><input type="checkbox" id="SL12FFTT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,3));"><label for="SL12FFTT">FFTT</label>
-        <input type="checkbox" id="SL13TFTT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,2));"><label for="SL13TFTT">TFTT</label>
-        <input type="checkbox" id="SL14FTTT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,1));"><label for="SL14FTTT">FTTT</label>
-        <input type="checkbox" id="SL15TTTT" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,0));"><label for="SL15TTTT">TTTT</label>
+        </br><input type="checkbox" id="SL0" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,15));"><label for="SL0">FFFF</label>
+        <input type="checkbox" id="SL1" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,14));"><label for="SL1">TFFF</label>
+        <input type="checkbox" id="SL2" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,13));"><label for="SL2">FTFF</label>
+        <input type="checkbox" id="SL3" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,12));"><label for="SL3">TTFF</label>
+        </br><input type="checkbox" id="SL4" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1this.checked:0,11));"><label for="SL5">FFTF</label>
+        <input type="checkbox" id="SL5" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,10));"><label for="SL5">TFTF</label>
+        <input type="checkbox" id="SL6" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,9));"><label for="SL6">FTTF</label>
+        <input type="checkbox" id="SL7" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,8));"><label for="SL7">TTTF</label>
+        </br><input type="checkbox" id="SL8" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,7));"><label for="SL8">FFFT</label>
+        <input type="checkbox" id="SL9" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,6));"><label for="SL9">TFFT</label>
+        <input type="checkbox" id="SL10" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,5));"><label for="SL10">FTFT</label>
+        <input type="checkbox" id="SL11" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,4));"><label for="SL11">TTFT</label>
+        </br><input type="checkbox" id="SL12" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,3));"><label for="SL12">FFTT</label>
+        <input type="checkbox" id="SL13" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,2));"><label for="SL13">TFTT</label>
+        <input type="checkbox" id="SL14" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,1));"><label for="SL14">FTTT</label>
+        <input type="checkbox" id="SL15" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,0));"><label for="SL15">TTTT</label>
     </div>
 </div>
 
@@ -393,7 +406,7 @@
     <p>Back Pressure Control <button id="BkpCtlBtn">Show/Hide</button></p>
     <div id="BkpCtl" class="Dropdown">
         <input type="checkbox" id="bkpEnableA" onclick="addModifiedList('EnableBackPressureInputA', this.checked);"><label for="bkpEnableA" >Enable Backpressure Veto A?</label>
-        </br><input type="checkbox" id="bkpEnableB" onclick="addModifiedList('EnableBackPressureInput', this.checked);"><label for="bkpEnableB" >Enable Backpressure Veto B?</label>
+        </br><input type="checkbox" id="bkpEnableB" onclick="addModifiedList('EnableBackPressureInputB', this.checked);"><label for="bkpEnableB" >Enable Backpressure Veto B?</label>
 
     </div>
 </div>
