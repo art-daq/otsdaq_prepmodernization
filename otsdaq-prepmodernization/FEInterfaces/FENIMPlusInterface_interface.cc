@@ -22,7 +22,7 @@ using namespace ots;
 //,theConfiguration_ ((FEWOtsUDPHardwareConfiguration*)configuration)
 //
 //{
-//    __MOUT__ << __PRETTY_FUNCTION__ << "Few name: " << name
+//    __COUT__ << __PRETTY_FUNCTION__ << "Few name: " << name
 //    << " Interface IP: "   << theConfiguration_->getInterfaceIPAddress(name)
 //    << " Interface Port: " << theConfiguration_->getInterfacePort(name)
 //    << " IP: "             << theConfiguration_->getIPAddress(name)
@@ -39,11 +39,11 @@ FENIMPlusInterface::FENIMPlusInterface(const std::string& interfaceUID, const Co
 		, theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("InterfacePort").getValue<unsigned int>())
 , OtsUDPFirmwareDataGen(theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("FirmwareVersion").getValue<unsigned int>())
 {
-	//    __MOUT__ << "FE name: " << interfaceUID << std::endl;
-	//    __MOUT__ << " Interface IP: "   << FEVInterface::theXDAQContextConfigTree_.getNode(interfaceConfigurationPath).getNode("IPAddress").getValue<std::string>() << std::endl;
-	//    __MOUT__ << " Interface Port: " << FEVInterface::theXDAQContextConfigTree_.getNode(interfaceConfigurationPath).getNode("Port").getValue<std::string>() << std::endl;
-	//    __MOUT__ << " IP: "             << FEVInterface::theXDAQContextConfigTree_.getNode(interfaceConfigurationPath).getNode("IP").getValue<std::string>() << std::endl;
-	//    __MOUT__ << " Port: "           << FEVInterface::theXDAQContextConfigTree_.getNode(interfaceConfigurationPath).getNode("IPAddress").getValue<std::string>() << std::endl;
+	//    __COUT__ << "FE name: " << interfaceUID << std::endl;
+	//    __COUT__ << " Interface IP: "   << FEVInterface::theXDAQContextConfigTree_.getNode(interfaceConfigurationPath).getNode("IPAddress").getValue<std::string>() << std::endl;
+	//    __COUT__ << " Interface Port: " << FEVInterface::theXDAQContextConfigTree_.getNode(interfaceConfigurationPath).getNode("Port").getValue<std::string>() << std::endl;
+	//    __COUT__ << " IP: "             << FEVInterface::theXDAQContextConfigTree_.getNode(interfaceConfigurationPath).getNode("IP").getValue<std::string>() << std::endl;
+	//    __COUT__ << " Port: "           << FEVInterface::theXDAQContextConfigTree_.getNode(interfaceConfigurationPath).getNode("IPAddress").getValue<std::string>() << std::endl;
 	universalAddressSize_ = 8;
 	universalDataSize_    = 8;
 }
@@ -68,10 +68,10 @@ void FENIMPlusInterface::runSequenceOfCommands(const std::string &treeLinkName)
 		auto configSeqLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode(treeLinkName);
 
 		if(configSeqLink.isDisconnected())
-			__MOUT__ << "Disconnected configure sequence" << std::endl;
+			__COUT__ << "Disconnected configure sequence" << std::endl;
 		else
 		{
-			__MOUT__ << "Handling configure sequence." << std::endl;
+			__COUT__ << "Handling configure sequence." << std::endl;
 			auto childrenMap = configSeqLink.getChildrenMap();
 			for(const auto &child:childrenMap)
 			{
@@ -96,7 +96,7 @@ void FENIMPlusInterface::runSequenceOfCommands(const std::string &treeLinkName)
 				sprintf(msg,"\t Writing %s: \t %ld(0x%lX) \t %ld(0x%lX)", child.first.c_str(),
 						writeAddress, writeAddress,
 						writeHistory[writeAddress], writeHistory[writeAddress]);
-				__MOUT__ << msg << std::endl;
+				__COUT__ << msg << std::endl;
 
 				writeBuffer.resize(0);
 				OtsUDPFirmwareCore::write(writeBuffer, writeAddress, writeHistory[writeAddress]);
@@ -109,27 +109,27 @@ void FENIMPlusInterface::runSequenceOfCommands(const std::string &treeLinkName)
 	}
 	catch(const std::runtime_error &e)
 	{
-		__MOUT__ << "Error accessing sequence, so giving up:\n" << e.what() << std::endl;
+		__COUT__ << "Error accessing sequence, so giving up:\n" << e.what() << std::endl;
 	}
 	catch(...)
 	{
-		__MOUT__ << "Unknown Error accessing sequence, so giving up." << std::endl;
+		__COUT__ << "Unknown Error accessing sequence, so giving up." << std::endl;
 	}
 }
 
 //========================================================================================================================
 void FENIMPlusInterface::configure(void)
 {
-	__MOUT__ << "configure" << std::endl;
-	__MOUT__ << "Clearing receive socket buffer: " << OtsUDPHardware::clearReadSocket() << " packets cleared." << std::endl;
+	__COUT__ << "configure" << std::endl;
+	__COUT__ << "Clearing receive socket buffer: " << OtsUDPHardware::clearReadSocket() << " packets cleared." << std::endl;
 
 	std::string writeBuffer;
 	std::string readBuffer;
 
-	__MOUT__ << "Setting Destination IP: " <<
+	__COUT__ << "Setting Destination IP: " <<
 			theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("StreamToIPAddress").getValue<std::string>()
 			<< std::endl;
-	__MOUT__ << "And Destination Port: " <<
+	__COUT__ << "And Destination Port: " <<
 			theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("StreamToPort").getValue<unsigned int>()
 			<< std::endl;
 
@@ -142,7 +142,7 @@ void FENIMPlusInterface::configure(void)
 
 	//
 	//
-	__MOUT__ << "Reading back burst dest MAC/IP/Port: "  << std::endl;
+	__COUT__ << "Reading back burst dest MAC/IP/Port: "  << std::endl;
 	writeBuffer.resize(0);
 	OtsUDPFirmwareCore::readDataDestinationMAC(writeBuffer);
 	OtsUDPHardware::read(writeBuffer,readBuffer);
@@ -171,7 +171,7 @@ void FENIMPlusInterface::configure(void)
 			if(usingOptionalParams &&
 					optionalLink.getNode("theXDAQContextConfigTree_.getNode(theConfigurationPath_)EnableClockResetDuringConfigure").getValue<bool>())
 			{
-				__MOUT__ << "Resetting clocks!" << std::endl;
+				__COUT__ << "Resetting clocks!" << std::endl;
 				writeBuffer.resize(0);
 				OtsUDPFirmwareCore::write(writeBuffer, /*address*/ 0x1FFFFFFFF, /*data*/ 0x1); //ots Ethernet reset
 				OtsUDPHardware::write(writeBuffer);
@@ -188,7 +188,7 @@ void FENIMPlusInterface::configure(void)
 		}
 		catch(...)
 		{
-			__MOUT__ << "Could not find reset clock flag, so not resetting... " << std::endl;
+			__COUT__ << "Could not find reset clock flag, so not resetting... " << std::endl;
 		}
 	}
 
@@ -260,12 +260,12 @@ void FENIMPlusInterface::configure(void)
 	}
 	catch(...)
 	{
-		__MOUT__ << "Skipping DAC writing because enable field was not found in tree." << std::endl;
+		__COUT__ << "Skipping DAC writing because enable field was not found in tree." << std::endl;
 	}
 
 	if(doWriteDACs) //works, but temporarily disabling
 	{
-		__MOUT__ << "Setting up DACs" << std::endl;
+		__COUT__ << "Setting up DACs" << std::endl;
 
 		//16 bit DAC value
 		//   - 15:12 channel := 2=A, 6=B, A=C, E=D
@@ -318,7 +318,7 @@ void FENIMPlusInterface::configure(void)
 		
 		unsigned char selectionOnOffMask = 0, inputPolarityMask = 0;
 
-		__MOUT__ << "Setting up input channels..." << std::endl;
+		__COUT__ << "Setting up input channels..." << std::endl;
 		for(const auto &channelName : channelNames) //setup sig mod for each channel
 		{
 			//if(channelName != "ChannelD") { ++channelCount; continue;} //For Debugging just one channel
@@ -342,7 +342,7 @@ void FENIMPlusInterface::configure(void)
 			inputPolarityMask |= ((invertPolarity?1:0) << channelCount);
 
 			
-			__MOUT__ << "Output word for " << channelName << " is " << std::bitset<64>(inputModMask) << std::endl << " with a delay of " << inputDelay << " and a width of " << inputWidth << std::endl;
+			__COUT__ << "Output word for " << channelName << " is " << std::bitset<64>(inputModMask) << std::endl << " with a delay of " << inputDelay << " and a width of " << inputWidth << std::endl;
 			
 			
 			writeBuffer.resize(0);
@@ -359,7 +359,7 @@ void FENIMPlusInterface::configure(void)
 
 			++channelCount;
 		}
-		__MOUT__ << "Input polariy mask is " << std::bitset<8>(inputPolarityMask) << std::endl;
+		__COUT__ << "Input polariy mask is " << std::bitset<8>(inputPolarityMask) << std::endl;
 		writeBuffer.resize(0);
 		OtsUDPFirmwareCore::write(writeBuffer, /*address*/0x1800B, /*data*/ inputPolarityMask); //setup input polarity
 		OtsUDPHardware::write(writeBuffer);
@@ -398,7 +398,7 @@ void FENIMPlusInterface::configure(void)
 	}
 	catch(const std::runtime_error &e)
 	{
-		__MOUT__ << "Failed input stage setup!\n" << e.what() << std::endl;
+		__COUT__ << "Failed input stage setup!\n" << e.what() << std::endl;
 		throw;
 	}
 
@@ -419,13 +419,13 @@ void FENIMPlusInterface::configure(void)
 		unsigned char backpressureMask = 0;
 		unsigned int gateChannelVetoSel[3] = {0,0,0};
 		
-		__MOUT__ << "Setting up output channels..." << std::endl;
+		__COUT__ << "Setting up output channels..." << std::endl;
 		//there are 3 output channels (alias: signorm, sigcms1, sigcms2)
 		std::array<std::string,3> outChannelNames = {"Channel0","Channel1","Channel2"};
 		for(const auto &channelName : outChannelNames)
 		{
 			outputChannelSourceSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("OutputSourceSelect" + channelName).getValue<unsigned int>(); //0: sig_log   or    1: sig_norm/ch0
-			__MOUT__ << "OutputSourceSelect = " << outputChannelSourceSelect << std::endl;
+			__COUT__ << "OutputSourceSelect = " << outputChannelSourceSelect << std::endl;
 			if(outputChannelSourceSelect) //if non-default, subtract 1 so choice 1 evaluates to 0, and so on..
 				--outputChannelSourceSelect;
 			
@@ -463,14 +463,14 @@ void FENIMPlusInterface::configure(void)
 			OtsUDPFirmwareCore::write(writeBuffer, channelCount==0?0x2:(0x18002 + channelCount - 1), outputModMask); //set output channel width/delay mask
 			OtsUDPHardware::write(writeBuffer);
 			
-			__MOUT__ << "Output word for " << channelName << " is " << std::bitset<64>(outputModMask) << std::endl << " with a delay of " << outputDelay << " and a width of " << outputWidth << std::endl;
+			__COUT__ << "Output word for " << channelName << " is " << std::bitset<64>(outputModMask) << std::endl << " with a delay of " << outputDelay << " and a width of " << outputWidth << std::endl;
 			
 			if(channelCount)
 			{
 				writeBuffer.resize(0);
 				OtsUDPFirmwareCore::write(writeBuffer, (0x18018 + channelCount - 1), outputChannelSourceSelect); //select source (1 := signorm, 0 := siglog)
 				OtsUDPHardware::write(writeBuffer);
-				__MOUT__ << "Output src select is " << outputChannelSourceSelect << " for " << channelName << std::endl;
+				__COUT__ << "Output src select is " << outputChannelSourceSelect << " for " << channelName << std::endl;
 			}
 			
 
@@ -480,7 +480,7 @@ void FENIMPlusInterface::configure(void)
 			OtsUDPFirmwareCore::write(writeBuffer, channelCount==0?0x1801B:(0x18011 + channelCount - 1), outputTimeVetoDuration);
 			OtsUDPHardware::write(writeBuffer);
 
-			__MOUT__ << "Veto count for " << channelName << " is " << outputTimeVetoDuration << " writing to ch "  << (channelCount==0?0x1801B:(0x18011 + channelCount - 1)) << std::endl;
+			__COUT__ << "Veto count for " << channelName << " is " << outputTimeVetoDuration << " writing to ch "  << (channelCount==0?0x1801B:(0x18011 + channelCount - 1)) << std::endl;
 			
 			//prescale veto setup
 						writeBuffer.resize(0);
@@ -490,7 +490,7 @@ void FENIMPlusInterface::configure(void)
 			OtsUDPFirmwareCore::write(writeBuffer, 0x1801C + channelCount, outputPrescaleCount);
 			OtsUDPHardware::write(writeBuffer);
 
-			__MOUT__ << "Prescaler count for " << channelName << " is " << outputPrescaleCount << " writing to ch " <<  0x1801C + channelCount << std::endl;
+			__COUT__ << "Prescaler count for " << channelName << " is " << outputPrescaleCount << " writing to ch " <<  0x1801C + channelCount << std::endl;
 			  
 			++channelCount;
 		}
@@ -501,7 +501,7 @@ void FENIMPlusInterface::configure(void)
 		//  2 external backpressure inputs
 		//  bit 3 is 0/1 disable/enable for first input
 		//  bit 4 is 0/1 disable/enable for second input
-		__MOUT__ << "Backpressure Selecting..." << std::endl;
+		__COUT__ << "Backpressure Selecting..." << std::endl;
 		outputBackpressureSelect = usingOptionalParams && optionalLink.getNode("EnableBackPressureInputA").getValue<bool>();
 		backpressureMask |= outputBackpressureSelect << 3;
 		outputBackpressureSelect = usingOptionalParams && optionalLink.getNode("EnableBackPressureInputB").getValue<bool>();
@@ -511,14 +511,14 @@ void FENIMPlusInterface::configure(void)
 		OtsUDPHardware::write(writeBuffer);
 
 		//and 4 output muxes (first is special)
-		__MOUT__ << "Setting output muxes..." << std::endl;
+		__COUT__ << "Setting output muxes..." << std::endl;
 		unsigned int outputPolarityMask = 0; 
 		bool outputInvertPolarity;
 		channelCount = 0;
 		for(const auto &channelName : channelNames)
 		{
 			outputMuxSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("OutputMuxSelect" + channelName).getValue<unsigned int>();
-			if(outputMuxSelect > 31) throw std::runtime_error("Invalid output mux select!");
+			if(outputMuxSelect > 31) {__SS__; throw std::runtime_error(ss.str() + "Invalid output mux select!");}
 			if(usingOptionalParams)
 			{
 			  outputInvertPolarity = usingOptionalParams && optionalLink.getNode("InvertPolarityOutput" + channelName).getValue<bool>();
@@ -551,19 +551,19 @@ void FENIMPlusInterface::configure(void)
 			writeBuffer.resize(0);
 			OtsUDPFirmwareCore::write(writeBuffer, channelCount == 0?0x5:(0x18013 + channelCount - 1), outputMuxSelect); //setup mux select
 			OtsUDPHardware::write(writeBuffer);
-			__MOUT__ << "Mux value for output channel " << channelName << " is " << outputMuxSelect << ", written to " << (channelCount == 0?0x5:(0x18013 + channelCount - 1)) << std::endl;
+			__COUT__ << "Mux value for output channel " << channelName << " is " << outputMuxSelect << ", written to " << (channelCount == 0?0x5:(0x18013 + channelCount - 1)) << std::endl;
 						
 			writeBuffer.resize(0);
 			OtsUDPFirmwareCore::write(writeBuffer, /*address*/0x1800C, /*data*/ outputPolarityMask); //setup output polarity
 			OtsUDPHardware::write(writeBuffer);
-			__MOUT__ << "Input polariy mask is " << std::bitset<8>(outputPolarityMask) << std::endl;
+			__COUT__ << "Input polariy mask is " << std::bitset<8>(outputPolarityMask) << std::endl;
 
 			++channelCount;
 		}
 
 		//setup burst data blocks
 		{
-			__MOUT__ << "Setting up Burst Data Blocks" << std::endl;
+			__COUT__ << "Setting up Burst Data Blocks" << std::endl;
 
 			unsigned int logicSampleDelay = 0;
 			unsigned int gateChannel = 0;
@@ -619,7 +619,7 @@ void FENIMPlusInterface::configure(void)
 		writeBuffer.resize(0);
 		OtsUDPFirmwareCore::write(writeBuffer, 0x06, 0x02); //renable selection  logic  
 		OtsUDPHardware::write(writeBuffer);
-		__MOUT__ << "Selection Logic word is  " << std::bitset<16>(coincidenceLogicWord) << std::endl;
+		__COUT__ << "Selection Logic word is  " << std::bitset<16>(coincidenceLogicWord) << std::endl;
 		
 		 
 		
@@ -647,29 +647,29 @@ void FENIMPlusInterface::configure(void)
 		OtsUDPFirmwareCore::write(writeBuffer, 0x1800D, sigGenPolarityMask); //sig gen polaity
 		OtsUDPHardware::write(writeBuffer);
 		
-		__MOUT__ << "Configured signal generator with a count of " << sigGenCount << " (0 is continuous output), a high period of " << sigGenHighPer << ", a low period of " << sigGenLowPer << ", and output inversion set to " << sigGenPolarity << std::endl;
+		__COUT__ << "Configured signal generator with a count of " << sigGenCount << " (0 is continuous output), a high period of " << sigGenHighPer << ", a low period of " << sigGenLowPer << ", and output inversion set to " << sigGenPolarity << std::endl;
 		}
 		else{
 		nimResets.set(5); //set bit 5 in resets to 1 to take sig gen out of reset
 		nimEnables.reset(5); //set bit 5 in enables to 0 to disable sig gen 
-		__MOUT__ << "Signal Generator disabled" << std::endl;
+		__COUT__ << "Signal Generator disabled" << std::endl;
 		}
 		
 		writeBuffer.resize(0);
 		OtsUDPFirmwareCore::write(writeBuffer, 0x18000, nimResets.to_ulong()); //set sig gen in or out of reset
 		OtsUDPHardware::write(writeBuffer);
-		__MOUT__ << "Nim Resets set to " << nimResets << std::endl;
+		__COUT__ << "Nim Resets set to " << nimResets << std::endl;
 		writeBuffer.resize(0);
 		OtsUDPFirmwareCore::write(writeBuffer, 0x18001, nimEnables.to_ulong()); //enable or disable sig gen
 		OtsUDPHardware::write(writeBuffer);
-		__MOUT__ << "Nim Enables set to " << nimEnables << std::endl;
+		__COUT__ << "Nim Enables set to " << nimEnables << std::endl;
 		
 		
 		
 	}
 	catch(const std::runtime_error &e)
 	{
-		__MOUT__ << "Failed output stage setup!\n" << e.what() << std::endl;
+		__COUT__ << "Failed output stage setup!\n" << e.what() << std::endl;
 		throw;
 	}
 
@@ -677,40 +677,40 @@ void FENIMPlusInterface::configure(void)
 	//at this point sig_log should be active (for chipscope)
 
 
-	__MOUT__ << "Done with configuring."  << std::endl;
+	__COUT__ << "Done with configuring."  << std::endl;
 }
 
 //========================================================================================================================
 //void FENIMPlusInterface::configureDetector(const DACStream& theDACStream)
 //{
-//	__MOUT__ << "\tconfigureDetector" << std::endl;
+//	__COUT__ << "\tconfigureDetector" << std::endl;
 //}
 
 //========================================================================================================================
 void FENIMPlusInterface::halt(void)
 {
-	__MOUT__ << "\tHalt" << std::endl;
+	__COUT__ << "\tHalt" << std::endl;
 	stop();
 }
 
 //========================================================================================================================
 void FENIMPlusInterface::pause(void)
 {
-	__MOUT__ << "\tPause" << std::endl;
+	__COUT__ << "\tPause" << std::endl;
 	stop();
 }
 
 //========================================================================================================================
 void FENIMPlusInterface::resume(void)
 {
-	__MOUT__ << "\tResume" << std::endl;
+	__COUT__ << "\tResume" << std::endl;
 	start("");
 }
 
 //========================================================================================================================
 void FENIMPlusInterface::start(std::string )//runNumber)
 {
-	__MOUT__ << "\tStart" << std::endl;
+	__COUT__ << "\tStart" << std::endl;
 	    std::string writeBuffer;
 
 	//Run Start Sequence Commands
@@ -736,7 +736,7 @@ void FENIMPlusInterface::start(std::string )//runNumber)
 //========================================================================================================================
 void FENIMPlusInterface::stop(void)
 {
-	__MOUT__ << "\tStop" << std::endl;
+	__COUT__ << "\tStop" << std::endl;
 	    std::string writeBuffer;
 	//Run Stop Sequence Commands
 
@@ -759,7 +759,7 @@ void FENIMPlusInterface::stop(void)
 bool FENIMPlusInterface::running(void)
 {
 	sleep(5);
-	__MOUT__ << "\running" << std::endl;
+	__COUT__ << "\running" << std::endl;
 
 	//		//example!
 	//		//play with array of 8 LEDs at address 0x1003
@@ -778,7 +778,7 @@ bool FENIMPlusInterface::running(void)
 		//there are 3 output channels (alias: signorm, sigcms1, sigcms2)
 		std::array<std::string,3> outChannelNames = {"Channel0","Channel1","Channel2"};
 
-		__MOUT__ << "Enabling output trigger channels!" << std::endl;
+		__COUT__ << "Enabling output trigger channels!" << std::endl;
 
 		//must do channel 0 last!! (synchronously enables all 3 channels)
 		for(channelCount = 2; channelCount <= 2; --channelCount)
@@ -797,7 +797,7 @@ bool FENIMPlusInterface::running(void)
 	}
 	catch(const std::runtime_error &e)
 	{
-		__MOUT__ << "Failed start setup!\n" << e.what() << std::endl;
+		__COUT__ << "Failed start setup!\n" << e.what() << std::endl;
 	}
 
 	return false;
@@ -808,9 +808,9 @@ bool FENIMPlusInterface::running(void)
 //NOTE: buffer for returnValue must be max UDP size to handle return possibility
 int ots::FENIMPlusInterface::universalRead(char *address, char *returnValue)
 {
-	__MOUT__ << "address size " << universalAddressSize_ << std::endl;
+	__COUT__ << "address size " << universalAddressSize_ << std::endl;
 
-	__MOUT__ << "Request: ";
+	__COUT__ << "Request: ";
 	for(unsigned int i=0;i<universalAddressSize_;++i)
 		printf("%2.2X",(unsigned char)address[i]);
 	std::cout << std::endl;
@@ -825,12 +825,12 @@ int ots::FENIMPlusInterface::universalRead(char *address, char *returnValue)
 	}
 	catch(std::runtime_error &e)
 	{
-		__MOUT__ << "Caught it! This is when it's getting time out error" << std::endl;
-		__MOUT_ERR__ << e.what() << std::endl;
+		__COUT__ << "Caught it! This is when it's getting time out error" << std::endl;
+		__COUT_ERR__ << e.what() << std::endl;
 		return -1;
 	}
 
-	__MOUT__ << "Result SIZE: " << readBuffer.size() << std::endl;
+	__COUT__ << "Result SIZE: " << readBuffer.size() << std::endl;
 	std::memcpy(returnValue,readBuffer.substr(2).c_str(),universalDataSize_);
 	return 0;
 }
@@ -840,9 +840,9 @@ int ots::FENIMPlusInterface::universalRead(char *address, char *returnValue)
 //NOTE: buffer for writeValue must be at least size universalDataSize_
 void ots::FENIMPlusInterface::universalWrite(char* address, char* writeValue)
 {
-	__MOUT__ << "address size " << universalAddressSize_ << std::endl;
-	__MOUT__ << "data size " << universalDataSize_ << std::endl;
-	__MOUT__ << "Sending: ";
+	__COUT__ << "address size " << universalAddressSize_ << std::endl;
+	__COUT__ << "data size " << universalDataSize_ << std::endl;
+	__COUT__ << "Sending: ";
 	for(unsigned int i=0;i<universalAddressSize_;++i)
 		printf("%2.2X",(unsigned char)address[i]);
 	std::cout << std::endl;
