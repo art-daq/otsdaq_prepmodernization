@@ -3,26 +3,23 @@
 
 
 if [ ! -e /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_prepmodernization/UserWebGUI/UserWebGUI ]; then #if it's installing for the first time
-
-
-  dbusRef=`kdialog --progressbar "Launching OTS (in Normal Mode)" 7`
-
-  qdbus $dbusRef Set "." value 1
-
+progress=$(kdialog --title "Installing PREPModenization Repo" --progressbar "Creating Symlink for webapp");
+qdbus $progress Set "" maximum 7 > /dev/null;
 
   #create a symlink for our webapp
   ln -sfn /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_prepmodernization/UserWebGUI /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_utilities/WebGUI/UserWebPath
 
-  qdbus $dbusRef Set ".." value 2
-  
+qdbus $progress Set "" value 1 > /dev/null;
+qdbus $progress setLabelText "Creating and populating user data folders" > /dev/null;
+
   #setup data folders for user data and copy example data into them
   mkdir ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitData
   mkdir ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitDatabases
   cp -r ${MRB_SOURCE}/otsdaq_prepmodernization/Data/* ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitData/
   cp -r ${MRB_SOURCE}/otsdaq_prepmodernization/Databases/* ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitDatabases/
 
-  
-  qdbus $dbusRef Set "..." value 3
+qdbus $progress Set "" value 2 > /dev/null;
+qdbus $progress setLabelText "Modifying OTS Setup Script" > /dev/null;
   
   #modify setup_ots.sh
   cat setup_ots.sh > setup_ots_repo_temp.sh 
@@ -31,7 +28,8 @@ if [ ! -e /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_prepmodernization/Use
   cp setup_ots.sh setup_ots.sh.bk
   mv setup_ots_repo_temp.sh setup_ots.sh
   
-  qdbus $dbusRef Set "..." value 4
+qdbus $progress Set "" value 3 > /dev/null;
+qdbus $progress setLabelText "Creating prepmodenization .gitignore file" > /dev/null;
 
   #create .gitignore to ignore user data
   touch ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
@@ -40,14 +38,26 @@ if [ ! -e /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_prepmodernization/Use
   echo "NoGitDatabases/" >> ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
   echo "UserWebGUI/UserWebGUI" >> ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
 
-  qdbus $dbusRef Set "..." value 5
-  unsetup_all  
-  qdbus $dbusRef Set "..." value 6
-  souce setup_ots.sh  
-  qdbus $dbusRef Set "..." value 7
+qdbus $progress Set "" value 4 > /dev/null;
+qdbus $progress setLabelText "Unsetting all variables" > /dev/null;
+
+  unsetup_all
+  unset "PRODUCTS"
+  
+qdbus $progress Set "" value 5 > /dev/null;
+qdbus $progress setLabelText "Re-Running OTS Setup script" > /dev/null;
+
+  source setup_ots.sh  
+  
+qdbus $progress Set "" value 6 > /dev/null;
+qdbus $progress setLabelText "Building Prepmodernization and OTS" > /dev/null;  
+  
   mrb b
   
-  qdbus $dbusRef close	
+qdbus $progress Set "" value 7 > /dev/null;
+qdbus $progress setLabelText "Install Complete!" > /dev/null;  
+  
+  
 
 else
   #code to update existing installs will be here
