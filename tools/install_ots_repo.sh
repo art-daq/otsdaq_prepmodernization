@@ -1,7 +1,7 @@
 #!/bin/bash
 #Install Prepmodernization into otsdaq
 
-if [ ! -e /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_prepmodernization/UserWebGUI ]; then #if it's installing for the first time
+if [ ! -e /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_prepmodernization/UserWebGUI/UserWebGUI ]; then #if it's installing for the first time
 #create a symlink for our webapp
 ln -sfn /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_prepmodernization/UserWebGUI /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_utilities/WebGUI/UserWebPath
 
@@ -25,6 +25,7 @@ echo "NoGitData/" >> ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
 echo "NoGitDatabases/" >> ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
 echo "UserWebGUI/UserWebGUI" >> ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
 
+mrb b
 
 else
   #code to update existing installs will be here
