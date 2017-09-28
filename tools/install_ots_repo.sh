@@ -3,7 +3,7 @@
 
 
 if [ ! -e /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_prepmodernization/UserWebGUI/UserWebGUI ]; then #if it's installing for the first time
-progress=$(kdialog --title "Installing PREPModenization Repo" --progressbar "Creating Symlink for webapp");
+progress=$(kdialog --title "Installing PREPModernization Repo" --progressbar "Creating Symlink for webapp");
 qdbus $progress Set "" maximum 7 > /dev/null;
 
   #create a symlink for our webapp
@@ -50,13 +50,15 @@ qdbus $progress setLabelText "Re-Running OTS Setup script" > /dev/null;
   source setup_ots.sh  
   
 qdbus $progress Set "" value 6 > /dev/null;
-qdbus $progress setLabelText "Building Prepmodernization and OTS" > /dev/null;  
+qdbus $progress setLabelText "Building Prepmodernization and OTS (May Take some time!)" > /dev/null;  
   
   mrb b
   
 qdbus $progress Set "" value 7 > /dev/null;
 qdbus $progress setLabelText "Install Complete!" > /dev/null;  
-  
+
+sleep 5
+qdbus $progress close > /dev/null;
   
 
 else
