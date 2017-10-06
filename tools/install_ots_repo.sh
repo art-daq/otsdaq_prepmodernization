@@ -1,11 +1,11 @@
 #!/bin/bash
 #Install Prepmodernization into otsdaq
 
-
-if [ ! -e /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_prepmodernization/UserWebGUI/UserWebGUI ]; then #if it's installing for the first time
+PWD=$(pwd)
+if [ ! -e ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed ]; then #if it's installing for the first time
 progress=$(kdialog --title "Installing PREPModernization Repo" --progressbar "Creating and populating user data folders");
 qdbus $progress Set "" maximum 7 > /dev/null;
-echo "Creating and populating user data folders"
+echo "Creating and populating user data folders" >> ${PWD}/script_log/install_ots_repo.sh.script
 
   #setup data folders for user data and copy example data into them
   mkdir ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitData
@@ -15,7 +15,7 @@ echo "Creating and populating user data folders"
 
 qdbus $progress Set "" value 1 > /dev/null;
 qdbus $progress setLabelText "Modifying OTS Setup Script" > /dev/null;
-echo "Modifying OTS Setup Script, Backup of original located in base otsdaq install directory as setup_ots.sh.bk"  
+echo "Modifying OTS Setup Script, Backup of original located in base otsdaq install directory as setup_ots.sh.bk" >> ${PWD}/script_log/install_ots_repo.sh.script
 
   #modify setup_ots.sh
   cat setup_ots.sh > setup_ots_repo_temp.sh 
@@ -26,7 +26,7 @@ echo "Modifying OTS Setup Script, Backup of original located in base otsdaq inst
   
 qdbus $progress Set "" value 2 > /dev/null;
 qdbus $progress setLabelText "Creating prepmodenization .gitignore file" > /dev/null;
-echo "Creating prepmodenization .gitignore file"
+echo "Creating prepmodenization .gitignore file" >> ${PWD}/script_log/install_ots_repo.sh.script
 
   #create .gitignore to ignore user data
   touch ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
@@ -37,22 +37,22 @@ echo "Creating prepmodenization .gitignore file"
 
 qdbus $progress Set "" value 3 > /dev/null;
 qdbus $progress setLabelText "Unsetting all variables" > /dev/null;
-echo "Unsetting all variables"
+echo "Unsetting all variables" >> ${PWD}/script_log/install_ots_repo.sh.script
   
   unsetup_all
   unset "PRODUCTS"
   
 qdbus $progress Set "" value 4 > /dev/null;
 qdbus $progress setLabelText "Re-Running OTS Setup script" > /dev/null;
-echo "Re-Running OTS Setup script"
+echo "Re-Running OTS Setup script" >> ${PWD}/script_log/install_ots_repo.sh.script
   
   source setup_ots.sh  
   
 qdbus $progress Set "" value 5 > /dev/null;
 qdbus $progress setLabelText "Building Prepmodernization and OTS (May Take some time!)" > /dev/null;  
-echo "Building Prepmodernization and OTS (May Take some time!)"
+echo "Building Prepmodernization and OTS (May Take some time!)" >> ${PWD}/script_log/install_ots_repo.sh.script
   
-  PWD=$(pwd)
+
   MRB_OUTPUT=$(mrb b | tee -a ${PWD}/script_log/install_ots_repo.sh.script | tail -n 3)
   if [[ $MRB_OUTPUT == *"Stage build successful."* ]]; then
       echo "Successful build detected, continuing install" >> ${PWD}/script_log/install_ots_repo.sh.script
@@ -61,7 +61,10 @@ echo "Building Prepmodernization and OTS (May Take some time!)"
       echo "Build Successful! Creating Symlink for webapp" >> ${PWD}/script_log/install_ots_repo.sh.script
 	#create a symlink for our webapp
 	ln -sfn /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_prepmodernization/UserWebGUI /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_utilities/WebGUI/UserWebPath
-      
+	touch ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
+	INSTALL_DATE=$(date '+%Y-%m-%d %H:%M:%S')
+	echo "prepmodenization repo installed on: " >> ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
+	echo ${INSTALL_DATE} >> ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
       qdbus $progress Set "" value 7 > /dev/null;
       qdbus $progress setLabelText "Install Complete!" > /dev/null;  
       echo "Install Complete!" >> ${PWD}/script_log/install_ots_repo.sh.script
@@ -80,7 +83,7 @@ echo "Building Prepmodernization and OTS (May Take some time!)"
   fi
 else
   #code to update existing installs will be here
-  echo "Nothing to do, prepmodenization already installed!"
+  echo "Nothing to do, prepmodenization already installed!" >> ${PWD}/script_log/install_ots_repo.sh.script
 fi 
 
 
