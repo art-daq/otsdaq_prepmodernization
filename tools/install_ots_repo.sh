@@ -5,6 +5,7 @@
 if [ ! -e /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_prepmodernization/UserWebGUI/UserWebGUI ]; then #if it's installing for the first time
 progress=$(kdialog --title "Installing PREPModernization Repo" --progressbar "Creating and populating user data folders");
 qdbus $progress Set "" maximum 7 > /dev/null;
+echo "Creating and populating user data folders"
 
   #setup data folders for user data and copy example data into them
   mkdir ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitData
@@ -14,7 +15,8 @@ qdbus $progress Set "" maximum 7 > /dev/null;
 
 qdbus $progress Set "" value 1 > /dev/null;
 qdbus $progress setLabelText "Modifying OTS Setup Script" > /dev/null;
-  
+echo "Modifying OTS Setup Script, Backup of original located in base otsdaq install directory as setup_ots.sh.bk"  
+
   #modify setup_ots.sh
   cat setup_ots.sh > setup_ots_repo_temp.sh 
   echo >> setup_ots_repo_temp.sh 
@@ -24,6 +26,7 @@ qdbus $progress setLabelText "Modifying OTS Setup Script" > /dev/null;
   
 qdbus $progress Set "" value 2 > /dev/null;
 qdbus $progress setLabelText "Creating prepmodenization .gitignore file" > /dev/null;
+echo "Creating prepmodenization .gitignore file"
 
   #create .gitignore to ignore user data
   touch ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
@@ -34,42 +37,46 @@ qdbus $progress setLabelText "Creating prepmodenization .gitignore file" > /dev/
 
 qdbus $progress Set "" value 3 > /dev/null;
 qdbus $progress setLabelText "Unsetting all variables" > /dev/null;
-
+echo "Unsetting all variables"
+  
   unsetup_all
   unset "PRODUCTS"
   
 qdbus $progress Set "" value 4 > /dev/null;
 qdbus $progress setLabelText "Re-Running OTS Setup script" > /dev/null;
-
+echo "Re-Running OTS Setup script"
+  
   source setup_ots.sh  
   
 qdbus $progress Set "" value 5 > /dev/null;
 qdbus $progress setLabelText "Building Prepmodernization and OTS (May Take some time!)" > /dev/null;  
+echo "Building Prepmodernization and OTS (May Take some time!)"
+  
   PWD=$(pwd)
   MRB_OUTPUT=$(mrb b | tee -a ${PWD}/script_log/install_ots_repo.sh.script | tail -n 3)
   if [[ $MRB_OUTPUT == *"Stage build successful."* ]]; then
-      echo "Successful build detected, continuing install"
+      echo "Successful build detected, continuing install" >> ${PWD}/script_log/install_ots_repo.sh.script
       qdbus $progress Set "" value 6 > /dev/null;
       qdbus $progress setLabelText "Build Successful! Creating Symlink for webapp" > /dev/null;  
-      
-      #create a symlink for our webapp
-      ln -sfn /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_prepmodernization/UserWebGUI /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_utilities/WebGUI/UserWebPath
+      echo "Build Successful! Creating Symlink for webapp" >> ${PWD}/script_log/install_ots_repo.sh.script
+	#create a symlink for our webapp
+	ln -sfn /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_prepmodernization/UserWebGUI /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_utilities/WebGUI/UserWebPath
       
       qdbus $progress Set "" value 7 > /dev/null;
       qdbus $progress setLabelText "Install Complete!" > /dev/null;  
-
-      sleep 5
+      echo "Install Complete!" >> ${PWD}/script_log/install_ots_repo.sh.script
+	sleep 5
       qdbus $progress close > /dev/null;
       
     else
-      echo "Failed build detected, aborting install"
+      echo "Failed build detected, aborting install" >> ${PWD}/script_log/install_ots_repo.sh.script
       qdbus $progress close > /dev/null;
       kdialog --error "Error encountered while building!\nAborting setup, make sure your VM is configured for your host machine correctly.\nIf the problem persists, contact the PREPModernization developers."
-      #Clean up work already done
-      mv setup_ots.sh.bk setup_ots.sh
-      rm -rf ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitData/
-      rm -rf ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitDatabases/
-      rm ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
+	#Clean up work already done
+	mv setup_ots.sh.bk setup_ots.sh
+	rm -rf ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitData/
+	rm -rf ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitDatabases/
+	rm ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
   fi
 else
   #code to update existing installs will be here
