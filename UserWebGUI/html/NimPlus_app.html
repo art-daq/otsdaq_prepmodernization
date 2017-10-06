@@ -216,7 +216,7 @@
     <p>Output Mux Control <button id="OutMuxCtlBtn">Show/Hide</button></p>
     <div id="OutMuxCtl" class="Dropdown">
 
-        <p>Output 1 (TestMux)- <select id="ChAOutMux" oninput="addModifiedList('OutputMuxSelectChannelA', this.value);">
+        <p>Output A (TestMux)- <select id="ChAOutMux" oninput="addModifiedList('OutputMuxSelectChannelA', this.value);">
 			<option value=0>Sig Norm</option>
 			<option value=1>CH A Raw</option>
 			<option value=2>CH B Raw</option>
@@ -253,7 +253,7 @@
         <input type="checkbox" id="ChAOutInv" onclick="addModifiedList('InvertPolarityOutputChannelA',this.checked?'yes':'no');"><label for="ChAOutInv">Invert Ch A Output?</label>
         </p>
 
-        <p>Output 2 - <select id="ChBOutMux" oninput="addModifiedList('OutputMuxSelectChannelB', this.value);">
+        <p>Output B - <select id="ChBOutMux" oninput="addModifiedList('OutputMuxSelectChannelB', this.value);">
 			<option value=0>SigCMS</option>
 			<option value=1>SigCMS1</option>
 			<option value=2>SigCMS2</option>
@@ -266,7 +266,7 @@
         <input type="checkbox" id="ChBOutInv" onclick="addModifiedList('InvertPolarityOutputChannelB',this.checked?'yes':'no');"><label for="ChBOutInv">Invert Ch B Output?</label>
         </p>
 
-        <p>Output 3 - <select id="ChCOutMux" oninput="addModifiedList('OutputMuxSelectChannelC', this.value);">
+        <p>Output C - <select id="ChCOutMux" oninput="addModifiedList('OutputMuxSelectChannelC', this.value);">
 			<option value=0>SigCMS</option>
 			<option value=1>SigCMS1</option>
 			<option value=2>SigCMS2</option>
@@ -279,7 +279,7 @@
         <input type="checkbox" id="ChCOutInv" onclick="addModifiedList('InvertPolarityOutputChannelC',this.checked?'yes':'no');"><label for="ChCOutInv">Invert Ch C Output?</label>
         </p>
 
-        <p>Output 4 - <select id="ChDOutMux" oninput="addModifiedList('OutputMuxSelectChannelD', this.value);">
+        <p>Output D - <select id="ChDOutMux" oninput="addModifiedList('OutputMuxSelectChannelD', this.value);">
 			<option value=0>SigCMS</option>
 			<option value=1>SigCMS1</option>
 			<option value=2>SigCMS2</option>
@@ -345,7 +345,7 @@
 <div class="ControlBox">
     <p>Veto(s) Control <button id="VetoCtlBtn">Show/Hide</button></p>
     <div id="VetoCtl" class="Dropdown">
-        SigNorm Veto Count:  <input type="number" id="VetoCount" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel0', this.value); addModifiedList('OutputPrescaleCountChannel0', 0); elByID('PsCount').value=0; validInput();" oninvalid="invalidInput();"></input>
+        SigNorm/SigCMS Veto Count:  <input type="number" id="VetoCount" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel0', this.value); addModifiedList('OutputPrescaleCountChannel0', 0); elByID('PsCount').value=0; validInput();" oninvalid="invalidInput();"></input>
 
         <br>SigCMS1 Veto Count: <input type="number" id="Veto1Count" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel1', this.value); addModifiedList('OutputPrescaleCountChannel1', 0); elByID('PsCount1').value=0; validInput();" oninvalid="invalidInput();"></input>
 
@@ -388,7 +388,6 @@
 <div class="ControlBox">
     <p>Selection Logic Control <button id="SelLogCtlBtn">Show/Hide</button></p>
     <div id="SelLogCtl" class="Dropdown">
-        <!-- Not in table?-->
         Channels: ABCD , Cases output when true and are OR'd together
         </br><input type="checkbox" id="SL0" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,15));"><label for="SL0">FFFF</label>
         <input type="checkbox" id="SL1" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,14));"><label for="SL1">TFFF</label>
