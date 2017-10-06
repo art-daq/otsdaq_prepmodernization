@@ -80,6 +80,7 @@ echo "Building Prepmodernization and OTS (May Take some time!)" >> ${PWD}/script
 	rm -rf ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitData/
 	rm -rf ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitDatabases/
 	rm ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
+	mrb z
   fi
 else
   #code to update existing installs will be here
