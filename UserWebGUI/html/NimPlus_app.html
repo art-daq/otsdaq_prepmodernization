@@ -91,13 +91,13 @@
     <p>Input Channel Enable Control <button id="InChEnCtlBtn">Show/Hide</button></p>
     <div id="InChEnCtl" class="Dropdown">
         <input type="checkbox" id="ChAInEn" onclick="addModifiedList('EnableInputChannelA',this.checked?'ON':'OFF');"><label for="ChAInEn">Enable Channel A?</label>
-        <input type="checkbox" id="ChAInInv" onclick="addModifiedList('InvertPolarityInputChannelA',this.checked?'yes':'no');"><label for="ChAInInv">Invert Input?</label>
+        <input type="checkbox" id="ChAInInv" onclick="addModifiedList('InvertPolarityInputChannelA',this.checked?'yes':'no');"><label for="ChAInInv">Invert Ch A Input?</label>
         </br><input type="checkbox" id="ChBInEn" onclick="addModifiedList('EnableInputChannelB',this.checked?'ON':'OFF');"><label for="ChBInEn">Enable Channel B?</label>
-        <input type="checkbox" id="ChBInInv" onclick="addModifiedList('InvertPolarityInputChannelB',this.checked?'yes':'no');"><label for="ChBInInv">Invert Input?</label>
+        <input type="checkbox" id="ChBInInv" onclick="addModifiedList('InvertPolarityInputChannelB',this.checked?'yes':'no');"><label for="ChBInInv">Invert Ch B Input?</label>
         </br><input type="checkbox" id="ChCInEn" onclick="addModifiedList('EnableInputChannelC',this.checked?'ON':'OFF');"><label for="ChCInEn">Enable Channel C?</label>
-        <input type="checkbox" id="ChCInInv" onclick="addModifiedList('InvertPolarityInputChannelC',this.checked?'yes':'no');"><label for="ChCInInv">Invert Input?</label>
+        <input type="checkbox" id="ChCInInv" onclick="addModifiedList('InvertPolarityInputChannelC',this.checked?'yes':'no');"><label for="ChCInInv">Invert Ch C Input?</label>
         </br><input type="checkbox" id="ChDInEn" onclick="addModifiedList('EnableInputChannelD',this.checked?'ON':'OFF');"><label for="ChDInEn">Enable Channel D?</label>
-        <input type="checkbox" id="ChDInInv" onclick="addModifiedList('InvertPolarityInputChannelD',this.checked?'yes':'no');"><label for="ChDInInv">Invert Input?</label>
+        <input type="checkbox" id="ChDInInv" onclick="addModifiedList('InvertPolarityInputChannelD',this.checked?'yes':'no');"><label for="ChDInInv">Invert Ch D Input?</label>
 
 
     </div>
@@ -128,7 +128,7 @@
         <div class="ControlBox">
             <p>CH D Dac Steps: 0<input type="range" id="ChDDacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChDDacEl2','ChDDacEl1'); addModifiedList('DACValueChannelD',this.value);">4095</p>
             <p>CH D Dac Steps: <input type=number id="ChDDacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChDDacEl2','ChDDacEl0'); addModifiedList('DACValueChannelD',this.value);"></p>
-            <p>Ch D Dac Voltage: <input type="number" id="ChDDacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChDDacEl0','ChDDacEl1'); addModifiedList('DACValueChannelD',valByID('ChDDacEl1');"></p>
+            <p>Ch D Dac Voltage: <input type="number" id="ChDDacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChDDacEl0','ChDDacEl1'); addModifiedList('DACValueChannelD',valByID('ChDDacEl1'));"></p>
         </div>
 
 
@@ -250,7 +250,7 @@
 			<option value=30>N/A</option>
 			<option value=31>N/A</option>
 			</select>
-            <!--not in table --><input type="checkbox" id="ChAOutInv" onclick="addModifiedList('InvertPolarityOutputChannelA',this.checked?'yes':'no');"><label for="ChAOutInv">Invert Output?</label>
+        <input type="checkbox" id="ChAOutInv" onclick="addModifiedList('InvertPolarityOutputChannelA',this.checked?'yes':'no');"><label for="ChAOutInv">Invert Ch A Output?</label>
         </p>
 
         <p>Output 2 - <select id="ChBOutMux" oninput="addModifiedList('OutputMuxSelectChannelB', this.value);">
@@ -263,7 +263,7 @@
 			<option value=6>N/A</option>
 			<option value=7>N/A</option>
 			</select>
-            <!--not in table --><input type="checkbox" id="ChBOutInv" onclick="addModifiedList('InvertPolarityOutputChannelB',this.checked?'yes':'no');"><label for="ChBOutInv">Invert Output?</label>
+        <input type="checkbox" id="ChBOutInv" onclick="addModifiedList('InvertPolarityOutputChannelB',this.checked?'yes':'no');"><label for="ChBOutInv">Invert Ch B Output?</label>
         </p>
 
         <p>Output 3 - <select id="ChCOutMux" oninput="addModifiedList('OutputMuxSelectChannelC', this.value);">
@@ -276,7 +276,7 @@
 			<option value=6>N/A</option>
 			<option value=7>N/A</option>
 			</select>
-            <!--not in table --><input type="checkbox" id="ChCOutInv" onclick="addModifiedList('InvertPolarityOutputChannelC',this.checked?'yes':'no');"><label for="ChCOutInv">Invert Output?</label>
+        <input type="checkbox" id="ChCOutInv" onclick="addModifiedList('InvertPolarityOutputChannelC',this.checked?'yes':'no');"><label for="ChCOutInv">Invert Ch C Output?</label>
         </p>
 
         <p>Output 4 - <select id="ChDOutMux" oninput="addModifiedList('OutputMuxSelectChannelD', this.value);">
@@ -289,7 +289,7 @@
 			<option value=6>N/A</option>
 			<option value=7>N/A</option>			
 			</select>
-            <!--not in table --><input type="checkbox" id="ChDOutInv" onclick="addModifiedList('InvertPolarityOutputChannelD',this.checked?'yes':'no');"><label for="ChDOutInv">Invert Output?</label>
+        <input type="checkbox" id="ChDOutInv" onclick="addModifiedList('InvertPolarityOutputChannelD',this.checked?'yes':'no');"><label for="ChDOutInv">Invert Ch D Output?</label>
         </p>
 
     </div>
@@ -345,11 +345,11 @@
 <div class="ControlBox">
     <p>Veto(s) Control <button id="VetoCtlBtn">Show/Hide</button></p>
     <div id="VetoCtl" class="Dropdown">
-        Veto Count<input type="number" id="VetoCount" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel0', this.value); addModifiedList('OutputPrescaleCountChannel0', 0); elByID('PsCount').value=0; validInput();" oninvalid="invalidInput();"></input>
+        SigNorm Veto Count:  <input type="number" id="VetoCount" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel0', this.value); addModifiedList('OutputPrescaleCountChannel0', 0); elByID('PsCount').value=0; validInput();" oninvalid="invalidInput();"></input>
 
-        <br>Veto 1 Count<input type="number" id="Veto1Count" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel1', this.value); addModifiedList('OutputPrescaleCountChannel1', 0); elByID('PsCount1').value=0; validInput();" oninvalid="invalidInput();"></input>
+        <br>SigCMS1 Veto Count: <input type="number" id="Veto1Count" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel1', this.value); addModifiedList('OutputPrescaleCountChannel1', 0); elByID('PsCount1').value=0; validInput();" oninvalid="invalidInput();"></input>
 
-        <br>Veto 2 Count<input type="number" id="Veto2Count" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel2', this.value); addModifiedList('OutputPrescaleCountChannel2', 0); elByID('PsCount2').value=0; validInput();" oninvalid="invalidInput();"></input>
+        <br>SigCMS2 Veto Count: <input type="number" id="Veto2Count" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel2', this.value); addModifiedList('OutputPrescaleCountChannel2', 0); elByID('PsCount2').value=0; validInput();" oninvalid="invalidInput();"></input>
 <!--
 	<p>Veto Source for Output Ch 0 - <select id="VetoSourceOutput0" oninput="addModifiedList('InputChannelVetoSourceForOutputChannel0', this.value);">
 		<option value="No Veto">No Veto</option>
@@ -379,9 +379,9 @@
 <div class="ControlBox">
     <p>Prescaler Control <button id="PsCtlBtn">Show/Hide</button></p>
     <div id="PsCtl" class="Dropdown">
-        Prescaler Count<input type="number" id="PsCount" min=0 step=1 oninput="addModifiedList('OutputPrescaleCountChannel0', this.value); addModifiedList('OutputTimeVetoDurationChannel0', 0); elByID('VetoCount').value=0; validInput();" oninvalid="invalidInput();"></input>
-        </br>Prescaler 1 Count<input type="number" id="PsCount1" min=0 step=1 oninput="addModifiedList('OutputPrescaleCountChannel1', this.value); addModifiedList('OutputTimeVetoDurationChannel1', 0); elByID('Veto1Count').value=0; validInput();" oninvalid="invalidInput();"></input>
-        </br>Prescaler 2 Count<input type="number" id="PsCount2" min=0 step=1 oninput="addModifiedList('OutputPrescaleCountChannel2', this.value); addModifiedList('OutputTimeVetoDurationChannel2', 0); elByID('Veto2Count').value=0; validInput();" oninvalid="invalidInput();"></input>
+        SigNorm Prescaler Count:  <input type="number" id="PsCount" min=0 step=1 oninput="addModifiedList('OutputPrescaleCountChannel0', this.value); addModifiedList('OutputTimeVetoDurationChannel0', 0); elByID('VetoCount').value=0; validInput();" oninvalid="invalidInput();"></input>
+        </br>SigCMS1 Prescaler Count: <input type="number" id="PsCount1" min=0 step=1 oninput="addModifiedList('OutputPrescaleCountChannel1', this.value); addModifiedList('OutputTimeVetoDurationChannel1', 0); elByID('Veto1Count').value=0; validInput();" oninvalid="invalidInput();"></input>
+        </br>SigCMS2 Prescaler Count: <input type="number" id="PsCount2" min=0 step=1 oninput="addModifiedList('OutputPrescaleCountChannel2', this.value); addModifiedList('OutputTimeVetoDurationChannel2', 0); elByID('Veto2Count').value=0; validInput();" oninvalid="invalidInput();"></input>
     </div>
 </div>
 
