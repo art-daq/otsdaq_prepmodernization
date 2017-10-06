@@ -46,8 +46,9 @@ qdbus $progress setLabelText "Re-Running OTS Setup script" > /dev/null;
 qdbus $progress Set "" value 5 > /dev/null;
 qdbus $progress setLabelText "Building Prepmodernization and OTS (May Take some time!)" > /dev/null;  
   PWD=$(pwd)
-  MRB_OUTPUT=$(mrb b | tee -a ${PWD}/script_log/install_ots_repo.script | tail -n 3)
+  MRB_OUTPUT=$(mrb b | tee -a ${PWD}/script_log/install_ots_repo.sh.script | tail -n 3)
   if [[ $MRB_OUTPUT == *"Stage build successful."* ]]; then
+      echo "Successful build detected, continuing install"
       qdbus $progress Set "" value 6 > /dev/null;
       qdbus $progress setLabelText "Build Successful! Creating Symlink for webapp" > /dev/null;  
       
@@ -61,6 +62,7 @@ qdbus $progress setLabelText "Building Prepmodernization and OTS (May Take some 
       qdbus $progress close > /dev/null;
       
     else
+      echo "Failed build detected, aborting install"
       qdbus $progress close > /dev/null;
       kdialog --error "Error encountered while building!\nAborting setup, make sure your VM is configured for your host machine correctly.\nIf the problem persists, contact the PREPModernization developers."
       #Clean up work already done
