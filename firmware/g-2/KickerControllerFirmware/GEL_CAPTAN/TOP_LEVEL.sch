@@ -309,6 +309,10 @@
         <signal name="ram_en_latch" />
         <signal name="CLK_MUX" />
         <signal name="XLXN_16009" />
+        <signal name="FADC_DATA_EDGE_MAP" />
+        <signal name="fadc_data_edge_sel(15:0)" />
+        <signal name="fadc_latched_in_fall(15:0)" />
+        <signal name="fadc_latched_in_rise(15:0)" />
         <port polarity="Input" name="BUSC_16DP_32S" />
         <port polarity="Input" name="SECONDARY_CLK" />
         <port polarity="Output" name="BUSC_25DN_51S" />
@@ -985,7 +989,7 @@
             <blockpin signalname="XLXN_12617" name="E" />
             <blockpin signalname="DCM_RESET_MAP" name="D0" />
             <blockpin signalname="FADC_MAP" name="D1" />
-            <blockpin name="D10" />
+            <blockpin signalname="FADC_DATA_EDGE_MAP" name="D10" />
             <blockpin name="D11" />
             <blockpin name="D12" />
             <blockpin name="D13" />
@@ -1969,7 +1973,7 @@
             <blockpin signalname="event_data_we" name="b_data_we" />
             <blockpin signalname="event_data_end" name="b_force_packet" />
             <blockpin signalname="event_data(63:0)" name="b_data(63:0)" />
-            <blockpin signalname="ram_en_latch" name="clock_enable" />
+            <blockpin signalname="ram_en" name="clock_enable" />
         </block>
         <block symbolname="fd8re" name="XLXI_6418">
             <blockpin signalname="MASTER_CLK" name="C" />
@@ -2071,13 +2075,20 @@
             <blockpin signalname="veto_enabled" name="Q" />
         </block>
         <block symbolname="iddr" name="ADC_IDDR(15:0)">
+            <attr value="SAME_EDGE_PIPELINED" name="DDR_CLK_EDGE">
+                <trait editname="all:1 sch:0" />
+                <trait edittrait="all:1 sch:0" />
+                <trait verilog="all:0 dp:1nosynth wsynop:1 wsynth:1" />
+                <trait vhdl="all:0 gm:1nosynth wa:1 wd:1" />
+                <trait valuetype="StringValList OPPOSITE_EDGE SAME_EDGE SAME_EDGE_PIPELINED" />
+            </attr>
             <blockpin signalname="fadc_data_in(15:0)" name="D" />
             <blockpin signalname="XLXN_16002" name="CE" />
             <blockpin signalname="FADC_DCLK" name="C" />
             <blockpin signalname="XLXN_16003" name="S" />
             <blockpin signalname="XLXN_16004" name="R" />
-            <blockpin signalname="fadc_latched_in(15:0)" name="Q1" />
-            <blockpin name="Q2" />
+            <blockpin signalname="fadc_latched_in_rise(15:0)" name="Q1" />
+            <blockpin signalname="fadc_latched_in_fall(15:0)" name="Q2" />
         </block>
         <block symbolname="gnd" name="XLXI_6459">
             <blockpin signalname="XLXN_16003" name="G" />
@@ -2100,6 +2111,19 @@
         <block symbolname="bufg" name="XLXI_6009">
             <blockpin signalname="XLXN_16009" name="I" />
             <blockpin signalname="CLK_MUX" name="O" />
+        </block>
+        <block symbolname="fd16re" name="XLXI_6465">
+            <blockpin signalname="MASTER_CLK" name="C" />
+            <blockpin signalname="FADC_DATA_EDGE_MAP" name="CE" />
+            <blockpin signalname="rx_data(15:0)" name="D(15:0)" />
+            <blockpin signalname="reset" name="R" />
+            <blockpin signalname="fadc_data_edge_sel(15:0)" name="Q(15:0)" />
+        </block>
+        <block symbolname="m2_1" name="fadc_data_mux(15:0)">
+            <blockpin signalname="fadc_latched_in_rise(15:0)" name="D0" />
+            <blockpin signalname="fadc_latched_in_fall(15:0)" name="D1" />
+            <blockpin signalname="fadc_data_edge_sel(15:0)" name="S0" />
+            <blockpin signalname="fadc_latched_in(15:0)" name="O" />
         </block>
     </netlist>
     <sheet sheetnum="1" width="7040" height="5440">
@@ -2384,6 +2408,10 @@
         <branch name="debug_signals(63:0)">
             <attrtext style="alignment:SOFT-RIGHT" attrname="Name" x="4608" y="4800" type="branch" />
             <wire x2="4864" y1="4800" y2="4800" x1="4608" />
+        </branch>
+        <branch name="FADC_DATA_EDGE_MAP">
+            <attrtext style="alignment:SOFT-LEFT;fontsize:28;fontname:Arial" attrname="Name" x="4576" y="3424" type="branch" />
+            <wire x2="4576" y1="3424" y2="3424" x1="4512" />
         </branch>
     </sheet>
     <sheet sheetnum="2" width="7040" height="5440">
@@ -2973,7 +3001,7 @@
             <attrtext style="alignment:SOFT-RIGHT;fontsize:28;fontname:Arial" attrname="Name" x="2320" y="2624" type="branch" />
             <wire x2="2336" y1="2624" y2="2624" x1="2320" />
         </branch>
-        <branch name="ram_en_latch">
+        <branch name="ram_en">
             <attrtext style="alignment:SOFT-RIGHT;fontsize:28;fontname:Arial" attrname="Name" x="4752" y="2176" type="branch" />
             <wire x2="4768" y1="2176" y2="2176" x1="4752" />
         </branch>
@@ -4353,6 +4381,7 @@
         </branch>
         <instance x="4144" y="2048" name="ADC_IDDR(15:0)" orien="R0">
             <attrtext style="fontsize:28;fontname:Arial" attrname="InstName" x="64" y="16" type="instance" />
+            <attrtext style="fontsize:28;fontname:Arial;displayformat:NAMEEQUALSVALUE" attrname="DDR_CLK_EDGE" x="0" y="-248" type="instance" />
         </instance>
         <branch name="FADC_DCLK">
             <attrtext style="alignment:SOFT-RIGHT;fontsize:28;fontname:Arial" attrname="Name" x="4112" y="1952" type="branch" />
@@ -4380,9 +4409,53 @@
             <attrtext style="alignment:SOFT-RIGHT;fontsize:28;fontname:Arial" attrname="Name" x="4096" y="1888" type="branch" />
             <wire x2="4144" y1="1888" y2="1888" x1="4096" />
         </branch>
-        <branch name="fadc_latched_in(15:0)">
+        <branch name="fadc_latched_in_rise(15:0)">
             <attrtext style="alignment:SOFT-LEFT;fontsize:28;fontname:Arial" attrname="Name" x="4560" y="1888" type="branch" />
             <wire x2="4560" y1="1888" y2="1888" x1="4528" />
+        </branch>
+        <instance x="4864" y="1776" name="XLXI_6465" orien="R0" />
+        <branch name="fadc_data_edge_sel(15:0)">
+            <attrtext style="alignment:SOFT-LEFT;fontsize:28;fontname:Arial" attrname="Name" x="5312" y="1520" type="branch" />
+            <wire x2="5312" y1="1520" y2="1520" x1="5248" />
+        </branch>
+        <branch name="reset">
+            <attrtext style="alignment:SOFT-RIGHT;fontsize:28;fontname:Arial" attrname="Name" x="4816" y="1744" type="branch" />
+            <wire x2="4864" y1="1744" y2="1744" x1="4816" />
+        </branch>
+        <branch name="MASTER_CLK">
+            <attrtext style="alignment:SOFT-RIGHT;fontsize:28;fontname:Arial" attrname="Name" x="4816" y="1648" type="branch" />
+            <wire x2="4864" y1="1648" y2="1648" x1="4816" />
+        </branch>
+        <branch name="rx_data(15:0)">
+            <attrtext style="alignment:SOFT-RIGHT;fontsize:28;fontname:Arial" attrname="Name" x="4816" y="1520" type="branch" />
+            <wire x2="4864" y1="1520" y2="1520" x1="4816" />
+        </branch>
+        <branch name="FADC_DATA_EDGE_MAP">
+            <attrtext style="alignment:SOFT-RIGHT;fontsize:28;fontname:Arial" attrname="Name" x="4816" y="1584" type="branch" />
+            <wire x2="4864" y1="1584" y2="1584" x1="4816" />
+        </branch>
+        <instance x="5360" y="2016" name="fadc_data_mux(15:0)" orien="R0">
+            <attrtext style="fontsize:28;fontname:Arial" attrname="InstName" x="32" y="-4" type="instance" />
+        </instance>
+        <branch name="fadc_latched_in_rise(15:0)">
+            <attrtext style="alignment:SOFT-RIGHT;fontsize:28;fontname:Arial" attrname="Name" x="5264" y="1856" type="branch" />
+            <wire x2="5360" y1="1856" y2="1856" x1="5264" />
+        </branch>
+        <branch name="fadc_latched_in_fall(15:0)">
+            <attrtext style="alignment:SOFT-RIGHT;fontsize:28;fontname:Arial" attrname="Name" x="5264" y="1920" type="branch" />
+            <wire x2="5360" y1="1920" y2="1920" x1="5264" />
+        </branch>
+        <branch name="fadc_data_edge_sel(15:0)">
+            <attrtext style="alignment:SOFT-RIGHT;fontsize:28;fontname:Arial" attrname="Name" x="5264" y="1984" type="branch" />
+            <wire x2="5360" y1="1984" y2="1984" x1="5264" />
+        </branch>
+        <branch name="fadc_latched_in(15:0)">
+            <attrtext style="alignment:SOFT-LEFT;fontsize:28;fontname:Arial" attrname="Name" x="5792" y="1888" type="branch" />
+            <wire x2="5792" y1="1888" y2="1888" x1="5680" />
+        </branch>
+        <branch name="fadc_latched_in_fall(15:0)">
+            <attrtext style="alignment:SOFT-LEFT;fontsize:28;fontname:Arial" attrname="Name" x="4576" y="2016" type="branch" />
+            <wire x2="4576" y1="2016" y2="2016" x1="4528" />
         </branch>
     </sheet>
 </drawing>

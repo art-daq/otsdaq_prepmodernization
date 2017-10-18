@@ -67,7 +67,7 @@ signal timing : std_logic;
 --internal flags
 signal armed : std_logic;
 signal reading : std_logic;
-signal sendUDP : std_logic;
+signal sendUDP, lastRead : std_logic;
 signal burstWrEn : std_logic;
 signal headerTwoStart : std_logic;
 signal busy : std_logic;
@@ -106,14 +106,38 @@ begin
 	headerTwoOut(63 downto 60) <= signal_ID(3 downto 0);
 	headerTwoOut(59 downto 0) <= header(59 downto 0);
 	
-	process(clk) begin
-		if(rst = '0') then
-			if(rising_edge(clk)) then
-				
+	process(clk) begin		
+		if(rising_edge(clk)) then
+		
+			--pulsed signals
+			b_data_we <= '0';
+			sendUDP <= '0';
+			lastRead <= '0';
+			
+			if(rst = '1') then
+				--reset code here
+				busy <= '0';
+				timing <= '0';
+				armed <= '0';
+				headerTwoStart <= '0';
+				reading <= '0';
+								
+				triggerCount <= (others => '0');
+				missedTriggerCount <= (others => '0');
+				positiveDelayTimer <= (others => '0');
+			else
+			
 				delayed_clk_en <= clock_enable;
 				
+				--use clock_enable to handle address related things
+				--use delayed_clk_en to handle data related things
+				
+				--====================
+				--====================
 				if(clock_enable = '1') then
+				
 					--latch the address data as soon as we recieve a trigger event
+					--	and count missed triggers
 					if(new_trigger = '1') then
 						--only latch the new trigger if we don't already have one.  
 						if(busy = '0') then
@@ -123,63 +147,78 @@ begin
 							triggerCount <= triggerCount + 1;
 							sampleSize <= userSampleSizeUns + userPretrigSamplesUns;
 							startAddr <= triggerAddressUns + userPositiveDelayUns - userPretrigSamplesUns;--This last number accounts for any delay in the firmware.  There must be at least -2 clocks allowed for placement of the header information.  Currently, another clock is requried by the peak_finder module for a total of -2.
-							endAddr <= triggerAddressUns + userSampleSizeUns + userPositiveDelayUns;
+							endAddr <= triggerAddressUns + userSampleSizeUns + userPositiveDelayUns + 1;
 						--If we get a trigger that we can't take care of because we are busy, incriment the missed trigger count.  
 						else
 							missedTriggerCount <= missedTriggerCount + 1;
 						end if;
 					end if;
+					
+					
 					--If we are triggered and the timing is finished, activate the armed flag.  
-					if(timing = '1' and positiveDelayTimer = userPositiveDelayUns) then
-						armed <= '1';
-						timing <= '0';
-					else
-						--if we aren't finished timing, but are still timing, then increase the positiveDelayTimer.  
-						if(timing = '1') then
+					if (timing = '1') then
+						if (positiveDelayTimer = userPositiveDelayUns) then
+							armed <= '1';
+							timing <= '0';
+						else
+							--if we aren't finished timing, but are still timing, then increase the positiveDelayTimer.  							
 							positiveDelayTimer <= positiveDelayTimer + 1;
 						end if;
+					elsif (armed = '1') then
+						--once we reach the start address for the readout, send header one
+						if(ramAddrUns = startAddr) then --Begins read cycle when buffer reaches starting point.  
+							armed <= '0';
+							
+							b_data_we <= '1';
+							b_data <= headerOneOut;
+							
+							headerTwoStart <= '1';
+						end if;	
+					elsif(reading = '1' ) then	--once we reach the end address
+						if(ramAddrUns = endAddr) then --Ends read cycle when buffer reaches the end point. 	
+							lastRead <= '1'; --last data arrives on next clock													
+						end if;
 					end if;
-					--once we reach the start address for the readout, send header one
-					if(armed = '1' and ramAddrUns = startAddr) then --Begins read cycle when buffer reaches starting point.  
-						b_data_we <= '1';
-						headerTwoStart <= '1';
-						armed <= '0';
-						b_data <= headerOneOut;
-					end if;
-					--send header two
-					if(headerTwoStart = '1') then
-						headerTwoStart <= '0';
-						b_data <= headerTwoOut;
-						reading <= '1';
-					end if;
-					--start reading (starts after headers are sent)
-					if(reading = '1') then
-						b_data <= dataOut;
-					end if;
-					--once we reach the end address
-					if(reading = '1' and ramAddrUns = endAddr) then --Ends read cycle when buffer reaches the end point. 
-						b_data_we <= '0';
-						reading <= '0';
-						sendUDP <= '1';
-						busy <= '0';
-					end if;
-					--pulsed signals
-					if(sendUDP = '1') then
-						sendUDP <= '0';
-					end if;
+					
+				end if; --end if(clock_enable = '1') then
+					
+				--====================	
+				--====================	
+				--send header two, one clock after header one (i.e. NO clock enable)
+				if(headerTwoStart = '1') then
+					headerTwoStart <= '0';
+					
+					b_data_we <= '1';
+					b_data <= headerTwoOut;
+					
+					reading <= '1';
 				end if;
+				
+				--====================	
+				--====================	
+				--after allowing last read, close packet and DONE!
+				if(lastRead = '1') then
+					reading <= '0';							
+					sendUDP <= '1';
+					busy <= '0';	
+					--note: the last we and data is handles by the reading clause (below)
+				end if;
+				
+				
+				--====================				
+				--====================				
+				--start reading (starts after headers are sent)
+				if(reading = '1' and delayed_clk_en = '1') then
+				
+					b_data_we <= '1';
+					b_data <= dataOut;					
+					
+				end if; --end if(delayed_clk_en = '1') then
+				
+				
 			end if;
-		else--reset code here
-			armed <= '0';
-			sendUDP <= '0';
-			reading <= '0';
-			headerTwoStart <= '0';
-			triggerCount <= (others => '0');
-			busy <= '0';
-			missedTriggerCount <= (others => '0');
-			timing <= '0';
-			positiveDelayTimer <= (others => '0');
 		end if;
 	end process;
+	
 end Behavioral;
 

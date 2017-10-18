@@ -7,7 +7,7 @@
 -- \   \   \/     Version : 14.7
 --  \   \         Application : sch2hdl
 --  /   /         Filename : TOP_LEVEL.vhf
--- /___/   /\     Timestamp : 10/16/2017 12:33:33
+-- /___/   /\     Timestamp : 10/17/2017 19:28:13
 -- \   \  /  \ 
 --  \___\/\___\ 
 --
@@ -25,146 +25,53 @@ use ieee.numeric_std.ALL;
 library UNISIM;
 use UNISIM.Vcomponents.ALL;
 
-entity FD8RE_MXILINX_TOP_LEVEL is
-   port ( C  : in    std_logic; 
-          CE : in    std_logic; 
-          D  : in    std_logic_vector (7 downto 0); 
-          R  : in    std_logic; 
-          Q  : out   std_logic_vector (7 downto 0));
-end FD8RE_MXILINX_TOP_LEVEL;
+entity M2_1_MXILINX_TOP_LEVEL is
+   port ( D0 : in    std_logic; 
+          D1 : in    std_logic; 
+          S0 : in    std_logic; 
+          O  : out   std_logic);
+end M2_1_MXILINX_TOP_LEVEL;
 
-architecture BEHAVIORAL of FD8RE_MXILINX_TOP_LEVEL is
+architecture BEHAVIORAL of M2_1_MXILINX_TOP_LEVEL is
    attribute BOX_TYPE   : string ;
-   component FDRE
-      generic( INIT : bit :=  '0');
-      port ( C  : in    std_logic; 
-             CE : in    std_logic; 
-             D  : in    std_logic; 
-             R  : in    std_logic; 
-             Q  : out   std_logic);
+   signal M0 : std_logic;
+   signal M1 : std_logic;
+   component AND2B1
+      port ( I0 : in    std_logic; 
+             I1 : in    std_logic; 
+             O  : out   std_logic);
    end component;
-   attribute BOX_TYPE of FDRE : component is "BLACK_BOX";
+   attribute BOX_TYPE of AND2B1 : component is "BLACK_BOX";
+   
+   component OR2
+      port ( I0 : in    std_logic; 
+             I1 : in    std_logic; 
+             O  : out   std_logic);
+   end component;
+   attribute BOX_TYPE of OR2 : component is "BLACK_BOX";
+   
+   component AND2
+      port ( I0 : in    std_logic; 
+             I1 : in    std_logic; 
+             O  : out   std_logic);
+   end component;
+   attribute BOX_TYPE of AND2 : component is "BLACK_BOX";
    
 begin
-   I_Q0 : FDRE
-      port map (C=>C,
-                CE=>CE,
-                D=>D(0),
-                R=>R,
-                Q=>Q(0));
+   I_36_7 : AND2B1
+      port map (I0=>S0,
+                I1=>D0,
+                O=>M0);
    
-   I_Q1 : FDRE
-      port map (C=>C,
-                CE=>CE,
-                D=>D(1),
-                R=>R,
-                Q=>Q(1));
+   I_36_8 : OR2
+      port map (I0=>M1,
+                I1=>M0,
+                O=>O);
    
-   I_Q2 : FDRE
-      port map (C=>C,
-                CE=>CE,
-                D=>D(2),
-                R=>R,
-                Q=>Q(2));
-   
-   I_Q3 : FDRE
-      port map (C=>C,
-                CE=>CE,
-                D=>D(3),
-                R=>R,
-                Q=>Q(3));
-   
-   I_Q4 : FDRE
-      port map (C=>C,
-                CE=>CE,
-                D=>D(4),
-                R=>R,
-                Q=>Q(4));
-   
-   I_Q5 : FDRE
-      port map (C=>C,
-                CE=>CE,
-                D=>D(5),
-                R=>R,
-                Q=>Q(5));
-   
-   I_Q6 : FDRE
-      port map (C=>C,
-                CE=>CE,
-                D=>D(6),
-                R=>R,
-                Q=>Q(6));
-   
-   I_Q7 : FDRE
-      port map (C=>C,
-                CE=>CE,
-                D=>D(7),
-                R=>R,
-                Q=>Q(7));
-   
-end BEHAVIORAL;
-
-
-
-library ieee;
-use ieee.std_logic_1164.ALL;
-use ieee.numeric_std.ALL;
-library UNISIM;
-use UNISIM.Vcomponents.ALL;
-
-entity OBUF8_MXILINX_TOP_LEVEL is
-   port ( I : in    std_logic_vector (7 downto 0); 
-          O : out   std_logic_vector (7 downto 0));
-end OBUF8_MXILINX_TOP_LEVEL;
-
-architecture BEHAVIORAL of OBUF8_MXILINX_TOP_LEVEL is
-   attribute IOSTANDARD  : string ;
-   attribute CAPACITANCE : string ;
-   attribute SLEW        : string ;
-   attribute DRIVE       : string ;
-   attribute BOX_TYPE    : string ;
-   component OBUF
-      port ( I : in    std_logic; 
-             O : out   std_logic);
-   end component;
-   attribute IOSTANDARD of OBUF : component is "DEFAULT";
-   attribute CAPACITANCE of OBUF : component is "DONT_CARE";
-   attribute SLEW of OBUF : component is "SLOW";
-   attribute DRIVE of OBUF : component is "12";
-   attribute BOX_TYPE of OBUF : component is "BLACK_BOX";
-   
-begin
-   I_36_30 : OBUF
-      port map (I=>I(0),
-                O=>O(0));
-   
-   I_36_31 : OBUF
-      port map (I=>I(1),
-                O=>O(1));
-   
-   I_36_32 : OBUF
-      port map (I=>I(2),
-                O=>O(2));
-   
-   I_36_33 : OBUF
-      port map (I=>I(3),
-                O=>O(3));
-   
-   I_36_34 : OBUF
-      port map (I=>I(7),
-                O=>O(7));
-   
-   I_36_35 : OBUF
-      port map (I=>I(6),
-                O=>O(6));
-   
-   I_36_36 : OBUF
-      port map (I=>I(5),
-                O=>O(5));
-   
-   I_36_37 : OBUF
-      port map (I=>I(4),
-                O=>O(4));
+   I_36_9 : AND2
+      port map (I0=>D1,
+                I1=>S0,
+                O=>M1);
    
 end BEHAVIORAL;
 
@@ -319,53 +226,146 @@ use ieee.numeric_std.ALL;
 library UNISIM;
 use UNISIM.Vcomponents.ALL;
 
-entity M2_1_MXILINX_TOP_LEVEL is
-   port ( D0 : in    std_logic; 
-          D1 : in    std_logic; 
-          S0 : in    std_logic; 
-          O  : out   std_logic);
-end M2_1_MXILINX_TOP_LEVEL;
+entity FD8RE_MXILINX_TOP_LEVEL is
+   port ( C  : in    std_logic; 
+          CE : in    std_logic; 
+          D  : in    std_logic_vector (7 downto 0); 
+          R  : in    std_logic; 
+          Q  : out   std_logic_vector (7 downto 0));
+end FD8RE_MXILINX_TOP_LEVEL;
 
-architecture BEHAVIORAL of M2_1_MXILINX_TOP_LEVEL is
+architecture BEHAVIORAL of FD8RE_MXILINX_TOP_LEVEL is
    attribute BOX_TYPE   : string ;
-   signal M0 : std_logic;
-   signal M1 : std_logic;
-   component AND2B1
-      port ( I0 : in    std_logic; 
-             I1 : in    std_logic; 
-             O  : out   std_logic);
+   component FDRE
+      generic( INIT : bit :=  '0');
+      port ( C  : in    std_logic; 
+             CE : in    std_logic; 
+             D  : in    std_logic; 
+             R  : in    std_logic; 
+             Q  : out   std_logic);
    end component;
-   attribute BOX_TYPE of AND2B1 : component is "BLACK_BOX";
-   
-   component OR2
-      port ( I0 : in    std_logic; 
-             I1 : in    std_logic; 
-             O  : out   std_logic);
-   end component;
-   attribute BOX_TYPE of OR2 : component is "BLACK_BOX";
-   
-   component AND2
-      port ( I0 : in    std_logic; 
-             I1 : in    std_logic; 
-             O  : out   std_logic);
-   end component;
-   attribute BOX_TYPE of AND2 : component is "BLACK_BOX";
+   attribute BOX_TYPE of FDRE : component is "BLACK_BOX";
    
 begin
-   I_36_7 : AND2B1
-      port map (I0=>S0,
-                I1=>D0,
-                O=>M0);
+   I_Q0 : FDRE
+      port map (C=>C,
+                CE=>CE,
+                D=>D(0),
+                R=>R,
+                Q=>Q(0));
    
-   I_36_8 : OR2
-      port map (I0=>M1,
-                I1=>M0,
-                O=>O);
+   I_Q1 : FDRE
+      port map (C=>C,
+                CE=>CE,
+                D=>D(1),
+                R=>R,
+                Q=>Q(1));
    
-   I_36_9 : AND2
-      port map (I0=>D1,
-                I1=>S0,
-                O=>M1);
+   I_Q2 : FDRE
+      port map (C=>C,
+                CE=>CE,
+                D=>D(2),
+                R=>R,
+                Q=>Q(2));
+   
+   I_Q3 : FDRE
+      port map (C=>C,
+                CE=>CE,
+                D=>D(3),
+                R=>R,
+                Q=>Q(3));
+   
+   I_Q4 : FDRE
+      port map (C=>C,
+                CE=>CE,
+                D=>D(4),
+                R=>R,
+                Q=>Q(4));
+   
+   I_Q5 : FDRE
+      port map (C=>C,
+                CE=>CE,
+                D=>D(5),
+                R=>R,
+                Q=>Q(5));
+   
+   I_Q6 : FDRE
+      port map (C=>C,
+                CE=>CE,
+                D=>D(6),
+                R=>R,
+                Q=>Q(6));
+   
+   I_Q7 : FDRE
+      port map (C=>C,
+                CE=>CE,
+                D=>D(7),
+                R=>R,
+                Q=>Q(7));
+   
+end BEHAVIORAL;
+
+
+
+library ieee;
+use ieee.std_logic_1164.ALL;
+use ieee.numeric_std.ALL;
+library UNISIM;
+use UNISIM.Vcomponents.ALL;
+
+entity OBUF8_MXILINX_TOP_LEVEL is
+   port ( I : in    std_logic_vector (7 downto 0); 
+          O : out   std_logic_vector (7 downto 0));
+end OBUF8_MXILINX_TOP_LEVEL;
+
+architecture BEHAVIORAL of OBUF8_MXILINX_TOP_LEVEL is
+   attribute IOSTANDARD  : string ;
+   attribute CAPACITANCE : string ;
+   attribute SLEW        : string ;
+   attribute DRIVE       : string ;
+   attribute BOX_TYPE    : string ;
+   component OBUF
+      port ( I : in    std_logic; 
+             O : out   std_logic);
+   end component;
+   attribute IOSTANDARD of OBUF : component is "DEFAULT";
+   attribute CAPACITANCE of OBUF : component is "DONT_CARE";
+   attribute SLEW of OBUF : component is "SLOW";
+   attribute DRIVE of OBUF : component is "12";
+   attribute BOX_TYPE of OBUF : component is "BLACK_BOX";
+   
+begin
+   I_36_30 : OBUF
+      port map (I=>I(0),
+                O=>O(0));
+   
+   I_36_31 : OBUF
+      port map (I=>I(1),
+                O=>O(1));
+   
+   I_36_32 : OBUF
+      port map (I=>I(2),
+                O=>O(2));
+   
+   I_36_33 : OBUF
+      port map (I=>I(3),
+                O=>O(3));
+   
+   I_36_34 : OBUF
+      port map (I=>I(7),
+                O=>O(7));
+   
+   I_36_35 : OBUF
+      port map (I=>I(6),
+                O=>O(6));
+   
+   I_36_36 : OBUF
+      port map (I=>I(5),
+                O=>O(5));
+   
+   I_36_37 : OBUF
+      port map (I=>I(4),
+                O=>O(4));
    
 end BEHAVIORAL;
 
@@ -690,6 +690,7 @@ architecture BEHAVIORAL of TOP_LEVEL is
    attribute DDR_CLK_EDGE          : string ;
    attribute SRTYPE                : string ;
    attribute BOX_TYPE              : string ;
+   attribute HU_SET                : string ;
    attribute IOBDELAY_VALUE        : string ;
    attribute IOBDELAY_TYPE         : string ;
    attribute CLK_FEEDBACK          : string ;
@@ -708,7 +709,6 @@ architecture BEHAVIORAL of TOP_LEVEL is
    attribute PHASE_SHIFT           : string ;
    attribute STARTUP_WAIT          : string ;
    attribute DCM_AUTOCALIBRATION   : string ;
-   attribute HU_SET                : string ;
    attribute IOSTANDARD            : string ;
    attribute CAPACITANCE           : string ;
    attribute SLEW                  : string ;
@@ -749,6 +749,8 @@ architecture BEHAVIORAL of TOP_LEVEL is
    signal FADC_CTRL_MAP                  : std_logic;
    signal fadc_data_del_ce               : std_logic;
    signal fadc_data_del_rst              : std_logic;
+   signal FADC_DATA_EDGE_MAP             : std_logic;
+   signal fadc_data_edge_sel             : std_logic_vector (15 downto 0);
    signal fadc_data_in                   : std_logic_vector (15 downto 0);
    signal FADC_DCLK                      : std_logic;
    signal fadc_dclk_in                   : std_logic;
@@ -758,6 +760,8 @@ architecture BEHAVIORAL of TOP_LEVEL is
    signal fadc_done                      : std_logic;
    signal fadc_fifo_data_out             : std_logic_vector (63 downto 0);
    signal fadc_latched_in                : std_logic_vector (15 downto 0);
+   signal fadc_latched_in_fall           : std_logic_vector (15 downto 0);
+   signal fadc_latched_in_rise           : std_logic_vector (15 downto 0);
    signal FADC_MAP                       : std_logic;
    signal fadc_raddr                     : std_logic_vector (9 downto 0);
    signal fadc_rdy_for_trigger           : std_logic;
@@ -874,6 +878,13 @@ architecture BEHAVIORAL of TOP_LEVEL is
    attribute DDR_CLK_EDGE of IDDR : component is "OPPOSITE_EDGE";
    attribute SRTYPE of IDDR : component is "SYNC";
    attribute BOX_TYPE of IDDR : component is "BLACK_BOX";
+   
+   component M2_1_MXILINX_TOP_LEVEL
+      port ( D0 : in    std_logic; 
+             D1 : in    std_logic; 
+             S0 : in    std_logic; 
+             O  : out   std_logic);
+   end component;
    
    component IDELAY
       -- synopsys translate_off
@@ -1065,13 +1076,6 @@ architecture BEHAVIORAL of TOP_LEVEL is
              O  : out   std_logic);
    end component;
    attribute BOX_TYPE of XOR2 : component is "BLACK_BOX";
-   
-   component M2_1_MXILINX_TOP_LEVEL
-      port ( D0 : in    std_logic; 
-             D1 : in    std_logic; 
-             S0 : in    std_logic; 
-             O  : out   std_logic);
-   end component;
    
    component FD16RE_MXILINX_TOP_LEVEL
       port ( C  : in    std_logic; 
@@ -1278,6 +1282,38 @@ architecture BEHAVIORAL of TOP_LEVEL is
    end component;
    attribute BOX_TYPE of FD : component is "BLACK_BOX";
    
+   attribute DDR_CLK_EDGE of ADC_IDDR_0 : label is "SAME_EDGE_PIPELINED";
+   attribute DDR_CLK_EDGE of ADC_IDDR_1 : label is "SAME_EDGE_PIPELINED";
+   attribute DDR_CLK_EDGE of ADC_IDDR_2 : label is "SAME_EDGE_PIPELINED";
+   attribute DDR_CLK_EDGE of ADC_IDDR_3 : label is "SAME_EDGE_PIPELINED";
+   attribute DDR_CLK_EDGE of ADC_IDDR_4 : label is "SAME_EDGE_PIPELINED";
+   attribute DDR_CLK_EDGE of ADC_IDDR_5 : label is "SAME_EDGE_PIPELINED";
+   attribute DDR_CLK_EDGE of ADC_IDDR_6 : label is "SAME_EDGE_PIPELINED";
+   attribute DDR_CLK_EDGE of ADC_IDDR_7 : label is "SAME_EDGE_PIPELINED";
+   attribute DDR_CLK_EDGE of ADC_IDDR_8 : label is "SAME_EDGE_PIPELINED";
+   attribute DDR_CLK_EDGE of ADC_IDDR_9 : label is "SAME_EDGE_PIPELINED";
+   attribute DDR_CLK_EDGE of ADC_IDDR_10 : label is "SAME_EDGE_PIPELINED";
+   attribute DDR_CLK_EDGE of ADC_IDDR_11 : label is "SAME_EDGE_PIPELINED";
+   attribute DDR_CLK_EDGE of ADC_IDDR_12 : label is "SAME_EDGE_PIPELINED";
+   attribute DDR_CLK_EDGE of ADC_IDDR_13 : label is "SAME_EDGE_PIPELINED";
+   attribute DDR_CLK_EDGE of ADC_IDDR_14 : label is "SAME_EDGE_PIPELINED";
+   attribute DDR_CLK_EDGE of ADC_IDDR_15 : label is "SAME_EDGE_PIPELINED";
+   attribute HU_SET of fadc_data_mux_0 : label is "fadc_data_mux_0_30";
+   attribute HU_SET of fadc_data_mux_1 : label is "fadc_data_mux_1_29";
+   attribute HU_SET of fadc_data_mux_2 : label is "fadc_data_mux_2_28";
+   attribute HU_SET of fadc_data_mux_3 : label is "fadc_data_mux_3_27";
+   attribute HU_SET of fadc_data_mux_4 : label is "fadc_data_mux_4_26";
+   attribute HU_SET of fadc_data_mux_5 : label is "fadc_data_mux_5_25";
+   attribute HU_SET of fadc_data_mux_6 : label is "fadc_data_mux_6_24";
+   attribute HU_SET of fadc_data_mux_7 : label is "fadc_data_mux_7_23";
+   attribute HU_SET of fadc_data_mux_8 : label is "fadc_data_mux_8_22";
+   attribute HU_SET of fadc_data_mux_9 : label is "fadc_data_mux_9_21";
+   attribute HU_SET of fadc_data_mux_10 : label is "fadc_data_mux_10_20";
+   attribute HU_SET of fadc_data_mux_11 : label is "fadc_data_mux_11_19";
+   attribute HU_SET of fadc_data_mux_12 : label is "fadc_data_mux_12_18";
+   attribute HU_SET of fadc_data_mux_13 : label is "fadc_data_mux_13_17";
+   attribute HU_SET of fadc_data_mux_14 : label is "fadc_data_mux_14_16";
+   attribute HU_SET of fadc_data_mux_15 : label is "fadc_data_mux_15_15";
    attribute IOBDELAY_TYPE of XLXI_3405 : label is "VARIABLE";
    attribute CLKIN_PERIOD of XLXI_3410 : label is "8.0";
    attribute CLKFX_MULTIPLY of XLXI_3410 : label is "8";
@@ -1338,150 +1374,295 @@ architecture BEHAVIORAL of TOP_LEVEL is
    attribute HU_SET of XLXI_6419 : label is "XLXI_6419_11";
    attribute HU_SET of XLXI_6420 : label is "XLXI_6420_13";
    attribute HU_SET of XLXI_6435 : label is "XLXI_6435_12";
+   attribute HU_SET of XLXI_6465 : label is "XLXI_6465_14";
 begin
    ADC_IDDR_0 : IDDR
+   -- synopsys translate_off
+   generic map( DDR_CLK_EDGE => "SAME_EDGE_PIPELINED")
+   -- synopsys translate_on
       port map (C=>FADC_DCLK,
                 CE=>XLXN_16002,
                 D=>fadc_data_in(0),
                 R=>XLXN_16004,
                 S=>XLXN_16003,
-                Q1=>fadc_latched_in(0),
-                Q2=>open);
+                Q1=>fadc_latched_in_rise(0),
+                Q2=>fadc_latched_in_fall(0));
    
    ADC_IDDR_1 : IDDR
+   -- synopsys translate_off
+   generic map( DDR_CLK_EDGE => "SAME_EDGE_PIPELINED")
+   -- synopsys translate_on
       port map (C=>FADC_DCLK,
                 CE=>XLXN_16002,
                 D=>fadc_data_in(1),
                 R=>XLXN_16004,
                 S=>XLXN_16003,
-                Q1=>fadc_latched_in(1),
-                Q2=>open);
+                Q1=>fadc_latched_in_rise(1),
+                Q2=>fadc_latched_in_fall(1));
    
    ADC_IDDR_2 : IDDR
+   -- synopsys translate_off
+   generic map( DDR_CLK_EDGE => "SAME_EDGE_PIPELINED")
+   -- synopsys translate_on
       port map (C=>FADC_DCLK,
                 CE=>XLXN_16002,
                 D=>fadc_data_in(2),
                 R=>XLXN_16004,
                 S=>XLXN_16003,
-                Q1=>fadc_latched_in(2),
-                Q2=>open);
+                Q1=>fadc_latched_in_rise(2),
+                Q2=>fadc_latched_in_fall(2));
    
    ADC_IDDR_3 : IDDR
+   -- synopsys translate_off
+   generic map( DDR_CLK_EDGE => "SAME_EDGE_PIPELINED")
+   -- synopsys translate_on
       port map (C=>FADC_DCLK,
                 CE=>XLXN_16002,
                 D=>fadc_data_in(3),
                 R=>XLXN_16004,
                 S=>XLXN_16003,
-                Q1=>fadc_latched_in(3),
-                Q2=>open);
+                Q1=>fadc_latched_in_rise(3),
+                Q2=>fadc_latched_in_fall(3));
    
    ADC_IDDR_4 : IDDR
+   -- synopsys translate_off
+   generic map( DDR_CLK_EDGE => "SAME_EDGE_PIPELINED")
+   -- synopsys translate_on
       port map (C=>FADC_DCLK,
                 CE=>XLXN_16002,
                 D=>fadc_data_in(4),
                 R=>XLXN_16004,
                 S=>XLXN_16003,
-                Q1=>fadc_latched_in(4),
-                Q2=>open);
+                Q1=>fadc_latched_in_rise(4),
+                Q2=>fadc_latched_in_fall(4));
    
    ADC_IDDR_5 : IDDR
+   -- synopsys translate_off
+   generic map( DDR_CLK_EDGE => "SAME_EDGE_PIPELINED")
+   -- synopsys translate_on
       port map (C=>FADC_DCLK,
                 CE=>XLXN_16002,
                 D=>fadc_data_in(5),
                 R=>XLXN_16004,
                 S=>XLXN_16003,
-                Q1=>fadc_latched_in(5),
-                Q2=>open);
+                Q1=>fadc_latched_in_rise(5),
+                Q2=>fadc_latched_in_fall(5));
    
    ADC_IDDR_6 : IDDR
+   -- synopsys translate_off
+   generic map( DDR_CLK_EDGE => "SAME_EDGE_PIPELINED")
+   -- synopsys translate_on
       port map (C=>FADC_DCLK,
                 CE=>XLXN_16002,
                 D=>fadc_data_in(6),
                 R=>XLXN_16004,
                 S=>XLXN_16003,
-                Q1=>fadc_latched_in(6),
-                Q2=>open);
+                Q1=>fadc_latched_in_rise(6),
+                Q2=>fadc_latched_in_fall(6));
    
    ADC_IDDR_7 : IDDR
+   -- synopsys translate_off
+   generic map( DDR_CLK_EDGE => "SAME_EDGE_PIPELINED")
+   -- synopsys translate_on
       port map (C=>FADC_DCLK,
                 CE=>XLXN_16002,
                 D=>fadc_data_in(7),
                 R=>XLXN_16004,
                 S=>XLXN_16003,
-                Q1=>fadc_latched_in(7),
-                Q2=>open);
+                Q1=>fadc_latched_in_rise(7),
+                Q2=>fadc_latched_in_fall(7));
    
    ADC_IDDR_8 : IDDR
+   -- synopsys translate_off
+   generic map( DDR_CLK_EDGE => "SAME_EDGE_PIPELINED")
+   -- synopsys translate_on
       port map (C=>FADC_DCLK,
                 CE=>XLXN_16002,
                 D=>fadc_data_in(8),
                 R=>XLXN_16004,
                 S=>XLXN_16003,
-                Q1=>fadc_latched_in(8),
-                Q2=>open);
+                Q1=>fadc_latched_in_rise(8),
+                Q2=>fadc_latched_in_fall(8));
    
    ADC_IDDR_9 : IDDR
+   -- synopsys translate_off
+   generic map( DDR_CLK_EDGE => "SAME_EDGE_PIPELINED")
+   -- synopsys translate_on
       port map (C=>FADC_DCLK,
                 CE=>XLXN_16002,
                 D=>fadc_data_in(9),
                 R=>XLXN_16004,
                 S=>XLXN_16003,
-                Q1=>fadc_latched_in(9),
-                Q2=>open);
+                Q1=>fadc_latched_in_rise(9),
+                Q2=>fadc_latched_in_fall(9));
    
    ADC_IDDR_10 : IDDR
+   -- synopsys translate_off
+   generic map( DDR_CLK_EDGE => "SAME_EDGE_PIPELINED")
+   -- synopsys translate_on
       port map (C=>FADC_DCLK,
                 CE=>XLXN_16002,
                 D=>fadc_data_in(10),
                 R=>XLXN_16004,
                 S=>XLXN_16003,
-                Q1=>fadc_latched_in(10),
-                Q2=>open);
+                Q1=>fadc_latched_in_rise(10),
+                Q2=>fadc_latched_in_fall(10));
    
    ADC_IDDR_11 : IDDR
+   -- synopsys translate_off
+   generic map( DDR_CLK_EDGE => "SAME_EDGE_PIPELINED")
+   -- synopsys translate_on
       port map (C=>FADC_DCLK,
                 CE=>XLXN_16002,
                 D=>fadc_data_in(11),
                 R=>XLXN_16004,
                 S=>XLXN_16003,
-                Q1=>fadc_latched_in(11),
-                Q2=>open);
+                Q1=>fadc_latched_in_rise(11),
+                Q2=>fadc_latched_in_fall(11));
    
    ADC_IDDR_12 : IDDR
+   -- synopsys translate_off
+   generic map( DDR_CLK_EDGE => "SAME_EDGE_PIPELINED")
+   -- synopsys translate_on
       port map (C=>FADC_DCLK,
                 CE=>XLXN_16002,
                 D=>fadc_data_in(12),
                 R=>XLXN_16004,
                 S=>XLXN_16003,
-                Q1=>fadc_latched_in(12),
-                Q2=>open);
+                Q1=>fadc_latched_in_rise(12),
+                Q2=>fadc_latched_in_fall(12));
    
    ADC_IDDR_13 : IDDR
+   -- synopsys translate_off
+   generic map( DDR_CLK_EDGE => "SAME_EDGE_PIPELINED")
+   -- synopsys translate_on
       port map (C=>FADC_DCLK,
                 CE=>XLXN_16002,
                 D=>fadc_data_in(13),
                 R=>XLXN_16004,
                 S=>XLXN_16003,
-                Q1=>fadc_latched_in(13),
-                Q2=>open);
+                Q1=>fadc_latched_in_rise(13),
+                Q2=>fadc_latched_in_fall(13));
    
    ADC_IDDR_14 : IDDR
+   -- synopsys translate_off
+   generic map( DDR_CLK_EDGE => "SAME_EDGE_PIPELINED")
+   -- synopsys translate_on
       port map (C=>FADC_DCLK,
                 CE=>XLXN_16002,
                 D=>fadc_data_in(14),
                 R=>XLXN_16004,
                 S=>XLXN_16003,
-                Q1=>fadc_latched_in(14),
-                Q2=>open);
+                Q1=>fadc_latched_in_rise(14),
+                Q2=>fadc_latched_in_fall(14));
    
    ADC_IDDR_15 : IDDR
+   -- synopsys translate_off
+   generic map( DDR_CLK_EDGE => "SAME_EDGE_PIPELINED")
+   -- synopsys translate_on
       port map (C=>FADC_DCLK,
                 CE=>XLXN_16002,
                 D=>fadc_data_in(15),
                 R=>XLXN_16004,
                 S=>XLXN_16003,
-                Q1=>fadc_latched_in(15),
-                Q2=>open);
+                Q1=>fadc_latched_in_rise(15),
+                Q2=>fadc_latched_in_fall(15));
+   
+   fadc_data_mux_0 : M2_1_MXILINX_TOP_LEVEL
+      port map (D0=>fadc_latched_in_rise(0),
+                D1=>fadc_latched_in_fall(0),
+                S0=>fadc_data_edge_sel(0),
+                O=>fadc_latched_in(0));
+   
+   fadc_data_mux_1 : M2_1_MXILINX_TOP_LEVEL
+      port map (D0=>fadc_latched_in_rise(1),
+                D1=>fadc_latched_in_fall(1),
+                S0=>fadc_data_edge_sel(1),
+                O=>fadc_latched_in(1));
+   
+   fadc_data_mux_2 : M2_1_MXILINX_TOP_LEVEL
+      port map (D0=>fadc_latched_in_rise(2),
+                D1=>fadc_latched_in_fall(2),
+                S0=>fadc_data_edge_sel(2),
+                O=>fadc_latched_in(2));
+   
+   fadc_data_mux_3 : M2_1_MXILINX_TOP_LEVEL
+      port map (D0=>fadc_latched_in_rise(3),
+                D1=>fadc_latched_in_fall(3),
+                S0=>fadc_data_edge_sel(3),
+                O=>fadc_latched_in(3));
+   
+   fadc_data_mux_4 : M2_1_MXILINX_TOP_LEVEL
+      port map (D0=>fadc_latched_in_rise(4),
+                D1=>fadc_latched_in_fall(4),
+                S0=>fadc_data_edge_sel(4),
+                O=>fadc_latched_in(4));
+   
+   fadc_data_mux_5 : M2_1_MXILINX_TOP_LEVEL
+      port map (D0=>fadc_latched_in_rise(5),
+                D1=>fadc_latched_in_fall(5),
+                S0=>fadc_data_edge_sel(5),
+                O=>fadc_latched_in(5));
+   
+   fadc_data_mux_6 : M2_1_MXILINX_TOP_LEVEL
+      port map (D0=>fadc_latched_in_rise(6),
+                D1=>fadc_latched_in_fall(6),
+                S0=>fadc_data_edge_sel(6),
+                O=>fadc_latched_in(6));
+   
+   fadc_data_mux_7 : M2_1_MXILINX_TOP_LEVEL
+      port map (D0=>fadc_latched_in_rise(7),
+                D1=>fadc_latched_in_fall(7),
+                S0=>fadc_data_edge_sel(7),
+                O=>fadc_latched_in(7));
+   
+   fadc_data_mux_8 : M2_1_MXILINX_TOP_LEVEL
+      port map (D0=>fadc_latched_in_rise(8),
+                D1=>fadc_latched_in_fall(8),
+                S0=>fadc_data_edge_sel(8),
+                O=>fadc_latched_in(8));
+   
+   fadc_data_mux_9 : M2_1_MXILINX_TOP_LEVEL
+      port map (D0=>fadc_latched_in_rise(9),
+                D1=>fadc_latched_in_fall(9),
+                S0=>fadc_data_edge_sel(9),
+                O=>fadc_latched_in(9));
+   
+   fadc_data_mux_10 : M2_1_MXILINX_TOP_LEVEL
+      port map (D0=>fadc_latched_in_rise(10),
+                D1=>fadc_latched_in_fall(10),
+                S0=>fadc_data_edge_sel(10),
+                O=>fadc_latched_in(10));
+   
+   fadc_data_mux_11 : M2_1_MXILINX_TOP_LEVEL
+      port map (D0=>fadc_latched_in_rise(11),
+                D1=>fadc_latched_in_fall(11),
+                S0=>fadc_data_edge_sel(11),
+                O=>fadc_latched_in(11));
+   
+   fadc_data_mux_12 : M2_1_MXILINX_TOP_LEVEL
+      port map (D0=>fadc_latched_in_rise(12),
+                D1=>fadc_latched_in_fall(12),
+                S0=>fadc_data_edge_sel(12),
+                O=>fadc_latched_in(12));
+   
+   fadc_data_mux_13 : M2_1_MXILINX_TOP_LEVEL
+      port map (D0=>fadc_latched_in_rise(13),
+                D1=>fadc_latched_in_fall(13),
+                S0=>fadc_data_edge_sel(13),
+                O=>fadc_latched_in(13));
+   
+   fadc_data_mux_14 : M2_1_MXILINX_TOP_LEVEL
+      port map (D0=>fadc_latched_in_rise(14),
+                D1=>fadc_latched_in_fall(14),
+                S0=>fadc_data_edge_sel(14),
+                O=>fadc_latched_in(14));
+   
+   fadc_data_mux_15 : M2_1_MXILINX_TOP_LEVEL
+      port map (D0=>fadc_latched_in_rise(15),
+                D1=>fadc_latched_in_fall(15),
+                S0=>fadc_data_edge_sel(15),
+                O=>fadc_latched_in(15));
    
    XLXI_3405 : IDELAY
    -- synopsys translate_off
@@ -1545,7 +1726,7 @@ begin
                 D7=>GLOBAL_RESET_MAP,
                 D8=>EVENT_MAP,
                 D9=>open,
-                D10=>open,
+                D10=>FADC_DATA_EDGE_MAP,
                 D11=>open,
                 D12=>open,
                 D13=>open,
@@ -2185,7 +2366,7 @@ begin
    
    XLXI_6253 : data_send
       port map (clk=>MASTER_CLK,
-                clock_enable=>ram_en_latch,
+                clock_enable=>ram_en,
                 data_in(63 downto 0)=>data_send_in(63 downto 0),
                 debug_signals(7 downto 0)=>debug_signals(7 downto 0),
                 header(59 downto 0)=>XLXI_6253_header_openSignal(59 downto 0),
@@ -2434,6 +2615,13 @@ begin
    XLXI_6463 : INV
       port map (I=>FADC_CLK_P,
                 O=>FADC_CLK_N);
+   
+   XLXI_6465 : FD16RE_MXILINX_TOP_LEVEL
+      port map (C=>MASTER_CLK,
+                CE=>FADC_DATA_EDGE_MAP,
+                D(15 downto 0)=>rx_data(15 downto 0),
+                R=>reset,
+                Q(15 downto 0)=>fadc_data_edge_sel(15 downto 0));
    
 end BEHAVIORAL;
 

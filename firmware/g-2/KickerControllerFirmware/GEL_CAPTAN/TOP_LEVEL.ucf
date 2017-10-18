@@ -15,8 +15,8 @@ INST "SECONDARY_CLK" IOSTANDARD = LVCMOS25;
 NET "SECONDARY_CLK" CLOCK_DEDICATED_ROUTE = TRUE;
 
 
-NET "FADC_sampling_clk_xor0" MAXDELAY=1.7ns;
-NET "FADC_sampling_clk_xor1" MAXDELAY=1.7ns;
+NET "FADC_sampling_clk_xor0" MAXDELAY=1.76ns;
+NET "FADC_sampling_clk_xor1" MAXDELAY=1.76ns;
 
 
 

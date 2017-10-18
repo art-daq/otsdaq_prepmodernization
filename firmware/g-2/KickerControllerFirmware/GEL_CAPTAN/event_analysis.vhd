@@ -127,126 +127,121 @@ begin
 	process(clk) begin
 		--check for reset condition
 		if(rising_edge(clk)) then
-			
-			del_clk_en <= clock_enable;
-			data_out_we <= '0';
-
-			
-			if(clock_enable = '1') then
-				--Reset pulsed signals
-				headerDelayOne <= '0';
-				headerDelayTwo <= '0';
-				prepareEnd <= '0';
-				sendFooter <= '0';
-				--data_out_we <= '0';
-				dataOutEnd <= '0';
-				finish <= '0';
-			end if;
-			
-			--Reset User Veto Signals (The manual veto is the only thing that is still active during clk_enable low)
-			resetClearVeto <= '0';
-			resetForceVeto <= '0';
 		
-			if(reset = '1') then--reset can still happen even if clk_enable is low.  
-				busy <= '0';
-			else
+			--====================
+			--====================			
+			--Reset pulsed signals			
+			data_out_we <= '0';
+			sendFooter <= '0';
+			dataOutEnd <= '0';			
+			resetClearVeto <= '0';
+			resetForceVeto <= '0';	
+			vetoed <= '0';		
 			
-				if(clock_enable = '1') then 
-				
-					if(data_in_we = '1') then
-						data_out_we <= '1';
-						data_out <= data_in;
-					elsif(prepareEnd = '1') then				
-						data_out_we <= '1';
-						data_out <= footer_in;--we need one clock to figure out if we need to veto.  The header signals coming from anything else in the firmware applciation can be sent at this time.  					
-					elsif(sendFooter = '1') then			
-						data_out_we <= '1';
-						data_out <= internalFooter;
-					end if;
-					
-					
-					
-					if(data_in_we = '1' and busy = '0') then
-						busy <= '1';
-						headerDelayOne <= '1';
-					elsif(headerDelayOne = '1') then 
-						headerDelayTwo <= '1'; --delay for second header				
-						analysisRunning <= '1';
-						lastSigHigh <= '0';
-						lastSigLow <= '0';
-					elsif(analysisRunning = '1') then --We have actual data! start the analysis process	
-					
-						--If last time was not high and this time is, incriment the counter
-						if(lastSigHigh = '0') then
-							if(sampleOne > userZeroCrossThreshHigh or sampleTwo > userZeroCrossThreshHigh or sampleThree > userZeroCrossThreshHigh or sampleFour > userZeroCrossThreshHigh
-								or sampleFive > userZeroCrossThreshHigh or sampleSix > userZeroCrossThreshHigh or sampleSeven > userZeroCrossThreshHigh or sampleEight > userZeroCrossThreshHigh) then
-								lastSigHigh <= '1';
-								zeroCrossCount <= zeroCrossCount + 1;
-							end if;
-						end if;
-						--If the last signal set was not low and this time is low, incriment the counter
-						if(lastSigLow = '0') then
-							if(sampleOne < userZeroCrossThreshLow or sampleTwo < userZeroCrossThreshLow or sampleThree < userZeroCrossThreshLow or sampleFour < userZeroCrossThreshLow or sampleFive < userZeroCrossThreshLow
-								or sampleSix < userZeroCrossThreshLow or sampleSeven < userZeroCrossThreshLow or sampleEight < userZeroCrossThreshLow) then
-								lastSigLow <= '1';
-								zeroCrossCount <= zeroCrossCount + 1; 
-							end if;
-						end if;
-						
-						--Reset the high signal if we are no longer above threshold
-						if(lastSigHigh = '1' and sampleOne < userZeroCrossThreshHigh and sampleTwo < userZeroCrossThreshHigh and sampleThree < userZeroCrossThreshHigh and sampleFour < userZeroCrossThreshHigh
-							and sampleFive < userZeroCrossThreshHigh and sampleSix < userZeroCrossThreshHigh and sampleSeven < userZeroCrossThreshHigh and sampleEight < userZeroCrossThreshHigh) then
-							lastSigHigh <= '0';
-						end if;
-						--Reset the Low signal if we are no longer below threshold
-						if(lastSigLow = '1' and sampleOne > userZeroCrossThreshLow and sampleTwo > userZeroCrossThreshLow and sampleThree > userZeroCrossThreshLow and sampleFour > userZeroCrossThreshLow and sampleFive > userZeroCrossThreshLow
-							and sampleSix > userZeroCrossThreshLow and sampleSeven > userZeroCrossThreshLow and sampleEight > userZeroCrossThreshLow) then
-							lastSigLow <= '0';
-						end if;
-						
-					end if;
-						
-					--detect the end of the packet and prepare for it.  
-					if(data_in_end = '1') then
-						--The data currently on the pins is still valid and needs to be compared.  We won't give the final 
-						--count until the event is actually over.  
-						prepareEnd <= '1';
-					elsif(prepareEnd = '1') then  --end the analysis and see if we need to veto.  
-						analysisRunning <= '0';
-						sendFooter <= '1';
-						
-						--Check if we will veto the signal and take approperate action
-						if(zeroCrossCount > userZeroCrossVetoThresh and veto_en = '1') then
-							vetoed <= '1';
-						end if;
-					elsif(sendFooter = '1') then --send the footer
-						data_out <= internalFooter;
-						finish <= '1';				
-					elsif(finish = '1') then			 --Turn off the data_out_we signal and pulse data_out_end		
-						dataOutEnd <= '1';
-						zeroCrossCount <= (others => '0');
-						busy <= '0';
-					end if;
-				
-				end if; -- everything before this is only active on clk_enable
-				
-				---user controlled signals:
-				
-				--Clear veto signal
-				if(force_veto = '1') then --Force veto signal
-					vetoed <= '1';
-					resetForceVeto <= '1';
-				elsif(clear_veto = '1') then
-					vetoed <= '0';
-					resetClearVeto <= '1';
-				end if;
 								 
-				
-				
-				
+			--====================	
+			--====================
+			if(data_in_we = '1') then -- reset pulsed-clock-en data
+				headerDelayOne <= '0'; 
 			end if;
+			
+			
+			--====================
+			--====================
+			-- primaray path
+			if(reset = '1') then	--reset can still happen even if data_in_we is low.  
+				busy <= '0';
+				analysisRunning <= '0';
+			elsif(data_in_end = '1') then -- Indicates end of header/payload data. So send external footer!				
+				data_out_we <= '1';
+				data_out <= footer_in; --we need one clock to figure out if we need to veto.  The header signals coming from anything else in the firmware application can be sent at this time.  									
+				
+				sendFooter <= '1';	--send internal footer next clock	
+				
+				--Check if we will veto the signal and take approperate action
+				if(zeroCrossCount > userZeroCrossVetoThresh and veto_en = '1') then
+					vetoed <= '1';
+				end if;				
+			elsif(sendFooter = '1') then				
+				data_out_we <= '1';
+				data_out <= internalFooter; --note: includes veto info setup in previous clock
+				dataOutEnd <= '1'; --DONE!!! end packet
+				
+				--DONE!!!
+				--wrap up things
+				busy <= '0';
+				analysisRunning <= '0';		
+				zeroCrossCount <= (others => '0');	
+				
+			elsif(data_in_we = '1') then
+			
+				data_out_we <= '1';
+				data_out <= data_in;
+				
+				--The data currently on the pins is still valid and needs to be compared.  We won't give the final 
+				--	 count until the event is actually over.  				
+				
+				if(busy = '0') then -- first data! = data for header 1
+					headerDelayOne <= '1';
+					busy <= '1';				
+				elsif(headerDelayOne = '1') then --data for header	2				
+					--headerDelayTwo <= '1'; 		
+					analysisRunning <= '1';
+					lastSigHigh <= '0';
+					lastSigLow <= '0';
+					zeroCrossCount <= (others => '0');
+				elsif(analysisRunning = '1') then --We have actual data! start the analysis process	
+					--If last time was not high and this time is, incriment the counter
+					if(lastSigHigh = '0') then
+						if(sampleOne > userZeroCrossThreshHigh or sampleTwo > userZeroCrossThreshHigh or sampleThree > userZeroCrossThreshHigh or sampleFour > userZeroCrossThreshHigh
+							or sampleFive > userZeroCrossThreshHigh or sampleSix > userZeroCrossThreshHigh or sampleSeven > userZeroCrossThreshHigh or sampleEight > userZeroCrossThreshHigh) then
+							lastSigHigh <= '1';
+							zeroCrossCount <= zeroCrossCount + 1;
+						end if;
+					end if;
+					
+					--If the last signal set was not low and this time is low, incriment the counter
+					if(lastSigLow = '0') then
+						if(sampleOne < userZeroCrossThreshLow or sampleTwo < userZeroCrossThreshLow or sampleThree < userZeroCrossThreshLow or sampleFour < userZeroCrossThreshLow or sampleFive < userZeroCrossThreshLow
+							or sampleSix < userZeroCrossThreshLow or sampleSeven < userZeroCrossThreshLow or sampleEight < userZeroCrossThreshLow) then
+							lastSigLow <= '1';
+							zeroCrossCount <= zeroCrossCount + 1; 
+						end if;
+					end if;
+					
+					
+					--Reset the high signal if we are no longer above threshold
+					if(lastSigHigh = '1' and sampleOne < userZeroCrossThreshHigh and sampleTwo < userZeroCrossThreshHigh and sampleThree < userZeroCrossThreshHigh and sampleFour < userZeroCrossThreshHigh
+						and sampleFive < userZeroCrossThreshHigh and sampleSix < userZeroCrossThreshHigh and sampleSeven < userZeroCrossThreshHigh and sampleEight < userZeroCrossThreshHigh) then
+						lastSigHigh <= '0';
+					end if;
+					
+					--Reset the Low signal if we are no longer below threshold
+					if(lastSigLow = '1' and sampleOne > userZeroCrossThreshLow and sampleTwo > userZeroCrossThreshLow and sampleThree > userZeroCrossThreshLow and sampleFour > userZeroCrossThreshLow and sampleFive > userZeroCrossThreshLow
+						and sampleSix > userZeroCrossThreshLow and sampleSeven > userZeroCrossThreshLow and sampleEight > userZeroCrossThreshLow) then
+						lastSigLow <= '0';
+					end if;
+				end if;
+				
+			end if; -- end elsif(data_in_we = '1') then
+			
+			--====================
+			--====================	
+			---user controlled signals:
+			
+			--Clear veto signal
+			if(force_veto = '1') then --Force veto signal
+				vetoed <= '1';
+				resetForceVeto <= '0'; --never reset flipflop
+			elsif(clear_veto = '1') then
+				vetoed <= '0';
+				resetClearVeto <= '0'; --never reset flipflop
+			end if;
+				
+				
 		end if;
 		
 	end process;
 end Behavioral;
 
+			
