@@ -1,0 +1,156 @@
+{
+"document" : {
+"data" : {
+"NAME" : "FE_INTERFACE_CONFIGURATION",
+"COMMENT" : "Added NimPlus",
+"AUTHOR" : "admin",
+"CREATION_TIME" : 1508524350,
+"COL_TYPES" : {
+"FE_INTERFACE_GROUP_ID" : "VARCHAR2",
+"FE_INTERFACE_UID" : "VARCHAR2",
+"STATUS" : "VARCHAR2",
+"FE_INTERFACE_PLUGIN_NAME" : "VARCHAR2",
+"LINK_TO_FE_TYPE_CONFIGURATION" : "VARCHAR2",
+"LINK_TO_FE_TYPE_UID" : "VARCHAR2",
+"LINK_TO_SLOW_CONTROL_CHANNELS_CONFIGURATION" : "VARCHAR2",
+"LINK_TO_SLOW_CONTROL_CHANNELS_GROUP_ID" : "VARCHAR2",
+"LINK_TO_SLOW_CONTROLS_MONITOR_CONFIGURATION" : "VARCHAR2",
+"LINK_TO_SLOW_CONTROLS_MONITOR_UID" : "VARCHAR2",
+"SLOW_CONTROLS_TX_SOCKET_IP_ADDRESS" : "VARCHAR2",
+"SLOW_CONTROLS_TX_SOCKET_PORT" : "NUMBER",
+"SLOW_CONTROLS_LOCAL_AGGREGATE_SAVING_ENABLED" : "VARCHAR2",
+"SLOW_CONTROLS_LOCAL_FILE_PATH" : "VARCHAR2",
+"SLOW_CONTROLS_RADIX_FILE_NAME" : "VARCHAR2",
+"SLOW_CONTROLS_SAVE_BINARY_FILE" : "VARCHAR2",
+"COMMENT_DESCRIPTION" : "VARCHAR2",
+"AUTHOR" : "VARCHAR2",
+"RECORD_INSERTION_TIME" : "TIMESTAMP WITH TIMEZONE"
+},
+"DATA_SET" : [
+{
+"FE_INTERFACE_GROUP_ID" : "FEGroup0",
+"FE_INTERFACE_UID" : "NimPlus0",
+"STATUS" : "On",
+"FE_INTERFACE_PLUGIN_NAME" : "FENIMPlusInterface",
+"LINK_TO_FE_TYPE_CONFIGURATION" : "FENIMPlusInterfaceConfiguration",
+"LINK_TO_FE_TYPE_UID" : "NimPlus0",
+"LINK_TO_SLOW_CONTROL_CHANNELS_CONFIGURATION" : "NO_LINK",
+"LINK_TO_SLOW_CONTROL_CHANNELS_GROUP_ID" : "DEFAULT",
+"LINK_TO_SLOW_CONTROLS_MONITOR_CONFIGURATION" : "NO_LINK",
+"LINK_TO_SLOW_CONTROLS_MONITOR_UID" : "0",
+"SLOW_CONTROLS_TX_SOCKET_IP_ADDRESS" : "127.0.0.1",
+"SLOW_CONTROLS_TX_SOCKET_PORT" : "4200",
+"SLOW_CONTROLS_LOCAL_AGGREGATE_SAVING_ENABLED" : "No",
+"SLOW_CONTROLS_LOCAL_FILE_PATH" : "",
+"SLOW_CONTROLS_RADIX_FILE_NAME" : "",
+"SLOW_CONTROLS_SAVE_BINARY_FILE" : "False",
+"COMMENT_DESCRIPTION" : "Default NIMPlus Configuration",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1508524350"
+}
+]
+},
+"metadata" : {
+
+},
+"search" : [
+
+]
+},
+"comments" : [
+
+],
+"origin" : {
+"source" : "template",
+"name" : "notprovided",
+"format" : "json",
+"created" : "Fri Oct 20 14:05:26 2017",
+"rawdata" : [
+
+]
+},
+"version" : "1",
+"entities" : [
+{
+"name" : "OTSROOT",
+"assigned" : "Fri Oct 20 14:05:26 2017"
+}
+],
+"configurations" : [
+{
+"name" : "notprovided",
+"assigned" : "Fri Oct 20 14:05:26 2017"
+},
+{
+"name" : "defaultConfig_v1",
+"assigned" : "Fri Oct 20 14:05:26 2017"
+}
+],
+"changelog" : "notprovided",
+"bookkeeping" : {
+"isdeleted" : false,
+"isreadonly" : false,
+"updates" : [
+{
+"event" : "addConfiguration",
+"timestamp" : "Fri Oct 20 14:05:26 2017",
+"value" : {
+"name" : "notprovided",
+"assigned" : "Fri Oct 20 14:05:26 2017"
+}
+},
+{
+"event" : "setVersion",
+"timestamp" : "Fri Oct 20 14:05:26 2017",
+"value" : {
+"name" : "1",
+"assigned" : "Fri Oct 20 14:05:26 2017"
+}
+},
+{
+"event" : "setCollection",
+"timestamp" : "Fri Oct 20 14:05:26 2017",
+"value" : {
+"name" : "FEInterfaceConfiguration",
+"assigned" : "Fri Oct 20 14:05:26 2017"
+}
+},
+{
+"event" : "addEntity",
+"timestamp" : "Fri Oct 20 14:05:26 2017",
+"value" : {
+"name" : "OTSROOT",
+"assigned" : "Fri Oct 20 14:05:26 2017"
+}
+},
+{
+"event" : "addConfiguration",
+"timestamp" : "Fri Oct 20 14:05:26 2017",
+"value" : {
+"name" : "defaultConfig_v1",
+"assigned" : "Fri Oct 20 14:05:26 2017"
+}
+}
+],
+"created" : "Fri Oct 20 14:05:26 2017"
+},
+"_id" : {
+"$oid" : "994c254640da40b9a7164bb6"
+},
+"collection" : "FEInterfaceConfiguration",
+"aliases" : {
+"active" : [
+
+],
+"history" : [
+
+]
+},
+"runs" : [
+
+],
+"attachments" : [
+
+],
+"configtype" : "notprovided"
+}

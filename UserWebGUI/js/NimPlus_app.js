@@ -3,9 +3,6 @@
 /* 
 TODO
 
-
- - Populate remaining divs with relevant controls
- 	- Add input source selection (siglog vs signorm on 3 outputs)  
  - (Later) Have the ability to load previous versions of config? 
 
  --- Save Procedure ---
@@ -25,125 +22,17 @@ TODO
 
 var _TABLE_BOOL_TYPE_TRUE_COLOR = "rgb(201, 255, 201)";
 var _TABLE_BOOL_TYPE_FALSE_COLOR = "rgb(255, 178, 178)";
-
-
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-
-//functions:			
-//init()
-
-
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-
-//----------------------------------------- Save Functions -----------------------------------------
 var _nimUids = null;
-function getNimFieldsForSave(nimUids) {
-    if (nimUids.length == 0) {
-        Debug.log("No NIMPlus UID's found", Debug.HIGH_PRIORITY);
-        return;
-    }
-    _nimUids = nimUids;
-    console.log("getNimUIDs' Input: \n")
-    console.log(nimUids);
-    console.log("\n");
-    Debug.log("getNimUIDs ", Debug.INFO_PRIORITY);
-
-    ConfigurationAPI.getFieldsOfRecords(
-        _subsetBasePath, nimUids,//["NimPlus0"]
-        "",/*_editableFieldList*/
-        -1,//maxDepth
-        setNimFieldValuesForSave,//responseHandler
-        _modifiedTables//modifiedTables
-    );
-}
-var valsToWrite = [];
-var objToWrite = [];
-function setNimFieldValuesForSave(recFields) {
-  var valsToWrite = [];
-  var objToWrite = [];
-  //Debug.log("recFields found = " + recFields.length);	
-    
-    console.log("setNimFields input: \n");
-    console.log(recFields);
-    console.log("\n");
-
-      
-//Compare Modified list and list of returned fields, populate a 2 arrays with the objects and data to write 
-//to the table of the elements of the page that have been modified since last save    
-    for (let i of modifiedList) {
-      console.log("got to 1");
-        for (let a of recFields) {
-	  console.log("got to 2");
-          if(a.fieldColumnName == i[0]) {
-		
-		objToWrite.push(a); //objects to update
-		valsToWrite.push(i[1]); //values for the corresponding objects
-                console.log("Object found");
-		console.log(a);
-		console.log(i);
-		
-	    }
-	    else{
-	    //console.log("\nno match for " + a.fieldColumnName);
-	   //console.log(a);
-	    //console.log(i);
-	      
-	    }
-	}
-    }
-    console.log(objToWrite);
-    console.log(valsToWrite);
-    
-    ConfigurationAPI.setFieldValuesForRecords(
-        _subsetBasePath,//subsetBasePath 
-	selUID,//recordArr
-        objToWrite,//fieldObjArr
-	valsToWrite,//valueArr
-        saveNimTableDialog,//responseHandler
-        _modifiedTables//modifiedTables
-    )
-
-};
-
-function saveNimTableDialog(modifiedTables){
-  modifiedList = [];  
-  console.log(modifiedTables);
-    _modifiedTables = modifiedTables;
-    ConfigurationAPI.saveModifiedTables(
-    modifiedTables,
-    activateNimTables
-    )
-};
-function activateNimTables(SavedTable,SavedGroup,SavedAlias){
-  for(let i of SavedGroup) {
-    ConfigurationAPI.activateGroup(i.groupName, i.groupKey, false)
-  }
-  
-        //#43c130 = green color, alerts user that changes are saved
-        $("body").css("background-color", "#43c130");
-        //Table Updates Here					
-        Debug.log("NimPlus Configuration Changes Saved to UID " + selUID[0], Debug.INFO_PRIORITY);
-        console.log("Page Values Saved");
-        console.log(modifiedList);
-
-        document.getElementById("saveEl").innerHTML = "Save Successful!";
-    
-};
-
-
-//------------------------------------Error Check etc. Functions------------------------------------
 var timeout = null; //voltField timeout value, used to wait till user done entering a value		
 var modifiedList = []; //List of values that are modified, used to keep track of what values need to be updated
 var invalidInput = false; //Track if any textbox input is invalid, used to prevent saving if there is
 var syncArray = [0,0,0,0,0,0,0,0] //empty array for 40Mhz Sync Word
 var logicArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] //empty array for coincidence logic word
 var _subsetBasePath = "FENIMPlusInterfaceConfiguration";
-var _modifiedTables;
+var _modifiedTables = [];
+var writeFEInterfaceStatus = false;
+var FEInterfaceStatusValue = "";
+var ogBoardState = "";
 var fieldList = [["NimStatus","Status"],
 ["NimPlusIP","InterfaceIPAddress"],
 ["NimPlusPort","InterfacePort"],
@@ -153,6 +42,8 @@ var fieldList = [["NimStatus","Status"],
 ["ChBInEn","EnableInputChannelB"],
 ["ChCInEn","EnableInputChannelC"],
 ["ChDInEn","EnableInputChannelD"],
+["OutputSourceOutput1","OutputSourceSelectChannel1"],
+["OutputSourceOutput2","OutputSourceSelectChannel2"],
 ["ChAInInv","InvertPolarityInputChannelA"],
 ["ChBInInv","InvertPolarityInputChannelB"],
 ["ChCInInv","InvertPolarityInputChannelC"],
@@ -170,6 +61,9 @@ var fieldList = [["NimStatus","Status"],
 ["ChCOutInv","InvertPolarityOutputChannelC"],
 ["ChDOutInv","InvertPolarityOutputChannelD"],
 ["Sync1","TriggerClockMask"],
+["EnableSync0","EnableClockMaskChannel0"],
+["EnableSync1","EnableClockMaskChannel1"],
+["EnableSync2","EnableClockMaskChannel2"],
 ["VetoCount","OutputTimeVetoDurationChannel0"],
 ["Veto1Count","OutputTimeVetoDurationChannel1"],
 ["Veto2Count","OutputTimeVetoDurationChannel2"],
@@ -204,20 +98,15 @@ var fieldList = [["NimStatus","Status"],
 ]
 
 
-//function testFunc() {
-//    ConfigurationAPI.getSubsetRecords(
-//        _subsetBasePath /*subsetBasePath*/ ,
-//        "", //"FEInterfacePluginName=FEOtsUDPTemplateInterface"/*filterList*/,
-//        getNimUIDs /*responseHandler*/ ,
-//        _modifiedTables /*modifiedTables*/ )
-//}
+
+//----------------------------------------- Save Functions -----------------------------------------
 
 
 // Save Page Function
 function savePageValues(e) {
   if(modifiedList.length > 0){ 
     if (invalidInput == false) {
-
+	
 				
 	
 //	ConfigurationAPI.getSubsetRecords(
@@ -225,21 +114,33 @@ function savePageValues(e) {
 //        "", //"FEInterfacePluginName=FEOtsUDPTemplateInterface"/*filterList*/,
 //        getNimFieldsForSave /*responseHandler*/ ,
 //        _modifiedTables /*modifiedTables*/ )      
-	
-	ConfigurationAPI.getFieldsOfRecords(
-        _subsetBasePath, selUID,//["NimPlus0"]
-        "",/*_editableFieldList*/
-        -1,//maxDepth
-        setNimFieldValuesForSave,//responseHandler
-        _modifiedTables//modifiedTables
-			 )
+	if(writeFEInterfaceStatus == false){ //Dont need to set FEInterface status 
+	      console.log("Don't need to write to FEInterfaceconfiguration, skipping that write.");
+	      ConfigurationAPI.getFieldsOfRecords(
+	      _subsetBasePath, selUID,//["NimPlus0"]
+	      "",/*_editableFieldList*/
+	      -1,//maxDepth
+	      setNimFieldValuesForSave,//responseHandler
+	      //_modifiedTables//modifiedTables
+			      )
+	}
+	else{
+	      console.log("Need to write to FEInterfaceconfiguration...");
+	      ConfigurationAPI.getFieldsOfRecords( //Need to set FEInterface status
+	      "FEInterfaceConfiguration", selUID,//["NimPlus0"]
+	      "",/*_editableFieldList*/
+	      -1,//maxDepth
+	      setFEInterfaceStatusForSave,//responseHandler
+	      //_modifiedTables//modifiedTables
+			       )
+	}
       
       
 
     } else {
         document.getElementById("saveEl").innerHTML = "Warning! Unable to save, some fields contain invalid values";
         console.log("Warning! Textbox on page has invalid value, aborting save...")
-        console.log("Please check the following fields for possible invalid values (some might be correct)");
+        console.log("Please check the following fields for possible invalid values (some might beSigNorm/ correct)");
         Debug.log("NimPlus Configuration Changes NOT Saved, Invalid value(s) in fields", Debug.HIGH_PRIORITY);
         console.log(modifiedList);
     }
@@ -248,6 +149,145 @@ function savePageValues(e) {
     Debug.log("Error! No Changes to Save!", Debug.WARN_PRIORITY);
   }
 }
+
+
+/* //Unused Function, still useful as reference
+function getNimFieldsForSave(nimUids) {
+    if (nimUids.length == 0) {
+        Debug.log("No NIMPlus UID's found", Debug.HIGH_PRIORITY);
+        return;
+    }
+    _nimUids = nimUids;
+    console.log("getNimUIDs' Input: \n")
+    console.log(nimUids);
+    console.log("\n");
+    Debug.log("getNimUIDs ", Debug.INFO_PRIORITY);
+
+    ConfigurationAPI.getFieldsOfRecords(
+        _subsetBasePath, nimUids,//["NimPlus0"]
+        "",//_editableFieldList
+        -1,//maxDepth
+        setNimFieldValuesForSave,//responseHandler
+        _modifiedTables//modifiedTables
+    );
+}
+*/
+ function setFEInterfaceStatusForSave(recFields){
+  console.log("setFEInterfaceStatusForSave hit");
+  var valsToWrite = [];
+  var objToWrite = [];
+  //Debug.log("recFields found = " + recFields.length);	
+    
+    console.log("setFEInterfaceStatusForSave input: \n");
+    console.log(recFields);
+    console.log("\n"); 
+        for (let a of recFields) {
+          if(a.fieldColumnName == "Status" && a.fieldRelativePath == "") {
+		objToWrite.push(a); //objects to update
+		valsToWrite.push(FEInterfaceStatusValue); //values for the corresponding objects
+	    }
+	    else{
+	      //console.log("Status field not there?!?!")
+	    }
+	}
+    ogBoardState = FEInterfaceStatusValue;
+    console.log(objToWrite);
+    console.log(valsToWrite);
+    
+    ConfigurationAPI.setFieldValuesForRecords(
+        "FEInterfaceConfiguration",//subsetBasePath 
+	selUID,//recordArr
+        objToWrite,//fieldObjArr
+	valsToWrite,//valueArr
+        FEInterfaceToNIMPlusConfigWrite,//responseHandler
+        _modifiedTables//modifiedTables
+    )
+
+}
+
+ function FEInterfaceToNIMPlusConfigWrite(newModifiedTables){
+ _modifiedTables.push(newModifiedTables[0])
+ console.log("FEInterfaceToNimplus handoff hit");
+ console.log(newModifiedTables[0]);
+ console.log(_modifiedTables);
+ 	      ConfigurationAPI.getFieldsOfRecords(
+	      _subsetBasePath, selUID,//["NimPlus0"]
+	      "",/*_editableFieldList*/
+	      -1,//maxDepth
+	      setNimFieldValuesForSave,//responseHandler
+	      _modifiedTables//modifiedTables 
+			       )
+   
+}
+function setNimFieldValuesForSave(recFields) {
+  var valsToWrite = [];
+  var objToWrite = [];
+  //Debug.log("recFields found = " + recFields.length);	
+    
+    console.log("setNimFields input: \n");
+    console.log(recFields);
+    console.log("\n");
+
+      
+//Compare Modified list and list of returned fields, populate a 2 arrays with the objects and data to write 
+//to the table of the elements of the page that have been modified since last save    
+    for (let i of modifiedList) {
+        for (let a of recFields) {
+          if(a.fieldColumnName == i[0]) {
+		objToWrite.push(a); //objects to update
+		valsToWrite.push(i[1]); //values for the corresponding objects
+                console.log("Object found");
+	    }
+	    else{
+	    //console.log("\nno match for " + a.fieldColumnName);      
+	    }
+	}
+    }
+    console.log(objToWrite);
+    console.log(valsToWrite);
+    
+    ConfigurationAPI.setFieldValuesForRecords(
+        _subsetBasePath,//subsetBasePath 
+	selUID,//recordArr
+        objToWrite,//fieldObjArr
+	valsToWrite,//valueArr
+        saveNimTableDialog,//responseHandler
+        _modifiedTables//modifiedTables
+    )
+
+};
+
+function saveNimTableDialog(newModifiedTables){
+  modifiedList = [];  
+  console.log(newModifiedTables);
+  console.log(_modifiedTables);
+  _modifiedTables = newModifiedTables.splice(0);
+  console.log(_modifiedTables);   
+    ConfigurationAPI.saveModifiedTables(
+    _modifiedTables,
+    activateNimTables
+    )
+};
+function activateNimTables(SavedTable,SavedGroup,SavedAlias){
+  for(let i of SavedGroup) {
+    ConfigurationAPI.activateGroup(i.groupName, i.groupKey, false)
+  }
+  
+        //#43c130 = green color, alerts user that changes are saved
+        $("body").css("background-color", "#43c130");
+        //Table Updates Here					
+        Debug.log("NimPlus Configuration Changes Saved to UID " + selUID[0], Debug.INFO_PRIORITY);
+        console.log("Page Values Saved");
+        console.log(modifiedList);
+	_modifiedTables = [];
+        document.getElementById("saveEl").innerHTML = "Save Successful!";
+    
+};
+
+
+//------------------------------------Error Check etc. Functions------------------------------------
+
+
 
 //Calculate the 40 Mhz Sync Mask
 function syncMaskCalc(val,a) {
@@ -311,8 +351,6 @@ function dwValidCheck(firstVal, secondValElId, msgElId) {
 
 }
 
-
-
 //Add a value to the list to save into the selected row (UID) of the NIMPlus table
  function addModifiedList(tableVal, tableDat) {
     //#fcd125 = yellow color, notifies user that there are unsaved changes on the page
@@ -336,6 +374,20 @@ function dwValidCheck(firstVal, secondValElId, msgElId) {
     }
 
 }
+ function FEInterfaceSetStatus(state){
+  console.log("ogBoardState = " + ogBoardState);
+  console.log("desired board state = " + state);
+  
+  FEInterfaceStatusValue = state; 
+  if(state == ogBoardState)
+     writeFEInterfaceStatus = false;
+  else
+     writeFEInterfaceStatus = true;
+  
+  console.log("writeFEInterfaceStatus = " + writeFEInterfaceStatus)
+   
+}
+
 //Dac Control Functions to link all 3 inputs together
 //Dac ranges from 0-3.3 volts with 4096 (0-4095) steps of resolution, input must be step value
 
@@ -517,6 +569,7 @@ function getNimUidsForList(nimUids) {
     console.log("first index: " + nimUids[0])
 	$.each(nimUids, function(val, text) {
             $('#nimUIDSelect').append( $('<option></option>').val(text).html(text) )
+	    $('#nimUIDToCopySelect').append( $('<option></option>').val(text).html(text) )
 	    console.log(val)
 	    console.log(text)
             }); 
@@ -527,7 +580,7 @@ function getNimUidsForList(nimUids) {
         "",/*_editableFieldList*/
         -1,//maxDepth
         getNimFieldsForPage,//responseHandler
-        _modifiedTables//modifiedTables
+        _modifiedTables//modifiedTablesto
     );
 	}
 }
@@ -578,6 +631,18 @@ function getNimValuesForPage(recFields) {
 				}
 				console.log("Trigger Clock Mask set")			
 			}
+			else if(a.fieldPath.includes("Status")){
+			  	if(a.fieldValue == "Yes" || a.fieldValue == "True" || a.fieldValue == "On"){
+					ogBoardState = "On";
+					elByID(i[0]).checked = true;
+					console.log("checkbox element " + i[0] + " set to checked = true")
+				}
+				else{
+					ogBoardState = "Off";
+					elByID(i[0]).checked = false;
+					console.log("checkbox element " + i[0] + " set to checked = false")
+				}
+			}
 			else if(elByID(i[0]).id=="ChADacEl1"){
 			  voltSteps(a.fieldValue, "ChADacEl2", "ChADacEl0")
 			  elByID(i[0]).value = a.fieldValue
@@ -612,6 +677,18 @@ function getNimValuesForPage(recFields) {
 			  } 
 		
 	    }
+	    else if(a.fieldPath.includes("EnableExpertWebappFeatures")){ //Show/Hide expert features
+	      if(a.fieldValue == "Yes"){
+		$("#SigGenBox").show() //Signal Generator
+		$("#BkpBox").show() //Backpressure Vetos
+		$("#SyncBox").show() //40Mhz Sync
+	      }
+	      else{
+		$("#SigGenBox").hide() //Signal Generator
+		$("#BkpBox").hide() //Backpressure Vetos
+		$("#SyncBox").hide() //40Mhz Sync
+	      }
+	    }
 	    else{/*
 	    console.log("\nno match for " + a.fieldColumnName);
 	    console.log(a.fieldColumnName);
@@ -642,3 +719,177 @@ function getNimValuesOnUIDSelect(selValue) {
 };
 
 
+//----------------------------------------------"Add New Nimplus" stuff ---------------------------------------------------------------------
+
+//--------------------------- Modal Setup ------------------------------ Unstable/Disabled for release
+/*
+window.onload  = function() {
+var modal = elByID('newNimPlusPopup');
+var openBtn = elByID('addNewNIMPlus');
+var xBtn = document.getElementsByClassName("close")[0];
+var cancelBtn = elByID('cancelNewNIMPlusAdd');
+
+
+//Open Modal
+openBtn.onclick = function() {
+    modal.style.display = "block";
+    elByID("newNIMUIDErr").innerHTML = ""
+    elByID("newNIMUID").value = ""
+}
+//Close Modal
+xBtn.onclick = function() {
+    modal.style.display = "none";
+}
+cancelBtn.onclick = function() {
+    modal.style.display = "none";
+}
+}
+
+
+var gottenFields = [];
+var copyUID;
+var alphaNumRegEx = /^[a-z0-9]+$/i
+var _recFields = [];
+function checkNewNIMPlusUID(){
+  if(alphaNumRegEx.test(valByID("newNIMUID"))){
+  elByID("newNIMUIDErr").innerHTML = ""
+  selUID = [valByID("newNIMUID")]
+  copyUID = [valByID("nimUIDToCopySelect")]
+  //create new UID stuff
+      	ConfigurationAPI.addSubsetRecords( //NimPlusConfiguration
+        "FENIMPlusInterfaceConfiguration",
+        selUID, //new NIMUID
+	loadNewNIMPlusConfigTable,
+        _modifiedTables);
+	
+	ConfigurationAPI.addSubsetRecords( //NimPlusOptionalConfiguration
+        "FENIMPlusInterfaceOptionalConfiguration",
+        selUID, //new NIMUID
+	loadNewNIMPlusOptionalConfigTable,
+        _modifiedTables);
+	
+	ConfigurationAPI.addSubsetRecords( //FEInterfaces
+	"FEInterfaceConfiguration",
+        selUID, //new NIMUID
+	loadNewNIMPlusFEInterfaceTable,
+        _modifiedTables);
+	
+  }
+  else{
+    elByID("newNIMUIDErr").innerHTML = "New NIMPlus UID MUST be Alphanumeric (A-Z, 0-9) Characters only!"
+    console.log("Bad New UID")
+  }
+  
+}
+
+
+
+//Inital Response handlers
+function loadNewNIMPlusConfigTable(newModifiedTables){
+  //assume only one table modified
+  if(newModifiedTables.length)
+    _modifiedTables.push(newModifiedTables[0]);
+  //console.log("New row in NimPlusConfiguration created")
+}
+function loadNewNIMPlusOptionalConfigTable(newModifiedTables){
+  if(newModifiedTables.length)
+  _modifiedTables .push(newModifiedTables[0]);
+     ConfigurationAPI.getFieldsOfRecords(
+        _subsetBasePath, copyUID,
+        "",
+        -1,//maxDepth
+        getNimFieldValuesForNewNIMPlus,
+        _modifiedTables)
+}
+function loadNewNIMPlusFEInterfaceTable(newModifiedTables){
+  if(newModifiedTables.length)
+  _modifiedTables.push(newModifiedTables[0]);
+}
+
+
+
+
+//Copying table for NimPlus Config Vals
+function getNimFieldValuesForNewNIMPlus(recFields) {
+    gottenFields = recFields.slice(0);
+        ConfigurationAPI.getFieldValuesForRecords(
+        _subsetBasePath, copyUID,
+        recFields,
+        setNimOptionalLinkForNewNIMPlus,
+        _modifiedTables)
+}
+
+
+function setNimOptionalLinkForNewNIMPlus(recFields) {
+  var valsToWrite = [];
+  var objToWrite = [];
+  _recFields = recFields.splice(0);
+  //...forge some objects
+  var linkObj = {}
+    linkObj.fieldTableName = "FENIMPlusInterfaceConfiguration"
+    linkObj.fieldUID = selUID[0]
+    linkObj.fieldColumnName = "LinkToOptionalParameters"
+    linkObj.fieldRelativePath = ""
+    linkObj.fieldColumnType = "ChildLink-optionalParameters"
+    linkObj.fieldColumnDataType = "VARCHAR2"
+    linkObj.fieldColumnDataChoicesArr = []
+    linkObj.fieldColumnDefaultValue = ""
+  var linkUIDObj = {};
+    linkUIDObj.fieldTableName = "FENIMPlusInterfaceConfiguration"
+    linkUIDObj.fieldUID = selUID[0]
+    linkUIDObj.fieldColumnName = "LinkToOptionalParametersUID"
+    linkUIDObj.fieldRelativePath = ""
+    linkUIDObj.fieldColumnType = "ChildLinkUID-optionalParameters"
+    linkUIDObj.fieldColumnDataType = "VARCHAR2"
+    linkUIDObj.fieldColumnDataChoicesArr = [0]
+    linkUIDObj.fieldColumnDefaultValue = ""  
+  objToWrite = [linkObj,linkUIDObj]
+  valsToWrite = ["FENIMPlusInterfaceOptionalConfiguration",selUID[0]]
+  
+  
+      ConfigurationAPI.setFieldValuesForRecords(
+        _subsetBasePath,//subsetBasePath 
+	selUID,//recordArr
+        objToWrite,//fieldObjArr
+	valsToWrite,//valueArr
+        setNimFieldValuesForNewNIMPlus,//responseHandler
+        _modifiedTables)//modifiedTables
+  
+}
+
+function setNimFieldValuesForNewNIMPlus(newModifiedTables) {
+  var valsToWrite = [];
+  var objToWrite = [];
+  for (let j of _modifiedTables){
+    if (j.tableName ==_subsetBasePath){
+      _modifiedTables[_modifiedTables.indexOf(j)] = newModifiedTables[0];
+    }    
+  }
+  //Debug.log("recFields found = " + recFields.length);	
+    
+    console.log("setNimFields input: \n");
+    console.log(_recFields);
+    console.log("\n");
+    console.log(gottenFields);	
+ 
+ 
+	for (let i of gottenFields) {
+	  objToWrite.push(i);
+	}
+	for (let a of _recFields) {
+	  valsToWrite.push(a.fieldValue);
+	  
+	}
+
+    console.log(objToWrite);
+    console.log(valsToWrite);
+    
+    ConfigurationAPI.setFieldValuesForRecords(
+        _subsetBasePath,//subsetBasePath 
+	selUID,//recordArr
+        objToWrite,//fieldObjArr
+	valsToWrite,//valueArr
+        saveNimTableDialog,//responseHandler
+        _modifiedTables)//modifiedTables
+}
+*/

@@ -15,13 +15,13 @@
 				<COLUMN Type="OnOff" 	 Name="EnableInputChannelB" 	 StorageName="ENABLE_INPUT_CHANNEL_B" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="OnOff" 	 Name="EnableInputChannelC" 	 StorageName="ENABLE_INPUT_CHANNEL_C" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="OnOff" 	 Name="EnableInputChannelD" 	 StorageName="ENABLE_INPUT_CHANNEL_D" 		DataType="VARCHAR2" 		DataChoices=""/>
-				<COLUMN Type="FixedChoiceData" 	 Name="OutputSourceSelectChannel0" 	 StorageName="OUTPUT_SOURCE_SELECT_CHANNEL0" 		DataType="VARCHAR2" 		DataChoices="arbitraryBool=0"/>
-				<COLUMN Type="FixedChoiceData" 	 Name="OutputSourceSelectChannel1" 	 StorageName="OUTPUT_SOURCE_SELECT_CHANNEL1" 		DataType="VARCHAR2" 		DataChoices="arbitraryBool=0,Output%20Channel-0"/>
-				<COLUMN Type="FixedChoiceData" 	 Name="OutputSourceSelectChannel2" 	 StorageName="OUTPUT_SOURCE_SELECT_CHANNEL2" 		DataType="VARCHAR2" 		DataChoices="arbitraryBool=0,Output%20Channel-0"/>
-				<COLUMN Type="Data" 	 Name="OutputMuxSelectChannelA" 	 StorageName="OUTPUT_MUX_SELECT_CHANNEL_A" 		DataType="NUMBER" 		DataChoices="arbitraryBool=0,Output%20Channel-1,Output%20Channel-2,Tie-Low"/>
-				<COLUMN Type="Data" 	 Name="OutputMuxSelectChannelB" 	 StorageName="OUTPUT_MUX_SELECT_CHANNEL_B" 		DataType="NUMBER" 		DataChoices="arbitraryBool=0,Output%20Channel-1,Output%20Channel-2,Tie-Low"/>
-				<COLUMN Type="Data" 	 Name="OutputMuxSelectChannelC" 	 StorageName="OUTPUT_MUX_SELECT_CHANNEL_C" 		DataType="NUMBER" 		DataChoices="arbitraryBool=0,Output%20Channel-1,Output%20Channel-2,Tie-Low"/>
-				<COLUMN Type="Data" 	 Name="OutputMuxSelectChannelD" 	 StorageName="OUTPUT_MUX_SELECT_CHANNEL_D" 		DataType="NUMBER" 		DataChoices="arbitraryBool=0,Output%20Channel-1,Output%20Channel-2,Tie-Low"/>
+				<COLUMN Type="FixedChoiceData" 	 Name="OutputSourceSelectChannel0" 	 StorageName="OUTPUT_SOURCE_SELECT_CHANNEL0" 		DataType="VARCHAR2" 		DataChoices="arbitraryBool=0,SigLog"/>
+				<COLUMN Type="FixedChoiceData" 	 Name="OutputSourceSelectChannel1" 	 StorageName="OUTPUT_SOURCE_SELECT_CHANNEL1" 		DataType="VARCHAR2" 		DataChoices="arbitraryBool=0,SigLog,SigNorm"/>
+				<COLUMN Type="FixedChoiceData" 	 Name="OutputSourceSelectChannel2" 	 StorageName="OUTPUT_SOURCE_SELECT_CHANNEL2" 		DataType="VARCHAR2" 		DataChoices="arbitraryBool=0,SigLog,SigNorm"/>
+				<COLUMN Type="Data" 	 Name="OutputMuxSelectChannelA" 	 StorageName="OUTPUT_MUX_SELECT_CHANNEL_A" 		DataType="NUMBER" 		DataChoices=""/>
+				<COLUMN Type="Data" 	 Name="OutputMuxSelectChannelB" 	 StorageName="OUTPUT_MUX_SELECT_CHANNEL_B" 		DataType="NUMBER" 		DataChoices=""/>
+				<COLUMN Type="Data" 	 Name="OutputMuxSelectChannelC" 	 StorageName="OUTPUT_MUX_SELECT_CHANNEL_C" 		DataType="NUMBER" 		DataChoices=""/>
+				<COLUMN Type="Data" 	 Name="OutputMuxSelectChannelD" 	 StorageName="OUTPUT_MUX_SELECT_CHANNEL_D" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="CoincidenceLogicWord" 	 StorageName="COINCIDENCE_LOGIC_WORD" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="ChildLink-optionalParameters" 	 Name="LinkToOptionalParameters" 	 StorageName="LINK_TO_OPTIONAL_PARAMETERS" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="ChildLinkUID-optionalParameters" 	 Name="LinkToOptionalParametersUID" 	 StorageName="LINK_TO_OPTIONAL_PARAMETERS_UID" 		DataType="VARCHAR2" 		DataChoices=""/>

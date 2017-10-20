@@ -1,0 +1,170 @@
+{
+"document" : {
+"data" : {
+"NAME" : "FENIM_PLUS_INTERFACE_CONFIGURATION",
+"COMMENT" : "No comment.",
+"AUTHOR" : "admin",
+"CREATION_TIME" : 1508526273,
+"COL_TYPES" : {
+"INTERFACE_ID" : "VARCHAR2",
+"STATUS" : "VARCHAR2",
+"FIRMWARE_VERSION" : "NUMBER",
+"INTERFACE_IP_ADDRESS" : "VARCHAR2",
+"INTERFACE_PORT" : "NUMBER",
+"HOST_IP_ADDRESS" : "VARCHAR2",
+"HOST_PORT" : "NUMBER",
+"STREAM_TO_IP_ADDRESS" : "VARCHAR2",
+"STREAM_TO_PORT" : "NUMBER",
+"ENABLE_INPUT_CHANNEL_A" : "VARCHAR2",
+"ENABLE_INPUT_CHANNEL_B" : "VARCHAR2",
+"ENABLE_INPUT_CHANNEL_C" : "VARCHAR2",
+"ENABLE_INPUT_CHANNEL_D" : "VARCHAR2",
+"OUTPUT_SOURCE_SELECT_CHANNEL0" : "VARCHAR2",
+"OUTPUT_SOURCE_SELECT_CHANNEL1" : "VARCHAR2",
+"OUTPUT_SOURCE_SELECT_CHANNEL2" : "VARCHAR2",
+"OUTPUT_MUX_SELECT_CHANNEL_A" : "NUMBER",
+"OUTPUT_MUX_SELECT_CHANNEL_B" : "NUMBER",
+"OUTPUT_MUX_SELECT_CHANNEL_C" : "NUMBER",
+"OUTPUT_MUX_SELECT_CHANNEL_D" : "NUMBER",
+"COINCIDENCE_LOGIC_WORD" : "NUMBER",
+"LINK_TO_OPTIONAL_PARAMETERS" : "VARCHAR2",
+"LINK_TO_OPTIONAL_PARAMETERS_UID" : "VARCHAR2",
+"COMMENT_DESCRIPTION" : "VARCHAR2",
+"AUTHOR" : "VARCHAR2",
+"RECORD_INSERTION_TIME" : "TIMESTAMP WITH TIMEZONE"
+},
+"DATA_SET" : [
+{
+"INTERFACE_ID" : "NimPlus0",
+"STATUS" : "On",
+"FIRMWARE_VERSION" : "0",
+"INTERFACE_IP_ADDRESS" : "192.168.133.112",
+"INTERFACE_PORT" : "2001",
+"HOST_IP_ADDRESS" : "192.168.133.42",
+"HOST_PORT" : "5101",
+"STREAM_TO_IP_ADDRESS" : "192.168.133.112",
+"STREAM_TO_PORT" : "8001",
+"ENABLE_INPUT_CHANNEL_A" : "On",
+"ENABLE_INPUT_CHANNEL_B" : "On",
+"ENABLE_INPUT_CHANNEL_C" : "On",
+"ENABLE_INPUT_CHANNEL_D" : "On",
+"OUTPUT_SOURCE_SELECT_CHANNEL0" : "SigLog",
+"OUTPUT_SOURCE_SELECT_CHANNEL1" : "SigLog",
+"OUTPUT_SOURCE_SELECT_CHANNEL2" : "SigLog",
+"OUTPUT_MUX_SELECT_CHANNEL_A" : "0",
+"OUTPUT_MUX_SELECT_CHANNEL_B" : "1",
+"OUTPUT_MUX_SELECT_CHANNEL_C" : "2",
+"OUTPUT_MUX_SELECT_CHANNEL_D" : "5",
+"COINCIDENCE_LOGIC_WORD" : "2",
+"LINK_TO_OPTIONAL_PARAMETERS" : "FENIMPlusInterfaceOptionalConfiguration",
+"LINK_TO_OPTIONAL_PARAMETERS_UID" : "NimPlus0",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1508526273"
+}
+]
+},
+"metadata" : {
+
+},
+"search" : [
+
+]
+},
+"comments" : [
+
+],
+"origin" : {
+"source" : "template",
+"name" : "notprovided",
+"format" : "json",
+"created" : "Fri Oct 20 14:05:26 2017",
+"rawdata" : [
+
+]
+},
+"version" : "1",
+"entities" : [
+{
+"name" : "OTSROOT",
+"assigned" : "Fri Oct 20 14:05:26 2017"
+}
+],
+"configurations" : [
+{
+"name" : "notprovided",
+"assigned" : "Fri Oct 20 14:05:26 2017"
+},
+{
+"name" : "defaultConfig_v1",
+"assigned" : "Fri Oct 20 14:05:26 2017"
+}
+],
+"changelog" : "notprovided",
+"bookkeeping" : {
+"isdeleted" : false,
+"isreadonly" : false,
+"updates" : [
+{
+"event" : "addConfiguration",
+"timestamp" : "Fri Oct 20 14:05:26 2017",
+"value" : {
+"name" : "notprovided",
+"assigned" : "Fri Oct 20 14:05:26 2017"
+}
+},
+{
+"event" : "setVersion",
+"timestamp" : "Fri Oct 20 14:05:26 2017",
+"value" : {
+"name" : "1",
+"assigned" : "Fri Oct 20 14:05:26 2017"
+}
+},
+{
+"event" : "setCollection",
+"timestamp" : "Fri Oct 20 14:05:26 2017",
+"value" : {
+"name" : "FENIMPlusInterfaceConfiguration",
+"assigned" : "Fri Oct 20 14:05:26 2017"
+}
+},
+{
+"event" : "addEntity",
+"timestamp" : "Fri Oct 20 14:05:26 2017",
+"value" : {
+"name" : "OTSROOT",
+"assigned" : "Fri Oct 20 14:05:26 2017"
+}
+},
+{
+"event" : "addConfiguration",
+"timestamp" : "Fri Oct 20 14:05:26 2017",
+"value" : {
+"name" : "defaultConfig_v1",
+"assigned" : "Fri Oct 20 14:05:26 2017"
+}
+}
+],
+"created" : "Fri Oct 20 14:05:26 2017"
+},
+"_id" : {
+"$oid" : "3f477c8ff70441a2b3ba4cc4"
+},
+"collection" : "FENIMPlusInterfaceConfiguration",
+"aliases" : {
+"active" : [
+
+],
+"history" : [
+
+]
+},
+"runs" : [
+
+],
+"attachments" : [
+
+],
+"configtype" : "notprovided"
+}

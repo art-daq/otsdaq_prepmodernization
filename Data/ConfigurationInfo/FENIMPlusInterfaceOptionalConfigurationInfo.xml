@@ -3,6 +3,7 @@
 		<CONFIGURATION Name="FENIMPlusInterfaceOptionalConfiguration">
 			<VIEW Name="FENIM_PLUS_INTERFACE_OPTIONAL_CONFIGURATION" Type="File,Database,DatabaseTest" Description="DelayAndWidth%20%5Beach%20bit%20is%203ns%5D%0AOutputTimeVetoDuration%20%5Bunits%20of%203ns%5D%0ASignalGeneratorHighPeriod%20%5Bunits%20of%203ns%5D%0ASignalGeneratorLow%20%5Bunits%20of%203ns%5D%0ASignalGeneratorPulseCount%20%5BNumber%20of%20pulses%20to%20output%2C%200%20for%20continuous%5D%0AOverrideORWithSelectionLogicRegister%20can%20be%20used%2C%20for%20example%2C%20to%20enable%20more%20than%20one%20combinatorial%20AND-gate%20for%20the%20selection%20logic%20-%20effectively%20an%20OR%20of%20ANDs.">
 				<COLUMN Type="UID" 	 Name="InterfaceID" 	 StorageName="INTERFACE_ID" 		DataType="VARCHAR2" 		DataChoices=""/>
+				<COLUMN Type="YesNo" 	 Name="EnableExpertWebappFeatures" 	 StorageName="ENABLE_EXPERT_WEBAPP_FEATURES" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="YesNo" 	 Name="EnableClockResetDuringConfigure" 	 StorageName="ENABLE_CLOCK_RESET_DURING_CONFIGURE" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="YesNo" 	 Name="EnableDACSetupDuringConfigure" 	 StorageName="ENABLE_DAC_SETUP_DURING_CONFIGURE" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="DACValueChannelA" 	 StorageName="DAC_VALUE_CHANNEL_A" 		DataType="NUMBER" 		DataChoices=""/>
@@ -32,21 +33,21 @@
 				<COLUMN Type="Data" 	 Name="OutputPrescaleCountChannel0" 	 StorageName="OUTPUT_PRESCALE_COUNT_CHANNEL0" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="TrueFalse" 	 Name="OutputBackpressureSelectChannel0" 	 StorageName="OUTPUT_BACKPRESSURE_SELECT_CHANNEL0" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="TrueFalse" 	 Name="EnableClockMaskChannel0" 	 StorageName="ENABLE_CLOCK_MASK_CHANNEL0" 		DataType="VARCHAR2" 		DataChoices=""/>
-				<COLUMN Type="FixedChoiceData" 	 Name="InputChannelVetoSourceForOutputChannel0" 	 StorageName="INPUT_CHANNEL_VETO_SOURCE_FOR_OUTPUT_CHANNEL0" 		DataType="VARCHAR2" 		DataChoices="arbitraryBool=0,Input%20Channel-A,Input%20Channel-B,Input%20Channel-C,Input%20Channel-D,No%20Veto"/>
+				<COLUMN Type="FixedChoiceData" 	 Name="InputChannelVetoSourceForOutputChannel0" 	 StorageName="INPUT_CHANNEL_VETO_SOURCE_FOR_OUTPUT_CHANNEL0" 		DataType="VARCHAR2" 		DataChoices="arbitraryBool=0,No-Veto,Input-Ch-A,Input-Ch-B,Input-Ch-C,Input-Ch-D"/>
 				<COLUMN Type="Data" 	 Name="DelayOutputChannel1" 	 StorageName="DELAY_OUTPUT_CHANNEL1" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="WidthOutputChannel1" 	 StorageName="WIDTH_OUTPUT_CHANNEL1" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="OutputTimeVetoDurationChannel1" 	 StorageName="OUTPUT_TIME_VETO_DURATION_CHANNEL1" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="OutputPrescaleCountChannel1" 	 StorageName="OUTPUT_PRESCALE_COUNT_CHANNEL1" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="TrueFalse" 	 Name="OutputBackpressureSelectChannel1" 	 StorageName="OUTPUT_BACKPRESSURE_SELECT_CHANNEL1" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="TrueFalse" 	 Name="EnableClockMaskChannel1" 	 StorageName="ENABLE_CLOCK_MASK_CHANNEL1" 		DataType="VARCHAR2" 		DataChoices=""/>
-				<COLUMN Type="FixedChoiceData" 	 Name="InputChannelVetoSourceForOutputChannel1" 	 StorageName="INPUT_CHANNEL_VETO_SOURCE_FOR_OUTPUT_CHANNEL1" 		DataType="VARCHAR2" 		DataChoices="arbitraryBool=0,Input%20Channel-A,Input%20Channel-B,Input%20Channel-C,Input%20Channel-D"/>
+				<COLUMN Type="FixedChoiceData" 	 Name="InputChannelVetoSourceForOutputChannel1" 	 StorageName="INPUT_CHANNEL_VETO_SOURCE_FOR_OUTPUT_CHANNEL1" 		DataType="VARCHAR2" 		DataChoices="arbitraryBool=0,No-Veto,Input-Ch-A,Input-Ch-B,Input-Ch-C,Input-Ch-D"/>
 				<COLUMN Type="Data" 	 Name="DelayOutputChannel2" 	 StorageName="DELAY_OUTPUT_CHANNEL2" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="WidthOutputChannel2" 	 StorageName="WIDTH_OUTPUT_CHANNEL2" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="OutputTimeVetoDurationChannel2" 	 StorageName="OUTPUT_TIME_VETO_DURATION_CHANNEL2" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="OutputPrescaleCountChannel2" 	 StorageName="OUTPUT_PRESCALE_COUNT_CHANNEL2" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="TrueFalse" 	 Name="OutputBackpressureSelectChannel2" 	 StorageName="OUTPUT_BACKPRESSURE_SELECT_CHANNEL2" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="TrueFalse" 	 Name="EnableClockMaskChannel2" 	 StorageName="ENABLE_CLOCK_MASK_CHANNEL2" 		DataType="VARCHAR2" 		DataChoices=""/>
-				<COLUMN Type="FixedChoiceData" 	 Name="InputChannelVetoSourceForOutputChannel2" 	 StorageName="INPUT_CHANNEL_VETO_SOURCE_FOR_OUTPUT_CHANNEL2" 		DataType="VARCHAR2" 		DataChoices="arbitraryBool=0,Input%20Channel-A,Input%20Channel-B,Input%20Channel-C,Input%20Channel-D"/>
+				<COLUMN Type="FixedChoiceData" 	 Name="InputChannelVetoSourceForOutputChannel2" 	 StorageName="INPUT_CHANNEL_VETO_SOURCE_FOR_OUTPUT_CHANNEL2" 		DataType="VARCHAR2" 		DataChoices="arbitraryBool=0,No-Veto,Input-Ch-A,Input-Ch-B,Input-Ch-C,Input-Ch-D"/>
 				<COLUMN Type="YesNo" 	 Name="InvertPolarityOutputChannelA" 	 StorageName="INVERT_POLARITY_OUTPUT_CHANNEL_A" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="YesNo" 	 Name="InvertPolarityOutputChannelB" 	 StorageName="INVERT_POLARITY_OUTPUT_CHANNEL_B" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="YesNo" 	 Name="InvertPolarityOutputChannelC" 	 StorageName="INVERT_POLARITY_OUTPUT_CHANNEL_C" 		DataType="VARCHAR2" 		DataChoices=""/>

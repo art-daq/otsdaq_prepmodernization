@@ -4060,3 +4060,27 @@
 "Time":"Fri Sep 15 2017 14:24:33 GMT-0500 (CDT)",
 "Interfaces":"FENIMPlusInterface:210:FEI0"
 }#
+{
+"Command":"r:18018:0001801800000000",
+"Format":"hex:hex",
+"Time":"Tue Oct 10 2017 14:13:36 GMT-0500 (CDT)",
+"Interfaces":"FENIMPlusInterface:210:FEI0"
+}#
+{
+"Command":"r:18019:0001801900000000",
+"Format":"hex:hex",
+"Time":"Tue Oct 10 2017 14:13:40 GMT-0500 (CDT)",
+"Interfaces":"FENIMPlusInterface:210:FEI0"
+}#
+{
+"Command":"r:04:000000040000000C",
+"Format":"hex:hex",
+"Time":"Tue Oct 10 2017 14:14:11 GMT-0500 (CDT)",
+"Interfaces":"FENIMPlusInterface:210:FEI0"
+}#
+{
+"Command":"r:00:000000000000EBB8",
+"Format":"hex:hex",
+"Time":"Fri Oct 20 2017 10:10:09 GMT-0500 (CDT)",
+"Interfaces":"FENIMPlusInterface:210:NimPlus0"
+}#
