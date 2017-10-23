@@ -7,7 +7,7 @@
 -- \   \   \/     Version : 14.7
 --  \   \         Application : sch2hdl
 --  /   /         Filename : TOP_LEVEL.vhf
--- /___/   /\     Timestamp : 10/17/2017 19:28:13
+-- /___/   /\     Timestamp : 10/23/2017 14:33:43
 -- \   \  /  \ 
 --  \___\/\___\ 
 --
@@ -716,6 +716,7 @@ architecture BEHAVIORAL of TOP_LEVEL is
    attribute DIFF_TERM             : string ;
    signal adc_fifo_empty                 : std_logic;
    signal adc_fifo_overflow              : std_logic;
+   signal apply_median_filter            : std_logic;
    signal b_data                         : std_logic_vector (63 downto 0);
    signal b_data_we                      : std_logic;
    signal b_enable                       : std_logic;
@@ -780,6 +781,7 @@ architecture BEHAVIORAL of TOP_LEVEL is
    signal manual_force_trig              : std_logic;
    signal MANUAL_TRIG_MAP                : std_logic;
    signal MASTER_CLK                     : std_logic;
+   signal MEDIAN_FILTER_MAP              : std_logic;
    signal new_trigger                    : std_logic;
    signal peak_finder_data_out           : std_logic_vector (63 downto 0);
    signal PHY_TXD_sig                    : std_logic_vector (7 downto 0);
@@ -1209,6 +1211,7 @@ architecture BEHAVIORAL of TOP_LEVEL is
    component PeakFinder
       port ( clk               : in    std_logic; 
              reset             : in    std_logic; 
+             clock_enable      : in    std_logic; 
              manual_force_trig : in    std_logic; 
              ext_trig          : in    std_logic; 
              data_in           : in    std_logic_vector (63 downto 0); 
@@ -1220,7 +1223,7 @@ architecture BEHAVIORAL of TOP_LEVEL is
              data_out          : out   std_logic_vector (63 downto 0); 
              addr_out          : out   std_logic_vector (9 downto 0); 
              trigger_address   : out   std_logic_vector (9 downto 0); 
-             clock_enable      : in    std_logic);
+             median_filter     : in    std_logic);
    end component;
    
    component EthernetRAM
@@ -1727,7 +1730,7 @@ begin
                 D8=>EVENT_MAP,
                 D9=>open,
                 D10=>FADC_DATA_EDGE_MAP,
-                D11=>open,
+                D11=>MEDIAN_FILTER_MAP,
                 D12=>open,
                 D13=>open,
                 D14=>open,
@@ -2417,6 +2420,7 @@ begin
                 data_in(63 downto 0)=>fadc_fifo_data_out(63 downto 0),
                 ext_trig=>ext_trig,
                 manual_force_trig=>manual_force_trig,
+                median_filter=>apply_median_filter,
                 reset=>reset,
                 signal_threshold(7 downto 0)=>threshold(7 downto 0),
                 trig_types(7 downto 0)=>trig_types(7 downto 0),
@@ -2622,6 +2626,13 @@ begin
                 D(15 downto 0)=>rx_data(15 downto 0),
                 R=>reset,
                 Q(15 downto 0)=>fadc_data_edge_sel(15 downto 0));
+   
+   XLXI_6467 : FDRE
+      port map (C=>MASTER_CLK,
+                CE=>MEDIAN_FILTER_MAP,
+                D=>rx_data(0),
+                R=>reset,
+                Q=>apply_median_filter);
    
 end BEHAVIORAL;
 

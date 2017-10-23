@@ -313,6 +313,8 @@
         <signal name="fadc_data_edge_sel(15:0)" />
         <signal name="fadc_latched_in_fall(15:0)" />
         <signal name="fadc_latched_in_rise(15:0)" />
+        <signal name="MEDIAN_FILTER_MAP" />
+        <signal name="apply_median_filter" />
         <port polarity="Input" name="BUSC_16DP_32S" />
         <port polarity="Input" name="SECONDARY_CLK" />
         <port polarity="Output" name="BUSC_25DN_51S" />
@@ -714,7 +716,8 @@
             <rect width="256" x="64" y="-320" height="256" />
         </blockdef>
         <blockdef name="PeakFinder">
-            <timestamp>2017-9-26T20:48:42</timestamp>
+            <timestamp>2017-10-23T19:31:42</timestamp>
+            <line x2="0" y1="736" y2="736" x1="64" />
             <line x2="0" y1="672" y2="672" x1="64" />
             <line x2="0" y1="480" y2="480" x1="64" />
             <line x2="0" y1="544" y2="544" x1="64" />
@@ -735,7 +738,7 @@
             <line x2="528" y1="-288" y2="-288" x1="464" />
             <rect width="64" x="464" y="-44" height="24" />
             <line x2="528" y1="-32" y2="-32" x1="464" />
-            <rect width="400" x="64" y="-320" height="1088" />
+            <rect width="400" x="64" y="-320" height="1152" />
         </blockdef>
         <blockdef name="data_send">
             <timestamp>2017-9-26T20:51:42</timestamp>
@@ -990,7 +993,7 @@
             <blockpin signalname="DCM_RESET_MAP" name="D0" />
             <blockpin signalname="FADC_MAP" name="D1" />
             <blockpin signalname="FADC_DATA_EDGE_MAP" name="D10" />
-            <blockpin name="D11" />
+            <blockpin signalname="MEDIAN_FILTER_MAP" name="D11" />
             <blockpin name="D12" />
             <blockpin name="D13" />
             <blockpin name="D14" />
@@ -1889,6 +1892,7 @@
         <block symbolname="PeakFinder" name="XLXI_6349">
             <blockpin signalname="MASTER_CLK" name="clk" />
             <blockpin signalname="reset" name="reset" />
+            <blockpin signalname="clock_enable" name="clock_enable" />
             <blockpin signalname="manual_force_trig" name="manual_force_trig" />
             <blockpin signalname="ext_trig" name="ext_trig" />
             <blockpin signalname="fadc_fifo_data_out(63:0)" name="data_in(63:0)" />
@@ -1900,7 +1904,7 @@
             <blockpin signalname="peak_finder_data_out(63:0)" name="data_out(63:0)" />
             <blockpin signalname="ram_addr(9:0)" name="addr_out(9:0)" />
             <blockpin signalname="trigger_addr(9:0)" name="trigger_address(9:0)" />
-            <blockpin signalname="clock_enable" name="clock_enable" />
+            <blockpin signalname="apply_median_filter" name="median_filter" />
         </block>
         <block symbolname="obuf" name="XLXI_6404">
             <blockpin signalname="trigger_out" name="I" />
@@ -2124,6 +2128,13 @@
             <blockpin signalname="fadc_latched_in_fall(15:0)" name="D1" />
             <blockpin signalname="fadc_data_edge_sel(15:0)" name="S0" />
             <blockpin signalname="fadc_latched_in(15:0)" name="O" />
+        </block>
+        <block symbolname="fdre" name="XLXI_6467">
+            <blockpin signalname="MASTER_CLK" name="C" />
+            <blockpin signalname="MEDIAN_FILTER_MAP" name="CE" />
+            <blockpin signalname="rx_data(0)" name="D" />
+            <blockpin signalname="reset" name="R" />
+            <blockpin signalname="apply_median_filter" name="Q" />
         </block>
     </netlist>
     <sheet sheetnum="1" width="7040" height="5440">
@@ -2412,6 +2423,10 @@
         <branch name="FADC_DATA_EDGE_MAP">
             <attrtext style="alignment:SOFT-LEFT;fontsize:28;fontname:Arial" attrname="Name" x="4576" y="3424" type="branch" />
             <wire x2="4576" y1="3424" y2="3424" x1="4512" />
+        </branch>
+        <branch name="MEDIAN_FILTER_MAP">
+            <attrtext style="alignment:SOFT-LEFT;fontsize:28;fontname:Arial" attrname="Name" x="4592" y="3488" type="branch" />
+            <wire x2="4592" y1="3488" y2="3488" x1="4512" />
         </branch>
     </sheet>
     <sheet sheetnum="2" width="7040" height="5440">
@@ -3141,6 +3156,31 @@
         <branch name="ram_en_latch">
             <attrtext style="alignment:SOFT-LEFT;fontsize:28;fontname:Arial" attrname="Name" x="4880" y="2512" type="branch" />
             <wire x2="4880" y1="2512" y2="2512" x1="4704" />
+        </branch>
+        <branch name="rx_data(0)">
+            <attrtext style="alignment:SOFT-RIGHT;fontsize:28;fontname:Arial" attrname="Name" x="2224" y="3136" type="branch" />
+            <wire x2="2240" y1="3136" y2="3136" x1="2224" />
+        </branch>
+        <branch name="MEDIAN_FILTER_MAP">
+            <attrtext style="alignment:SOFT-RIGHT;fontsize:28;fontname:Arial" attrname="Name" x="2224" y="3200" type="branch" />
+            <wire x2="2240" y1="3200" y2="3200" x1="2224" />
+        </branch>
+        <branch name="MASTER_CLK">
+            <attrtext style="alignment:SOFT-RIGHT;fontsize:28;fontname:Arial" attrname="Name" x="2224" y="3264" type="branch" />
+            <wire x2="2240" y1="3264" y2="3264" x1="2224" />
+        </branch>
+        <branch name="reset">
+            <attrtext style="alignment:SOFT-RIGHT;fontsize:28;fontname:Arial" attrname="Name" x="2224" y="3360" type="branch" />
+            <wire x2="2240" y1="3360" y2="3360" x1="2224" />
+        </branch>
+        <branch name="apply_median_filter">
+            <attrtext style="alignment:SOFT-LEFT;fontsize:28;fontname:Arial" attrname="Name" x="2640" y="3136" type="branch" />
+            <wire x2="2640" y1="3136" y2="3136" x1="2624" />
+        </branch>
+        <instance x="2240" y="3392" name="XLXI_6467" orien="R0" />
+        <branch name="apply_median_filter">
+            <attrtext style="alignment:SOFT-RIGHT;fontsize:28;fontname:Arial" attrname="Name" x="2240" y="2688" type="branch" />
+            <wire x2="2336" y1="2688" y2="2688" x1="2240" />
         </branch>
     </sheet>
     <sheet sheetnum="4" width="7040" height="5440">

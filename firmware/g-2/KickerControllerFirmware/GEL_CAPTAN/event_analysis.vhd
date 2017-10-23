@@ -89,7 +89,7 @@ architecture Behavioral of event_analysis is
 	signal headerDelayOne, headerDelayTwo : std_logic;
 	signal analysisRunning : std_logic;
 	signal prepareEnd : std_logic;
-	signal sendFooter : std_logic;
+	signal sendFooter,sendPacketEnd : std_logic;
 	signal finish : std_logic;
 	--signal state
 	signal lastSigLow, lastSigHigh : std_logic;
@@ -136,7 +136,8 @@ begin
 			dataOutEnd <= '0';			
 			resetClearVeto <= '0';
 			resetForceVeto <= '0';	
-			vetoed <= '0';		
+			vetoed <= '0';	
+			sendPacketEnd <= '0';			
 			
 								 
 			--====================	
@@ -164,14 +165,18 @@ begin
 				end if;				
 			elsif(sendFooter = '1') then				
 				data_out_we <= '1';
-				data_out <= internalFooter; --note: includes veto info setup in previous clock
+				data_out <= internalFooter; --note: includes veto info setup in previous clock				
+				
+				sendPacketEnd <= '1'; -- got to last state, note: force end must happen after last qw in packet				
+
+			elsif(sendPacketEnd = '1') then
 				dataOutEnd <= '1'; --DONE!!! end packet
 				
 				--DONE!!!
 				--wrap up things
 				busy <= '0';
 				analysisRunning <= '0';		
-				zeroCrossCount <= (others => '0');	
+				zeroCrossCount <= (others => '0');
 				
 			elsif(data_in_we = '1') then
 			

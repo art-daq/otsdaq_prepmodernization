@@ -37,6 +37,7 @@ entity PeakFinder is
 			  clk : in STD_LOGIC;
 			  reset : in STD_LOGIC;
 			  clock_enable : in STD_LOGIC;
+			  median_filter : in STD_LOGIC;
 			  --data signals
 			  data_in : in  STD_LOGIC_VECTOR (63 downto 0);
 			  --trigger types and attributes
@@ -65,6 +66,29 @@ architecture Behavioral of PeakFinder is
 	signal sample_six : unsigned(7 downto 0);
 	signal sample_seven : unsigned(7 downto 0);
 	signal sample_eight : unsigned(7 downto 0);
+	
+	
+	signal pre_sample_one : unsigned(7 downto 0);
+	signal pre_sample_two : unsigned(7 downto 0);
+	signal pre_sample_three : unsigned(7 downto 0);
+	signal pre_sample_four : unsigned(7 downto 0);
+	signal pre_sample_five : unsigned(7 downto 0);
+	signal pre_sample_six : unsigned(7 downto 0);
+	signal pre_sample_seven : unsigned(7 downto 0);
+	signal pre_sample_eight : unsigned(7 downto 0);
+	
+	
+	signal post_sample_one : unsigned(7 downto 0);
+	signal post_sample_two : unsigned(7 downto 0);
+	signal post_sample_three : unsigned(7 downto 0);
+	signal post_sample_four : unsigned(7 downto 0);
+	signal post_sample_five : unsigned(7 downto 0);
+	signal post_sample_six : unsigned(7 downto 0);
+	signal post_sample_seven : unsigned(7 downto 0);
+	signal post_sample_eight : unsigned(7 downto 0);
+	
+	signal pre_data_in, post_data_in : std_logic_vector(63 downto 0);
+	
 	--repeating signals 
 	signal threshold : unsigned( 7 downto 0 );
 	signal ramAddress : unsigned(9 downto 0);
@@ -82,6 +106,22 @@ architecture Behavioral of PeakFinder is
 	signal extTrigEn : std_logic; --External Trig Mode is enabled
 	signal extTrigRising : std_logic; --Trigger on the rising edge of the external trigger
 	signal lastExtTrigState : std_logic; --The last state of the external trigger
+	
+	
+	function MEDIAN_SAMPLE (
+		s0: unsigned(7 downto 0);
+		s1: unsigned(7 downto 0);
+		s2: unsigned(7 downto 0))
+	return std_logic_vector is
+	begin
+		if ((s0 > s1 and s0 < s2) or (s0 < s1 and s0 > s2)) then
+			return std_logic_vector(s0);
+		elsif ((s2 > s1 and s2 < s0) or (s2 < s1 and s2 > s0)) then
+			return std_logic_vector(s2);
+		else
+			return std_logic_vector(s1);
+		end if;
+	end MEDIAN_SAMPLE;
 begin
 	--assign the samples
 	sample_one <= unsigned(data_in(15 downto 8));
@@ -92,6 +132,26 @@ begin
 	sample_six <= unsigned(data_in(39 downto 32));
 	sample_seven <= unsigned(data_in(63 downto 56));
 	sample_eight <= unsigned(data_in(55 downto 48));
+	
+	pre_sample_one <= unsigned(pre_data_in(15 downto 8));
+	pre_sample_two <= unsigned(pre_data_in(7 downto 0));
+	pre_sample_three <= unsigned(pre_data_in(31 downto 24));
+	pre_sample_four <= unsigned(pre_data_in(23 downto 16));
+	pre_sample_five <= unsigned(pre_data_in(47 downto 40));
+	pre_sample_six <= unsigned(pre_data_in(39 downto 32));
+	pre_sample_seven <= unsigned(pre_data_in(63 downto 56));
+	pre_sample_eight <= unsigned(pre_data_in(55 downto 48));
+	
+	post_sample_one <= unsigned(post_data_in(15 downto 8));
+	post_sample_two <= unsigned(post_data_in(7 downto 0));
+	post_sample_three <= unsigned(post_data_in(31 downto 24));
+	post_sample_four <= unsigned(post_data_in(23 downto 16));
+	post_sample_five <= unsigned(post_data_in(47 downto 40));
+	post_sample_six <= unsigned(post_data_in(39 downto 32));
+	post_sample_seven <= unsigned(post_data_in(63 downto 56));
+	post_sample_eight <= unsigned(post_data_in(55 downto 48));
+	
+	
 	--assign repeating signals
 	threshold <= unsigned(signal_threshold);
 	new_trigger <= new_trigger_sig;
@@ -104,7 +164,14 @@ begin
 	extTrigEn <= trig_types(3);
 	extTrigRising <= trig_types(4);
 	
+	
+	
+	
 	process(clk) begin
+		
+		
+		
+		
 		
 --		data_out(7 downto 0) <= data_in(7 downto 0);
 --		data_out(15 downto 8) <= data_in(15 downto 8);
@@ -140,7 +207,27 @@ begin
 					
 					ramAddress <= ramAddress + 1;
 					out_enable <= '1';
-					data_out <= data_in;
+					
+					post_data_in <= data_in;
+					pre_data_in <= post_data_in;
+					
+					-- so ... data in is newest, then post, then pre
+					-- data out will always come from post
+					
+					if (median_filter = '1') then 					
+						 
+						data_out(15 downto 8) <= MEDIAN_SAMPLE(pre_sample_eight,post_sample_one,post_sample_two);
+						data_out(7 downto 0) <= MEDIAN_SAMPLE(post_sample_one,post_sample_two,post_sample_three);
+						data_out(31 downto 24) <= MEDIAN_SAMPLE(post_sample_two,post_sample_three,post_sample_four);
+						data_out(23 downto 16) <= MEDIAN_SAMPLE(post_sample_three,post_sample_four,post_sample_five);
+						data_out(47 downto 40) <= MEDIAN_SAMPLE(post_sample_four,post_sample_five,post_sample_six);
+						data_out(39 downto 32) <= MEDIAN_SAMPLE(post_sample_five,post_sample_six,post_sample_seven);
+						data_out(63 downto 56) <= MEDIAN_SAMPLE(post_sample_six,post_sample_seven,post_sample_eight);
+						data_out(55 downto 48) <= MEDIAN_SAMPLE(post_sample_seven,post_sample_eight,sample_one);
+						
+					else  --old way
+						data_out <= data_in;
+					end if;
 					
 					--These are the tests for each trigger state.  There is at least one if statement per trigger mode that is enabled when the 
 					--respective trigger mode is enabled.  If the trigger mode is active and the trigger state is also active, it enables the 

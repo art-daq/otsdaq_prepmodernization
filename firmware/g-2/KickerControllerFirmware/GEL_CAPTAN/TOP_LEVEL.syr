@@ -12,7 +12,7 @@ Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.06 secs
+Total CPU time to Xst completion: 0.05 secs
  
 --> 
 Reading design: TOP_LEVEL.prj
@@ -439,12 +439,11 @@ Analyzing Entity <TOP_LEVEL> in library <work> (Architecture <BEHAVIORAL>).
     Set user-defined property "FACTORY_JF =  F0F0" for instance <XLXI_3410> in unit <TOP_LEVEL>.
     Set user-defined property "PHASE_SHIFT =  0" for instance <XLXI_3410> in unit <TOP_LEVEL>.
     Set user-defined property "STARTUP_WAIT =  FALSE" for instance <XLXI_3410> in unit <TOP_LEVEL>.
-WARNING:Xst:753 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/TOP_LEVEL.vhf" line 1713: Unconnected output port 'D11' of component 'D4_16E_MXILINX_TOP_LEVEL'.
-WARNING:Xst:753 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/TOP_LEVEL.vhf" line 1713: Unconnected output port 'D12' of component 'D4_16E_MXILINX_TOP_LEVEL'.
-WARNING:Xst:753 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/TOP_LEVEL.vhf" line 1713: Unconnected output port 'D13' of component 'D4_16E_MXILINX_TOP_LEVEL'.
-WARNING:Xst:753 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/TOP_LEVEL.vhf" line 1713: Unconnected output port 'D14' of component 'D4_16E_MXILINX_TOP_LEVEL'.
-WARNING:Xst:753 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/TOP_LEVEL.vhf" line 1713: Unconnected output port 'D15' of component 'D4_16E_MXILINX_TOP_LEVEL'.
-WARNING:Xst:753 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/TOP_LEVEL.vhf" line 1713: Unconnected output port 'D9' of component 'D4_16E_MXILINX_TOP_LEVEL'.
+WARNING:Xst:753 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/TOP_LEVEL.vhf" line 1716: Unconnected output port 'D12' of component 'D4_16E_MXILINX_TOP_LEVEL'.
+WARNING:Xst:753 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/TOP_LEVEL.vhf" line 1716: Unconnected output port 'D13' of component 'D4_16E_MXILINX_TOP_LEVEL'.
+WARNING:Xst:753 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/TOP_LEVEL.vhf" line 1716: Unconnected output port 'D14' of component 'D4_16E_MXILINX_TOP_LEVEL'.
+WARNING:Xst:753 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/TOP_LEVEL.vhf" line 1716: Unconnected output port 'D15' of component 'D4_16E_MXILINX_TOP_LEVEL'.
+WARNING:Xst:753 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/TOP_LEVEL.vhf" line 1716: Unconnected output port 'D9' of component 'D4_16E_MXILINX_TOP_LEVEL'.
     Set user-defined property "HU_SET =  XLXI_3432_0" for instance <XLXI_3432> in unit <TOP_LEVEL>.
     Set user-defined property "CAPACITANCE =  DONT_CARE" for instance <XLXI_4136> in unit <TOP_LEVEL>.
     Set user-defined property "IOSTANDARD =  DEFAULT" for instance <XLXI_4136> in unit <TOP_LEVEL>.
@@ -708,8 +707,8 @@ WARNING:Xst:753 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master
     Set user-defined property "SLEW =  SLOW" for instance <XLXI_6229> in unit <TOP_LEVEL>.
     Set user-defined property "HU_SET =  XLXI_6247_6" for instance <XLXI_6247> in unit <TOP_LEVEL>.
     Set user-defined property "HU_SET =  XLXI_6251_5" for instance <XLXI_6251> in unit <TOP_LEVEL>.
-WARNING:Xst:2211 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/TOP_LEVEL.vhf" line 2396: Instantiating black box module <ADC_FIFO>.
-WARNING:Xst:2211 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/TOP_LEVEL.vhf" line 2430: Instantiating black box module <EthernetRAM>.
+WARNING:Xst:2211 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/TOP_LEVEL.vhf" line 2399: Instantiating black box module <ADC_FIFO>.
+WARNING:Xst:2211 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/TOP_LEVEL.vhf" line 2434: Instantiating black box module <EthernetRAM>.
     Set user-defined property "HU_SET =  XLXI_6394_7" for instance <XLXI_6394> in unit <TOP_LEVEL>.
     Set user-defined property "INIT =  0" for instance <XLXI_6396> in unit <TOP_LEVEL>.
     Set user-defined property "CAPACITANCE =  DONT_CARE" for instance <XLXI_6404> in unit <TOP_LEVEL>.
@@ -728,7 +727,7 @@ WARNING:Xst:2211 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-maste
     Set user-defined property "INIT =  0" for instance <XLXI_6421> in unit <TOP_LEVEL>.
     Set user-defined property "INIT =  0" for instance <XLXI_6422> in unit <TOP_LEVEL>.
     Set user-defined property "INIT =  0" for instance <XLXI_6423> in unit <TOP_LEVEL>.
-WARNING:Xst:753 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/TOP_LEVEL.vhf" line 2553: Unconnected output port 'O' of component 'OBUF8_MXILINX_TOP_LEVEL'.
+WARNING:Xst:753 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/TOP_LEVEL.vhf" line 2557: Unconnected output port 'O' of component 'OBUF8_MXILINX_TOP_LEVEL'.
     Set user-defined property "HU_SET =  XLXI_6435_12" for instance <XLXI_6435> in unit <TOP_LEVEL>.
     Set user-defined property "CAPACITANCE =  DONT_CARE" for instance <XLXI_6436> in unit <TOP_LEVEL>.
     Set user-defined property "DRIVE =  12" for instance <XLXI_6436> in unit <TOP_LEVEL>.
@@ -756,6 +755,7 @@ WARNING:Xst:753 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master
     Set user-defined property "IOSTANDARD =  DEFAULT" for instance <XLXI_6447> in unit <TOP_LEVEL>.
     Set user-defined property "INIT =  0" for instance <XLXI_6462> in unit <TOP_LEVEL>.
     Set user-defined property "HU_SET =  XLXI_6465_14" for instance <XLXI_6465> in unit <TOP_LEVEL>.
+    Set user-defined property "INIT =  0" for instance <XLXI_6467> in unit <TOP_LEVEL>.
 Entity <TOP_LEVEL> analyzed. Unit <TOP_LEVEL> generated.
 
 Analyzing Entity <M2_1_MXILINX_TOP_LEVEL> in library <work> (Architecture <BEHAVIORAL>).
@@ -938,7 +938,7 @@ WARNING:Xst:819 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master
 Entity <ClockLatchSignals> analyzed. Unit <ClockLatchSignals> generated.
 
 Analyzing Entity <PeakFinder> in library <work> (Architecture <Behavioral>).
-WARNING:Xst:819 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/PeakFinder.vhd" line 107: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
+WARNING:Xst:819 - "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/PeakFinder.vhd" line 170: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
    <reset>
 Entity <PeakFinder> analyzed. Unit <PeakFinder> generated.
 
@@ -1089,52 +1089,125 @@ Synthesizing Unit <PeakFinder>.
     Related source file is "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/PeakFinder.vhd".
 WARNING:Xst:647 - Input <trig_types<7:5>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:646 - Signal <triggered> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <pre_sample_two> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <pre_sample_three> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <pre_sample_six> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <pre_sample_seven> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <pre_sample_one> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <pre_sample_four> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <pre_sample_five> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
     Found 10-bit register for signal <trigger_address>.
     Found 1-bit register for signal <out_enable>.
     Found 64-bit register for signal <data_out>.
     Found 1-bit register for signal <clearManualTrigSig>.
+    Found 8-bit comparator greater for signal <data_out_15_8$cmp_gt0000> created at line 117.
+    Found 8-bit comparator greater for signal <data_out_15_8$cmp_gt0001> created at line 117.
+    Found 8-bit comparator greater for signal <data_out_15_8$cmp_gt0002> created at line 118.
+    Found 8-bit comparator greater for signal <data_out_15_8$cmp_gt0003> created at line 118.
+    Found 8-bit comparator less for signal <data_out_15_8$cmp_lt0000> created at line 117.
+    Found 8-bit comparator less for signal <data_out_15_8$cmp_lt0001> created at line 117.
+    Found 8-bit comparator less for signal <data_out_15_8$cmp_lt0002> created at line 118.
+    Found 8-bit comparator less for signal <data_out_15_8$cmp_lt0003> created at line 118.
+    Found 8-bit comparator greater for signal <data_out_23_16$cmp_gt0000> created at line 117.
+    Found 8-bit comparator greater for signal <data_out_23_16$cmp_gt0001> created at line 117.
+    Found 8-bit comparator greater for signal <data_out_23_16$cmp_gt0002> created at line 118.
+    Found 8-bit comparator greater for signal <data_out_23_16$cmp_gt0003> created at line 118.
+    Found 8-bit comparator less for signal <data_out_23_16$cmp_lt0000> created at line 117.
+    Found 8-bit comparator less for signal <data_out_23_16$cmp_lt0001> created at line 117.
+    Found 8-bit comparator less for signal <data_out_23_16$cmp_lt0002> created at line 118.
+    Found 8-bit comparator less for signal <data_out_23_16$cmp_lt0003> created at line 118.
+    Found 8-bit comparator greater for signal <data_out_31_24$cmp_gt0000> created at line 117.
+    Found 8-bit comparator greater for signal <data_out_31_24$cmp_gt0001> created at line 117.
+    Found 8-bit comparator greater for signal <data_out_31_24$cmp_gt0002> created at line 118.
+    Found 8-bit comparator greater for signal <data_out_31_24$cmp_gt0003> created at line 118.
+    Found 8-bit comparator less for signal <data_out_31_24$cmp_lt0000> created at line 117.
+    Found 8-bit comparator less for signal <data_out_31_24$cmp_lt0001> created at line 117.
+    Found 8-bit comparator less for signal <data_out_31_24$cmp_lt0002> created at line 118.
+    Found 8-bit comparator less for signal <data_out_31_24$cmp_lt0003> created at line 118.
+    Found 8-bit comparator greater for signal <data_out_39_32$cmp_gt0000> created at line 117.
+    Found 8-bit comparator greater for signal <data_out_39_32$cmp_gt0001> created at line 117.
+    Found 8-bit comparator greater for signal <data_out_39_32$cmp_gt0002> created at line 118.
+    Found 8-bit comparator greater for signal <data_out_39_32$cmp_gt0003> created at line 118.
+    Found 8-bit comparator less for signal <data_out_39_32$cmp_lt0000> created at line 117.
+    Found 8-bit comparator less for signal <data_out_39_32$cmp_lt0001> created at line 117.
+    Found 8-bit comparator less for signal <data_out_39_32$cmp_lt0002> created at line 118.
+    Found 8-bit comparator less for signal <data_out_39_32$cmp_lt0003> created at line 118.
+    Found 8-bit comparator greater for signal <data_out_47_40$cmp_gt0000> created at line 117.
+    Found 8-bit comparator greater for signal <data_out_47_40$cmp_gt0001> created at line 117.
+    Found 8-bit comparator greater for signal <data_out_47_40$cmp_gt0002> created at line 118.
+    Found 8-bit comparator greater for signal <data_out_47_40$cmp_gt0003> created at line 118.
+    Found 8-bit comparator less for signal <data_out_47_40$cmp_lt0000> created at line 117.
+    Found 8-bit comparator less for signal <data_out_47_40$cmp_lt0001> created at line 117.
+    Found 8-bit comparator less for signal <data_out_47_40$cmp_lt0002> created at line 118.
+    Found 8-bit comparator less for signal <data_out_47_40$cmp_lt0003> created at line 118.
+    Found 8-bit comparator greater for signal <data_out_55_48$cmp_gt0000> created at line 117.
+    Found 8-bit comparator greater for signal <data_out_55_48$cmp_gt0001> created at line 117.
+    Found 8-bit comparator greater for signal <data_out_55_48$cmp_gt0002> created at line 118.
+    Found 8-bit comparator greater for signal <data_out_55_48$cmp_gt0003> created at line 118.
+    Found 8-bit comparator less for signal <data_out_55_48$cmp_lt0000> created at line 117.
+    Found 8-bit comparator less for signal <data_out_55_48$cmp_lt0001> created at line 117.
+    Found 8-bit comparator less for signal <data_out_55_48$cmp_lt0002> created at line 118.
+    Found 8-bit comparator less for signal <data_out_55_48$cmp_lt0003> created at line 118.
+    Found 8-bit comparator greater for signal <data_out_63_56$cmp_gt0000> created at line 117.
+    Found 8-bit comparator greater for signal <data_out_63_56$cmp_gt0001> created at line 117.
+    Found 8-bit comparator greater for signal <data_out_63_56$cmp_gt0002> created at line 118.
+    Found 8-bit comparator greater for signal <data_out_63_56$cmp_gt0003> created at line 118.
+    Found 8-bit comparator less for signal <data_out_63_56$cmp_lt0000> created at line 117.
+    Found 8-bit comparator less for signal <data_out_63_56$cmp_lt0001> created at line 117.
+    Found 8-bit comparator less for signal <data_out_63_56$cmp_lt0002> created at line 118.
+    Found 8-bit comparator less for signal <data_out_63_56$cmp_lt0003> created at line 118.
+    Found 8-bit comparator greater for signal <data_out_7_0$cmp_gt0000> created at line 117.
+    Found 8-bit comparator greater for signal <data_out_7_0$cmp_gt0001> created at line 117.
+    Found 8-bit comparator greater for signal <data_out_7_0$cmp_gt0002> created at line 118.
+    Found 8-bit comparator greater for signal <data_out_7_0$cmp_gt0003> created at line 118.
+    Found 8-bit comparator less for signal <data_out_7_0$cmp_lt0000> created at line 117.
+    Found 8-bit comparator less for signal <data_out_7_0$cmp_lt0001> created at line 117.
+    Found 8-bit comparator less for signal <data_out_7_0$cmp_lt0002> created at line 118.
+    Found 8-bit comparator less for signal <data_out_7_0$cmp_lt0003> created at line 118.
     Found 1-bit register for signal <extTrigLatched>.
     Found 1-bit register for signal <lastExtTrigState>.
     Found 1-bit register for signal <lastThreshTrigState>.
-    Found 8-bit comparator greater for signal <lastThreshTrigState$cmp_gt0000> created at line 153.
-    Found 8-bit comparator greater for signal <lastThreshTrigState$cmp_gt0001> created at line 153.
-    Found 8-bit comparator greater for signal <lastThreshTrigState$cmp_gt0002> created at line 153.
-    Found 8-bit comparator greater for signal <lastThreshTrigState$cmp_gt0003> created at line 153.
-    Found 8-bit comparator greater for signal <lastThreshTrigState$cmp_gt0004> created at line 153.
-    Found 8-bit comparator greater for signal <lastThreshTrigState$cmp_gt0005> created at line 153.
-    Found 8-bit comparator greater for signal <lastThreshTrigState$cmp_gt0006> created at line 153.
-    Found 8-bit comparator greater for signal <lastThreshTrigState$cmp_gt0007> created at line 153.
-    Found 8-bit comparator less for signal <lastThreshTrigState$cmp_lt0000> created at line 167.
-    Found 8-bit comparator less for signal <lastThreshTrigState$cmp_lt0001> created at line 167.
-    Found 8-bit comparator less for signal <lastThreshTrigState$cmp_lt0002> created at line 167.
-    Found 8-bit comparator less for signal <lastThreshTrigState$cmp_lt0003> created at line 167.
-    Found 8-bit comparator less for signal <lastThreshTrigState$cmp_lt0004> created at line 167.
-    Found 8-bit comparator less for signal <lastThreshTrigState$cmp_lt0005> created at line 167.
-    Found 8-bit comparator less for signal <lastThreshTrigState$cmp_lt0006> created at line 167.
-    Found 8-bit comparator less for signal <lastThreshTrigState$cmp_lt0007> created at line 167.
+    Found 8-bit comparator greater for signal <lastThreshTrigState$cmp_gt0000> created at line 240.
+    Found 8-bit comparator greater for signal <lastThreshTrigState$cmp_gt0001> created at line 240.
+    Found 8-bit comparator greater for signal <lastThreshTrigState$cmp_gt0002> created at line 240.
+    Found 8-bit comparator greater for signal <lastThreshTrigState$cmp_gt0003> created at line 240.
+    Found 8-bit comparator greater for signal <lastThreshTrigState$cmp_gt0004> created at line 240.
+    Found 8-bit comparator greater for signal <lastThreshTrigState$cmp_gt0005> created at line 240.
+    Found 8-bit comparator greater for signal <lastThreshTrigState$cmp_gt0006> created at line 240.
+    Found 8-bit comparator greater for signal <lastThreshTrigState$cmp_gt0007> created at line 240.
+    Found 8-bit comparator less for signal <lastThreshTrigState$cmp_lt0000> created at line 254.
+    Found 8-bit comparator less for signal <lastThreshTrigState$cmp_lt0001> created at line 254.
+    Found 8-bit comparator less for signal <lastThreshTrigState$cmp_lt0002> created at line 254.
+    Found 8-bit comparator less for signal <lastThreshTrigState$cmp_lt0003> created at line 254.
+    Found 8-bit comparator less for signal <lastThreshTrigState$cmp_lt0004> created at line 254.
+    Found 8-bit comparator less for signal <lastThreshTrigState$cmp_lt0005> created at line 254.
+    Found 8-bit comparator less for signal <lastThreshTrigState$cmp_lt0006> created at line 254.
+    Found 8-bit comparator less for signal <lastThreshTrigState$cmp_lt0007> created at line 254.
     Found 1-bit register for signal <new_trigger_sig>.
+    Found 64-bit register for signal <post_data_in>.
+    Found 64-bit register for signal <pre_data_in>.
     Found 10-bit up counter for signal <ramAddress>.
     Found 1-bit register for signal <trigger_active>.
-    Found 8-bit comparator greatequal for signal <trigger_active$cmp_ge0000> created at line 167.
-    Found 8-bit comparator greatequal for signal <trigger_active$cmp_ge0001> created at line 167.
-    Found 8-bit comparator greatequal for signal <trigger_active$cmp_ge0002> created at line 167.
-    Found 8-bit comparator greatequal for signal <trigger_active$cmp_ge0003> created at line 167.
-    Found 8-bit comparator greatequal for signal <trigger_active$cmp_ge0004> created at line 167.
-    Found 8-bit comparator greatequal for signal <trigger_active$cmp_ge0005> created at line 167.
-    Found 8-bit comparator greatequal for signal <trigger_active$cmp_ge0006> created at line 167.
-    Found 8-bit comparator greatequal for signal <trigger_active$cmp_ge0007> created at line 167.
-    Found 8-bit comparator lessequal for signal <trigger_active$cmp_le0000> created at line 153.
-    Found 8-bit comparator lessequal for signal <trigger_active$cmp_le0001> created at line 153.
-    Found 8-bit comparator lessequal for signal <trigger_active$cmp_le0002> created at line 153.
-    Found 8-bit comparator lessequal for signal <trigger_active$cmp_le0003> created at line 153.
-    Found 8-bit comparator lessequal for signal <trigger_active$cmp_le0004> created at line 153.
-    Found 8-bit comparator lessequal for signal <trigger_active$cmp_le0005> created at line 153.
-    Found 8-bit comparator lessequal for signal <trigger_active$cmp_le0006> created at line 153.
-    Found 8-bit comparator lessequal for signal <trigger_active$cmp_le0007> created at line 153.
+    Found 8-bit comparator greatequal for signal <trigger_active$cmp_ge0000> created at line 254.
+    Found 8-bit comparator greatequal for signal <trigger_active$cmp_ge0001> created at line 254.
+    Found 8-bit comparator greatequal for signal <trigger_active$cmp_ge0002> created at line 254.
+    Found 8-bit comparator greatequal for signal <trigger_active$cmp_ge0003> created at line 254.
+    Found 8-bit comparator greatequal for signal <trigger_active$cmp_ge0004> created at line 254.
+    Found 8-bit comparator greatequal for signal <trigger_active$cmp_ge0005> created at line 254.
+    Found 8-bit comparator greatequal for signal <trigger_active$cmp_ge0006> created at line 254.
+    Found 8-bit comparator greatequal for signal <trigger_active$cmp_ge0007> created at line 254.
+    Found 8-bit comparator lessequal for signal <trigger_active$cmp_le0000> created at line 240.
+    Found 8-bit comparator lessequal for signal <trigger_active$cmp_le0001> created at line 240.
+    Found 8-bit comparator lessequal for signal <trigger_active$cmp_le0002> created at line 240.
+    Found 8-bit comparator lessequal for signal <trigger_active$cmp_le0003> created at line 240.
+    Found 8-bit comparator lessequal for signal <trigger_active$cmp_le0004> created at line 240.
+    Found 8-bit comparator lessequal for signal <trigger_active$cmp_le0005> created at line 240.
+    Found 8-bit comparator lessequal for signal <trigger_active$cmp_le0006> created at line 240.
+    Found 8-bit comparator lessequal for signal <trigger_active$cmp_le0007> created at line 240.
     Summary:
 	inferred   1 Counter(s).
-	inferred  81 D-type flip-flop(s).
-	inferred  32 Comparator(s).
+	inferred 209 D-type flip-flop(s).
+	inferred  96 Comparator(s).
 Unit <PeakFinder> synthesized.
 
 
@@ -1155,63 +1228,64 @@ WARNING:Xst:1780 - Signal <del_clk_en> is never used or assigned. This unconnect
     Found 1-bit register for signal <dataOutEnd>.
     Found 1-bit register for signal <headerDelayOne>.
     Found 1-bit register for signal <lastSigHigh>.
-    Found 8-bit comparator greatequal for signal <lastSigHigh$cmp_ge0000> created at line 214.
-    Found 8-bit comparator greatequal for signal <lastSigHigh$cmp_ge0001> created at line 214.
-    Found 8-bit comparator greatequal for signal <lastSigHigh$cmp_ge0002> created at line 214.
-    Found 8-bit comparator greatequal for signal <lastSigHigh$cmp_ge0003> created at line 214.
-    Found 8-bit comparator greatequal for signal <lastSigHigh$cmp_ge0004> created at line 214.
-    Found 8-bit comparator greatequal for signal <lastSigHigh$cmp_ge0005> created at line 214.
-    Found 8-bit comparator greatequal for signal <lastSigHigh$cmp_ge0006> created at line 214.
-    Found 8-bit comparator greatequal for signal <lastSigHigh$cmp_ge0007> created at line 214.
-    Found 8-bit comparator less for signal <lastSigHigh$cmp_lt0000> created at line 214.
-    Found 8-bit comparator less for signal <lastSigHigh$cmp_lt0001> created at line 214.
-    Found 8-bit comparator less for signal <lastSigHigh$cmp_lt0002> created at line 214.
-    Found 8-bit comparator less for signal <lastSigHigh$cmp_lt0003> created at line 214.
-    Found 8-bit comparator less for signal <lastSigHigh$cmp_lt0004> created at line 214.
-    Found 8-bit comparator less for signal <lastSigHigh$cmp_lt0005> created at line 214.
-    Found 8-bit comparator less for signal <lastSigHigh$cmp_lt0006> created at line 214.
-    Found 8-bit comparator less for signal <lastSigHigh$cmp_lt0007> created at line 214.
+    Found 8-bit comparator greatequal for signal <lastSigHigh$cmp_ge0000> created at line 219.
+    Found 8-bit comparator greatequal for signal <lastSigHigh$cmp_ge0001> created at line 219.
+    Found 8-bit comparator greatequal for signal <lastSigHigh$cmp_ge0002> created at line 219.
+    Found 8-bit comparator greatequal for signal <lastSigHigh$cmp_ge0003> created at line 219.
+    Found 8-bit comparator greatequal for signal <lastSigHigh$cmp_ge0004> created at line 219.
+    Found 8-bit comparator greatequal for signal <lastSigHigh$cmp_ge0005> created at line 219.
+    Found 8-bit comparator greatequal for signal <lastSigHigh$cmp_ge0006> created at line 219.
+    Found 8-bit comparator greatequal for signal <lastSigHigh$cmp_ge0007> created at line 219.
+    Found 8-bit comparator less for signal <lastSigHigh$cmp_lt0000> created at line 219.
+    Found 8-bit comparator less for signal <lastSigHigh$cmp_lt0001> created at line 219.
+    Found 8-bit comparator less for signal <lastSigHigh$cmp_lt0002> created at line 219.
+    Found 8-bit comparator less for signal <lastSigHigh$cmp_lt0003> created at line 219.
+    Found 8-bit comparator less for signal <lastSigHigh$cmp_lt0004> created at line 219.
+    Found 8-bit comparator less for signal <lastSigHigh$cmp_lt0005> created at line 219.
+    Found 8-bit comparator less for signal <lastSigHigh$cmp_lt0006> created at line 219.
+    Found 8-bit comparator less for signal <lastSigHigh$cmp_lt0007> created at line 219.
     Found 1-bit register for signal <lastSigLow>.
-    Found 8-bit comparator greater for signal <lastSigLow$cmp_gt0000> created at line 220.
-    Found 8-bit comparator greater for signal <lastSigLow$cmp_gt0001> created at line 220.
-    Found 8-bit comparator greater for signal <lastSigLow$cmp_gt0002> created at line 220.
-    Found 8-bit comparator greater for signal <lastSigLow$cmp_gt0003> created at line 220.
-    Found 8-bit comparator greater for signal <lastSigLow$cmp_gt0004> created at line 220.
-    Found 8-bit comparator greater for signal <lastSigLow$cmp_gt0005> created at line 220.
-    Found 8-bit comparator greater for signal <lastSigLow$cmp_gt0006> created at line 220.
-    Found 8-bit comparator greater for signal <lastSigLow$cmp_gt0007> created at line 220.
-    Found 8-bit comparator lessequal for signal <lastSigLow$cmp_le0000> created at line 220.
-    Found 8-bit comparator lessequal for signal <lastSigLow$cmp_le0001> created at line 220.
-    Found 8-bit comparator lessequal for signal <lastSigLow$cmp_le0002> created at line 220.
-    Found 8-bit comparator lessequal for signal <lastSigLow$cmp_le0003> created at line 220.
-    Found 8-bit comparator lessequal for signal <lastSigLow$cmp_le0004> created at line 220.
-    Found 8-bit comparator lessequal for signal <lastSigLow$cmp_le0005> created at line 220.
-    Found 8-bit comparator lessequal for signal <lastSigLow$cmp_le0006> created at line 220.
-    Found 8-bit comparator lessequal for signal <lastSigLow$cmp_le0007> created at line 220.
+    Found 8-bit comparator greater for signal <lastSigLow$cmp_gt0000> created at line 225.
+    Found 8-bit comparator greater for signal <lastSigLow$cmp_gt0001> created at line 225.
+    Found 8-bit comparator greater for signal <lastSigLow$cmp_gt0002> created at line 225.
+    Found 8-bit comparator greater for signal <lastSigLow$cmp_gt0003> created at line 225.
+    Found 8-bit comparator greater for signal <lastSigLow$cmp_gt0004> created at line 225.
+    Found 8-bit comparator greater for signal <lastSigLow$cmp_gt0005> created at line 225.
+    Found 8-bit comparator greater for signal <lastSigLow$cmp_gt0006> created at line 225.
+    Found 8-bit comparator greater for signal <lastSigLow$cmp_gt0007> created at line 225.
+    Found 8-bit comparator lessequal for signal <lastSigLow$cmp_le0000> created at line 225.
+    Found 8-bit comparator lessequal for signal <lastSigLow$cmp_le0001> created at line 225.
+    Found 8-bit comparator lessequal for signal <lastSigLow$cmp_le0002> created at line 225.
+    Found 8-bit comparator lessequal for signal <lastSigLow$cmp_le0003> created at line 225.
+    Found 8-bit comparator lessequal for signal <lastSigLow$cmp_le0004> created at line 225.
+    Found 8-bit comparator lessequal for signal <lastSigLow$cmp_le0005> created at line 225.
+    Found 8-bit comparator lessequal for signal <lastSigLow$cmp_le0006> created at line 225.
+    Found 8-bit comparator lessequal for signal <lastSigLow$cmp_le0007> created at line 225.
     Found 1-bit register for signal <sendFooter>.
+    Found 1-bit register for signal <sendPacketEnd>.
     Found 1-bit register for signal <vetoed>.
-    Found 8-bit comparator greater for signal <vetoed$cmp_gt0000> created at line 162.
+    Found 8-bit comparator greater for signal <vetoed$cmp_gt0000> created at line 163.
     Found 8-bit up counter for signal <zeroCrossCount>.
-    Found 8-bit comparator greatequal for signal <zeroCrossCount$cmp_ge0000> created at line 205.
-    Found 8-bit comparator greatequal for signal <zeroCrossCount$cmp_ge0001> created at line 205.
-    Found 8-bit comparator greatequal for signal <zeroCrossCount$cmp_ge0002> created at line 205.
-    Found 8-bit comparator greatequal for signal <zeroCrossCount$cmp_ge0003> created at line 205.
-    Found 8-bit comparator greatequal for signal <zeroCrossCount$cmp_ge0004> created at line 205.
-    Found 8-bit comparator greatequal for signal <zeroCrossCount$cmp_ge0005> created at line 205.
-    Found 8-bit comparator greatequal for signal <zeroCrossCount$cmp_ge0006> created at line 205.
-    Found 8-bit comparator greatequal for signal <zeroCrossCount$cmp_ge0007> created at line 205.
-    Found 8-bit comparator lessequal for signal <zeroCrossCount$cmp_le0000> created at line 196.
-    Found 8-bit comparator lessequal for signal <zeroCrossCount$cmp_le0001> created at line 196.
-    Found 8-bit comparator lessequal for signal <zeroCrossCount$cmp_le0002> created at line 196.
-    Found 8-bit comparator lessequal for signal <zeroCrossCount$cmp_le0003> created at line 196.
-    Found 8-bit comparator lessequal for signal <zeroCrossCount$cmp_le0004> created at line 196.
-    Found 8-bit comparator lessequal for signal <zeroCrossCount$cmp_le0005> created at line 196.
-    Found 8-bit comparator lessequal for signal <zeroCrossCount$cmp_le0006> created at line 196.
-    Found 8-bit comparator lessequal for signal <zeroCrossCount$cmp_le0007> created at line 196.
-    Found 8-bit adder for signal <zeroCrossCount$mux0000> created at line 205.
+    Found 8-bit comparator greatequal for signal <zeroCrossCount$cmp_ge0000> created at line 210.
+    Found 8-bit comparator greatequal for signal <zeroCrossCount$cmp_ge0001> created at line 210.
+    Found 8-bit comparator greatequal for signal <zeroCrossCount$cmp_ge0002> created at line 210.
+    Found 8-bit comparator greatequal for signal <zeroCrossCount$cmp_ge0003> created at line 210.
+    Found 8-bit comparator greatequal for signal <zeroCrossCount$cmp_ge0004> created at line 210.
+    Found 8-bit comparator greatequal for signal <zeroCrossCount$cmp_ge0005> created at line 210.
+    Found 8-bit comparator greatequal for signal <zeroCrossCount$cmp_ge0006> created at line 210.
+    Found 8-bit comparator greatequal for signal <zeroCrossCount$cmp_ge0007> created at line 210.
+    Found 8-bit comparator lessequal for signal <zeroCrossCount$cmp_le0000> created at line 201.
+    Found 8-bit comparator lessequal for signal <zeroCrossCount$cmp_le0001> created at line 201.
+    Found 8-bit comparator lessequal for signal <zeroCrossCount$cmp_le0002> created at line 201.
+    Found 8-bit comparator lessequal for signal <zeroCrossCount$cmp_le0003> created at line 201.
+    Found 8-bit comparator lessequal for signal <zeroCrossCount$cmp_le0004> created at line 201.
+    Found 8-bit comparator lessequal for signal <zeroCrossCount$cmp_le0005> created at line 201.
+    Found 8-bit comparator lessequal for signal <zeroCrossCount$cmp_le0006> created at line 201.
+    Found 8-bit comparator lessequal for signal <zeroCrossCount$cmp_le0007> created at line 201.
+    Found 8-bit adder for signal <zeroCrossCount$mux0000> created at line 210.
     Summary:
 	inferred   1 Counter(s).
-	inferred  73 D-type flip-flop(s).
+	inferred  74 D-type flip-flop(s).
 	inferred   1 Adder/Subtractor(s).
 	inferred  49 Comparator(s).
 	inferred  64 Multiplexer(s).
@@ -1226,18 +1300,17 @@ Unit <ext_ip_addr_map> synthesized.
 Synthesizing Unit <burst_traffic_controller>.
     Related source file is "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/oei/burst_traffic_controller.vhd".
     Found 1-bit register for signal <BURST_END_PACKET>.
-    Found 34-bit comparator less for signal <BURST_END_PACKET$cmp_lt0000> created at line 69.
     Found 34-bit up counter for signal <clocks_since_send>.
-    Found 9-bit comparator greatequal for signal <clocks_since_send$cmp_ge0000> created at line 56.
-    Found 34-bit comparator greatequal for signal <clocks_since_send$cmp_ge0001> created at line 69.
+    Found 34-bit comparator greatequal for signal <clocks_since_send$cmp_ge0000> created at line 73.
     Found 1-bit register for signal <force_packet_old>.
     Found 8-bit register for signal <writes_in_curr_burst>.
-    Found 8-bit adder for signal <writes_in_curr_burst$addsub0000> created at line 60.
+    Found 8-bit adder for signal <writes_in_curr_burst$addsub0000> created at line 61.
+    Found 9-bit comparator greatequal for signal <writes_in_curr_burst$cmp_ge0000> created at line 58.
     Summary:
 	inferred   1 Counter(s).
 	inferred  10 D-type flip-flop(s).
 	inferred   1 Adder/Subtractor(s).
-	inferred   3 Comparator(s).
+	inferred   2 Comparator(s).
 Unit <burst_traffic_controller> synthesized.
 
 
@@ -2023,8 +2096,8 @@ Macro Statistics
  5-bit down counter                                    : 1
  5-bit up counter                                      : 1
  8-bit up counter                                      : 3
-# Registers                                            : 720
- 1-bit register                                        : 623
+# Registers                                            : 786
+ 1-bit register                                        : 688
  10-bit register                                       : 3
  11-bit register                                       : 8
  16-bit register                                       : 8
@@ -2035,14 +2108,14 @@ Macro Statistics
  4-bit register                                        : 1
  40-bit register                                       : 1
  48-bit register                                       : 2
- 64-bit register                                       : 7
+ 64-bit register                                       : 8
  8-bit register                                        : 59
 # Latches                                              : 5
  1-bit latch                                           : 2
  3-bit latch                                           : 1
  4-bit latch                                           : 1
  8-bit latch                                           : 1
-# Comparators                                          : 107
+# Comparators                                          : 170
  10-bit comparator equal                               : 1
  10-bit comparator not equal                           : 2
  11-bit comparator less                                : 2
@@ -2054,7 +2127,6 @@ Macro Statistics
  17-bit comparator greater                             : 1
  32-bit comparator equal                               : 1
  34-bit comparator greatequal                          : 1
- 34-bit comparator less                                : 1
  4-bit comparator greatequal                           : 1
  4-bit comparator greater                              : 1
  4-bit comparator less                                 : 2
@@ -2064,8 +2136,8 @@ Macro Statistics
  6-bit comparator lessequal                            : 1
  8-bit comparator equal                                : 1
  8-bit comparator greatequal                           : 24
- 8-bit comparator greater                              : 18
- 8-bit comparator less                                 : 16
+ 8-bit comparator greater                              : 50
+ 8-bit comparator less                                 : 48
  8-bit comparator lessequal                            : 24
  9-bit comparator greatequal                           : 1
 # Multiplexers                                         : 9
@@ -2451,7 +2523,119 @@ WARNING:Xst:1710 - FF/Latch <test_data_3> (without init value) has a constant va
 WARNING:Xst:1710 - FF/Latch <test_data_7> (without init value) has a constant value of 0 in block <CreatePacketBlock>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <tx_er> (without init value) has a constant value of 0 in block <crcSplice>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <internal_eth_dout_48> (without init value) has a constant value of 0 in block <XLXI_6227>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:2677 - Node <pre_data_in_0> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_1> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_2> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_3> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_4> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_5> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_6> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_7> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_8> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_9> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_10> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_11> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_12> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_13> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_14> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_15> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_16> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_17> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_18> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_19> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_20> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_21> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_22> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_23> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_24> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_25> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_26> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_27> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_28> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_29> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_30> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_31> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_32> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_33> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_34> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_35> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_36> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_37> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_38> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_39> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_40> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_41> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_42> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_43> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_44> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_45> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_46> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_47> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_56> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_57> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_58> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_59> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_60> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_61> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_62> of sequential type is unconnected in block <XLXI_6349>.
+WARNING:Xst:2677 - Node <pre_data_in_63> of sequential type is unconnected in block <XLXI_6349>.
 WARNING:Xst:1710 - FF/Latch <test_data_6> (without init value) has a constant value of 0 in block <CreatePacketBlock>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:2677 - Node <pre_data_in_0> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_1> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_2> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_3> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_4> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_5> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_6> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_7> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_8> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_9> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_10> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_11> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_12> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_13> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_14> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_15> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_16> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_17> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_18> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_19> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_20> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_21> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_22> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_23> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_24> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_25> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_26> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_27> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_28> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_29> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_30> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_31> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_32> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_33> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_34> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_35> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_36> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_37> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_38> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_39> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_40> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_41> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_42> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_43> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_44> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_45> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_46> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_47> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_56> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_57> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_58> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_59> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_60> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_61> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_62> of sequential type is unconnected in block <PeakFinder>.
+WARNING:Xst:2677 - Node <pre_data_in_63> of sequential type is unconnected in block <PeakFinder>.
 
 =========================================================================
 Advanced HDL Synthesis Report
@@ -2483,14 +2667,14 @@ Macro Statistics
  5-bit down counter                                    : 1
  5-bit up counter                                      : 1
  8-bit up counter                                      : 3
-# Registers                                            : 2267
- Flip-Flops                                            : 2267
+# Registers                                            : 2341
+ Flip-Flops                                            : 2341
 # Latches                                              : 5
  1-bit latch                                           : 2
  3-bit latch                                           : 1
  4-bit latch                                           : 1
  8-bit latch                                           : 1
-# Comparators                                          : 107
+# Comparators                                          : 170
  10-bit comparator equal                               : 1
  10-bit comparator not equal                           : 2
  11-bit comparator less                                : 2
@@ -2502,7 +2686,6 @@ Macro Statistics
  17-bit comparator greater                             : 1
  32-bit comparator equal                               : 1
  34-bit comparator greatequal                          : 1
- 34-bit comparator less                                : 1
  4-bit comparator greatequal                           : 1
  4-bit comparator greater                              : 1
  4-bit comparator less                                 : 2
@@ -2512,8 +2695,8 @@ Macro Statistics
  6-bit comparator lessequal                            : 1
  8-bit comparator equal                                : 1
  8-bit comparator greatequal                           : 24
- 8-bit comparator greater                              : 18
- 8-bit comparator less                                 : 16
+ 8-bit comparator greater                              : 50
+ 8-bit comparator less                                 : 48
  8-bit comparator lessequal                            : 24
  9-bit comparator greatequal                           : 1
 # Multiplexers                                         : 9
@@ -2771,7 +2954,7 @@ WARNING:Xst:1290 - Hierarchical block <XLXI_6124> is unconnected in block <TOP_L
 
 Mapping all equations...
 Building and optimizing final netlist ...
-Found area constraint ratio of 100 (+ 5) on block TOP_LEVEL, actual ratio is 34.
+Found area constraint ratio of 100 (+ 5) on block TOP_LEVEL, actual ratio is 38.
 INFO:Xst:2260 - The FF/Latch <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i> in Unit <XLXI_6341> is equivalent to the following FF/Latch : <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_fb_i> 
 INFO:Xst:2260 - The FF/Latch <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i> in Unit <XLXI_6341> is equivalent to the following FF/Latch : <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i> 
 INFO:Xst:2260 - The FF/Latch <U0/grf.rf/gl0.rd/grss.rsts/ram_empty_fb_i> in Unit <BU2> is equivalent to the following FF/Latch : <U0/grf.rf/gl0.rd/grss.rsts/ram_empty_i> 
@@ -2872,7 +3055,6 @@ INFO:Xst:2260 - The FF/Latch <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_
 INFO:Xst:2260 - The FF/Latch <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/count_d1_0> in Unit <TX_CTRL_MAC_FIFO> is equivalent to the following FF/Latch : <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/count_d1_0_1> 
 INFO:Xst:2260 - The FF/Latch <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/count_d1_0> in Unit <TX_CTRL_MAC_FIFO> is equivalent to the following FF/Latch : <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/count_d1_0_1> 
 INFO:Xst:2260 - The FF/Latch <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/count_d1_1> in Unit <TX_CTRL_MAC_FIFO> is equivalent to the following FF/Latch : <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/count_d1_1_1> 
-FlipFlop XLXI_6227/ec_wrapper/ethernet_controller/DecipherBlock/Sreg0_FSM_FFd1 has been replicated 1 time(s)
 
 Final Macro Processing ...
 
@@ -2891,8 +3073,8 @@ Unit <ICMPPingShiftRegBlock> processed.
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 1959
- Flip-Flops                                            : 1959
+# Registers                                            : 2032
+ Flip-Flops                                            : 2032
 # Shift Registers                                      : 8
  44-bit shift register                                 : 8
 
@@ -2923,7 +3105,7 @@ Design Statistics
 # IOs                              : 89
 
 Cell Usage :
-# BELS                             : 6937
+# BELS                             : 8157
 #      AND2                        : 22
 #      AND2B1                      : 20
 #      AND5                        : 1
@@ -2935,30 +3117,30 @@ Cell Usage :
 #      GND                         : 30
 #      INV                         : 188
 #      LUT1                        : 258
-#      LUT2                        : 865
-#      LUT2_D                      : 22
-#      LUT2_L                      : 19
-#      LUT3                        : 1150
+#      LUT2                        : 1432
+#      LUT2_D                      : 23
+#      LUT2_L                      : 18
+#      LUT3                        : 1141
 #      LUT3_D                      : 19
-#      LUT3_L                      : 51
-#      LUT4                        : 2080
-#      LUT4_D                      : 54
+#      LUT3_L                      : 52
+#      LUT4                        : 2224
+#      LUT4_D                      : 59
 #      LUT4_L                      : 204
-#      MUXCY                       : 1216
+#      MUXCY                       : 1728
 #      MUXF5                       : 145
 #      MUXF6                       : 40
 #      OR2                         : 19
 #      VCC                         : 26
 #      XOR2                        : 1
 #      XORCY                       : 487
-# FlipFlops/Latches                : 2525
+# FlipFlops/Latches                : 2598
 #      FD                          : 81
 #      FDC                         : 54
 #      FDCE                        : 99
-#      FDE                         : 729
+#      FDE                         : 801
 #      FDP                         : 18
 #      FDPE                        : 6
-#      FDR                         : 85
+#      FDR                         : 86
 #      FDRE                        : 1226
 #      FDRS                        : 86
 #      FDRSE                       : 1
@@ -2991,10 +3173,10 @@ Device utilization summary:
 
 Selected Device : 4vlx25ff668-10 
 
- Number of Slices:                     3359  out of  10752    31%  
- Number of Slice Flip Flops:           2525  out of  21504    11%  
- Number of 4 input LUTs:               5318  out of  21504    24%  
-    Number used as logic:              4910
+ Number of Slices:                     3694  out of  10752    34%  
+ Number of Slice Flip Flops:           2598  out of  21504    12%  
+ Number of 4 input LUTs:               6026  out of  21504    28%  
+    Number used as logic:              5618
     Number used as Shift registers:      24
     Number used as RAMs:                384
  Number of IOs:                          89
@@ -3025,7 +3207,7 @@ Clock Information:
 -----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)                                                                                                             | Load  |
 -----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+-------+
-GEL_RXCLK                          | IBUFG+BUFG                                                                                                                        | 2683  |
+GEL_RXCLK                          | IBUFG+BUFG                                                                                                                        | 2756  |
 BUSBHS_02DP_04S                    | XLXI_6199:CLK0                                                                                                                    | 57    |
 XLXI_6380/N1                       | NONE(XLXI_6380/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/v4_noinit.ram/SP.SINGLE_PRIM.SP)| 4     |
 SECONDARY_CLK                      | IBUFG                                                                                                                             | 18    |
@@ -3053,9 +3235,9 @@ Timing Summary:
 ---------------
 Speed Grade: -10
 
-   Minimum period: 8.769ns (Maximum Frequency: 114.038MHz)
+   Minimum period: 8.777ns (Maximum Frequency: 113.937MHz)
    Minimum input arrival time before clock: 7.029ns
-   Maximum output required time after clock: 6.760ns
+   Maximum output required time after clock: 6.768ns
    Maximum combinational path delay: 6.182ns
 
 Timing Detail:
@@ -3112,10 +3294,10 @@ Offset:              0.742ns (Levels of Logic = 0)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'SECONDARY_CLK'
-  Clock period: 8.769ns (frequency: 114.038MHz)
-  Total number of paths / destination ports: 2336 / 2066
+  Clock period: 8.777ns (frequency: 113.937MHz)
+  Total number of paths / destination ports: 2409 / 2139
 -------------------------------------------------------------------------
-Offset:              8.769ns (Levels of Logic = 5)
+Offset:              8.777ns (Levels of Logic = 5)
   Source:            XLXI_6227/reset_mgr/reset (FF)
   Destination:       XLXI_6227/data_manager_blk/RX_DATA_FIFO/BU2/U0/grf.rf/gl0.rd/rpntr/count_7 (FF)
   Source Clock:      SECONDARY_CLK rising
@@ -3125,7 +3307,7 @@ Offset:              8.769ns (Levels of Logic = 5)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDS:C->Q            236   0.360   1.725  reset (reset)
+     FDS:C->Q            238   0.360   1.733  reset (reset)
      end scope: 'reset_mgr'
      BUF:I->O            481   0.358   2.846  reset_mgr_reset_1 (reset_mgr_reset_1)
      begin scope: 'data_manager_blk'
@@ -3135,7 +3317,7 @@ Offset:              8.769ns (Levels of Logic = 5)
      LUT3:I0->O           16   0.195   0.593  U0/grf.rf/gl0.wr/wpntr/count_not00011 (U0/grf.rf/gl0.wr/wpntr/count_not0001)
      FDCE:CE                   0.540          U0/grf.rf/gl0.wr/wpntr/count_7
     ----------------------------------------
-    Total                      8.769ns (1.648ns logic, 7.121ns route)
+    Total                      8.777ns (1.648ns logic, 7.129ns route)
                                        (18.8% logic, 81.2% route)
 
 =========================================================================
@@ -3164,7 +3346,7 @@ Offset:              2.748ns (Levels of Logic = 2)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'GEL_RXCLK'
   Clock period: 7.302ns (frequency: 136.947MHz)
-  Total number of paths / destination ports: 113934 / 7581
+  Total number of paths / destination ports: 132044 / 7727
 -------------------------------------------------------------------------
 Delay:               7.302ns (Levels of Logic = 14)
   Source:            XLXI_6227/data_manager_blk/RAM_COMM_DEC/ram_addr_sig_54 (FF)
@@ -3288,14 +3470,14 @@ Offset:              7.029ns (Levels of Logic = 13)
      end scope: 'xgmii'
      begin scope: 'ethernet_controller'
      begin scope: 'DecipherBlock'
-     LUT4_D:I0->LO         1   0.195   0.163  is_arp_sig_mux0000112 (N220)
+     LUT4_D:I0->LO         1   0.195   0.163  is_arp_sig_mux0000112 (N223)
      LUT3:I2->O            3   0.195   0.600  Sreg0_FSM_FFd6-In215 (N182)
      LUT4:I2->O            1   0.195   0.523  Sreg0_cmp_eq000332_SW0 (N140)
      LUT4:I3->O           16   0.195   0.818  Sreg0_cmp_eq000332 (Sreg0_cmp_eq0003)
      LUT4:I2->O            1   0.195   0.000  udp_countdown_4_mux00002_G (N1791)
      MUXF5:I1->O           2   0.374   0.540  udp_countdown_4_mux00002 (N24)
      LUT3_D:I2->O          5   0.195   0.546  udp_countdown_4_mux000031 (N63)
-     LUT4_L:I3->LO         1   0.195   0.163  udp_countdown_2_mux000047_SW0 (N104)
+     LUT4_L:I3->LO         1   0.195   0.163  udp_countdown_2_mux000047_SW0 (N102)
      LUT4:I3->O            1   0.195   0.000  udp_countdown_2_mux000047 (udp_countdown_2_mux0000)
      FDRE:D                    0.022          udp_countdown_2
     ----------------------------------------
@@ -3328,7 +3510,7 @@ Offset:              6.348ns (Levels of Logic = 4)
 Timing constraint: Default OFFSET OUT AFTER for Clock 'SECONDARY_CLK'
   Total number of paths / destination ports: 1 / 1
 -------------------------------------------------------------------------
-Offset:              6.760ns (Levels of Logic = 3)
+Offset:              6.768ns (Levels of Logic = 3)
   Source:            XLXI_6227/reset_mgr/reset (FF)
   Destination:       BUSC_21DN_43S (PAD)
   Source Clock:      SECONDARY_CLK rising
@@ -3337,14 +3519,14 @@ Offset:              6.760ns (Levels of Logic = 3)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDS:C->Q            236   0.360   1.725  reset (reset)
+     FDS:C->Q            238   0.360   1.733  reset (reset)
      end scope: 'reset_mgr'
      end scope: 'XLXI_6227'
      INV:I->O              1   0.358   0.360  XLXI_6230 (XLXN_15150)
      OBUF:I->O                 3.957          XLXI_6229 (BUSC_21DN_43S)
     ----------------------------------------
-    Total                      6.760ns (4.675ns logic, 2.085ns route)
-                                       (69.2% logic, 30.8% route)
+    Total                      6.768ns (4.675ns logic, 2.093ns route)
+                                       (69.1% logic, 30.9% route)
 
 =========================================================================
 Timing constraint: Default path analysis
@@ -3368,15 +3550,15 @@ Delay:               6.182ns (Levels of Logic = 3)
 =========================================================================
 
 
-Total REAL time to Xst completion: 64.00 secs
-Total CPU time to Xst completion: 63.07 secs
+Total REAL time to Xst completion: 71.00 secs
+Total CPU time to Xst completion: 70.93 secs
  
 --> 
 
 
-Total memory usage is 1086124 kilobytes
+Total memory usage is 1088920 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :  273 (   0 filtered)
+Number of warnings :  391 (   0 filtered)
 Number of infos    :  128 (   0 filtered)
 
