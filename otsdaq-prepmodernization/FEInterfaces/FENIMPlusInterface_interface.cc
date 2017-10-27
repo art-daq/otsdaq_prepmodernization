@@ -169,7 +169,7 @@ void FENIMPlusInterface::configure(void)
 		try
 		{
 			if(usingOptionalParams &&
-					optionalLink.getNode("theXDAQContextConfigTree_.getNode(theConfigurationPath_)EnableClockResetDuringConfigure").getValue<bool>())
+					optionalLink.getNode("EnableClockResetDuringConfigure").getValue<bool>())
 			{
 				__MOUT__ << "Resetting clocks!" << std::endl;
 				writeBuffer.resize(0);
@@ -377,22 +377,6 @@ void FENIMPlusInterface::configure(void)
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
 		OtsUDPFirmwareCore::write(writeBuffer, 0x18000, 0x0); //enables a section of 40MHz clock block
-		OtsUDPHardware::write(writeBuffer);
-
-
-		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x7, ((1 << selectionOnOffMask) &
-				(usingOptionalParams?
-						optionalLink.getNode("Override1stANDWithSelectionLogicRegister").getValue<unsigned int>():
-						-1)
-				) |
-				(usingOptionalParams?
-						optionalLink.getNode("Override2ndORWithSelectionLogicRegister").getValue<unsigned int>():
-						0)); //choose proper AND gate
-		OtsUDPHardware::write(writeBuffer);
-
-		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x6, 0x2); //enable selection logic output
 		OtsUDPHardware::write(writeBuffer);
 
 	}

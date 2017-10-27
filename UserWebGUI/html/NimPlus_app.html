@@ -169,15 +169,15 @@
         <input type="checkbox" id="ChCInInv" onclick="addModifiedList('InvertPolarityInputChannelC',this.checked?'yes':'no');"><label for="ChCInInv">Invert Ch C Input?</label>
         </br><input type="checkbox" id="ChDInEn" onclick="addModifiedList('EnableInputChannelD',this.checked?'ON':'OFF');"><label for="ChDInEn">Enable Channel D?</label>
         <input type="checkbox" id="ChDInInv" onclick="addModifiedList('InvertPolarityInputChannelD',this.checked?'yes':'no');"><label for="ChDInInv">Invert Ch D Input?</label>
-        
+        <!-- Hackey Temp fix for CH Sources, need to investigate/debug further -->
         <br><p>Source for SigCMS1 - <select id="OutputSourceOutput1" oninput="addModifiedList('OutputSourceSelectChannel1', this.value);">
-		<option value="SigLog">SigLog</option>
-		<option value="SigNorm">SigNorm</option>
+		<option value="SigNorm">SigLog</option>
+		<option value="SigLog">SigNorm</option>
 		</select>
 		
 	<p>Source for SigCMS2 - <select id="OutputSourceOutput2" oninput="addModifiedList('OutputSourceSelectChannel2', this.value);">
-		<option value="SigLog">SigLog</option>
-		<option value="SigNorm">SigNorm</option>
+		<option value="SigNorm">SigLog</option>
+		<option value="SigLog">SigNorm</option>
 		</select>
 
 

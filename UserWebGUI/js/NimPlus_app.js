@@ -280,6 +280,7 @@ function activateNimTables(SavedTable,SavedGroup,SavedAlias){
         console.log("Page Values Saved");
         console.log(modifiedList);
 	_modifiedTables = [];
+	writeFEInterfaceStatus = false;
         document.getElementById("saveEl").innerHTML = "Save Successful!";
     
 };
