@@ -1,0 +1,1 @@
+xst -intstyle ise -ifn "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/TOP_LEVEL.xst" -ofn "/home/rrivera/g-2/fromWindows/KickerControllerFirmware-master/GEL_CAPTAN/TOP_LEVEL.syr" 
