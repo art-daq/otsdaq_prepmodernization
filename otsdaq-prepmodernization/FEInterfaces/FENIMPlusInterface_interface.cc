@@ -99,10 +99,10 @@ void FENIMPlusInterface::runSequenceOfCommands(const std::string &treeLinkName)
 				__MOUT__ << msg << std::endl;
 
 				writeBuffer.resize(0);
-				OtsUDPFirmwareCore::write(writeBuffer, writeAddress, writeHistory[writeAddress]);
+				OtsUDPFirmwareCore::writeAdvanced(writeBuffer, writeAddress, writeHistory[writeAddress]);
 				OtsUDPHardware::write(writeBuffer);
 				//				writeBuffer.resize(0);
-				//				OtsUDPFirmwareCore::read(writeBuffer, writeAddress);
+				//				OtsUDPFirmwareCore::readAdvanced(writeBuffer, writeAddress);
 				//				OtsUDPHardware::read(writeBuffer,readBuffer);
 			}
 		}
@@ -142,21 +142,22 @@ void FENIMPlusInterface::configure(void)
 
 	//
 	//
-	__MOUT__ << "Reading back burst dest MAC/IP/Port: "  << std::endl;
-	writeBuffer.resize(0);
-	OtsUDPFirmwareCore::readDataDestinationMAC(writeBuffer);
-	OtsUDPHardware::read(writeBuffer,readBuffer);
-	writeBuffer.resize(0);
-	OtsUDPFirmwareCore::readDataDestinationIP(writeBuffer);
-	OtsUDPHardware::read(writeBuffer,readBuffer);
-	writeBuffer.resize(0);
-	OtsUDPFirmwareCore::readDataDestinationPort(writeBuffer);
-	OtsUDPHardware::read(writeBuffer,readBuffer);
-
-	//read NIM+ version (for debugging)
-	writeBuffer.resize(0);
-	OtsUDPFirmwareCore::read(writeBuffer,0x5);
-	OtsUDPHardware::read(writeBuffer,readBuffer);
+	//LORE RIGH NOW I DONT CARE TO READ BACK
+//	__MOUT__ << "Reading back burst dest MAC/IP/Port: "  << std::endl;
+//	writeBuffer.resize(0);
+//	OtsUDPFirmwareCore::readAdvancedDataDestinationMAC(writeBuffer);
+//	OtsUDPHardware::read(writeBuffer,readBuffer);
+//	writeBuffer.resize(0);
+//	OtsUDPFirmwareCore::readAdvancedDataDestinationIP(writeBuffer);
+//	OtsUDPHardware::read(writeBuffer,readBuffer);
+//	writeBuffer.resize(0);
+//	OtsUDPFirmwareCore::readAdvancedDataDestinationPort(writeBuffer);
+//	OtsUDPHardware::read(writeBuffer,readBuffer);
+//
+//	//read NIM+ version (for debugging)
+//	writeBuffer.resize(0);
+//	OtsUDPFirmwareCore::readAdvancedAdvanced(writeBuffer,0x5);
+//	OtsUDPHardware::read(writeBuffer,readBuffer);
 
 
 	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
@@ -173,15 +174,15 @@ void FENIMPlusInterface::configure(void)
 			{
 				__MOUT__ << "Resetting clocks!" << std::endl;
 				writeBuffer.resize(0);
-				OtsUDPFirmwareCore::write(writeBuffer, /*address*/ 0x1FFFFFFFF, /*data*/ 0x1); //ots Ethernet reset
+				OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x1FFFFFFFF, /*data*/ 0x1); //ots Ethernet reset
 				OtsUDPHardware::write(writeBuffer);
 				writeBuffer.resize(0);
-				OtsUDPFirmwareCore::write(writeBuffer, 0x1FFFFFFFF,0x0);
+				OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x1FFFFFFFF,0x0);
 				OtsUDPHardware::write(writeBuffer);
 				sleep(5); //seconds
 				
 				writeBuffer.resize(0);
-				OtsUDPFirmwareCore::write(writeBuffer, 0x3,0x0); //Choosing internal := 0, external := 1
+				OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x3,0x0); //Choosing internal := 0, external := 1
 				OtsUDPHardware::write(writeBuffer);
 				sleep(1); //seconds
 			}
@@ -205,34 +206,34 @@ void FENIMPlusInterface::configure(void)
 		// write 3 to disable and reset
 
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, /*address*/ 0x4, /*data*/ 0x3); //disable sig norm
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x4, /*data*/ 0x3); //disable sig norm
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x18016, 0x3); //disable cms1
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18016, 0x3); //disable cms1
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x18017, 0x3); //disable cms2
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18017, 0x3); //disable cms2
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x5, 0x0);  //chA output mux to sig_norm
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x5, 0x0);  //chA output mux to sig_norm
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x18013, 0x0);  //chB output mux to sig_norm
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18013, 0x0);  //chB output mux to sig_norm
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x18014, 0x0);  //chC output mux to sig_norm
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18014, 0x0);  //chC output mux to sig_norm
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x18015, 0x0);  //chD output mux to sig_norm
-		OtsUDPHardware::write(writeBuffer);
-
-
-		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x1800C, 0xF); //setup output polarity
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18015, 0x0);  //chD output mux to sig_norm
 		OtsUDPHardware::write(writeBuffer);
 
+
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x6, 0x0); //disable AND gate selection logic
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x1800C, 0xF); //setup output polarity
+		OtsUDPHardware::write(writeBuffer);
+
+		writeBuffer.resize(0);
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x6, 0x0); //disable AND gate selection logic
 		OtsUDPHardware::write(writeBuffer);
 	}
 	//bitsets for enables and resets
@@ -242,11 +243,11 @@ void FENIMPlusInterface::configure(void)
 	//Reset everything for configure
 		nimResets.set(); //set all bits to 1
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x18000, nimResets.to_ulong()); //reset everything (counters and vetos/ps)
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, nimResets.to_ulong()); //reset everything (counters and vetos/ps)
 		OtsUDPHardware::write(writeBuffer);
 		nimResets.reset(); //set all bits to 0
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x18000, nimResets.to_ulong()); //unreset everything
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, nimResets.to_ulong()); //unreset everything
 		OtsUDPHardware::write(writeBuffer);
 
 
@@ -277,29 +278,29 @@ void FENIMPlusInterface::configure(void)
 		{
 
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, /*address*/ 0x1, /*data*/ 0x0);
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x1, /*data*/ 0x0);
 			OtsUDPHardware::write(writeBuffer);
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, /*address*/ 0x1, /*data*/ 0x0);
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x1, /*data*/ 0x0);
 			OtsUDPHardware::write(writeBuffer);
 
 			unsigned short dacValue = optionalLink.getNode(dacValueField + channelName).getValue<unsigned short>();
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, /*address*/ 0x0, /*data*/ (dacChannelAddress << 12) | (dacValue & 0xFFF));
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x0, /*data*/ (dacChannelAddress << 12) | (dacValue & 0xFFF));
 			OtsUDPHardware::write(writeBuffer);
 			dacChannelAddress += 4;
 
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, /*address*/ 0x1, /*data*/ 0x2);
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x1, /*data*/ 0x2);
 			OtsUDPHardware::write(writeBuffer);
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, /*address*/ 0x1, /*data*/ 0x0);
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x1, /*data*/ 0x0);
 			OtsUDPHardware::write(writeBuffer);
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, /*address*/ 0x1, /*data*/ 0x4);
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x1, /*data*/ 0x4);
 			OtsUDPHardware::write(writeBuffer);
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, /*address*/ 0x1, /*data*/ 0x0);
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x1, /*data*/ 0x0);
 			OtsUDPHardware::write(writeBuffer);
 			//sleep(1); // give a little time to the slow DAC ASIC write
 		}
@@ -346,29 +347,29 @@ void FENIMPlusInterface::configure(void)
 			
 			
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, /*address*/((channelCount+1) << 8) | 0x4, /*data*/ 0x3); //reset channel
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/((channelCount+1) << 8) | 0x4, /*data*/ 0x3); //reset channel
 			OtsUDPHardware::write(writeBuffer);
 			
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, ((channelCount+1) << 8) | 0x2, inputModMask); //set sig_mod width and delay
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, ((channelCount+1) << 8) | 0x2, inputModMask); //set sig_mod width and delay
 			OtsUDPHardware::write(writeBuffer);
 
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, ((channelCount+1) << 8) | 0x4, enableInput?0:1); //enable/disable channel
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, ((channelCount+1) << 8) | 0x4, enableInput?0:1); //enable/disable channel
 			OtsUDPHardware::write(writeBuffer);
 
 			++channelCount;
 		}
 		__MOUT__ << "Input polariy mask is " << std::bitset<8>(inputPolarityMask) << std::endl;
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, /*address*/0x1800B, /*data*/ inputPolarityMask); //setup input polarity
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/0x1800B, /*data*/ inputPolarityMask); //setup input polarity
 		OtsUDPHardware::write(writeBuffer);
 // 40Mhz Clock Stuff - Update to reflect firmware changes
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x18000, 0x40); //resets section of 40MHz clock block
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, 0x40); //resets section of 40MHz clock block
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer,
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer,
 				0x18008,
 				(1<<8) |  //disable sig_log masking with 40MHz clock block
 				(usingOptionalParams?
@@ -376,7 +377,7 @@ void FENIMPlusInterface::configure(void)
 						0)); //chooses a section of 40MHz clock
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x18000, 0x0); //enables a section of 40MHz clock block
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, 0x0); //enables a section of 40MHz clock block
 		OtsUDPHardware::write(writeBuffer);
 
 	}
@@ -441,10 +442,10 @@ void FENIMPlusInterface::configure(void)
 			backpressureMask |= (outputBackpressureSelect?1:0) << channelCount;
 
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, channelCount==0?0x4:(0x18016 + channelCount - 1), 0x33); //reset output channel block (bits 4/5 are reseting ch1/2)
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelCount==0?0x4:(0x18016 + channelCount - 1), 0x33); //reset output channel block (bits 4/5 are reseting ch1/2)
 			OtsUDPHardware::write(writeBuffer);
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, channelCount==0?0x2:(0x18002 + channelCount - 1), outputModMask); //set output channel width/delay mask
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelCount==0?0x2:(0x18002 + channelCount - 1), outputModMask); //set output channel width/delay mask
 			OtsUDPHardware::write(writeBuffer);
 			
 			__MOUT__ << "Output word for " << channelName << " is " << std::bitset<64>(outputModMask) << std::endl << " with a delay of " << outputDelay << " and a width of " << outputWidth << std::endl;
@@ -452,7 +453,7 @@ void FENIMPlusInterface::configure(void)
 			if(channelCount)
 			{
 				writeBuffer.resize(0);
-				OtsUDPFirmwareCore::write(writeBuffer, (0x18018 + channelCount - 1), outputChannelSourceSelect); //select source (1 := signorm, 0 := siglog)
+				OtsUDPFirmwareCore::writeAdvanced(writeBuffer, (0x18018 + channelCount - 1), outputChannelSourceSelect); //select source (1 := signorm, 0 := siglog)
 				OtsUDPHardware::write(writeBuffer);
 				__MOUT__ << "Output src select is " << outputChannelSourceSelect << " for " << channelName << std::endl;
 			}
@@ -461,17 +462,17 @@ void FENIMPlusInterface::configure(void)
 			
 			//time veto setup
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, channelCount==0?0x1801B:(0x18011 + channelCount - 1), outputTimeVetoDuration);
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelCount==0?0x1801B:(0x18011 + channelCount - 1), outputTimeVetoDuration);
 			OtsUDPHardware::write(writeBuffer);
 
 			__MOUT__ << "Veto count for " << channelName << " is " << outputTimeVetoDuration << " writing to ch "  << (channelCount==0?0x1801B:(0x18011 + channelCount - 1)) << std::endl;
 			
 			//prescale veto setup
 						writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, 0x1801C + channelCount, 0); //Set to 0, then set to value
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x1801C + channelCount, 0); //Set to 0, then set to value
 			OtsUDPHardware::write(writeBuffer);
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, 0x1801C + channelCount, outputPrescaleCount);
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x1801C + channelCount, outputPrescaleCount);
 			OtsUDPHardware::write(writeBuffer);
 
 			__MOUT__ << "Prescaler count for " << channelName << " is " << outputPrescaleCount << " writing to ch " <<  0x1801C + channelCount << std::endl;
@@ -491,7 +492,7 @@ void FENIMPlusInterface::configure(void)
 		outputBackpressureSelect = usingOptionalParams && optionalLink.getNode("EnableBackPressureInputB").getValue<bool>();
 		backpressureMask |= outputBackpressureSelect << 4;
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x1801A, backpressureMask);
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x1801A, backpressureMask);
 		OtsUDPHardware::write(writeBuffer);
 
 		//and 4 output muxes (first is special)
@@ -533,12 +534,12 @@ void FENIMPlusInterface::configure(void)
 	*/
 			
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, channelCount == 0?0x5:(0x18013 + channelCount - 1), outputMuxSelect); //setup mux select
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelCount == 0?0x5:(0x18013 + channelCount - 1), outputMuxSelect); //setup mux select
 			OtsUDPHardware::write(writeBuffer);
 			__MOUT__ << "Mux value for output channel " << channelName << " is " << outputMuxSelect << ", written to " << (channelCount == 0?0x5:(0x18013 + channelCount - 1)) << std::endl;
 						
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, /*address*/0x1800C, /*data*/ outputPolarityMask); //setup output polarity
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/0x1800C, /*data*/ outputPolarityMask); //setup output polarity
 			OtsUDPHardware::write(writeBuffer);
 			__MOUT__ << "Input polariy mask is " << std::bitset<8>(outputPolarityMask) << std::endl;
 
@@ -579,29 +580,29 @@ void FENIMPlusInterface::configure(void)
 			}
 
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, 0x1800E, outputMuxSelect); //setup burst output mux select
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x1800E, outputMuxSelect); //setup burst output mux select
 			OtsUDPHardware::write(writeBuffer);
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, 0x18010, logicSampleDelay); //setup burst logic sample delay
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18010, logicSampleDelay); //setup burst logic sample delay
 			OtsUDPHardware::write(writeBuffer);
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, 0x18004, gateChannelReg); //setup burst block gate signal choice
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18004, gateChannelReg); //setup burst block gate signal choice
 			OtsUDPHardware::write(writeBuffer);
 		}
 		
 		//selection logic setup
 		unsigned int coincidenceLogicWord = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("CoincidenceLogicWord").getValue<unsigned int>();
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x06, 0x01); //reset selection logic
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x06, 0x01); //reset selection logic
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x06, 0x00); //disable selection logic, take out of reset 
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x06, 0x00); //disable selection logic, take out of reset
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x07, coincidenceLogicWord); //setup selection logic
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x07, coincidenceLogicWord); //setup selection logic
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x06, 0x02); //renable selection  logic  
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x06, 0x02); //renable selection  logic
 		OtsUDPHardware::write(writeBuffer);
 		__MOUT__ << "Selection Logic word is  " << std::bitset<16>(coincidenceLogicWord) << std::endl;
 		
@@ -619,16 +620,16 @@ void FENIMPlusInterface::configure(void)
 		  nimEnables.set(5); //set bit 5 in enables to 1 to enable sig gen
 		  //signal generator setup
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x18005, sigGenCount); //sig gen pulse count
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18005, sigGenCount); //sig gen pulse count
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x18006, sigGenHighPer); //sig gen high per 
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18006, sigGenHighPer); //sig gen high per
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x18007, sigGenLowPer); //sig gen low per
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18007, sigGenLowPer); //sig gen low per
 		OtsUDPHardware::write(writeBuffer);
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x1800D, sigGenPolarityMask); //sig gen polaity
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x1800D, sigGenPolarityMask); //sig gen polaity
 		OtsUDPHardware::write(writeBuffer);
 		
 		__MOUT__ << "Configured signal generator with a count of " << sigGenCount << " (0 is continuous output), a high period of " << sigGenHighPer << ", a low period of " << sigGenLowPer << ", and output inversion set to " << sigGenPolarity << std::endl;
@@ -640,11 +641,11 @@ void FENIMPlusInterface::configure(void)
 		}
 		
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x18000, nimResets.to_ulong()); //set sig gen in or out of reset
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, nimResets.to_ulong()); //set sig gen in or out of reset
 		OtsUDPHardware::write(writeBuffer);
 		__MOUT__ << "Nim Resets set to " << nimResets << std::endl;
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::write(writeBuffer, 0x18001, nimEnables.to_ulong()); //enable or disable sig gen
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18001, nimEnables.to_ulong()); //enable or disable sig gen
 		OtsUDPHardware::write(writeBuffer);
 		__MOUT__ << "Nim Enables set to " << nimEnables << std::endl;
 		
@@ -713,7 +714,7 @@ void FENIMPlusInterface::start(std::string )//runNumber)
 
 	//enable nim plus burst data
 	writeBuffer.resize(0);
-	OtsUDPFirmwareCore::write(writeBuffer, /*address*/ 0x1801F, /*data*/0x6);
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x1801F, /*data*/0x6);
 	OtsUDPHardware::write(writeBuffer);
 }
 
@@ -735,7 +736,7 @@ void FENIMPlusInterface::stop(void)
 	//there are 3 output channels (alias: signorm, sigcms1, sigcms2)
 
 	writeBuffer.resize(0);
-	OtsUDPFirmwareCore::write(writeBuffer, /*address*/ 0x4, /*data*/0x33);//only reset signorm  0x33); //reset output channel blocks synchronously
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x4, /*data*/0x33);//only reset signorm  0x33); //reset output channel blocks synchronously
 	OtsUDPHardware::write(writeBuffer);	      
 }
 
@@ -773,7 +774,7 @@ bool FENIMPlusInterface::running(void)
 					0;
 
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::write(writeBuffer, /*address*/ channelCount==0?0x4:(0x18016 + channelCount - 1),/*data*/ (enable40MHzMask?0x0:0x8) | (gateChannelVetoSel <= 1?0:(1<<2))); //unreset output channel block
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ channelCount==0?0x4:(0x18016 + channelCount - 1),/*data*/ (enable40MHzMask?0x0:0x8) | (gateChannelVetoSel <= 1?0:(1<<2))); //unreset output channel block
 			OtsUDPHardware::write(writeBuffer);
 		}
 
@@ -800,7 +801,7 @@ int ots::FENIMPlusInterface::universalRead(char *address, char *returnValue)
 	std::cout << std::endl;
 
 	std::string readBuffer, sendBuffer;
-	OtsUDPFirmwareCore::read(sendBuffer,address,1 /*size*/);
+	OtsUDPFirmwareCore::readAdvanced(sendBuffer,address,1 /*size*/);
 
 	//OtsUDPHardware::read(FSSRFirmware::universalRead(address), readBuffer) < 0;
 	try
@@ -832,7 +833,7 @@ void ots::FENIMPlusInterface::universalWrite(char* address, char* writeValue)
 	std::cout << std::endl;
 
 	std::string sendBuffer;
-	OtsUDPFirmwareCore::write(sendBuffer,address,writeValue,1 /*size*/);
+	OtsUDPFirmwareCore::writeAdvanced(sendBuffer,address,writeValue,1 /*size*/);
 	OtsUDPHardware::write(sendBuffer); // data request
 }
 
