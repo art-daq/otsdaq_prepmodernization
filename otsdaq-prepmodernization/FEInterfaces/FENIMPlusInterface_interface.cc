@@ -375,11 +375,20 @@ void FENIMPlusInterface::configure(void)
 		writeBuffer.resize(0);
 		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/0x1800B, /*data*/ inputPolarityMask); //setup input polarity
 		OtsUDPHardware::write(writeBuffer);
-// 40Mhz Clock Stuff - Update to reflect firmware changes
-		writeBuffer.resize(0);
+
+		// 40Mhz Clock Stuff - Update to reflect firmware changes
 		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, 0x40); //resets section of 40MHz clock block
 		OtsUDPHardware::write(writeBuffer);
-		writeBuffer.resize(0);
+
+		__COUT__ << "Writing accelerator clock mask." << __E__;
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer,
+				0x107,
+				(usingOptionalParams?
+						optionalLink.getNode("AcceleratorClockMask").getValue<unsigned int>():
+						0)); //chooses a 40MHz clock phase relative to the accelerator clock (in increments of ~3ns)
+		OtsUDPHardware::write(writeBuffer);
+
+		__COUT__ << "Writing trigger clock mask." << __E__;
 		OtsUDPFirmwareCore::writeAdvanced(writeBuffer,
 				0x18008,
 				(1<<8) |  //disable sig_log masking with 40MHz clock block
@@ -387,7 +396,7 @@ void FENIMPlusInterface::configure(void)
 						optionalLink.getNode("TriggerClockMask").getValue<unsigned int>():
 						0)); //chooses a section of 40MHz clock
 		OtsUDPHardware::write(writeBuffer);
-		writeBuffer.resize(0);
+
 		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, 0x0); //enables a section of 40MHz clock block
 		OtsUDPHardware::write(writeBuffer);
 
