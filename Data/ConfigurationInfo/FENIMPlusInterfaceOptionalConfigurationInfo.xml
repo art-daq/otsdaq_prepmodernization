@@ -26,6 +26,7 @@
 				<COLUMN Type="TrueFalse" 	 Name="EnableBackPressureInputB" 	 StorageName="ENABLE_BACK_PRESSURE_INPUT_B" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="Override1stANDWithSelectionLogicRegister" 	 StorageName="OVERRIDE1ST_AND_WITH_SELECTION_LOGIC_REGISTER" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="Override2ndORWithSelectionLogicRegister" 	 StorageName="OVERRIDE2ND_OR_WITH_SELECTION_LOGIC_REGISTER" 		DataType="NUMBER" 		DataChoices=""/>
+				<COLUMN Type="Data" 	 Name="AcceleratorClockMask" 	 StorageName="ACCELERATOR_CLOCK_MASK" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="TriggerClockMask" 	 StorageName="TRIGGER_CLOCK_MASK" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="DelayOutputChannel0" 	 StorageName="DELAY_OUTPUT_CHANNEL0" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="WidthOutputChannel0" 	 StorageName="WIDTH_OUTPUT_CHANNEL0" 		DataType="NUMBER" 		DataChoices=""/>

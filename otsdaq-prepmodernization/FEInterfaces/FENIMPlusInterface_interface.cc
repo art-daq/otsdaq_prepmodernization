@@ -193,6 +193,16 @@ void FENIMPlusInterface::configure(void)
 		}
 	}
 
+	__COUT__ << "Re-locking clocks..." << std::endl;
+	//reset clock PLLs
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 999, /*data*/ 0x7); //reset wiz0, wiz1, and nimDacClk
+	OtsUDPHardware::write(writeBuffer);
+	sleep(1); //seconds
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 999, /*data*/ 0); //unreset
+	OtsUDPHardware::write(writeBuffer);
+
+	//FIXME -- read back clock lock status
+
 
 
 	//Run Configure Sequence Commands
