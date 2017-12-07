@@ -164,6 +164,15 @@ void FENIMPlusInterface::configure(void)
 	bool usingOptionalParams =
 			!optionalLink.isDisconnected();
 
+	//choose external or internal clock
+	__COUT__ << "Choosing external or internal clock..." << std::endl;
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x3,
+			(usingOptionalParams?
+					(optionalLink.getNode("UseExternalClock").getValue<bool>()?1:0):
+					0)); //Choosing external := 1, internal := 0
+	OtsUDPHardware::write(writeBuffer);
+
+
 	////////////////////////////////////////////////////////////////////////////////
 	//if clock reset is enabled reset clock
 	{
@@ -172,19 +181,16 @@ void FENIMPlusInterface::configure(void)
 			if(usingOptionalParams &&
 					optionalLink.getNode("EnableClockResetDuringConfigure").getValue<bool>())
 			{
-				__COUT__ << "Resetting clocks!" << std::endl;
-				writeBuffer.resize(0);
+				__COUT__ << "Resetting Ethernet!" << std::endl;
+
 				OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x1FFFFFFFF, /*data*/ 0x1); //ots Ethernet reset
 				OtsUDPHardware::write(writeBuffer);
-				writeBuffer.resize(0);
-				OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x1FFFFFFFF,0x0);
+
+				OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x1FFFFFFFF,0x0); //unreset
 				OtsUDPHardware::write(writeBuffer);
 				sleep(5); //seconds
 				
-				writeBuffer.resize(0);
-				OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x3,0x0); //Choosing internal := 0, external := 1
-				OtsUDPHardware::write(writeBuffer);
-				sleep(1); //seconds
+
 			}
 		}
 		catch(...)
@@ -195,11 +201,12 @@ void FENIMPlusInterface::configure(void)
 
 	__COUT__ << "Re-locking clocks..." << std::endl;
 	//reset clock PLLs
-	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 999, /*data*/ 0x7); //reset wiz0, wiz1, and nimDacClk
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x999, /*data*/ 0x7); //reset wiz0, wiz1, and nimDacClk
 	OtsUDPHardware::write(writeBuffer);
 	sleep(1); //seconds
-	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 999, /*data*/ 0); //unreset
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x999, /*data*/ 0); //unreset
 	OtsUDPHardware::write(writeBuffer);
+	sleep(1); //seconds
 
 	//FIXME -- read back clock lock status
 
@@ -376,9 +383,6 @@ void FENIMPlusInterface::configure(void)
 		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/0x1800B, /*data*/ inputPolarityMask); //setup input polarity
 		OtsUDPHardware::write(writeBuffer);
 
-		// 40Mhz Clock Stuff - Update to reflect firmware changes
-		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, 0x40); //resets section of 40MHz clock block
-		OtsUDPHardware::write(writeBuffer);
 
 		__COUT__ << "Writing accelerator clock mask." << __E__;
 		OtsUDPFirmwareCore::writeAdvanced(writeBuffer,
@@ -397,8 +401,15 @@ void FENIMPlusInterface::configure(void)
 						0)); //chooses a section of 40MHz clock
 		OtsUDPHardware::write(writeBuffer);
 
+		// 40Mhz Clock Stuff - Update to reflect firmware changes
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, 0x40); //resets section of 40MHz clock block
+		OtsUDPHardware::write(writeBuffer);
+
+
 		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, 0x0); //enables a section of 40MHz clock block
 		OtsUDPHardware::write(writeBuffer);
+
+
 
 	}
 	catch(const std::runtime_error &e)
@@ -429,7 +440,8 @@ void FENIMPlusInterface::configure(void)
 		std::array<std::string,3> outChannelNames = {"Channel0","Channel1","Channel2"};
 		for(const auto &channelName : outChannelNames)
 		{
-			outputChannelSourceSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("OutputSourceSelect" + channelName).getValue<unsigned int>(); //0: sig_log   or    1: sig_norm/ch0
+			outputChannelSourceSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode(
+					"OutputSourceSelect" + channelName).getValue<unsigned int>(); //0: sig_log   or    1: sig_norm/ch0
 			__COUT__ << "OutputSourceSelect = " << outputChannelSourceSelect << std::endl;
 			if(outputChannelSourceSelect) //if non-default, subtract 1 so choice 1 evaluates to 0, and so on..
 				--outputChannelSourceSelect;
@@ -690,6 +702,9 @@ void FENIMPlusInterface::configure(void)
 	}
 
 
+
+
+
 	//at this point sig_log should be active (for chipscope)
 
 
@@ -799,13 +814,16 @@ bool FENIMPlusInterface::running(void)
 		//must do channel 0 last!! (synchronously enables all 3 channels)
 		for(channelCount = 2; channelCount <= 2; --channelCount)
 		{
-			enable40MHzMask = usingOptionalParams && optionalLink.getNode("EnableClockMask" + outChannelNames[channelCount]).getValue<bool>();
+			enable40MHzMask = usingOptionalParams && optionalLink.getNode("EnableClockMask" +
+					outChannelNames[channelCount]).getValue<bool>();
 			gateChannelVetoSel = usingOptionalParams?
 					optionalLink.getNode("InputChannelVetoSourceForOutput" + outChannelNames[channelCount]).getValue<int>():
 					0;
 
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ channelCount==0?0x4:(0x18016 + channelCount - 1),/*data*/ (enable40MHzMask?0x0:0x8) | (gateChannelVetoSel <= 1?0:(1<<2))); //unreset output channel block
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer,
+					 channelCount==0?0x4:(0x18016 + channelCount - 1) /*address*/,
+					(enable40MHzMask?0x0:0x8) | (gateChannelVetoSel <= 1?0:(1<<2))/*data*/ ); //unreset output channel block
 			OtsUDPHardware::write(writeBuffer);
 		}
 
