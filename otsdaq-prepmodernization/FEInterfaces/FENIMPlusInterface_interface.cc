@@ -442,7 +442,7 @@ void FENIMPlusInterface::configure(void)
 		{
 			outputChannelSourceSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode(
 					"OutputSourceSelect" + channelName).getValue<unsigned int>(); //0: sig_log   or    1: sig_norm/ch0
-			__COUT__ << "OutputSourceSelect = " << outputChannelSourceSelect << std::endl;
+			__COUT__ << "OutputSourceSelect for " << channelName << " is " << outputChannelSourceSelect << std::endl;
 			if(outputChannelSourceSelect) //if non-default, subtract 1 so choice 1 evaluates to 0, and so on..
 				--outputChannelSourceSelect;
 			
@@ -455,6 +455,7 @@ void FENIMPlusInterface::configure(void)
 				outputPrescaleCount = optionalLink.getNode("OutputPrescaleCount" + channelName).getValue<unsigned int>();
 				outputBackpressureSelect = optionalLink.getNode("OutputBackpressureSelect" + channelName).getValue<bool>();
 				gateChannelVetoSel[channelCount] = optionalLink.getNode("InputChannelVetoSourceForOutput" + channelName).getValue<int>();
+				__COUT__ << "Raw gateChannelVetoSelect for " << channelName << " is " << gateChannelVetoSel[channelCount] << std::endl;
 				//0/1 := No Veto, 2-5 := Input_A-D		
 			
 			}
@@ -585,7 +586,10 @@ void FENIMPlusInterface::configure(void)
 			unsigned int logicSampleDelay = 0;
 			unsigned int gateChannel = 0;
 			unsigned int gateChannelReg = (gateChannelVetoSel[2]<<8) | (gateChannelVetoSel[1]<<4) | (gateChannelVetoSel[0]<<0); //nibbles ... 3:= delta-time, 2:= out-ch2, 1:= out-ch1, 0 := out-ch0
-				//value of 4 is no-gate
+			__COUT__ << "Gate Ch Veto Selections - 2: " << gateChannelVetoSel[2] << std::endl;
+			__COUT__ << "Gate Ch Veto Selections - 1: " << gateChannelVetoSel[1] << std::endl;
+			__COUT__ << "Gate Ch Veto Selections - 0: " << gateChannelVetoSel[0] << std::endl;
+			//value of 4 is no-gate
 				// 0-3 are input channels A-D depending on polarity
 
 
@@ -610,7 +614,11 @@ void FENIMPlusInterface::configure(void)
 			{
 				gateChannelReg |= 4<<12;
 			}
-
+			__COUT__ << "Gate Ch Veto Selections - Burst: " << gateChannel << std::endl;
+			std::bitset<16> gateChannelRegBitset (gateChannelReg);
+			__COUT__ << "Gate Ch Veto Register: " << gateChannelReg << std::endl;			
+			__COUT__ << "Gate Ch Veto Register: " << gateChannelRegBitset.to_string() << std::endl;
+			
 			writeBuffer.resize(0);
 			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x1800E, outputMuxSelect); //setup burst output mux select
 			OtsUDPHardware::write(writeBuffer);
