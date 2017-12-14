@@ -60,7 +60,7 @@
 				<COLUMN Type="YesNo" 	 Name="SignalGeneratorInvertPolarity" 	 StorageName="SIGNAL_GENERATOR_INVERT_POLARITY" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="YesNo" 	 Name="SignalGeneratorEnable" 	 StorageName="SIGNAL_GENERATOR_ENABLE" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="TrueFalse" 	 Name="EnableBurstData" 	 StorageName="ENABLE_BURST_DATA" 		DataType="VARCHAR2" 		DataChoices=""/>
-				<COLUMN Type="FixedChoiceData" 	 Name="BurstDataMuxSelect" 	 StorageName="BURST_DATA_MUX_SELECT" 		DataType="VARCHAR2" 		DataChoices="arbitraryBool=0,4-Channel%20Scope,Delta-Time%20Samples"/>
+				<COLUMN Type="FixedChoiceData" 	 Name="BurstDataMuxSelect" 	 StorageName="BURST_DATA_MUX_SELECT" 		DataType="VARCHAR2" 		DataChoices="arbitraryBool=0,Event%20Counters,4-Channel%20Scope,Delta-Time%20Samples"/>
 				<COLUMN Type="FixedChoiceData" 	 Name="BurstDataLogicSampleDelay" 	 StorageName="BURST_DATA_LOGIC_SAMPLE_DELAY" 		DataType="NUMBER" 		DataChoices="arbitraryBool=0"/>
 				<COLUMN Type="FixedChoiceData" 	 Name="BurstDataGateInputChannel" 	 StorageName="BURST_DATA_GATE_INPUT_CHANNEL" 		DataType="VARCHAR2" 		DataChoices="arbitraryBool=0,Input%20Channel-A,Input%20Channel-B,Input%20Channel-C,Input%20Channel-D"/>
 				<COLUMN Type="Comment" 	 Name="CommentDescription" 	 StorageName="COMMENT_DESCRIPTION" 		DataType="VARCHAR2" 		DataChoices=""/>

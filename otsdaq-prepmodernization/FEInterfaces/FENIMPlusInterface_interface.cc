@@ -619,29 +619,29 @@ void FENIMPlusInterface::configure(void)
 			__COUT__ << "Gate Ch Veto Register: " << gateChannelReg << std::endl;			
 			__COUT__ << "Gate Ch Veto Register: " << gateChannelRegBitset.to_string() << std::endl;
 			
-			writeBuffer.resize(0);
+
 			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x1800E, outputMuxSelect); //setup burst output mux select
 			OtsUDPHardware::write(writeBuffer);
-			writeBuffer.resize(0);
+
 			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18010, logicSampleDelay); //setup burst logic sample delay
 			OtsUDPHardware::write(writeBuffer);
-			writeBuffer.resize(0);
+
 			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18004, gateChannelReg); //setup burst block gate signal choice
 			OtsUDPHardware::write(writeBuffer);
 		}
 		
 		//selection logic setup
 		unsigned int coincidenceLogicWord = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("CoincidenceLogicWord").getValue<unsigned int>();
-		writeBuffer.resize(0);
+
 		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x06, 0x01); //reset selection logic
 		OtsUDPHardware::write(writeBuffer);
-		writeBuffer.resize(0);
+
 		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x06, 0x00); //disable selection logic, take out of reset
 		OtsUDPHardware::write(writeBuffer);
-		writeBuffer.resize(0);
+
 		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x07, coincidenceLogicWord); //setup selection logic
 		OtsUDPHardware::write(writeBuffer);
-		writeBuffer.resize(0);
+
 		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x06, 0x02); //renable selection  logic
 		OtsUDPHardware::write(writeBuffer);
 		__COUT__ << "Selection Logic word is  " << std::bitset<16>(coincidenceLogicWord) << std::endl;
