@@ -37,6 +37,8 @@ public:
 
 private:
     //void destroy          (void);
+
+    std::string 			runNumber_;
 };
 
 }

@@ -35,8 +35,11 @@ FENIMPlusInterface::FENIMPlusInterface(const std::string& interfaceUID, const Co
 		theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("HostIPAddress").getValue<std::string>()
 		, theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("HostPort").getValue<unsigned int>())
 , FEVInterface      (interfaceUID, theXDAQContextConfigTree, interfaceConfigurationPath)
-, OtsUDPHardware    (theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("InterfaceIPAddress").getValue<std::string>()
-		, theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("InterfacePort").getValue<unsigned int>())
+, OtsUDPHardware    (
+		theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("InterfaceIPAddress").getValue<std::string>()
+		, theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("InterfacePort").getValue<unsigned int>()
+		, -1 /*version*/
+		, true /*verbose*/)
 , OtsUDPFirmwareDataGen(theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("FirmwareVersion").getValue<unsigned int>())
 {
 	//    __COUT__ << "FE name: " << interfaceUID << std::endl;
@@ -747,9 +750,10 @@ void FENIMPlusInterface::resume(void)
 }
 
 //========================================================================================================================
-void FENIMPlusInterface::start(std::string )//runNumber)
+void FENIMPlusInterface::start(std::string runNumber)
 {
-	__COUT__ << "\tStart" << std::endl;
+	runNumber_ = runNumber;
+	__COUT__ << "\tStart " << runNumber_ << std::endl;
 	    std::string writeBuffer;
 
 	//Run Start Sequence Commands
@@ -761,13 +765,14 @@ void FENIMPlusInterface::start(std::string )//runNumber)
 			!optionalLink.isDisconnected();
 
 	if(usingOptionalParams && optionalLink.getNode("EnableBurstData").getValue<bool>())
-		//OtsUDPHardware::write(
+	{
+		__COUT__ << "Enabling burst mode!" << __E__;
 		OtsUDPFirmwareCore::startBurst(writeBuffer);
-		//);
+		OtsUDPHardware::write(writeBuffer);
+	}
 
 
 	//enable nim plus burst data
-	writeBuffer.resize(0);
 	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x1801F, /*data*/0x6);
 	OtsUDPHardware::write(writeBuffer);
 }
@@ -776,16 +781,67 @@ void FENIMPlusInterface::start(std::string )//runNumber)
 void FENIMPlusInterface::stop(void)
 {
 	__COUT__ << "\tStop" << std::endl;
-	    std::string writeBuffer;
+
+	std::string writeBuffer;
 	//Run Stop Sequence Commands
 
 	//runSequenceOfCommands("LinkToStopSequence");
-
-	//OtsUDPHardware::write(
-	OtsUDPFirmwareCore::stopBurst(writeBuffer);
-	//);
-
 	
+	//attempt to stop burst always
+	OtsUDPFirmwareCore::stopBurst(writeBuffer);
+	OtsUDPHardware::write(writeBuffer);
+
+	std::string filename = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode(
+			"TriggerCountAtRunStopFilename").getValue<std::string>();
+
+	if(filename != "DEFAULT" && filename != "")
+	{
+		filename +=	"_" + runNumber_ + ".cnt";
+
+		__COUT__ << "Attempting to save counts to " << filename << __E__;
+		FILE *fp = fopen(//("/data/TestBeam/2017_12_December/NimPlus/TriggerCount_" +
+				//runNumber_ + ".cnt").c_str()
+				filename.c_str()
+				,"w");
+		if(fp)
+		{
+			__COUT__ << "Saving counts to " << filename << __E__;
+			std::string readBuffer;
+			OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x814,1 /*size*/);
+			OtsUDPHardware::read(writeBuffer,readBuffer);
+
+			unsigned int count;
+			std::memcpy(&count,readBuffer.substr(2).c_str(),
+					4);
+			__COUT__ << "count " << count << std::endl;
+			fprintf(fp,"%d 0x%4.4X\n",count,count);
+
+
+
+			OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x804,1 /*size*/);
+			OtsUDPHardware::read(writeBuffer,readBuffer);
+			std::memcpy(&count,readBuffer.substr(2).c_str(),
+					4);
+			__COUT__ << "out0 count " << count << std::endl;
+			fprintf(fp,"out0count %d 0x%4.4X\n",count,count);
+			OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x814,1 /*size*/);
+			OtsUDPHardware::read(writeBuffer,readBuffer);
+			std::memcpy(&count,readBuffer.substr(2).c_str(),
+					4);
+			__COUT__ << "out1 count " << count << std::endl;
+			fprintf(fp,"out1count %d 0x%4.4X\n",count,count);
+			OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x824,1 /*size*/);
+			OtsUDPHardware::read(writeBuffer,readBuffer);
+			std::memcpy(&count,readBuffer.substr(2).c_str(),
+					4);
+			__COUT__ << "out2 count " << count << std::endl;
+			fprintf(fp,"out2count %d 0x%4.4X\n",count,count);
+
+			fclose(fp);
+		}
+	}
+
+
 
 	//there are 3 output channels (alias: signorm, sigcms1, sigcms2)
 
