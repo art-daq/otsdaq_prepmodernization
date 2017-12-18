@@ -783,6 +783,7 @@ void FENIMPlusInterface::stop(void)
 	__COUT__ << "\tStop" << std::endl;
 
 	std::string writeBuffer;
+	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
 	//Run Stop Sequence Commands
 
 	//runSequenceOfCommands("LinkToStopSequence");
@@ -790,9 +791,11 @@ void FENIMPlusInterface::stop(void)
 	//attempt to stop burst always
 	OtsUDPFirmwareCore::stopBurst(writeBuffer);
 	OtsUDPHardware::write(writeBuffer);
+	
+	
 
-	std::string filename = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode(
-			"TriggerCountAtRunStopFilename").getValue<std::string>();
+	std::string filename = //theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode(
+			optionalLink.getNode("TriggerCountAtRunStopFilename").getValue<std::string>();
 
 	if(filename != "DEFAULT" && filename != "")
 	{
