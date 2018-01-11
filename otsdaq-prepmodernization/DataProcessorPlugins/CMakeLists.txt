@@ -5,6 +5,12 @@ simple_plugin(BurstDataAndTimeSaverConsumer "processor"
 	${CETLIB}
 	WorkLoopManager
   )
+  
+simple_plugin(NimStreamConsumer "processor"
+	DataManager
+	${CETLIB}
+	WorkLoopManager
+  )  
 
 
 

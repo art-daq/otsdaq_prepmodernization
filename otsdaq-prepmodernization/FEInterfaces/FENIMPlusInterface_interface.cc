@@ -783,6 +783,7 @@ void FENIMPlusInterface::stop(void)
 	__COUT__ << "\tStop" << std::endl;
 
 	std::string writeBuffer;
+	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
 	//Run Stop Sequence Commands
 
 	//runSequenceOfCommands("LinkToStopSequence");
@@ -791,8 +792,19 @@ void FENIMPlusInterface::stop(void)
 	OtsUDPFirmwareCore::stopBurst(writeBuffer);
 	OtsUDPHardware::write(writeBuffer);
 
+	//there are 3 output channels (alias: signorm, sigcms1, sigcms2)
+
+	writeBuffer.resize(0);
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x4, /*data*/0x33);//only reset signorm  0x33); //reset output channel blocks synchronously
+	OtsUDPHardware::write(writeBuffer);
+	
+
 	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
-	if(!optionalLink.isDisconnected())
+	if(optionalLink.isDisconnected()) return;
+	std::string filename = //theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode(
+			optionalLink.getNode("TriggerCountAtRunStopFilename").getValue<std::string>();
+
+	if(filename != "DEFAULT" && filename != "")
 	{
 
 		std::string filename = optionalLink.getNode(
@@ -848,11 +860,6 @@ void FENIMPlusInterface::stop(void)
 
 
 
-	//there are 3 output channels (alias: signorm, sigcms1, sigcms2)
-
-	writeBuffer.resize(0);
-	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x4, /*data*/0x33);//only reset signorm  0x33); //reset output channel blocks synchronously
-	OtsUDPHardware::write(writeBuffer);	      
 }
 
 //========================================================================================================================
