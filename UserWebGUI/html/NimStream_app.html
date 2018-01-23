@@ -22,14 +22,15 @@
             cursor: pointer;
         }
         
-        canvas {
+
+/*    canvas {
 	  position: absolute;
 	  width: 100%;
 	  height: 100%;
 	  top: 0;
 	  left: 0;
 	  z-index: -1;
-	}
+	} */
 
     </style>
     
@@ -44,61 +45,40 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="../js/jquery.mask.min.js"></script>
+    <script src="../js/jscolor.min.js"></script>
+
+
+
     
     
     <script src="../js/NimStream_app.js" defer></script>
-    
-    
- <!---   <script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) {
-	var x = 1, y = 0, z = 0, t=0;
-	function onTick(timestamp)
-	{
-		var ctx = document.getElementById('canvas').getContext('2d');
-		//ctx.clearRect(0, 0, 300, 300);
-        ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
-        ctx.fillRect(0, 0, 300, 300);
-		ctx.fillStyle = 'white';
-		var cx = 150;
-		var cy = 150;
-		var r = 5;
-		var now = timestamp * 0.001;
-		var dt = now - t;
-		t = now;
-		if (dt > 0.1)
-			dt = 0.1;
-		// Lorenz attractor
-		var sigma = 10, rho=28, beta=8/3;
-		var dxdt = sigma*(y-x);
-		var dydt = x*(rho-z)-y;
-		var dzdt = x*y-beta*z;
-		x += dt*dxdt;
-		y += dt*dydt;
-		z += dt*dzdt;
-		
-		var drawx = cx + r*x;
-		var drawy = cy + r*y;
-		var rdot = 2;
-		ctx.beginPath();
-		ctx.arc(drawx, drawy, rdot, 0, 2 * Math.PI, true);
-		ctx.fill();
-		requestAnimationFrame(onTick);		
-	}
-	requestAnimationFrame(onTick);
-  });
-</script> --->
-    		
     		
 </head> 
+
 </html>
     <h1>NimPLUS Remote Scope</h1>	
-		<div class='mainBlock' id='block1'>
-		  <canvas id="canvas1" style="border:1px solid red;"></canvas>
+		<p><div class='mainBlock' id='block1' style="position:relative; display:block;">
+		  <canvas id="canvas1Grid"
+		  style="position:absolute; left: 0; top: 0; z-index: 1;"></canvas>
+		  <canvas id="canvas1"
+		  style="position:absolute; left: 0; top: 0; z-index: 2;"></canvas> 
+		  <input id="color3" class="jscolor {closable:true,closeText:'Close',hash:true}" value="ff3300">		  
 		</div>
-		<div class='mainBlock' id='block2'>
-		<canvas id="canvas2" style="border:1px solid green;"></canvas>
+		<div><br></div>
+		<p><div class='mainBlock' id='block2' style="position:relative; display:block;">
+		  <canvas id="canvas2Grid"
+		   style="position:absolute; left: 0; top: 0; z-index: 1;"></canvas>
+		  <canvas id="canvas2"
+		   style="position:absolute; left: 0; top: 0; z-index: 2;"></canvas>		  
+		   <input id="color3" class="jscolor {closable:true,closeText:'Close',hash:true}" value="ff3300">		  
 		</div>
-		<div class='mainBlock' id='block3'>
-		<canvas id="canvas3" style="border:1px solid blue;"></canvas>
+		<div><br></div>
+		<p><div class='mainBlock' id='block3' style="position:relative; display:block;">
+		  <canvas id="canvas3Grid"
+		  style="position:absolute; left: 0; top: 0; z-index: 1;"></canvas>
+		  <canvas id="canvas3"
+		  style="position:absolute; left: 0; top: 0; z-index: 2;"></canvas>		  
+		  <input id="color3" class="jscolor {closable:true,closeText:'Close',hash:true}" value="ff3300">		  
 		</div>
 		<div class='mainBlock' id='block4'></div>
 				
