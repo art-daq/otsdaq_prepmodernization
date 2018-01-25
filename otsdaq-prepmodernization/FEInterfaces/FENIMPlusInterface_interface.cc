@@ -793,74 +793,77 @@ void FENIMPlusInterface::stop(void)
 	OtsUDPFirmwareCore::stopBurst(writeBuffer);
 	OtsUDPHardware::write(writeBuffer);
 
+
+	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
+	if(!optionalLink.isDisconnected())
+	{
+
+
+
+		std::string filename = //theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode(
+				optionalLink.getNode("TriggerCountAtRunStopFilename").getValue<std::string>();
+
+		if(filename != "DEFAULT" && filename != "")
+		{
+
+			std::string filename = optionalLink.getNode(
+					"TriggerCountAtRunStopFilename").getValue<std::string>();
+
+			if(filename != "DEFAULT" && filename != "")
+			{
+				filename +=	"_" + runNumber_ + ".cnt";
+
+				__COUT__ << "Attempting to save counts to " << filename << __E__;
+				FILE *fp = fopen(//("/data/TestBeam/2017_12_December/NimPlus/TriggerCount_" +
+						//runNumber_ + ".cnt").c_str()
+						filename.c_str()
+						,"w");
+				if(fp)
+				{
+					__COUT__ << "Saving counts to " << filename << __E__;
+					std::string readBuffer;
+					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x814,1 /*size*/);
+					OtsUDPHardware::read(writeBuffer,readBuffer);
+
+					unsigned int count;
+					std::memcpy(&count,readBuffer.substr(2).c_str(),
+							4);
+					__COUT__ << "count " << count << std::endl;
+					fprintf(fp,"%d 0x%4.4X\n",count,count);
+
+
+
+					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x804,1 /*size*/);
+					OtsUDPHardware::read(writeBuffer,readBuffer);
+					std::memcpy(&count,readBuffer.substr(2).c_str(),
+							4);
+					__COUT__ << "out0 count " << count << std::endl;
+					fprintf(fp,"out0count %d 0x%4.4X\n",count,count);
+					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x814,1 /*size*/);
+					OtsUDPHardware::read(writeBuffer,readBuffer);
+					std::memcpy(&count,readBuffer.substr(2).c_str(),
+							4);
+					__COUT__ << "out1 count " << count << std::endl;
+					fprintf(fp,"out1count %d 0x%4.4X\n",count,count);
+					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x824,1 /*size*/);
+					OtsUDPHardware::read(writeBuffer,readBuffer);
+					std::memcpy(&count,readBuffer.substr(2).c_str(),
+							4);
+					__COUT__ << "out2 count " << count << std::endl;
+					fprintf(fp,"out2count %d 0x%4.4X\n",count,count);
+
+					fclose(fp);
+				}
+			}
+		}
+	}
+
+
 	//there are 3 output channels (alias: signorm, sigcms1, sigcms2)
 
 	writeBuffer.resize(0);
 	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x4, /*data*/0x33);//only reset signorm  0x33); //reset output channel blocks synchronously
 	OtsUDPHardware::write(writeBuffer);
-	
-
-	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
-	if(optionalLink.isDisconnected()) return;
-
-
-	std::string filename = //theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode(
-			optionalLink.getNode("TriggerCountAtRunStopFilename").getValue<std::string>();
-
-	if(filename != "DEFAULT" && filename != "")
-	{
-
-		std::string filename = optionalLink.getNode(
-				"TriggerCountAtRunStopFilename").getValue<std::string>();
-
-		if(filename != "DEFAULT" && filename != "")
-		{
-			filename +=	"_" + runNumber_ + ".cnt";
-
-			__COUT__ << "Attempting to save counts to " << filename << __E__;
-			FILE *fp = fopen(//("/data/TestBeam/2017_12_December/NimPlus/TriggerCount_" +
-					//runNumber_ + ".cnt").c_str()
-					filename.c_str()
-					,"w");
-			if(fp)
-			{
-				__COUT__ << "Saving counts to " << filename << __E__;
-				std::string readBuffer;
-				OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x814,1 /*size*/);
-				OtsUDPHardware::read(writeBuffer,readBuffer);
-
-				unsigned int count;
-				std::memcpy(&count,readBuffer.substr(2).c_str(),
-						4);
-				__COUT__ << "count " << count << std::endl;
-				fprintf(fp,"%d 0x%4.4X\n",count,count);
-
-
-
-				OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x804,1 /*size*/);
-				OtsUDPHardware::read(writeBuffer,readBuffer);
-				std::memcpy(&count,readBuffer.substr(2).c_str(),
-						4);
-				__COUT__ << "out0 count " << count << std::endl;
-				fprintf(fp,"out0count %d 0x%4.4X\n",count,count);
-				OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x814,1 /*size*/);
-				OtsUDPHardware::read(writeBuffer,readBuffer);
-				std::memcpy(&count,readBuffer.substr(2).c_str(),
-						4);
-				__COUT__ << "out1 count " << count << std::endl;
-				fprintf(fp,"out1count %d 0x%4.4X\n",count,count);
-				OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x824,1 /*size*/);
-				OtsUDPHardware::read(writeBuffer,readBuffer);
-				std::memcpy(&count,readBuffer.substr(2).c_str(),
-						4);
-				__COUT__ << "out2 count " << count << std::endl;
-				fprintf(fp,"out2count %d 0x%4.4X\n",count,count);
-
-				fclose(fp);
-			}
-		}
-	}
-
 
 
 }
