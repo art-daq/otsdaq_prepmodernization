@@ -16,15 +16,10 @@
 	//init()					
 	
 //top-level scope (global) variables:
-var block1El;
-var block2El;
-var block3El;
-var block4El;
-    
-block1El = document.getElementById('block1');//red
-block2El = document.getElementById('block2');//yellow
-block3El = document.getElementById('block3');//blue
-block4El = document.getElementById('block4');//green
+var block1El = document.getElementById('block1');//red
+var block2El = document.getElementById('block2');//yellow
+var block3El = document.getElementById('block3');//blue
+var block4El = document.getElementById('block4');//green
 
   
 var canvas1 = document.getElementById("canvas1"),
@@ -40,14 +35,35 @@ var canvas1 = document.getElementById("canvas1"),
     canvas3Grid = document.getElementById("canvas3Grid"),
     ctx3Grid = canvas3Grid.getContext("2d");    
 
+var color1 = document.getElementById('color1');
+var color2 = document.getElementById('color2');
+var color3 = document.getElementById('color3');
+
+var gblAlpha1 = document.getElementById('gblAlpha1');
+var gblAlpha2 = document.getElementById('gblAlpha2');
+var gblAlpha3 = document.getElementById('gblAlpha3');
+    
+    
 // X,Y Coords in Pixels, 0,0 is top left corner of canvas
-var sigHighHeight = 150;
-var sigLowHeight = 300;
-var sigWidth = 20;
-var vertDivs = 12;
+var defaultSigHighHeight = 150;
+var defaultSigLowHeight = 300;
+var defaultSigWidth = 20;
+var defaultVertDivs = 12;
+var defaultGblAlpha = 0.1;
+var defaultTimeoutval = 150;
 
+var sigHighHeight1 = 150,
+    sigLowHeight1 = 300,
+    sigWidth1 = 20;
 
+var sigHighHeight2 = 150,
+    sigLowHeight2 = 300,
+    sigWidth2 = 20;
 
+var sigHighHeight3 = 150,
+    sigLowHeight3 = 300,
+    sigWidth3 = 20;
+    
 canvas1.width = canvas1.style.width = sigWidth*32;
 canvas1.height = canvas1.style.height = sigLowHeight;
   
@@ -135,44 +151,29 @@ function pxCheck(pxData){
   fadeOut()
   
   Function:
-    "Fades out" pulses over time simalar to a phospherous oscilloscope 
+    "Fades out" pulses over time simalar to a phospherous oscilloscope by compositing out the previously drawn lines with a amount of transparency
   
   args:
     ctxVar - the 2D context of the canvas that the fade effect should be applied to
     canvasVar - the canvas that the 2D Context that's being faded out resides in
+    gblAlphaVar - global alpha value, controls the strength of the fade. Lower the value, higher the "persistance"
+    timeoutval - controls the frequency that the canvas is "faded out" at. Recommended to leave low to keep fade out smooth
+		 and modify the gblAlpha value to change persistance
  */
-function fadeOut(ctxVar,canvasVar) {
+function fadeOut(ctxVar,canvasVar,gblAlphaVar,timeoutVal) {
   //https://stackoverflow.com/questions/27082720/html5-apply-transparency-to-canvas-after-drawing-through-javascript
   ctxVar.save();
-  ctxVar.globalAlpha = 0.1;
+  ctxVar.globalAlpha = gblAlphaVar.value;
   ctxVar.globalCompositeOperation='destination-out'; 
   ctxVar.fillStyle= '#FFF';
   ctxVar.fillRect(0,0,canvasVar.width, canvasVar.height);    
   ctxVar.restore();   
   
   return setTimeout(function() {
-    fadeOut(ctxVar,canvasVar);
-    },150);//Tune timeout value (in ms) to adjust rate of fade out, lower will update more often and fade faster
+    fadeOut(ctxVar,canvasVar,gblAlphaVar,timeoutVal);
+    },timeoutVal);//Tune timeout value (in ms) to adjust rate of fade out, lower will update more often and fade faster
   }
   
-
-  //Old Fade out for a single canvas with bg/path, does not work for current multi-layered implementation
-  /*
-  var highPx = ctxVar.getImageData(sigWidth/2,sigHighHeight,1,1).data; // get pixel from where a "high" signal would be
-  var lowPx = ctxVar.getImageData(sigWidth/2,sigLowHeight,1,1).data; //get a pixel from where a "low" signal would be
-  
-  if(!pxCheck(highPx) || !pxCheck(lowPx)){ //if neither pixel is white, fill whole canvas with a (very transparent) white rectange to "fade out" the drawn pulses
-    ctxVar.fillStyle = "rgba(255,255,255,0.08)"; //Tune 'a' (transparency) value of rgba to adjust rate of fade out, lower is slower
-    ctxVar.fillRect(0, 0, canvasVar.width, canvasVar.height);
-    return setTimeout(function() {
-    fadeOut(ctxVar,canvasVar);
-    },100);//Tune timeout value (in ms) to adjust rate of fade out, lower will update more often and fade faster
-  }
-  else{
-    return;
-  }
- */ 
-
 
 /*
   drawGrid()
@@ -186,23 +187,30 @@ function fadeOut(ctxVar,canvasVar) {
     strokeColor - desired color/style of the grid, accepts any valid CSS "style" string
     ctxVar - 2D context to draw grid on
     canvasVar - the canvas that the 2D Context to draw the grid on resides in
+    vertDivs - Vertical divisons of the grid
 
 */  
-function drawGrid(strokeColor,ctxVar,canvasVar){
+function drawGrid(strokeColor,ctxVar,canvasVar,vertDivs){
+  //reset the canvas to a blank (white) slate
+  ctxVar.clearRect(0, 0, canvasVar.width, canvasVar.height);
+  ctxVar.fillStyle = "white"; 
+  ctxVar.fillRect(0, 0, canvasVar.width, canvasVar.height); 
   
-  for (var x =0; x <= canvasVar.width; x += sigWidth){
+  //draw the grid
+  ctxVar.beginPath();
+  for (var x =0; x <= canvasVar.width; x += sigWidth){ //draw vertical lines
     ctxVar.moveTo(0.5 + x, 0);
     ctxVar.lineTo(0.5 + x, canvasVar.height);
   }
   
-  for (var x=0; x <= canvasVar.height; x += (sigLowHeight/vertDivs)){
+  for (var x=0; x <= canvasVar.height; x += (sigLowHeight/vertDivs)){ //draw horizontal lines
     ctxVar.moveTo(0,0.5+x);
     ctxVar.lineTo(canvasVar.width, 0.5 + x); 
   }
   
   ctxVar.strokeStyle = strokeColor;
   ctxVar.stroke();
-  
+  ctxVar.closePath();
   
 }  
 
@@ -220,9 +228,11 @@ function drawGrid(strokeColor,ctxVar,canvasVar){
     ctxVar - the 2D context of the canvas that the path will be drawn in
  
  */
-function drawScope(scopeArr,strokeColor,ctxVar){
+function drawScope(scopeArr,strokeColor,ctxVar,sigWidth,sigLowHeight,sigHighHeight){
   var lastHeight = 0;
+  
   ctxVar.beginPath();
+  
   if(scopeArr[0]=="1"){
     lastHeight = sigHighHeight+5;
     ctxVar.moveTo(0,lastHeight);
@@ -255,36 +265,39 @@ function drawScope(scopeArr,strokeColor,ctxVar){
   }
   ctxVar.strokeStyle=strokeColor;
   ctxVar.stroke();
-  //fadeOut(ctxVar); //Potentially remove when getting constant updates? might spawn multiple instances and fade faster/overload browser?
+  ctxVar.closePath();
 }
+
+
+function chan
+
 
 
 //Dummy Data functions to test drawing features
 function keepDrawing1() {
-  drawScope("1010101010101011110000","red", ctx1);
+  drawScope("1010101010101011110000", color1.value, ctx1, SigWidth1, SigLowHeight1, SigHighHeight1);
   setTimeout(keepDrawing1,1500);
 }
 
 function keepDrawing2() {
-  drawScope("0001101000101011010101","green", ctx2);  
+  drawScope("0001101000101011010101", color2.value, ctx2, SigWidth2, SigLowHeight2, SigHighHeight2);  
   setTimeout(keepDrawing2,2500);
 }
 
-
 function keepDrawing3() {
-  drawScope("1101010010101110100010","blue", ctx3);
+  drawScope("1101010010101110100010", color3.value, ctx3, SigWidth3, SigLowHeight3, SigHighHeight3);
   setTimeout(keepDrawing3,7000);
 }
 
-drawGrid("lightgray",ctx1Grid,canvas1Grid);
-drawGrid("lightgray",ctx2Grid,canvas2Grid);
-drawGrid("lightgray",ctx3Grid,canvas3Grid);
+drawGrid("lightgray",ctx1Grid,canvas1Grid,defaultVertDivs);
+drawGrid("lightgray",ctx2Grid,canvas2Grid,defaultVertDivs);
+drawGrid("lightgray",ctx3Grid,canvas3Grid,defaultVertDivs);
 keepDrawing1();
 keepDrawing2();
 keepDrawing3();
-fadeOut(ctx1,canvas1);
-fadeOut(ctx2,canvas2);
-fadeOut(ctx3,canvas3);
+fadeOut(ctx1,canvas1,gblAlpha1,defaultTimeoutval);
+fadeOut(ctx2,canvas2,gblAlpha2,defaultTimeoutval);
+fadeOut(ctx3,canvas3,gblAlpha3,defaultTimeoutval);
 //$(document).ready(getData());	
 	
 
