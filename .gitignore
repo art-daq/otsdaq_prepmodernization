@@ -3,3 +3,7 @@ obj
 *.vcxproj*
 *~
 \#*\#
+NoGitData/
+NoGitDatabases/
+UserWebGUI/UserWebGUI
+prepmodenization_installed
