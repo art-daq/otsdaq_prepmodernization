@@ -2,7 +2,7 @@
 #include "otsdaq-core/MessageFacility/MessageFacility.h"
 #include "otsdaq-core/Macros/CoutHeaderMacros.h"
 #include "otsdaq-core/Macros/InterfacePluginMacros.h"
-#include <iostream>
+#include <iostream>     // std::cout, std::dec, std::hex, std::oct
 #include <set>
 #include <stdint.h>
 #include <bitset>
@@ -780,9 +780,17 @@ void FENIMPlusInterface::start(std::string runNumber)
 //========================================================================================================================
 void FENIMPlusInterface::stop(void)
 {
+	std::string writeBuffer;
+	//immediately stop triggers (by disabling sig log)
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer,
+			0x6 /*address*/,
+			(sel_ctl_register_) & (~(1<<1))); //disable sig mod block
+	OtsUDPHardware::write(writeBuffer);
+
+
+
 	__COUT__ << "\tStop" << std::endl;
 
-	std::string writeBuffer;
 
 
 	//Run Stop Sequence Commands
@@ -821,36 +829,63 @@ void FENIMPlusInterface::stop(void)
 				if(fp)
 				{
 					__COUT__ << "Saving counts to " << filename << __E__;
-					std::string readBuffer;
-					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x814,1 /*size*/);
-					OtsUDPHardware::read(writeBuffer,readBuffer);
+					//std::string readBuffer;
+					uint64_t readQuadWord;
+					uint32_t count;
 
-					unsigned int count;
-					std::memcpy(&count,readBuffer.substr(2).c_str(),
-							4);
-					__COUT__ << "count " << count << std::endl;
-					fprintf(fp,"%d 0x%4.4X\n",count,count);
+					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x102);
+					OtsUDPHardware::read(writeBuffer,readQuadWord);
+
+					count = (readQuadWord >> 32);
+					__COUT__ << "sig_log count = " << count << __E__;
+					fprintf(fp,"sig_log %d 0x%4.4X\n",count,count);
+
+					count = (readQuadWord & 0x0FFFF);
+					__COUT__ << "sig_norm(out0) count = " << count << __E__;
+					fprintf(fp,"sig_norm(out0) %d 0x%4.4X\n",count,count);
+
+
+					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x100);
+					OtsUDPHardware::read(writeBuffer,readQuadWord);
+
+					count = (readQuadWord & 0x0FFFF);
+					__COUT__ << "sig_cms1(out1) count = " << count << __E__;
+					fprintf(fp,"sig_cms1(out1) %d 0x%4.4X\n",count,count);
+
+					count = (readQuadWord >> 32);
+					__COUT__ << "sig_cms2(out2) count = " << count << __E__;
+					fprintf(fp,"sig_cms2(out2) %d 0x%4.4X\n",count,count);
 
 
 
-					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x804,1 /*size*/);
-					OtsUDPHardware::read(writeBuffer,readBuffer);
-					std::memcpy(&count,readBuffer.substr(2).c_str(),
-							4);
-					__COUT__ << "out0 count " << count << std::endl;
-					fprintf(fp,"out0count %d 0x%4.4X\n",count,count);
-					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x814,1 /*size*/);
-					OtsUDPHardware::read(writeBuffer,readBuffer);
-					std::memcpy(&count,readBuffer.substr(2).c_str(),
-							4);
-					__COUT__ << "out1 count " << count << std::endl;
-					fprintf(fp,"out1count %d 0x%4.4X\n",count,count);
-					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x824,1 /*size*/);
-					OtsUDPHardware::read(writeBuffer,readBuffer);
-					std::memcpy(&count,readBuffer.substr(2).c_str(),
-							4);
-					__COUT__ << "out2 count " << count << std::endl;
-					fprintf(fp,"out2count %d 0x%4.4X\n",count,count);
+//					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x100);
+//					OtsUDPHardware::read(writeBuffer,readQuadWord);
+//
+//					__COUT__ << "out1 count = " << (readQuadWord >> 32) << __E__;
+//					__COUT__ << "out1 count = " << (readQuadWord & 0x0FFFF) << __E__;
+//
+//					fprintf(fp,"out1count %d 0x%4.4X\n",(readQuadWord >> 32),(readQuadWord >> 32));
+//					fprintf(fp,"out1count %d 0x%4.4X\n",(readQuadWord & 0x0FFFF),(readQuadWord & 0x0FFFF));
+//
+//
+//					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x100);
+//					OtsUDPHardware::read(writeBuffer,readQuadWord);
+//					std::memcpy(&count,readBuffer.substr(2).c_str(),
+//							4);
+//					__COUT__ << "out0 count " << count << std::endl;
+//					fprintf(fp,"out0count %d 0x%4.4X\n",count,count);
+//					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x814,1 /*size*/);
+//					OtsUDPHardware::read(writeBuffer,readBuffer);
+//					std::memcpy(&count,readBuffer.substr(2).c_str(),
+//							4);
+//					__COUT__ << "out1 count " << count << std::endl;
+//					fprintf(fp,"out1count %d 0x%4.4X\n",count,count);
+//					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x824,1 /*size*/);
+//					OtsUDPHardware::read(writeBuffer,readBuffer);
+//					std::memcpy(&count,readBuffer.substr(2).c_str(),
+//							4);
+//					__COUT__ << "out2 count " << count << std::endl;
+//					fprintf(fp,"out2count %d 0x%4.4X\n",count,count);
 
 					fclose(fp);
 				}
@@ -871,8 +906,55 @@ void FENIMPlusInterface::stop(void)
 //========================================================================================================================
 bool FENIMPlusInterface::running(void)
 {
+	std::string writeBuffer;
+
+
+	__COUT__ << "Disabling sig_log" << std::endl;
+
+
+	OtsUDPFirmwareCore::readAdvanced(writeBuffer,
+			10 /*address*/); //read back sig log
+	OtsUDPHardware::read(writeBuffer,sel_ctl_register_);
+
+	__COUT__ << "receiveQuadWord all = 0x" << std::hex <<
+			sel_ctl_register_ << std::dec << std::endl;
+
+	sel_ctl_register_ = ((sel_ctl_register_>>(5*8))&0x0FF);
+
+	__COUT__ << "receiveQuadWord sel_ctl = 0x" << std::hex <<
+			sel_ctl_register_ << std::dec << std::endl;
+
+
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer,
+			0x6 /*address*/,
+			(sel_ctl_register_) & (~(1<<1))); //disable sig mod block
+	OtsUDPHardware::write(writeBuffer);
+
+
+	__COUT__ << "Resetting all counters (including sig log)" << std::endl;
+	//0x18000 ==> counter resets
+
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer,
+			0x18000 /*address*/,
+			(-1)&(~(1<<6))/*data*/ ); //reset sig_log and sig_norm/cms1/cms2 counters (just not bit 6 which is acc_sync block reset)
+	OtsUDPHardware::write(writeBuffer);
+
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer,
+			0x18000 /*address*/,
+			0 /*data*/ ); //unreset sig_log and sig_norm/cms1/cms2 counters (just not bit 6 which is acc_sync block reset)
+	OtsUDPHardware::write(writeBuffer);
+
+
+
+	////////////////////////////////
+	////////////////////////////////
+	// long sleep so trigger numbers match
 	sleep(22);
-	__COUT__ << "\running" << std::endl;
+
+
+
+
+	__COUT__ << "Running" << std::endl;
 
 	//		//example!
 	//		//play with array of 8 LEDs at address 0x1003
@@ -880,7 +962,7 @@ bool FENIMPlusInterface::running(void)
 	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
 	bool usingOptionalParams =
 			!optionalLink.isDisconnected();
-	std::string writeBuffer;
+
 	// 0x0/0x8 to 0x4 to use edge detection
 	try
 	{
@@ -909,11 +991,19 @@ bool FENIMPlusInterface::running(void)
 			OtsUDPHardware::write(writeBuffer);
 		}
 
+		__COUT__ << "Enabling sig mod block!" << __E__;
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer,
+				0x6 /*address*/,
+				sel_ctl_register_); //enable sig mod block and restore original register value
+		OtsUDPHardware::write(writeBuffer);
+
 
 	}
 	catch(const std::runtime_error &e)
 	{
-		__COUT__ << "Failed start setup!\n" << e.what() << std::endl;
+		__SS__ << "Failed start setup!\n" << e.what() << std::endl;
+		__COUT_ERR__ << ss.str();
+		throw std::runtime_error(ss.str());
 	}
 
 	return false;

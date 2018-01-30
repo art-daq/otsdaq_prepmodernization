@@ -39,6 +39,7 @@ private:
     //void destroy          (void);
 
     std::string 			runNumber_;
+	uint64_t 				sel_ctl_register_;
 };
 
 }
