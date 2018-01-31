@@ -713,10 +713,22 @@ void FENIMPlusInterface::configure(void)
 	}
 
 
+	//now that configure done, save sel_ctl_register_ for later
+	OtsUDPFirmwareCore::readAdvanced(writeBuffer,
+			10 /*address*/); //read back sig log
+	OtsUDPHardware::read(writeBuffer,sel_ctl_register_);
+
+	__COUT__ << "receiveQuadWord all = 0x" << std::hex <<
+			sel_ctl_register_ << std::dec << std::endl;
+
+	sel_ctl_register_ = ((sel_ctl_register_>>(5*8))&0x0FF);
+
+	__COUT__ << "sel_ctl_register_ = 0x" << std::hex <<
+			sel_ctl_register_ << std::dec << std::endl;
 
 
 
-	//at this point sig_log should be active (for chipscope)
+	//at this point sig_log should be active (for chipscope, and recognizing of trigger input active)
 
 
 	__COUT__ << "Done with configuring."  << std::endl;
@@ -911,20 +923,6 @@ bool FENIMPlusInterface::running(void)
 
 	__COUT__ << "Disabling sig_log" << std::endl;
 
-
-	OtsUDPFirmwareCore::readAdvanced(writeBuffer,
-			10 /*address*/); //read back sig log
-	OtsUDPHardware::read(writeBuffer,sel_ctl_register_);
-
-	__COUT__ << "receiveQuadWord all = 0x" << std::hex <<
-			sel_ctl_register_ << std::dec << std::endl;
-
-	sel_ctl_register_ = ((sel_ctl_register_>>(5*8))&0x0FF);
-
-	__COUT__ << "receiveQuadWord sel_ctl = 0x" << std::hex <<
-			sel_ctl_register_ << std::dec << std::endl;
-
-
 	OtsUDPFirmwareCore::writeAdvanced(writeBuffer,
 			0x6 /*address*/,
 			(sel_ctl_register_) & (~(1<<1))); //disable sig mod block
@@ -949,7 +947,7 @@ bool FENIMPlusInterface::running(void)
 	////////////////////////////////
 	////////////////////////////////
 	// long sleep so trigger numbers match
-	sleep(22);
+	sleep(1);//sleep(22);
 
 
 
