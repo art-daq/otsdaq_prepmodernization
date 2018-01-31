@@ -538,8 +538,12 @@ void FENIMPlusInterface::configure(void)
 		channelCount = 0;
 		for(const auto &channelName : channelNames)
 		{
-			outputMuxSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("OutputMuxSelect" + channelName).getValue<unsigned int>();
+			outputMuxSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode(
+					"OutputMuxSelect" + channelName).getValue<unsigned int>();
+			if(outputMuxSelect) --outputMuxSelect; //default is 0, the actual selection address for all other choices is 1 higher
+
 			if(outputMuxSelect > 31) {__SS__; throw std::runtime_error(ss.str() + "Invalid output mux select!");}
+
 			if(usingOptionalParams)
 			{
 			  outputInvertPolarity = usingOptionalParams && optionalLink.getNode("InvertPolarityOutput" + channelName).getValue<bool>();
@@ -548,26 +552,6 @@ void FENIMPlusInterface::configure(void)
 			else {
 			  outputPolarityMask = 0xF;
 			}
-/* Let any mux selection through so the Test/Debug mux can be used, along with other mux selections, add "used advanced mux?" selector on JS app?
-			//default value is 0 := channel-0, 1:= ch1, 2:= ch2, 3:=ground
-			if(channelCount == 0)
-			{
-				if(outputMuxSelect == 1)
-					outputMuxSelect = 0xB;
-				else if(outputMuxSelect == 2)
-					outputMuxSelect = 0xC;
-				else if(outputMuxSelect == 3)
-					outputMuxSelect = 31; //ground
-				else if(outputMuxSelect >= 4 && outputMuxSelect <= 12) //4x inputs after polarity mod, 4x after delayAndWidth, coincident output
-				      outputMuxSelect -= 3; //ground
-				  
-			}
-			else
-			{
-				if(outputMuxSelect == 3)
-					outputMuxSelect = 0x7; //ground
-			}
-	*/
 			
 			writeBuffer.resize(0);
 			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelCount == 0?0x5:(0x18013 + channelCount - 1), outputMuxSelect); //setup mux select
