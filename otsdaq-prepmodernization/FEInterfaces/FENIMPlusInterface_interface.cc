@@ -542,7 +542,8 @@ void FENIMPlusInterface::configure(void)
 					"OutputMuxSelect" + channelName).getValue<unsigned int>();
 			if(outputMuxSelect) --outputMuxSelect; //default is 0, the actual selection address for all other choices is 1 higher
 
-			if(outputMuxSelect > 31) {__SS__; throw std::runtime_error(ss.str() + "Invalid output mux select!");}
+			if(outputMuxSelect > 31) {__SS__; throw std::runtime_error(ss.str() +
+					"Invalid output mux select!");}
 
 			if(usingOptionalParams)
 			{
@@ -561,7 +562,7 @@ void FENIMPlusInterface::configure(void)
 			writeBuffer.resize(0);
 			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/0x1800C, /*data*/ outputPolarityMask); //setup output polarity
 			OtsUDPHardware::write(writeBuffer);
-			__COUT__ << "Input polariy mask is " << std::bitset<8>(outputPolarityMask) << std::endl;
+			__COUT__ << "Input polarity mask is " << std::bitset<8>(outputPolarityMask) << std::endl;
 
 			++channelCount;
 		}
