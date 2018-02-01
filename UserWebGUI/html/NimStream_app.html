@@ -16,6 +16,7 @@
 
     <style type="text/css">
         /* make buttons have a hand cursor */
+        body {background-color: #4d94ff;}
         
         input[type="button"],
         button {
@@ -88,9 +89,16 @@
 		  style="position:absolute; left: 0; top: 0; z-index: 1;"></canvas>
 		  <canvas id="canvas3"
 		  style="position:absolute; left: 0; top: 0; z-index: 2;"></canvas>		  
-		  
 		</div>
-		<div class='mainBlock' id='block4'></div>
+		<div><br></div>
+		<input id="color4" class="jscolor {closable:true,closeText:'Close',hash:true}" value="#8615D1">		
+		<p>Persistance: Low/None<input type="range" id="gblAlpha4" class="revRange" max=0.5 min=0 step=0.001 value=0.1>Infinite</p>
+		<p><div class='mainBlock' id='block4' style="position:relative; display:block;">
+		  <canvas id="canvas4Grid"
+		  style="position:absolute; left: 0; top: 0; z-index: 1;"></canvas>
+		  <canvas id="canvas4"
+		  style="position:absolute; left: 0; top: 0; z-index: 2;"></canvas>		  
+		</div>
 				
 		
 	</body>
