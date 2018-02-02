@@ -59,12 +59,16 @@ echo "Building Prepmodernization and OTS (May Take some time!)" >> ${PWD}/script
       qdbus $progress Set "" value 6 > /dev/null;
       qdbus $progress setLabelText "Build Successful! Creating Symlink for webapp" > /dev/null;  
       echo "Build Successful! Creating Symlink for webapp" >> ${PWD}/script_log/install_ots_repo.sh.script
+	
 	#create a symlink for our webapp
 	ln -sfn /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_prepmodernization/UserWebGUI /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_utilities/WebGUI/UserWebPath
 	touch ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
 	INSTALL_DATE=$(date '+%Y-%m-%d %H:%M:%S')
 	echo "prepmodenization repo installed on: " >> ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
 	echo ${INSTALL_DATE} >> ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
+	
+	echo "otsdaq_prepmodernization" >> ${USER_DATA}/ServiceData/InstalledRepoNames.dat
+      
       qdbus $progress Set "" value 7 > /dev/null;
       qdbus $progress setLabelText "Install Complete!" > /dev/null;  
       echo "Install Complete!" >> ${PWD}/script_log/install_ots_repo.sh.script
