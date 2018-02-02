@@ -262,36 +262,36 @@
     <div id="OutMuxCtl" class="Dropdown">
 
         <p>Output A (TestMux)- <select id="ChAOutMux" oninput="addModifiedList('OutputMuxSelectChannelA', this.value);">
-			<option value=0>Sig Norm</option>
-			<option value=1>CH A Raw</option>
-			<option value=2>CH B Raw</option>
-			<option value=3>CH C Raw</option>
-			<option value=4>CH D Raw</option>
-			<option value=5>CH A Modified</option>
-			<option value=6>CH B Modified</option>
-			<option value=7>CH C Modified</option>
-			<option value=8>CH D Modified</option>
-			<option value=9>SigLog</option>
-			<option value=10>SigCMS</option>
-			<option value=11>SigCMS1</option>
-			<option value=12>SigCMS2</option>
-			<option value=13>Veto Out n1</option>
-			<option value=14>Veto Out n2</option>
-			<option value=15>Backpressure Out</option>
-			<option value=16>Backpressure A</option>
-			<option value=17>Backpressure B</option>
-			<option value=18>Out Event Counter</option>
-			<option value=19>In Event Counter 1</option>
-			<option value=20>In Event Counter 2</option>
-			<option value=21>b_wr_out_b</option>
-			<option value=22>Clock 40DCM</option>
-			<option value=23>Sync W/ 40 Mhz</option>
-			<option value=24>Signal Gen p Out</option>
-			<option value=25>Muxout 2a</option>
-			<option value=26>Muxout 3a</option>
-			<option value=27>Muxout 4a</option>
-			<option value=28>N/A</option>
-			<option value=29>N/A</option>
+			<option value="Sig Norm">Sig Norm</option>
+			<option value="NIM Input CH-A Raw">NIM Input CH-A Raw</option>
+			<option value="NIM Input CH-B Raw">NIM Input CH-B Raw</option>
+			<option value="NIM Input CH-C Raw">NIM Input CH-C Raw</option>
+			<option value="NIM Input CH-D Raw">NIM Input CH-D Raw</option>
+			<option value="NIM Input CH-A Modified">NIM Input CH-A Modified</option>
+			<option value="NIM Input CH-B Modified">NIM Input CH-B Modified</option>
+			<option value="NIM Input CH-C Modified">NIM Input CH-C Modified</option>
+			<option value="NIM Input CH-D Modified">NIM Input CH-D Modified</option>
+			<option value="SigLog">SigLog</option>
+			<option value="Ground">Ground</option>
+			<option value="SigCMS1">SigCMS1</option>
+			<option value="SigCMS2">SigCMS2</option>
+			<option value="Veto Out n1">Veto Out n1</option>
+			<option value="Veto Out n2">Veto Out n2</option>
+			<option value="Backpressure Out">Backpressure Out</option>
+			<option value="Backpressure A">Backpressure A</option>
+			<option value="Backpressure B">Backpressure B</option>
+			<option value="Out Event Counter">Out Event Counter</option>
+			<option value="In Event Counter 1">In Event Counter 1</option>
+			<option value="In Event Counter 2">In Event Counter 2</option>
+			<option value="Burst Out Write Enable">Burst Out Write Enable</option>
+			<option value="40MHz System Clock">40MHz System Clock</option>
+			<option value="Sync W/40MHz">Sync W/40MHz</option>
+			<option value="Signal Generator Output">Signal Generator Output</option>
+			<option value="Output CH-B">Output CH-Ba</option>
+			<option value="Output CH-C">Output CH-C</option>
+			<option value="Output CH-D">Output CH-D</option>
+			<option value="External Clock after DCM">External Clock after DCM</option>
+			<option value="External Clock"></option>
 			<option value=30>N/A</option>
 			<option value=31>N/A</option>
 			</select>
@@ -299,11 +299,11 @@
         </p>
 
         <p>Output B - <select id="ChBOutMux" oninput="addModifiedList('OutputMuxSelectChannelB', this.value);">
-			<option value=0>SigCMS</option>
-			<option value=1>SigCMS1</option>
-			<option value=2>SigCMS2</option>
-			<option value=3>Clock 40DCM</option>
-			<option value=4>Signal Gen p Out</option>
+			<option value="SigNorm/SigCMS">SigNorm/SigCMS</option>
+			<option value="SigCMS1">SigCMS1</option>
+			<option value="SigCMS2">SigCMS2</option>
+			<option value="40MHz System Clock">40MHz System Clock</option>
+			<option value="Signal Generator Output">Signal Generator Output</option>
 			<option value=5>N/A</option>
 			<option value=6>N/A</option>
 			<option value=7>N/A</option>
@@ -312,11 +312,11 @@
         </p>
 
         <p>Output C - <select id="ChCOutMux" oninput="addModifiedList('OutputMuxSelectChannelC', this.value);">
-			<option value=0>SigCMS</option>
-			<option value=1>SigCMS1</option>
-			<option value=2>SigCMS2</option>
-			<option value=3>Clock 40DCM</option>
-			<option value=4>Signal Gen p Out</option>
+			<option value="SigNorm/SigCMS">SigNorm/SigCMS</option>
+			<option value="SigCMS1">SigCMS1</option>
+			<option value="SigCMS2">SigCMS2</option>
+			<option value="40MHz System Clock">40MHz System Clock</option>
+			<option value="Signal Generator Output">Signal Generator Output</option>
 			<option value=5>N/A</option>
 			<option value=6>N/A</option>
 			<option value=7>N/A</option>
@@ -325,14 +325,14 @@
         </p>
 
         <p>Output D - <select id="ChDOutMux" oninput="addModifiedList('OutputMuxSelectChannelD', this.value);">
-			<option value=0>SigCMS</option>
-			<option value=1>SigCMS1</option>
-			<option value=2>SigCMS2</option>
-			<option value=3>Clock 40DCM</option>
-			<option value=4>Signal Gen p Out</option>
+			<option value="SigNorm/SigCMS">SigNorm/SigCMS</option>
+			<option value="SigCMS1">SigCMS1</option>
+			<option value="SigCMS2">SigCMS2</option>
+			<option value="40MHz System Clock">40MHz System Clock</option>
+			<option value="Signal Generator Output">Signal Generator Output</option>
 			<option value=5>N/A</option>
 			<option value=6>N/A</option>
-			<option value=7>N/A</option>			
+			<option value=7>N/A</option>
 			</select>
         <input type="checkbox" id="ChDOutInv" onclick="addModifiedList('InvertPolarityOutputChannelD',this.checked?'yes':'no');"><label for="ChDOutInv">Invert Ch D Output?</label>
         </p>
