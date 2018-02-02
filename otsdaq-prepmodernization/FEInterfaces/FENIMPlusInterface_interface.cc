@@ -557,7 +557,10 @@ void FENIMPlusInterface::configure(void)
 			writeBuffer.resize(0);
 			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelCount == 0?0x5:(0x18013 + channelCount - 1), outputMuxSelect); //setup mux select
 			OtsUDPHardware::write(writeBuffer);
-			__COUT__ << "Mux value for output channel " << channelName << " is " << outputMuxSelect << ", written to " << (channelCount == 0?0x5:(0x18013 + channelCount - 1)) << std::endl;
+			__COUT__ << "Mux value for output channel " << channelName << " is " <<
+					outputMuxSelect << ", written to 0x" << std::hex <<
+					(channelCount == 0?0x5:(0x18013 + channelCount - 1)) <<
+					std::dec << std::endl;
 						
 			writeBuffer.resize(0);
 			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/0x1800C, /*data*/ outputPolarityMask); //setup output polarity
@@ -854,35 +857,29 @@ void FENIMPlusInterface::stop(void)
 					fprintf(fp,"sig_cms2(out2) %d 0x%4.4X\n",count,count);
 
 
+					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x105);
+					OtsUDPHardware::read(writeBuffer,readQuadWord);
 
-//					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x100);
-//					OtsUDPHardware::read(writeBuffer,readQuadWord);
-//
-//					__COUT__ << "out1 count = " << (readQuadWord >> 32) << __E__;
-//					__COUT__ << "out1 count = " << (readQuadWord & 0x0FFFF) << __E__;
-//
-//					fprintf(fp,"out1count %d 0x%4.4X\n",(readQuadWord >> 32),(readQuadWord >> 32));
-//					fprintf(fp,"out1count %d 0x%4.4X\n",(readQuadWord & 0x0FFFF),(readQuadWord & 0x0FFFF));
-//
-//
-//					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x100);
-//					OtsUDPHardware::read(writeBuffer,readQuadWord);
-//					std::memcpy(&count,readBuffer.substr(2).c_str(),
-//							4);
-//					__COUT__ << "out0 count " << count << std::endl;
-//					fprintf(fp,"out0count %d 0x%4.4X\n",count,count);
-//					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x814,1 /*size*/);
-//					OtsUDPHardware::read(writeBuffer,readBuffer);
-//					std::memcpy(&count,readBuffer.substr(2).c_str(),
-//							4);
-//					__COUT__ << "out1 count " << count << std::endl;
-//					fprintf(fp,"out1count %d 0x%4.4X\n",count,count);
-//					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x824,1 /*size*/);
-//					OtsUDPHardware::read(writeBuffer,readBuffer);
-//					std::memcpy(&count,readBuffer.substr(2).c_str(),
-//							4);
-//					__COUT__ << "out2 count " << count << std::endl;
-//					fprintf(fp,"out2count %d 0x%4.4X\n",count,count);
+					count = (readQuadWord & 0x0FFFF);
+					__COUT__ << "muxout-A count = " << count << __E__;
+					fprintf(fp,"muxout-A %d 0x%4.4X\n",count,count);
+
+					count = (readQuadWord >> 32);
+					__COUT__ << "muxout-B count = " << count << __E__;
+					fprintf(fp,"muxout-B %d 0x%4.4X\n",count,count);
+
+					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x106);
+					OtsUDPHardware::read(writeBuffer,readQuadWord);
+
+					count = (readQuadWord & 0x0FFFF);
+					__COUT__ << "muxout-C count = " << count << __E__;
+					fprintf(fp,"muxout-C %d 0x%4.4X\n",count,count);
+
+					count = (readQuadWord >> 32);
+					__COUT__ << "muxout-D count = " << count << __E__;
+					fprintf(fp,"muxout-D %d 0x%4.4X\n",count,count);
+
+
 
 					fclose(fp);
 				}
@@ -932,7 +929,7 @@ bool FENIMPlusInterface::running(void)
 	////////////////////////////////
 	////////////////////////////////
 	// long sleep so trigger numbers match
-	sleep(1);//sleep(22);
+	sleep(22);
 
 
 
@@ -967,7 +964,6 @@ bool FENIMPlusInterface::running(void)
 					optionalLink.getNode("InputChannelVetoSourceForOutput" + outChannelNames[channelCount]).getValue<int>():
 					0;
 
-			writeBuffer.resize(0);
 			OtsUDPFirmwareCore::writeAdvanced(writeBuffer,
 					 channelCount==0?0x4:(0x18016 + channelCount - 1) /*address*/,
 					(enable40MHzMask?0x0:0x8) | (gateChannelVetoSel <= 1?0:(1<<2))/*data*/ ); //unreset output channel block
