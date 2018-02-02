@@ -68,6 +68,9 @@ echo "Building Prepmodernization and OTS (May Take some time!)" >> ${PWD}/script
 	echo ${INSTALL_DATE} >> ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
 	
 	echo "otsdaq_prepmodernization" >> ${USER_DATA}/ServiceData/InstalledRepoNames.dat
+	
+	#to add FENIMPlusInterface as an entry to FEInterfaceConfiguration
+	source ${MRB_SOURCE}/otsdaq_prepmodernization/update_ots_repo.sh
       
       qdbus $progress Set "" value 7 > /dev/null;
       qdbus $progress setLabelText "Install Complete!" > /dev/null;  
@@ -87,27 +90,10 @@ echo "Building Prepmodernization and OTS (May Take some time!)" >> ${PWD}/script
 	mrb z
   fi
 else
-  #code to update existing installs will be here
-  if [[ $(diff -rq ${MRB_SOURCE}/otsdaq_prepmodernization/Data/ConfigurationInfo ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitData/ConfigurationInfo | grep otsdaq_prepmodernization/Data/ConfigurationInfo) ]]; then
-  #copy database data for *only* new databases (doesn't copy/modify existing data)
-  diff -rq ${MRB_SOURCE}/otsdaq_prepmodernization/Data/ConfigurationInfo ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitData/ConfigurationInfo | grep "Only in ${MRB_SOURCE}/otsdaq_prepmodernization/Data/ConfigurationInfo" | awk '{print $4}' | xargs -L1 -I {} basename {} .xml | xargs -L1 -I {} cp -r ${MRB_SOURCE}/otsdaq_prepmodernization/Databases/{} ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitDatabases/
-  #make backup of previous database definition of any that are different between Data and NoGitData
-  diff -rq ${MRB_SOURCE}/otsdaq_prepmodernization/Data/ConfigurationInfo ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitData/ConfigurationInfo | grep otsdaq_prepmodernization/Data/ConfigurationInfo | awk '{print $4}' | awk '{print $NF}' FS=/ | xargs -L1 -I {} cp ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitData/ConfigurationInfo/{} ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitData/ConfigurationInfo/{}.bk
-  #copy database definitions for new and changes databases, overwrites previous database definitions
-  diff -rq ${MRB_SOURCE}/otsdaq_prepmodernization/Data/ConfigurationInfo ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitData/ConfigurationInfo | grep otsdaq_prepmodernization/Data/ConfigurationInfo | awk '{print $4}' | awk '{print $NF}' FS=/ | xargs -L1 -I {} \cp -f ${MRB_SOURCE}/otsdaq_prepmodernization/Data/ConfigurationInfo/{} ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitData/ConfigurationInfo/{}
-  UPDATE_DATE=$(date '+%Y-%m-%d %H:%M:%S')
-  echo >> ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
-  echo "prepmodenization repo updated w/ database file changes on: " >> ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
-  echo ${UPDATE_DATE} >> ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
+
+   echo "Nothing to do, prepmodenization already installed! Running Update script instead..." >> ${PWD}/script_log/install_ots_repo.sh.script
+   source ${MRB_SOURCE}/otsdaq_prepmodernization/update_ots_repo.sh
   
-  echo "Updated database files! No existing user data was removed, if you need to rollback a database definition, the previous version is backed up under <name>.xml.bk"
-  else
-   UPDATE_DATE=$(date '+%Y-%m-%d %H:%M:%S')
-   echo >> ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
-   echo "prepmodenization repo updated on: " >> ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
-   echo ${UPDATE_DATE} >> ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
-   
-   echo "Nothing to do, prepmodenization already installed!" >> ${PWD}/script_log/install_ots_repo.sh.script
   fi
 fi 
 
