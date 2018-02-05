@@ -930,7 +930,7 @@ bool FENIMPlusInterface::running(void)
 	////////////////////////////////
 	// long sleep so trigger numbers match
 	sleep(22);
-
+	//sleep(1);
 
 
 
