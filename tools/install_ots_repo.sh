@@ -42,7 +42,6 @@ if [ ! -e ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed ]; t
       qdbus $progress setLabelText "Unsetting all variables" > /dev/null;
       echo "Unsetting all variables" >> ${PWD}/script_log/install_ots_repo.sh.script
 
-      unsetup_all
       unset "PRODUCTS"
 
       qdbus $progress Set "" value 4 > /dev/null;
@@ -93,7 +92,15 @@ if [ ! -e ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed ]; t
 	    mrb z
 	fi
   else 
-    progress=$(kdialog --title "Installing PREPModernization Repo" --progressbar "Creating prepmodenization .gitignore file");
+    if kdialog --title "Example ContinueCancel warning dialog" \
+      --warningcontinuecancel "Note that since you are NOT installing within a VM,\n /
+      a user data directroy MUST exist and be set as such in your setup_ots.sh file.\n
+      Only continue if this is the case. Otherwise, installation will fail."
+    then
+      kdialog --error "User aborted install. Exiting..."
+      echo "User aborted install during confirmation that User Data Folder exists, exiting..." >> ${PWD}/script_log/install_ots_repo.sh.script
+    else  
+      progress=$(kdialog --title "Installing PREPModernization Repo" --progressbar "Creating prepmodenization .gitignore file");
       qdbus $progress Set "" maximum 6 > /dev/null;
     
       echo "Creating prepmodenization .gitignore file" >> ${PWD}/script_log/install_ots_repo.sh.script
@@ -122,47 +129,39 @@ if [ ! -e ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed ]; t
 
       MRB_OUTPUT=$(mrb b | tee -a ${PWD}/script_log/install_ots_repo.sh.script | tail -n 3)
       if [[ $MRB_OUTPUT == *"Stage build successful."* ]]; then
-	  echo "Successful build detected, continuing install" >> ${PWD}/script_log/install_ots_repo.sh.script
-	  qdbus $progress Set "" value 5 > /dev/null;
-	  qdbus $progress setLabelText "Build Successful! Creating Symlink for webapp" > /dev/null;  
-	  echo "Build Successful! Creating Symlink for webapp" >> ${PWD}/script_log/install_ots_repo.sh.script
-	    
-	    #create a symlink for our webapp
-	    ln -sfn /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_prepmodernization/UserWebGUI /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_utilities/WebGUI/UserWebPath
-	    touch ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
-	    INSTALL_DATE=$(date '+%Y-%m-%d %H:%M:%S')
-	    echo "prepmodenization repo installed on: " >> ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
-	    echo ${INSTALL_DATE} >> ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
-	    
-	    echo "otsdaq_prepmodernization" >> ${USER_DATA}/ServiceData/InstalledRepoNames.dat
-	    
-	    #to add FENIMPlusInterface as an entry to FEInterfaceConfiguration
-	    source ${MRB_SOURCE}/otsdaq_prepmodernization/tools/update_ots_repo.sh
+	echo "Successful build detected, continuing install" >> ${PWD}/script_log/install_ots_repo.sh.script
+	qdbus $progress Set "" value 5 > /dev/null;
+	qdbus $progress setLabelText "Build Successful! Creating Symlink for webapp" > /dev/null;  
+	echo "Build Successful! Creating Symlink for webapp" >> ${PWD}/script_log/install_ots_repo.sh.script
+	
+	#create a symlink for our webapp
+	ln -sfn /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_prepmodernization/UserWebGUI /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_utilities/WebGUI/UserWebPath
+	touch ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
+	INSTALL_DATE=$(date '+%Y-%m-%d %H:%M:%S')
+	echo "prepmodenization repo installed on: " >> ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
+	echo ${INSTALL_DATE} >> ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
+	
+	echo "otsdaq_prepmodernization" >> ${USER_DATA}/ServiceData/InstalledRepoNames.dat
+	
+	#to add FENIMPlusInterface as an entry to FEInterfaceConfiguration
+	source ${MRB_SOURCE}/otsdaq_prepmodernization/tools/update_ots_repo.sh
+	      
+	qdbus $progress Set "" value 6 > /dev/null;
+	qdbus $progress setLabelText "Install Complete!" > /dev/null;  
+	echo "Install Complete!" >> ${PWD}/script_log/install_ots_repo.sh.script
+	sleep 5
+	qdbus $progress close > /dev/null;
 	  
-	  qdbus $progress Set "" value 6 > /dev/null;
-	  qdbus $progress setLabelText "Install Complete!" > /dev/null;  
-	  echo "Install Complete!" >> ${PWD}/script_log/install_ots_repo.sh.script
-	    sleep 5
-	  qdbus $progress close > /dev/null;
-	  
-	else
-	  echo "Failed build detected, aborting install" >> ${PWD}/script_log/install_ots_repo.sh.script
-	  qdbus $progress close > /dev/null;
-	  kdialog --error "Error encountered while building!\nAborting setup.\nIf the problem persists, contact the OTSDAQ/PREPModernization developers."
-	    #Clean up work already done
-	    rm $USER_DATA/ConfigurationInfo/FENIMPlusInterfaceConfigurationInfo.xml
-	    rm $USER_DATA/ConfigurationInfo/FENIMPlusInterfaceOptionalConfigurationInfo.xml
-	    if grep -Fq "FENIMPlusInterface" $USER_DATA/ConfigurationInfo/FEInterfaceConfigurationInfo.xml
-	    then
-		#remove entry in FEINTERfaceConfigurationInfo
-		sed -i -e 's/Interface,FENIMPlusInterface"\/>/Interface"\/>/' $USER_DATA/ConfigurationInfo/FEInterfaceConfigurationInfo.xml
-	    else
-		echo "Entry for 'FENIMPlusInterface' does NOT exist in FEInterfaceConfigurationInfo when trying to remove it (due to failed build)??? Something's weird..." | tee $OTSDAQ_DIR/../../script_log/install_ots_repo.sh.script;  
-	    fi
-	    rm ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
-	    mrb z
-	fi
+      else
+	echo "Failed build detected, aborting install" >> ${PWD}/script_log/install_ots_repo.sh.script
+	qdbus $progress close > /dev/null;
+	kdialog --error "Error encountered while building!\nAborting setup.\nIf the problem persists, contact the OTSDAQ/PREPModernization developers."
+	#Clean up work already done
+	rm ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
+	mrb z
+      fi
   fi
+ fi 
 else
 
    echo "Nothing to do, prepmodenization already installed! Running Update script instead..." >> ${PWD}/script_log/install_ots_repo.sh.script
