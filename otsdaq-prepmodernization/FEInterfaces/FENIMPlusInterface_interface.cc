@@ -929,7 +929,7 @@ bool FENIMPlusInterface::running(void)
 	////////////////////////////////
 	////////////////////////////////
 	// long sleep so trigger numbers match
-	sleep(22);
+	//sleep(22);
 	//sleep(1);
 
 
@@ -946,6 +946,23 @@ bool FENIMPlusInterface::running(void)
 	// 0x0/0x8 to 0x4 to use edge detection
 	try
 	{
+		unsigned int sleepSeconds = 22;
+		if(usingOptionalParams)
+		{
+			try
+			{
+				sleepSeconds = optionalLink.getNode("SecondsDelayBeforeStartingTriggers").getValue<unsigned int>();
+			}
+			catch(...)
+			{
+				__COUT__ << "Ingore missing SecondsDelayBeforeStartingTriggers field..." << __E__;
+			}
+		}
+
+		if(!sleepSeconds) sleepSeconds = 22;
+		__COUT__ << "Sleeping for " << sleepSeconds << " seconds..." << __E__;
+		sleep(sleepSeconds);
+
 		unsigned char channelCount = 0;
 		bool enable40MHzMask;
 		unsigned int gateChannelVetoSel;
