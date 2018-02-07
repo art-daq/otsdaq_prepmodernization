@@ -347,12 +347,14 @@ void FENIMPlusInterface::configure(void)
 
 		  	enableInput = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("EnableInput" + channelName).getValue<bool>();
 			
-			if(usingOptionalParams){
+			if(usingOptionalParams)
+			{
 				inputDelay = optionalLink.getNode("DelayInput" + channelName).getValue<unsigned int>();
 				inputWidth = optionalLink.getNode("WidthInput" + channelName).getValue<unsigned int>();
 				inputModMask = (0xFFFFFFFFFFFFFFFF >> (64-inputWidth)) << inputDelay;
 			}
-			else{
+			else
+			{
 				inputModMask = 0x7; // b111 default value
 			}
 			
@@ -832,52 +834,69 @@ void FENIMPlusInterface::stop(void)
 					//std::string readBuffer;
 					uint64_t readQuadWord;
 					uint32_t count;
+					uint8_t tag;
 
 					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x102);
 					OtsUDPHardware::read(writeBuffer,readQuadWord);
 
 					count = (readQuadWord >> 32);
+					tag = count>>28; //top 4 bits
+					count = (count & 0x0FFFFFFF); //only 28 bits
 					__COUT__ << "sig_log count = " << count << __E__;
-					fprintf(fp,"sig_log %d 0x%4.4X\n",count,count);
+					fprintf(fp,"sig_log   \t [tag=%d] %d 0x%4.4X\n",tag,count,count);
 
-					count = (readQuadWord & 0x0FFFF);
+					count = (readQuadWord & 0x0FFFFFFFF);
+					tag = count>>28; //top 4 bits
+					count = (count & 0x0FFFFFFF); //only 28 bits
 					__COUT__ << "sig_norm(out0) count = " << count << __E__;
-					fprintf(fp,"sig_norm(out0) %d 0x%4.4X\n",count,count);
+					fprintf(fp,"sig_norm(out0) \t [tag=%d] %d 0x%4.4X\n",tag,count,count);
 
 
 					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x100);
 					OtsUDPHardware::read(writeBuffer,readQuadWord);
 
-					count = (readQuadWord & 0x0FFFF);
+					count = (readQuadWord & 0x0FFFFFFFF);
+					tag = count>>28; //top 4 bits
+					count = (count & 0x0FFFFFFF); //only 28 bits
 					__COUT__ << "sig_cms1(out1) count = " << count << __E__;
-					fprintf(fp,"sig_cms1(out1) %d 0x%4.4X\n",count,count);
+					fprintf(fp,"sig_cms1(out1) \t [tag=%d] %d 0x%4.4X\n",tag,count,count);
 
 					count = (readQuadWord >> 32);
+					tag = count>>28; //top 4 bits
+					count = (count & 0x0FFFFFFF); //only 28 bits
 					__COUT__ << "sig_cms2(out2) count = " << count << __E__;
-					fprintf(fp,"sig_cms2(out2) %d 0x%4.4X\n",count,count);
+					fprintf(fp,"sig_cms2(out2) \t [tag=%d] %d 0x%4.4X\n",tag,count,count);
 
 
 					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x105);
 					OtsUDPHardware::read(writeBuffer,readQuadWord);
 
-					count = (readQuadWord & 0x0FFFF);
+					count = (readQuadWord & 0x0FFFFFFFF);
+					tag = count>>28; //top 4 bits
+					count = (count & 0x0FFFFFFF); //only 28 bits
 					__COUT__ << "muxout-A count = " << count << __E__;
-					fprintf(fp,"muxout-A %d 0x%4.4X\n",count,count);
+					fprintf(fp,"muxout-A \t [tag=%d] %d 0x%4.4X\n",tag,count,count);
 
 					count = (readQuadWord >> 32);
+					tag = count>>28; //top 4 bits
+					count = (count & 0x0FFFFFFF); //only 28 bits
 					__COUT__ << "muxout-B count = " << count << __E__;
-					fprintf(fp,"muxout-B %d 0x%4.4X\n",count,count);
+					fprintf(fp,"muxout-B \t [tag=%d] %d 0x%4.4X\n",tag,count,count);
 
 					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x106);
 					OtsUDPHardware::read(writeBuffer,readQuadWord);
 
-					count = (readQuadWord & 0x0FFFF);
+					count = (readQuadWord & 0x0FFFFFFFF);
+					tag = count>>28; //top 4 bits
+					count = (count & 0x0FFFFFFF); //only 28 bits
 					__COUT__ << "muxout-C count = " << count << __E__;
-					fprintf(fp,"muxout-C %d 0x%4.4X\n",count,count);
+					fprintf(fp,"muxout-C \t [tag=%d] %d 0x%4.4X\n",tag,count,count);
 
 					count = (readQuadWord >> 32);
+					tag = count>>28; //top 4 bits
+					count = (count & 0x0FFFFFFF); //only 28 bits
 					__COUT__ << "muxout-D count = " << count << __E__;
-					fprintf(fp,"muxout-D %d 0x%4.4X\n",count,count);
+					fprintf(fp,"muxout-D \t [tag=%d] %d 0x%4.4X\n",tag,count,count);
 
 
 
