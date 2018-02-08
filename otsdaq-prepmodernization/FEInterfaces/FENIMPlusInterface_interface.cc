@@ -929,20 +929,63 @@ bool FENIMPlusInterface::running(void)
 }
 
 
+////========================================================================================================================
+//void FENIMPlusInterface::FEMacroGenerateTriggers(FEVInterface::frontEndMacroInArgs_t argsIn,
+//		FEVInterface::frontEndMacroOutArgs_t argsOut)
+//{
+//	__COUT__ << "FEMacroGenerateTriggers" << __E__;
+//
+//	unsigned int numberOfTriggers =
+//			FEVInterface::getFEMacroInputArgument<unsigned int>(argsIn,"numberOfTriggers");
+//	unsigned int clocksOfDelayBetweenTriggers =
+//			FEVInterface::getFEMacroInputArgument<unsigned int>(argsIn,"clocksOfDelayBetweenTriggers");
+//	std::string& triggersWereLaunched =
+//			FEVInterface::getFEMacroOutputArgument(argsOut,"triggersWereLaunched");
+//
+//	unsigned int numberOfTriggersStr =
+//			FEVInterface::getFEMacroInputArgument<std::string>(argsIn,"numberOfTriggers");
+//
+//	__COUT__ << "numberOfTriggers " << numberOfTriggers << __E__;
+//	__COUT__ << "numberOfTriggersStr " << numberOfTriggersStr << __E__;
+//	__COUT__ << "clocksOfDelayBetweenTriggers " << clocksOfDelayBetweenTriggers << __E__;
+//
+//
+//	//TODO launch triggers based on parameters...
+//
+//
+//	__COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
+//	triggersWereLaunched = "Done!";
+//	__COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
+//	FEVInterface::setFEMacroOutputArgument<unsigned int>(argsOut,"triggersWereLaunched",
+//			42.2f);
+//	__COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
+//}
+
 //========================================================================================================================
-void FENIMPlusInterface::FEMacroGenerateTriggers(FEVInterface::frontEndMacroInArgs_t argsIn,
-		FEVInterface::frontEndMacroOutArgs_t argsOut)
+void FENIMPlusInterface::FEMacroGenerateTriggers(__ARGS__)
 {
-	unsigned int numberOfTriggers =
-			FEVInterface::getFEMacroInputArgument<unsigned int>(argsIn,"numberOfTriggers");
-	unsigned int clocksOfDelayBetweenTriggers =
-			FEVInterface::getFEMacroInputArgument<unsigned int>(argsIn,"clocksOfDelayBetweenTriggers");
-	std::string& triggersWereLaunched =
-			FEVInterface::getFEMacroOutputArgument(argsOut,"triggersWereLaunched");
+	__COUT__ << "FEMacroGenerateTriggers" << __E__;
+
+	unsigned int numberOfTriggers =	__GET_ARG_IN__(unsigned int,"numberOfTriggers");
+	unsigned int clocksOfDelayBetweenTriggers = __GET_ARG_IN__(unsigned int,"clocksOfDelayBetweenTriggers");
+	std::string& triggersWereLaunched =	__GET_ARG_OUT__("triggersWereLaunched");
+	std::string numberOfTriggersStr = __GET_ARG_IN__(std::string,"numberOfTriggers");
 
 	__COUT__ << "numberOfTriggers " << numberOfTriggers << __E__;
+	__COUT__ << "numberOfTriggersStr " << numberOfTriggersStr << __E__;
 	__COUT__ << "clocksOfDelayBetweenTriggers " << clocksOfDelayBetweenTriggers << __E__;
 
+
+	//TODO launch triggers based on parameters...
+
+
+	__COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
+	triggersWereLaunched = "Done!";
+	__COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
+	__SET_ARG_OUT__(unsigned int,"triggersWereLaunched",42.2f);
+	__COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
+	__SET_ARG_OUT__(float,"triggersWereLaunched",42.2f);
+	__COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
 }
 
 
