@@ -14,8 +14,19 @@ using namespace ots;
 
 
 FENIMPlusInterface::FENIMPlusInterface(const std::string& interfaceUID, const ConfigurationTree& theXDAQContextConfigTree, const std::string& interfaceConfigurationPath)
-: FEOtsUDPTemplateInterface(interfaceUID,theXDAQContextConfigTree,interfaceConfigurationPath)
-{}
+: Socket               (
+		theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("HostIPAddress").getValue<std::string>()
+		, theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("HostPort").getValue<unsigned int>())
+, FEOtsUDPTemplateInterface(interfaceUID,theXDAQContextConfigTree,interfaceConfigurationPath)
+{
+	//register FE Macro Functions
+	registerFEMacroFunction("GenerateTriggers",	//feMacroName
+			static_cast<FEVInterface::frontEndMacroFunction_t>(&FENIMPlusInterface::FEMacroGenerateTriggers),
+			std::vector<std::string>{"numberOfTriggers","clocksOfDelayBetweenTriggers"}, //namesOfInputArgs
+			std::vector<std::string>{"triggersWereLaunched"},		//namesOfOutputArgs
+			1); //requiredUserPermissions
+
+}
 
 //========================================================================================================================
 FENIMPlusInterface::~FENIMPlusInterface(void)
@@ -915,6 +926,23 @@ bool FENIMPlusInterface::running(void)
 	}
 
 	return false;
+}
+
+
+//========================================================================================================================
+void FENIMPlusInterface::FEMacroGenerateTriggers(FEVInterface::frontEndMacroInArgs_t argsIn,
+		FEVInterface::frontEndMacroOutArgs_t argsOut)
+{
+	unsigned int numberOfTriggers =
+			FEVInterface::getFEMacroInputArgument<unsigned int>(argsIn,"numberOfTriggers");
+	unsigned int clocksOfDelayBetweenTriggers =
+			FEVInterface::getFEMacroInputArgument<unsigned int>(argsIn,"clocksOfDelayBetweenTriggers");
+	std::string& triggersWereLaunched =
+			FEVInterface::getFEMacroOutputArgument(argsOut,"triggersWereLaunched");
+
+	__COUT__ << "numberOfTriggers " << numberOfTriggers << __E__;
+	__COUT__ << "clocksOfDelayBetweenTriggers " << clocksOfDelayBetweenTriggers << __E__;
+
 }
 
 
