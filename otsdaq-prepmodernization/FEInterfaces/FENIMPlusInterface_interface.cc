@@ -12,27 +12,6 @@ using namespace ots;
 #undef 	__MF_SUBJECT__
 #define __MF_SUBJECT__ "FE-FENIMPlusInterface"
 
-////========================================================================================================================
-//FENIMPlusInterface::FENIMPlusInterface(const std::string& interfaceUID, const ConfigurationTree& theXDAQContextConfigTree, const std::string& interfaceConfigurationPath)
-//: Socket            (
-//		theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("HostIPAddress").getValue<std::string>()
-//		, theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("HostPort").getValue<unsigned int>())
-//, FEVInterface      (interfaceUID, theXDAQContextConfigTree, interfaceConfigurationPath)
-//, OtsUDPHardware    (
-//		theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("InterfaceIPAddress").getValue<std::string>()
-//		, theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("InterfacePort").getValue<unsigned int>()
-//		, -1 /*version*/
-//		, true /*verbose*/)
-//, OtsUDPFirmwareDataGen(theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("FirmwareVersion").getValue<unsigned int>())
-//{
-//	//    __COUT__ << "FE name: " << interfaceUID << std::endl;
-//	//    __COUT__ << " Interface IP: "   << FEVInterface::theXDAQContextConfigTree_.getNode(interfaceConfigurationPath).getNode("IPAddress").getValue<std::string>() << std::endl;
-//	//    __COUT__ << " Interface Port: " << FEVInterface::theXDAQContextConfigTree_.getNode(interfaceConfigurationPath).getNode("Port").getValue<std::string>() << std::endl;
-//	//    __COUT__ << " IP: "             << FEVInterface::theXDAQContextConfigTree_.getNode(interfaceConfigurationPath).getNode("IP").getValue<std::string>() << std::endl;
-//	//    __COUT__ << " Port: "           << FEVInterface::theXDAQContextConfigTree_.getNode(interfaceConfigurationPath).getNode("IPAddress").getValue<std::string>() << std::endl;
-//	universalAddressSize_ = 8;
-//	universalDataSize_    = 8;
-//}
 
 FENIMPlusInterface::FENIMPlusInterface(const std::string& interfaceUID, const ConfigurationTree& theXDAQContextConfigTree, const std::string& interfaceConfigurationPath)
 : FEOtsUDPTemplateInterface(interfaceUID,theXDAQContextConfigTree,interfaceConfigurationPath)
@@ -645,12 +624,6 @@ void FENIMPlusInterface::configure(void)
 }
 
 //========================================================================================================================
-//void FENIMPlusInterface::configureDetector(const DACStream& theDACStream)
-//{
-//	__COUT__ << "\tconfigureDetector" << std::endl;
-//}
-
-//========================================================================================================================
 void FENIMPlusInterface::halt(void)
 {
 	__COUT__ << "\tHalt" << std::endl;
@@ -944,53 +917,5 @@ bool FENIMPlusInterface::running(void)
 	return false;
 }
 
-//========================================================================================================================
-//NOTE: buffer for address must be at least size universalAddressSize_
-//NOTE: buffer for returnValue must be max UDP size to handle return possibility
-int ots::FENIMPlusInterface::universalRead(char *address, char *returnValue)
-{
-	__COUT__ << "address size " << universalAddressSize_ << std::endl;
-
-	__COUT__ << "Request: ";
-	for(unsigned int i=0;i<universalAddressSize_;++i)
-		printf("%2.2X",(unsigned char)address[i]);
-	std::cout << std::endl;
-
-	std::string readBuffer, sendBuffer;
-	OtsUDPFirmwareCore::readAdvanced(sendBuffer,address,1 /*size*/);
-
-	//OtsUDPHardware::read(FSSRFirmware::universalRead(address), readBuffer) < 0;
-	try
-	{
-		OtsUDPHardware::read(sendBuffer, readBuffer); // data reply
-	}
-	catch(std::runtime_error &e)
-	{
-		__COUT__ << "Caught it! This is when it's getting time out error" << std::endl;
-		__COUT_ERR__ << e.what() << std::endl;
-		return -1;
-	}
-
-	__COUT__ << "Result SIZE: " << readBuffer.size() << std::endl;
-	std::memcpy(returnValue,readBuffer.substr(2).c_str(),universalDataSize_);
-	return 0;
-}
-
-//========================================================================================================================
-//NOTE: buffer for address must be at least size universalAddressSize_
-//NOTE: buffer for writeValue must be at least size universalDataSize_
-void ots::FENIMPlusInterface::universalWrite(char* address, char* writeValue)
-{
-	__COUT__ << "address size " << universalAddressSize_ << std::endl;
-	__COUT__ << "data size " << universalDataSize_ << std::endl;
-	__COUT__ << "Sending: ";
-	for(unsigned int i=0;i<universalAddressSize_;++i)
-		printf("%2.2X",(unsigned char)address[i]);
-	std::cout << std::endl;
-
-	std::string sendBuffer;
-	OtsUDPFirmwareCore::writeAdvanced(sendBuffer,address,writeValue,1 /*size*/);
-	OtsUDPHardware::write(sendBuffer); // data request
-}
 
 DEFINE_OTS_INTERFACE(FENIMPlusInterface)

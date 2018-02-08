@@ -2,19 +2,13 @@
 #define _ots_FENIMPlusInterface_h_
 
 #include "otsdaq-components/FEInterfaces/FEOtsUDPTemplateInterface.h"
-//#include "otsdaq-core/FECore/FEVInterface.h"
-//#include "otsdaq-components/DAQHardware/OtsUDPHardware.h"
-//#include "otsdaq-components/DAQHardware/OtsUDPFirmwareDataGen.h"
-
-
-//#include <string>
 
 namespace ots
 {
 class FEInterfaceConfigurationBase;
 class FENIMPlusInterfaceConfiguration;
 
-class FENIMPlusInterface : public FEOtsUDPTemplateInterface// public FEVInterface, public OtsUDPHardware, public OtsUDPFirmwareDataGen
+class FENIMPlusInterface : public FEOtsUDPTemplateInterface
 {
 
 public:
@@ -29,8 +23,6 @@ public:
     bool running          					(void) override;
     void stop             					(void) override;
 
-    int universalRead	  					(char* address, char* readValue) override;
-    void universalWrite	  					(char* address, char* writeValue) override;
 
 
     /////////////////////////////////////
