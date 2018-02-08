@@ -12,113 +12,35 @@ using namespace ots;
 #undef 	__MF_SUBJECT__
 #define __MF_SUBJECT__ "FE-FENIMPlusInterface"
 
-//========================================================================================================================
-//FENIMPlusInterface::FENIMPlusInterface(unsigned int name,
-//		std::string daqHardwareType, std::string firmwareType, const FEWConfiguration* configuration)
-//:Socket            (theConfiguration_->getInterfaceIPAddress(name), theConfiguration_->getInterfacePort(name))
-//,FEVInterface     (name,daqHardwareType,firmwareType,configuration)
-//,OtsUDPHardware    (theConfiguration_->getIPAddress(name), theConfiguration_->getPort(name))
-//,FSSRFirmware      (theConfiguration_->getFirmwareVersion(name), "PurdueFirmwareCore")
-//,theConfiguration_ ((FEWOtsUDPHardwareConfiguration*)configuration)
-//
+////========================================================================================================================
+//FENIMPlusInterface::FENIMPlusInterface(const std::string& interfaceUID, const ConfigurationTree& theXDAQContextConfigTree, const std::string& interfaceConfigurationPath)
+//: Socket            (
+//		theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("HostIPAddress").getValue<std::string>()
+//		, theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("HostPort").getValue<unsigned int>())
+//, FEVInterface      (interfaceUID, theXDAQContextConfigTree, interfaceConfigurationPath)
+//, OtsUDPHardware    (
+//		theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("InterfaceIPAddress").getValue<std::string>()
+//		, theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("InterfacePort").getValue<unsigned int>()
+//		, -1 /*version*/
+//		, true /*verbose*/)
+//, OtsUDPFirmwareDataGen(theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("FirmwareVersion").getValue<unsigned int>())
 //{
-//    __COUT__ << __PRETTY_FUNCTION__ << "Few name: " << name
-//    << " Interface IP: "   << theConfiguration_->getInterfaceIPAddress(name)
-//    << " Interface Port: " << theConfiguration_->getInterfacePort(name)
-//    << " IP: "             << theConfiguration_->getIPAddress(name)
-//    << " Port: "           << theConfiguration_->getPort(name)
-//    << std::endl;
+//	//    __COUT__ << "FE name: " << interfaceUID << std::endl;
+//	//    __COUT__ << " Interface IP: "   << FEVInterface::theXDAQContextConfigTree_.getNode(interfaceConfigurationPath).getNode("IPAddress").getValue<std::string>() << std::endl;
+//	//    __COUT__ << " Interface Port: " << FEVInterface::theXDAQContextConfigTree_.getNode(interfaceConfigurationPath).getNode("Port").getValue<std::string>() << std::endl;
+//	//    __COUT__ << " IP: "             << FEVInterface::theXDAQContextConfigTree_.getNode(interfaceConfigurationPath).getNode("IP").getValue<std::string>() << std::endl;
+//	//    __COUT__ << " Port: "           << FEVInterface::theXDAQContextConfigTree_.getNode(interfaceConfigurationPath).getNode("IPAddress").getValue<std::string>() << std::endl;
+//	universalAddressSize_ = 8;
+//	universalDataSize_    = 8;
 //}
-//========================================================================================================================
+
 FENIMPlusInterface::FENIMPlusInterface(const std::string& interfaceUID, const ConfigurationTree& theXDAQContextConfigTree, const std::string& interfaceConfigurationPath)
-: Socket            (
-		theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("HostIPAddress").getValue<std::string>()
-		, theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("HostPort").getValue<unsigned int>())
-, FEVInterface      (interfaceUID, theXDAQContextConfigTree, interfaceConfigurationPath)
-, OtsUDPHardware    (
-		theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("InterfaceIPAddress").getValue<std::string>()
-		, theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("InterfacePort").getValue<unsigned int>()
-		, -1 /*version*/
-		, true /*verbose*/)
-, OtsUDPFirmwareDataGen(theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode("FirmwareVersion").getValue<unsigned int>())
-{
-	//    __COUT__ << "FE name: " << interfaceUID << std::endl;
-	//    __COUT__ << " Interface IP: "   << FEVInterface::theXDAQContextConfigTree_.getNode(interfaceConfigurationPath).getNode("IPAddress").getValue<std::string>() << std::endl;
-	//    __COUT__ << " Interface Port: " << FEVInterface::theXDAQContextConfigTree_.getNode(interfaceConfigurationPath).getNode("Port").getValue<std::string>() << std::endl;
-	//    __COUT__ << " IP: "             << FEVInterface::theXDAQContextConfigTree_.getNode(interfaceConfigurationPath).getNode("IP").getValue<std::string>() << std::endl;
-	//    __COUT__ << " Port: "           << FEVInterface::theXDAQContextConfigTree_.getNode(interfaceConfigurationPath).getNode("IPAddress").getValue<std::string>() << std::endl;
-	universalAddressSize_ = 8;
-	universalDataSize_    = 8;
-}
+: FEOtsUDPTemplateInterface(interfaceUID,theXDAQContextConfigTree,interfaceConfigurationPath)
+{}
 
 //========================================================================================================================
 FENIMPlusInterface::~FENIMPlusInterface(void)
 {}
-
-
-//========================================================================================================================
-void FENIMPlusInterface::runSequenceOfCommands(const std::string &treeLinkName)
-{
-	std::map<uint64_t,uint64_t> writeHistory;
-	uint64_t writeAddress, writeValue, bitMask;
-	uint8_t bitPosition;
-
-	std::string writeBuffer;
-	std::string readBuffer;
-	char msg[1000];
-	try
-	{
-		auto configSeqLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode(treeLinkName);
-
-		if(configSeqLink.isDisconnected())
-			__COUT__ << "Disconnected configure sequence" << std::endl;
-		else
-		{
-			__COUT__ << "Handling configure sequence." << std::endl;
-			auto childrenMap = configSeqLink.getChildrenMap();
-			for(const auto &child:childrenMap)
-			{
-				//WriteAddress and WriteValue fields
-
-				writeAddress = child.second.getNode("WriteAddress").getValue<uint64_t>();
-				writeValue = child.second.getNode("WriteValue").getValue<uint64_t>();
-				bitPosition = child.second.getNode("StartingBitPosition").getValue<uint8_t>();
-				bitMask = (1 << child.second.getNode("BitFieldSize").getValue<uint8_t>())-1;
-
-				writeValue &= bitMask;
-				writeValue <<= bitPosition;
-				bitMask = ~(bitMask<<bitPosition);
-
-				//place into write history
-				if(writeHistory.find(writeAddress) == writeHistory.end())
-					writeHistory[writeAddress] = 0;//init to 0
-
-				writeHistory[writeAddress] &= bitMask; //clear incoming bits
-				writeHistory[writeAddress] |= writeValue; //add incoming bits
-
-				sprintf(msg,"\t Writing %s: \t %ld(0x%lX) \t %ld(0x%lX)", child.first.c_str(),
-						writeAddress, writeAddress,
-						writeHistory[writeAddress], writeHistory[writeAddress]);
-				__COUT__ << msg << std::endl;
-
-				writeBuffer.resize(0);
-				OtsUDPFirmwareCore::writeAdvanced(writeBuffer, writeAddress, writeHistory[writeAddress]);
-				OtsUDPHardware::write(writeBuffer);
-				//				writeBuffer.resize(0);
-				//				OtsUDPFirmwareCore::readAdvanced(writeBuffer, writeAddress);
-				//				OtsUDPHardware::read(writeBuffer,readBuffer);
-			}
-		}
-	}
-	catch(const std::runtime_error &e)
-	{
-		__COUT__ << "Error accessing sequence, so giving up:\n" << e.what() << std::endl;
-	}
-	catch(...)
-	{
-		__COUT__ << "Unknown Error accessing sequence, so giving up." << std::endl;
-	}
-}
 
 //========================================================================================================================
 void FENIMPlusInterface::configure(void)
@@ -145,7 +67,6 @@ void FENIMPlusInterface::configure(void)
 
 	//
 	//
-	//LORE RIGH NOW I DONT CARE TO READ BACK
 //	__COUT__ << "Reading back burst dest MAC/IP/Port: "  << std::endl;
 //	writeBuffer.resize(0);
 //	OtsUDPFirmwareCore::readAdvancedDataDestinationMAC(writeBuffer);
@@ -157,10 +78,9 @@ void FENIMPlusInterface::configure(void)
 //	OtsUDPFirmwareCore::readAdvancedDataDestinationPort(writeBuffer);
 //	OtsUDPHardware::read(writeBuffer,readBuffer);
 //
-//	//read NIM+ version (for debugging)
-//	writeBuffer.resize(0);
-//	OtsUDPFirmwareCore::readAdvancedAdvanced(writeBuffer,0x5);
-//	OtsUDPHardware::read(writeBuffer,readBuffer);
+	//read NIM+ version (for debugging)
+	OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x5);
+	OtsUDPHardware::read(writeBuffer,readBuffer);
 
 
 	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
