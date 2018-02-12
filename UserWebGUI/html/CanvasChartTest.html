@@ -51,13 +51,10 @@
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="../js/jquery.mask.min.js"></script>
     <script src="../js/jscolor.min.js"></script>
-
-
-
+   
+   <script src="../js/CanvasLineChart.js" defer ></script>    
+   
     
-   <!-- <script src="../js/CanvasLineChart.js" defer ></script> -->    
-    <script src="../js/NimStream_app.js" defer></script>
-    <!--
 	  <script type="text/javascript"> 
 	  $(document).ready(function () {
 	   LineChartVar = new LineChart;
@@ -70,10 +67,10 @@
                             useGrid: true,
 			    useAxisLabels: true,
 			    useDataLabels: false,
-			    ChartWidth: 800,
-			    ChartHeight: 600,
-			    HorizontalDivs: 15,
-			    VeticalDivs: 15,
+			    chartWidth: 800, //Width of chart to display data, DOES NOT INCLUDE MARGINS
+			    chartHeight: 600, //Height of chart to display data, DOES NOT INCLUDE MARGINS
+			    HorizontalDivs: 10, //Horizontal divisions of the chart desired, should divide into chart height cleanly
+			    VeticalDivs: 10,//Vertical divisions of the chart desired, should divide into chart width cleanly
 			    renderTypes: [LineChartVar.renderType.lines, LineChartVar.renderType.points] };
 			    
 			    
@@ -82,54 +79,14 @@
 	  
 	  });  
 	  </script>
-	-->
-    
-</head> 
-
-</html>
-    <h1>NimPLUS Remote Scope</h1>
-
-		<input id="color1" class="jscolor {closable:true,closeText:'Close',hash:true}" value="#ff3300">	
-		<p>Persistance: Low/None<input type="range" id="gblAlpha1" class="revRange" max=0.5 min=0 step=0.001 value=0.1>Infinite</p>
-		<p><div class="mainBlock" id="block1" style="position:relative; display:block;">	
-		  <canvas id="canvas1Grid"
+	
+</head>    
+<body>
+    		<p><div class="mainBlock" id="testBlock" style="position:relative; display:block;">
+		  <canvas id="testGrid" width=800px height=600px
 		  style="position:absolute; left: 0; top: 0; z-index: 1;"></canvas>
-		  <canvas id="canvas1"
-		  style="position:absolute; left: 0; top: 0; z-index: 2;"></canvas> 
-		  	  
-		</div>
-		<div><br></div>
-		<input id="color2" class="jscolor {closable:true,closeText:'Close',hash:true}" value="#0ece04">
-		<p>Persistance: Low/None<input type="range" id="gblAlpha2" class="revRange" max=0.5 min=0 step=0.001 value=0.1>Infinite</p>
-		<p><div class='mainBlock' id='block2' style="position:relative; display:block;">
-		  <canvas id="canvas2Grid"
-		   style="position:absolute; left: 0; top: 0; z-index: 1;"></canvas>
-		  <canvas id="canvas2"
-		   style="position:absolute; left: 0; top: 0; z-index: 2;"></canvas>		   		  
-		</div>
-		<div><br></div>
-		<input id="color3" class="jscolor {closable:true,closeText:'Close',hash:true}" value="#0854d1">		
-		<p>Persistance: Low/None<input type="range" id="gblAlpha3" class="revRange" max=0.5 min=0 step=0.001 value=0.1>Infinite</p>
-		<input type="number" id="vertDiv3" value=12 oninput="drawGrid('lightgray',ctx3Grid,canvas3Grid,this.value,sigWidth3,sigLowHeight3);">
-		<p><div class='mainBlock' id='block3' style="position:relative; display:block;">
-		  <canvas id="canvas3Grid"
-		  style="position:absolute; left: 0; top: 0; z-index: 1;"></canvas>
-		  <canvas id="canvas3"
-		  style="position:absolute; left: 0  top: 0; z-index: 2;"></canvas>		  
-		</div>
-		<div><br></div>
-		<input id="color4" class="jscolor {closable:true,closeText:'Close',hash:true}" value="#8615D1">		
-		<p>Persistance: Low/None<input type="range" id="gblAlpha4" class="revRange" max=0.5 min=0 step=0.001 value=0.1>Infinite</p>
-		<p><div class='mainBlock' id='block4' style="position:relative; display:block;">
-		  <canvas id="canvas4Grid"
-		  style="position:absolute; left: 0; top: 0; z-index: 1;"></canvas>
-		  <canvas id="canvas4"
+		  <canvas id="testCanvas" width=800px height=600px
 		  style="position:absolute; left: 0; top: 0; z-index: 2;"></canvas>		  
 		</div>
-				
-		
-	</body>
-	
-</html>
-
-    
+		<div><br></div>
+</body>		

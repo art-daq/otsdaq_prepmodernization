@@ -118,10 +118,11 @@ $(block3El).css("width",sigWidth3*32);
 $(block4El).css("height",sigLowHeight4);
 $(block4El).css("width",sigWidth4*32);
 
+var testCanvasEl = document.getElementById("testCanvas");
+var testGridEl = document.getElementById("testGrid");
 
 
 var getDataReq = true;
-	
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -210,6 +211,7 @@ function fadeOut(ctxVar,canvasVar,gblAlphaVar,timeoutVal) {
 */  
 function drawGrid(strokeColor,ctxVar,canvasVar,vertDivs,sigWidth,sigLowHeight){
   //reset the canvas to a blank (white) slate
+  console.log("vDiv Spacing: " + (sigLowHeight/vertDivs));
   ctxVar.clearRect(0, 0, canvasVar.width, canvasVar.height);
   ctxVar.fillStyle = "white"; 
   ctxVar.fillRect(0, 0, canvasVar.width, canvasVar.height); 
