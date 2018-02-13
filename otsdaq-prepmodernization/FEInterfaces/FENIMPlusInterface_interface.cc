@@ -340,7 +340,8 @@ void FENIMPlusInterface::configure(void)
 		unsigned char channelCount = 0;
 		bool enableOutput;
 		unsigned int outputDelay;
-		unsigned int outputWidth;
+		unsigned int outputWidthMask; //max is 64 bit mask
+		uint64_t outputWidth;
 		uint64_t outputModMask;
 
 		unsigned int outputMuxSelect;
@@ -364,19 +365,30 @@ void FENIMPlusInterface::configure(void)
 			if(usingOptionalParams)
 			{
 				outputDelay = optionalLink.getNode("DelayOutput" + channelName).getValue<unsigned int>();
-				outputWidth = optionalLink.getNode("WidthOutput" + channelName).getValue<unsigned int>();
-				outputModMask = (0xFFFFFFFFFFFFFFFF >> (64-outputWidth)) << outputDelay;
-				outputTimeVetoDuration = optionalLink.getNode("OutputTimeVetoDuration" + channelName).getValue<unsigned int>(); //0 ignores time veto, units of 3ns
-				outputPrescaleCount = optionalLink.getNode("OutputPrescaleCount" + channelName).getValue<unsigned int>();
-				outputBackpressureSelect = optionalLink.getNode("OutputBackpressureSelect" + channelName).getValue<bool>();
-				gateChannelVetoSel[channelCount] = optionalLink.getNode("InputChannelVetoSourceForOutput" + channelName).getValue<int>();
+				outputWidth = optionalLink.getNode("WidthOutput" + channelName).getValue<uint64_t>();
+				if(outputWidth > 64)
+					outputWidthMask = 64;
+				else
+				{
+					outputWidthMask = outputWidth;
+					outputWidth = 0;
+				}
+				outputModMask = (0xFFFFFFFFFFFFFFFF >> (64-outputWidthMask)) << outputDelay;
+				outputTimeVetoDuration = optionalLink.getNode("OutputTimeVetoDuration" +
+						channelName).getValue<unsigned int>(); //0 ignores time veto, units of 3ns
+				outputPrescaleCount = optionalLink.getNode("OutputPrescaleCount" +
+						channelName).getValue<unsigned int>();
+				outputBackpressureSelect = optionalLink.getNode("OutputBackpressureSelect" +
+						channelName).getValue<bool>();
+				gateChannelVetoSel[channelCount] = optionalLink.getNode("InputChannelVetoSourceForOutput" +
+						channelName).getValue<int>();
 				__COUT__ << "Raw gateChannelVetoSelect for " << channelName << " is " << gateChannelVetoSel[channelCount] << std::endl;
 				//0/1 := No Veto, 2-5 := Input_A-D		
 			
 			}
 			else //defaults
 			{
-				outputModMask = 0xFFF;
+				outputModMask = 0xFFF; outputWidth = 0;
 				outputTimeVetoDuration = 0;
 				outputPrescaleCount = 0;
 				outputBackpressureSelect = false;
@@ -389,11 +401,16 @@ void FENIMPlusInterface::configure(void)
 
 			backpressureMask |= (outputBackpressureSelect?1:0) << channelCount;
 
-			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelCount==0?0x4:(0x18016 + channelCount - 1), 0x33); //reset output channel block (bits 4/5 are reseting ch1/2)
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelCount==0?0x4:(0x18016 +
+					channelCount - 1), 0x33); //reset output channel block (bits 4/5 are reseting ch1/2)
 			OtsUDPHardware::write(writeBuffer);
-			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelCount==0?0x2:(0x18002 + channelCount - 1), outputModMask); //set output channel width/delay mask
+
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelCount==0?0x2:(0x18002 +
+					channelCount - 1), outputModMask); //set output channel width/delay mask
+			OtsUDPHardware::write(writeBuffer);
+
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x106 + channelCount*0x100,
+					outputWidth); //set output channel long width count
 			OtsUDPHardware::write(writeBuffer);
 			
 			__COUT__ << "Output word for " << channelName << " is " << std::bitset<64>(outputModMask) << std::endl << " with a delay of " << outputDelay << " and a width of " << outputWidth << std::endl;
@@ -966,10 +983,10 @@ void FENIMPlusInterface::FEMacroGenerateTriggers(__ARGS__)
 {
 	__COUT__ << "FEMacroGenerateTriggers" << __E__;
 
-	unsigned int numberOfTriggers =	__GET_ARG_IN__(unsigned int,"numberOfTriggers");
-	unsigned int clocksOfDelayBetweenTriggers = __GET_ARG_IN__(unsigned int,"clocksOfDelayBetweenTriggers");
+	unsigned int numberOfTriggers =	__GET_ARG_IN__("numberOfTriggers",unsigned int);
+	unsigned int clocksOfDelayBetweenTriggers = __GET_ARG_IN__("clocksOfDelayBetweenTriggers",unsigned int);
 	std::string& triggersWereLaunched =	__GET_ARG_OUT__("triggersWereLaunched");
-	std::string numberOfTriggersStr = __GET_ARG_IN__(std::string,"numberOfTriggers");
+	std::string numberOfTriggersStr = __GET_ARG_IN__("numberOfTriggers",std::string);
 
 	__COUT__ << "numberOfTriggers " << numberOfTriggers << __E__;
 	__COUT__ << "numberOfTriggersStr " << numberOfTriggersStr << __E__;
@@ -978,13 +995,36 @@ void FENIMPlusInterface::FEMacroGenerateTriggers(__ARGS__)
 
 	//TODO launch triggers based on parameters...
 
+	{
+		std::string writeBuffer;
+
+		//clear bit 5 in 0x18001
+//		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18001, nimEnables.to_ulong()); //enable or disable sig gen
+//		OtsUDPHardware::write(writeBuffer);
+//		__COUT__ << "Nim Enables set to " << nimEnables << std::endl;
+
+
+		//3 registers
+		//	count 		0x18005 (27:0)
+		//	hi_duration 0x18006 (27:0)
+		//	lo_duration 0x18007 (31:0)
+
+		//Note: select input mux to sig gen
+		//	muxInputA 0x108 => 1
+		//		B, C, D are on same register shifted up by 3 bits.
+
+		//set bit 5
+//		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18001, nimEnables.to_ulong()); //enable or disable sig gen
+//		OtsUDPHardware::write(writeBuffer);
+//		__COUT__ << "Nim Enables set to " << nimEnables << std::endl;
+	}
 
 	__COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
 	triggersWereLaunched = "Done!";
 	__COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
-	__SET_ARG_OUT__(unsigned int,"triggersWereLaunched",42.2f);
+	__SET_ARG_OUT__("triggersWereLaunched",42.2f);//,unsigned int);
 	__COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
-	__SET_ARG_OUT__(float,"triggersWereLaunched",42.2f);
+	__SET_ARG_OUT__("triggersWereLaunched",42.2f);//,float);
 	__COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
 }
 
