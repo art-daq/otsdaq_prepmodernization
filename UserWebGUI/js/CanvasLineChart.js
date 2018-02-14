@@ -15,7 +15,7 @@ var LineChart = function() {
   var gridCtx; //2D Context for the grid/labels
   var gridCanvas
   var dataCanvas
-  var margins = {top: 50, bottom: 50, left: 75, right: 0}; //margins
+  var margins = {top: 50, bottom: 50, left: 50, right: 50}; //margins
   var chartHeight, chartWidth; // width of the whole canvas area
   var useGrid = true;
   var useDataLabels = false;
@@ -49,6 +49,10 @@ var render = function(dataId,gridId,dataPts){
   dataCanvas.style.height = dataCanvas.height = chartHeight;
   dataCanvas.style.width = dataCanvas.width = chartWidth;
   
+  gridCanvas.style.height = gridCanvas.height = chartHeight;
+  gridCanvas.style.width = gridCanvas.width = chartWidth;
+  
+  
   renderChart();
 };
 
@@ -70,25 +74,31 @@ var renderGrid = function () {
   console.log("Drawing Grid");
   hDivs = data.HorizontalDivs;
   vDivs = data.VeticalDivs;
+  gridCtx.rect(0,0,gridCanvas.width,gridCanvas.height);
+  gridCtx.strokeStyle="Red";
+  gridCtx.stroke();
   var vDivSpacing = (xMaxPx/vDivs); 
-  var hDivSpaceing = (yMaxPx/hDivs);
-  console.log("vDiv spacing: "+ vDivSpacing + "\n" + "hDiv Spacing: " + hDivSpaceing + "\n");
+  var hDivSpacing = (yMaxPx/hDivs);
+/*  
+  console.log("vDiv spacing: "+ vDivSpacing + "\n" + "hDiv Spacing: " + hDivSpacing + "\n");
   console.log("xMaxPx: " + xMaxPx);
   console.log("yMaxPx: " + yMaxPx);
-  
-  gridCtx.beginPath();
-  for (var x = margins.left; x <= xMaxPx+margins.left; x += xMaxPx/vDivs){ //draw vertical lines
+  console.log("Canvas Height: " + gridCanvas.height);
+  console.log("Canvas Width: " + gridCanvas.width);
+*/
+    gridCtx.beginPath();
+    gridCtx.lineWidth=1;
+  for (var x =margins.left; x <= xMaxPx + margins.left; x += vDivSpacing){ //draw vertical lines
     gridCtx.moveTo(0.5 + x, margins.top);
-    gridCtx.lineTo(0.5 + x, yMaxPx);
-    console.log(x);
+    gridCtx.lineTo(0.5 + x, yMaxPx+margins.bottom);
+    console.log("Vertical Line at x val: " + x);
   }
   
-  for (var y = margins.top; y <= yMaxPx+margins.top; y += yMaxPx/hDivs){ //draw horizontal lines
-    gridCtx.moveTo(margins.left,0.5+y);
-    gridCtx.lineTo(xMaxPx,  0.5+y); 
-    console.log(y);
+  for (var x=margins.top; x <= yMaxPx+margins.top; x += hDivSpacing){ //draw horizontal lines
+    gridCtx.moveTo(margins.left, 0.5 + x);
+    gridCtx.lineTo(xMaxPx+margins.right, 0.5 + x); 
+    console.log("Horizontal Line at y val: " + x);    
   }
-  
   gridCtx.strokeStyle = strokeColor;
   gridCtx.stroke();
   gridCtx.closePath();
@@ -109,13 +119,13 @@ var renderAxisLabels = function () {
   //Render the Title
   if(data.title != ""){
   var size = gridCtx.measureText(data.title);
-  gridCtx.fillText(data.title, (chartWidth/2), (margins.top/2));
+  gridCtx.fillText(data.title, (chartWidth/2), (margins.top/1.5));
   }
   
   //X-Axis Label
   if(data.xLabel != ""){
   size = gridCtx.measureText(data.xLabel);
-  gridCtx.fillText(data.xLabel, margins.left + (xMaxPx/2)-(size.width/2), yMaxPx + (margins.bottom/1.2));
+  gridCtx.fillText(data.xLabel, (chartWidth/2), (yMaxPx+margins.top+margins.bottom/1.5))//, margins.left + (xMaxPx/2)-(size.width/2), yMaxPx + (margins.bottom/1.5));
   }
   
   //Y-Axis Label - save the canvas, rotate it to render text for the Y Axis label, then resore it once text rendered
@@ -123,7 +133,7 @@ var renderAxisLabels = function () {
   gridCtx.save();
   gridCtx.rotate(-Math.PI / 2);
   gridCtx.font = labelFont;
-  gridCtx.fillText(data.yLabel, (yMaxPx / 2) * -1, margins.left / 4);
+  gridCtx.fillText(data.yLabel, (yMaxPx / 2) * -1, margins.left / 1.5);
   gridCtx.restore();  
   }
   
