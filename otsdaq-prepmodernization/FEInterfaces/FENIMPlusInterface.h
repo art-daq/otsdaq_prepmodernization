@@ -2,6 +2,7 @@
 #define _ots_FENIMPlusInterface_h_
 
 #include "otsdaq-components/FEInterfaces/FEOtsUDPTemplateInterface.h"
+#include <bitset>
 
 namespace ots
 {
@@ -37,6 +38,9 @@ private:
 
     std::string 			runNumber_;
 	uint64_t 				sel_ctl_register_;
+
+	//bitsets for enables and resets
+	std::bitset<16> 		nimResets_, nimEnables_;
 };
 
 }

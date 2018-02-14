@@ -5,7 +5,7 @@
 #include <iostream>     // std::cout, std::dec, std::hex, std::oct
 #include <set>
 #include <stdint.h>
-#include <bitset>
+
 
 using namespace ots;
 
@@ -22,7 +22,7 @@ FENIMPlusInterface::FENIMPlusInterface(const std::string& interfaceUID, const Co
 	//register FE Macro Functions
 	registerFEMacroFunction("GenerateTriggers",	//feMacroName
 			static_cast<FEVInterface::frontEndMacroFunction_t>(&FENIMPlusInterface::FEMacroGenerateTriggers),
-			std::vector<std::string>{"numberOfTriggers","clocksOfDelayBetweenTriggers"}, //namesOfInputArgs
+			std::vector<std::string>{"numberOfTriggers","signalHiDuration","signalLoDuration"}, //namesOfInputArgs
 			std::vector<std::string>{"triggersWereLaunched"},		//namesOfOutputArgs
 			1); //requiredUserPermissions
 
@@ -35,29 +35,32 @@ FENIMPlusInterface::~FENIMPlusInterface(void)
 //========================================================================================================================
 void FENIMPlusInterface::configure(void)
 {
-	__COUT__ << "configure" << std::endl;
-	__COUT__ << "Clearing receive socket buffer: " << OtsUDPHardware::clearReadSocket() << " packets cleared." << std::endl;
+	FEOtsUDPTemplateInterface::configure();
+
+	__CFG_COUT__ << "configure" << std::endl;
 
 	std::string writeBuffer;
 	std::string readBuffer;
+	uint64_t readQuadWord;
 
-	__COUT__ << "Setting Destination IP: " <<
-			theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("StreamToIPAddress").getValue<std::string>()
-			<< std::endl;
-	__COUT__ << "And Destination Port: " <<
-			theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("StreamToPort").getValue<unsigned int>()
-			<< std::endl;
 
-	writeBuffer.resize(0);
-	OtsUDPFirmwareCore::setDataDestination(writeBuffer,
-			theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("StreamToIPAddress").getValue<std::string>(),
-			theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("StreamToPort").getValue<uint64_t>()
-	);
-	OtsUDPHardware::write(writeBuffer);
+//	__CFG_COUT__ << "Setting Destination IP: " <<
+//			theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("StreamToIPAddress").getValue<std::string>()
+//			<< std::endl;
+//	__CFG_COUT__ << "And Destination Port: " <<
+//			theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("StreamToPort").getValue<unsigned int>()
+//			<< std::endl;
+//
+//	writeBuffer.resize(0);
+//	OtsUDPFirmwareCore::setDataDestination(writeBuffer,
+//			theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("StreamToIPAddress").getValue<std::string>(),
+//			theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("StreamToPort").getValue<uint64_t>()
+//	);
+//	OtsUDPHardware::write(writeBuffer);
 
 	//
 	//
-//	__COUT__ << "Reading back burst dest MAC/IP/Port: "  << std::endl;
+//	__CFG_COUT__ << "Reading back burst dest MAC/IP/Port: "  << std::endl;
 //	writeBuffer.resize(0);
 //	OtsUDPFirmwareCore::readAdvancedDataDestinationMAC(writeBuffer);
 //	OtsUDPHardware::read(writeBuffer,readBuffer);
@@ -68,9 +71,6 @@ void FENIMPlusInterface::configure(void)
 //	OtsUDPFirmwareCore::readAdvancedDataDestinationPort(writeBuffer);
 //	OtsUDPHardware::read(writeBuffer,readBuffer);
 //
-	//read NIM+ version (for debugging)
-	OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x5);
-	OtsUDPHardware::read(writeBuffer,readBuffer);
 
 
 	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
@@ -78,7 +78,7 @@ void FENIMPlusInterface::configure(void)
 			!optionalLink.isDisconnected();
 
 	//choose external or internal clock
-	__COUT__ << "Choosing external or internal clock..." << std::endl;
+	__CFG_COUT__ << "Choosing external or internal clock..." << std::endl;
 	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x3,
 			(usingOptionalParams?
 					(optionalLink.getNode("UseExternalClock").getValue<bool>()?1:0):
@@ -94,25 +94,43 @@ void FENIMPlusInterface::configure(void)
 			if(usingOptionalParams &&
 					optionalLink.getNode("EnableClockResetDuringConfigure").getValue<bool>())
 			{
-				__COUT__ << "Resetting Ethernet!" << std::endl;
+				__CFG_COUT__ << "Resetting Ethernet!" << std::endl;
 
-				OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x1FFFFFFFF, /*data*/ 0x1); //ots Ethernet reset
+				OtsUDPFirmwareCore::ethernetReset(writeBuffer);
 				OtsUDPHardware::write(writeBuffer);
 
-				OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x1FFFFFFFF,0x0); //unreset
+				OtsUDPFirmwareCore::ethernetUnreset(writeBuffer);
 				OtsUDPHardware::write(writeBuffer);
-				sleep(5); //seconds
-				
+				sleep(1); //seconds
+
+
+
 
 			}
 		}
 		catch(...)
 		{
-			__COUT__ << "Could not find reset clock flag, so not resetting... " << std::endl;
+			__CFG_COUT__ << "Could not find reset clock flag, so not resetting... " << std::endl;
 		}
 	}
 
-	__COUT__ << "Re-locking clocks..." << std::endl;
+	{ //debug read
+		//read NIM+ version (for debugging)
+		OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x5);
+		OtsUDPHardware::read(writeBuffer,readBuffer);
+
+		//read back clock lock loss status
+		OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x10);
+		OtsUDPHardware::read(writeBuffer,readQuadWord);
+		__CFG_COUT__ << "Clocks lock loss " << ((readQuadWord>>24)&0xF) << __E__;
+
+		//read NIM+ version (for debugging)
+		OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x5);
+		OtsUDPHardware::read(writeBuffer,readBuffer);
+	}
+
+
+	__CFG_COUT__ << "Re-locking clocks..." << std::endl;
 	//reset clock PLLs
 	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x999, /*data*/ 0x7); //reset wiz0, wiz1, and nimDacClk
 	OtsUDPHardware::write(writeBuffer);
@@ -120,9 +138,17 @@ void FENIMPlusInterface::configure(void)
 	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x999, /*data*/ 0); //unreset
 	OtsUDPHardware::write(writeBuffer);
 	sleep(1); //seconds
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x999, /*data*/ 0x8); //reset phase shift output clock
+	OtsUDPHardware::write(writeBuffer);
+	sleep(1); //seconds
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x999, /*data*/ 0); //unreset
+	OtsUDPHardware::write(writeBuffer);
+	sleep(1); //seconds
 
-	//FIXME -- read back clock lock status
-
+	//read back clock lock loss status
+	OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x10);
+	OtsUDPHardware::read(writeBuffer,readQuadWord);
+	__CFG_COUT__ << "Clocks lock loss " << ((readQuadWord>>24)&0xF) << __E__;
 
 
 	//Run Configure Sequence Commands
@@ -167,18 +193,16 @@ void FENIMPlusInterface::configure(void)
 		OtsUDPHardware::write(writeBuffer);
 	}
 
-	//bitsets for enables and resets
-	std::bitset<16> nimResets;
-	std::bitset<16> nimEnables;
 
 	//Reset everything for configure
-	nimResets.set(); //set all bits to 1
+	nimEnables_.reset(); //set all bits to 0
+	nimResets_.set(); //set all bits to 1
 	writeBuffer.resize(0);
-	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, nimResets.to_ulong()); //reset everything (counters and vetos/ps)
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, nimResets_.to_ulong()); //reset everything (counters and vetos/ps)
 	OtsUDPHardware::write(writeBuffer);
-	nimResets.reset(); //set all bits to 0
+	nimResets_.reset(); //set all bits to 0
 	writeBuffer.resize(0);
-	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, nimResets.to_ulong()); //unreset everything
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, nimResets_.to_ulong()); //unreset everything
 	OtsUDPHardware::write(writeBuffer);
 
 
@@ -192,12 +216,12 @@ void FENIMPlusInterface::configure(void)
 	}
 	catch(...)
 	{
-		__COUT__ << "Skipping DAC writing because enable field was not found in tree." << std::endl;
+		__CFG_COUT__ << "Skipping DAC writing because enable field was not found in tree." << std::endl;
 	}
 
 	if(doWriteDACs) //works, but temporarily disabling
 	{
-		__COUT__ << "Setting up DACs" << std::endl;
+		__CFG_COUT__ << "Setting up DACs" << std::endl;
 
 		//16 bit DAC value
 		//   - 15:12 channel := 2=A, 6=B, A=C, E=D
@@ -250,7 +274,7 @@ void FENIMPlusInterface::configure(void)
 		
 		unsigned char selectionOnOffMask = 0, inputPolarityMask = 0;
 
-		__COUT__ << "Setting up input channels..." << std::endl;
+		__CFG_COUT__ << "Setting up input channels..." << std::endl;
 		for(const auto &channelName : channelNames) //setup sig mod for each channel
 		{
 			//if(channelName != "ChannelD") { ++channelCount; continue;} //For Debugging just one channel
@@ -276,7 +300,7 @@ void FENIMPlusInterface::configure(void)
 			inputPolarityMask |= ((invertPolarity?1:0) << channelCount);
 
 			
-			__COUT__ << "Output word for " << channelName << " is " << std::bitset<64>(inputModMask) << std::endl << " with a delay of " << inputDelay << " and a width of " << inputWidth << std::endl;
+			__CFG_COUT__ << "Output word for " << channelName << " is " << std::bitset<64>(inputModMask) << std::endl << " with a delay of " << inputDelay << " and a width of " << inputWidth << std::endl;
 			
 			
 			writeBuffer.resize(0);
@@ -293,13 +317,13 @@ void FENIMPlusInterface::configure(void)
 
 			++channelCount;
 		}
-		__COUT__ << "Input polariy mask is " << std::bitset<8>(inputPolarityMask) << std::endl;
+		__CFG_COUT__ << "Input polariy mask is " << std::bitset<8>(inputPolarityMask) << std::endl;
 		writeBuffer.resize(0);
 		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/0x1800B, /*data*/ inputPolarityMask); //setup input polarity
 		OtsUDPHardware::write(writeBuffer);
 
 
-		__COUT__ << "Writing accelerator clock mask." << __E__;
+		__CFG_COUT__ << "Writing accelerator clock mask." << __E__;
 		OtsUDPFirmwareCore::writeAdvanced(writeBuffer,
 				0x107,
 				(usingOptionalParams?
@@ -307,7 +331,7 @@ void FENIMPlusInterface::configure(void)
 						0)); //chooses a 40MHz clock phase relative to the accelerator clock (in increments of ~3ns)
 		OtsUDPHardware::write(writeBuffer);
 
-		__COUT__ << "Writing trigger clock mask." << __E__;
+		__CFG_COUT__ << "Writing trigger clock mask." << __E__;
 		OtsUDPFirmwareCore::writeAdvanced(writeBuffer,
 				0x18008,
 				(1<<8) |  //disable sig_log masking with 40MHz clock block
@@ -329,7 +353,7 @@ void FENIMPlusInterface::configure(void)
 	}
 	catch(const std::runtime_error &e)
 	{
-		__COUT__ << "Failed input stage setup!\n" << e.what() << std::endl;
+		__CFG_COUT__ << "Failed input stage setup!\n" << e.what() << std::endl;
 		throw;
 	}
 
@@ -351,14 +375,14 @@ void FENIMPlusInterface::configure(void)
 		unsigned char backpressureMask = 0;
 		unsigned int gateChannelVetoSel[3] = {0,0,0};
 		
-		__COUT__ << "Setting up output channels..." << std::endl;
+		__CFG_COUT__ << "Setting up output channels..." << std::endl;
 		//there are 3 output channels (alias: signorm, sigcms1, sigcms2)
 		std::array<std::string,3> outChannelNames = {"Channel0","Channel1","Channel2"};
 		for(const auto &channelName : outChannelNames)
 		{
 			outputChannelSourceSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode(
 					"OutputSourceSelect" + channelName).getValue<unsigned int>(); //0: sig_log   or    1: sig_norm/ch0
-			__COUT__ << "OutputSourceSelect for " << channelName << " is " << outputChannelSourceSelect << std::endl;
+			__CFG_COUT__ << "OutputSourceSelect for " << channelName << " is " << outputChannelSourceSelect << std::endl;
 			if(outputChannelSourceSelect) //if non-default, subtract 1 so choice 1 evaluates to 0, and so on..
 				--outputChannelSourceSelect;
 			
@@ -382,7 +406,7 @@ void FENIMPlusInterface::configure(void)
 						channelName).getValue<bool>();
 				gateChannelVetoSel[channelCount] = optionalLink.getNode("InputChannelVetoSourceForOutput" +
 						channelName).getValue<int>();
-				__COUT__ << "Raw gateChannelVetoSelect for " << channelName << " is " << gateChannelVetoSel[channelCount] << std::endl;
+				__CFG_COUT__ << "Raw gateChannelVetoSelect for " << channelName << " is " << gateChannelVetoSel[channelCount] << std::endl;
 				//0/1 := No Veto, 2-5 := Input_A-D		
 			
 			}
@@ -410,17 +434,20 @@ void FENIMPlusInterface::configure(void)
 			OtsUDPHardware::write(writeBuffer);
 
 			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x106 + channelCount*0x100,
-					outputWidth); //set output channel long width count
+					outputWidth | (uint64_t(outputWidth?1:0/*enable*/)<<63)); //set output channel long width count
 			OtsUDPHardware::write(writeBuffer);
 			
-			__COUT__ << "Output word for " << channelName << " is " << std::bitset<64>(outputModMask) << std::endl << " with a delay of " << outputDelay << " and a width of " << outputWidth << std::endl;
+			__CFG_COUT__ << "Output word for " << channelName << " is " << std::bitset<64>(outputModMask) <<
+					std::endl;
+			__CFG_COUT__ << "Output delay of " << outputDelay << " and an extended width of " <<
+					outputWidth << std::endl;
 			
 			if(channelCount)
 			{
 				writeBuffer.resize(0);
 				OtsUDPFirmwareCore::writeAdvanced(writeBuffer, (0x18018 + channelCount - 1), outputChannelSourceSelect); //select source (1 := signorm, 0 := siglog)
 				OtsUDPHardware::write(writeBuffer);
-				__COUT__ << "Output src select is " << outputChannelSourceSelect << " for " << channelName << std::endl;
+				__CFG_COUT__ << "Output src select is " << outputChannelSourceSelect << " for " << channelName << std::endl;
 			}
 			
 
@@ -430,7 +457,7 @@ void FENIMPlusInterface::configure(void)
 			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelCount==0?0x1801B:(0x18011 + channelCount - 1), outputTimeVetoDuration);
 			OtsUDPHardware::write(writeBuffer);
 
-			__COUT__ << "Veto count for " << channelName << " is " << outputTimeVetoDuration << " writing to ch "  << (channelCount==0?0x1801B:(0x18011 + channelCount - 1)) << std::endl;
+			__CFG_COUT__ << "Veto count for " << channelName << " is " << outputTimeVetoDuration << " writing to ch "  << (channelCount==0?0x1801B:(0x18011 + channelCount - 1)) << std::endl;
 			
 			//prescale veto setup
 						writeBuffer.resize(0);
@@ -440,7 +467,7 @@ void FENIMPlusInterface::configure(void)
 			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x1801C + channelCount, outputPrescaleCount);
 			OtsUDPHardware::write(writeBuffer);
 
-			__COUT__ << "Prescaler count for " << channelName << " is " << outputPrescaleCount << " writing to ch " <<  0x1801C + channelCount << std::endl;
+			__CFG_COUT__ << "Prescaler count for " << channelName << " is " << outputPrescaleCount << " writing to ch " <<  0x1801C + channelCount << std::endl;
 			  
 			++channelCount;
 		}
@@ -451,7 +478,7 @@ void FENIMPlusInterface::configure(void)
 		//  2 external backpressure inputs
 		//  bit 3 is 0/1 disable/enable for first input
 		//  bit 4 is 0/1 disable/enable for second input
-		__COUT__ << "Backpressure Selecting..." << std::endl;
+		__CFG_COUT__ << "Backpressure Selecting..." << std::endl;
 		outputBackpressureSelect = usingOptionalParams && optionalLink.getNode("EnableBackPressureInputA").getValue<bool>();
 		backpressureMask |= outputBackpressureSelect << 3;
 		outputBackpressureSelect = usingOptionalParams && optionalLink.getNode("EnableBackPressureInputB").getValue<bool>();
@@ -461,7 +488,7 @@ void FENIMPlusInterface::configure(void)
 		OtsUDPHardware::write(writeBuffer);
 
 		//and 4 output muxes (first is special)
-		__COUT__ << "Setting output muxes..." << std::endl;
+		__CFG_COUT__ << "Setting output muxes..." << std::endl;
 		unsigned int outputPolarityMask = 0; 
 		bool outputInvertPolarity;
 		channelCount = 0;
@@ -486,7 +513,7 @@ void FENIMPlusInterface::configure(void)
 			writeBuffer.resize(0);
 			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelCount == 0?0x5:(0x18013 + channelCount - 1), outputMuxSelect); //setup mux select
 			OtsUDPHardware::write(writeBuffer);
-			__COUT__ << "Mux value for output channel " << channelName << " is " <<
+			__CFG_COUT__ << "Mux value for output channel " << channelName << " is " <<
 					outputMuxSelect << ", written to 0x" << std::hex <<
 					(channelCount == 0?0x5:(0x18013 + channelCount - 1)) <<
 					std::dec << std::endl;
@@ -494,21 +521,21 @@ void FENIMPlusInterface::configure(void)
 			writeBuffer.resize(0);
 			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/0x1800C, /*data*/ outputPolarityMask); //setup output polarity
 			OtsUDPHardware::write(writeBuffer);
-			__COUT__ << "Input polarity mask is " << std::bitset<8>(outputPolarityMask) << std::endl;
+			__CFG_COUT__ << "Input polarity mask is " << std::bitset<8>(outputPolarityMask) << std::endl;
 
 			++channelCount;
 		}
 
 		//setup burst data blocks
 		{
-			__COUT__ << "Setting up Burst Data Blocks" << std::endl;
+			__CFG_COUT__ << "Setting up Burst Data Blocks" << std::endl;
 
 			unsigned int logicSampleDelay = 0;
 			unsigned int gateChannel = 0;
 			unsigned int gateChannelReg = (gateChannelVetoSel[2]<<8) | (gateChannelVetoSel[1]<<4) | (gateChannelVetoSel[0]<<0); //nibbles ... 3:= delta-time, 2:= out-ch2, 1:= out-ch1, 0 := out-ch0
-			__COUT__ << "Gate Ch Veto Selections - 2: " << gateChannelVetoSel[2] << std::endl;
-			__COUT__ << "Gate Ch Veto Selections - 1: " << gateChannelVetoSel[1] << std::endl;
-			__COUT__ << "Gate Ch Veto Selections - 0: " << gateChannelVetoSel[0] << std::endl;
+			__CFG_COUT__ << "Gate Ch Veto Selections - 2: " << gateChannelVetoSel[2] << std::endl;
+			__CFG_COUT__ << "Gate Ch Veto Selections - 1: " << gateChannelVetoSel[1] << std::endl;
+			__CFG_COUT__ << "Gate Ch Veto Selections - 0: " << gateChannelVetoSel[0] << std::endl;
 			//value of 4 is no-gate
 				// 0-3 are input channels A-D depending on polarity
 
@@ -534,10 +561,10 @@ void FENIMPlusInterface::configure(void)
 			{
 				gateChannelReg |= 4<<12;
 			}
-			__COUT__ << "Gate Ch Veto Selections - Burst: " << gateChannel << std::endl;
+			__CFG_COUT__ << "Gate Ch Veto Selections - Burst: " << gateChannel << std::endl;
 			std::bitset<16> gateChannelRegBitset (gateChannelReg);
-			__COUT__ << "Gate Ch Veto Register: " << gateChannelReg << std::endl;			
-			__COUT__ << "Gate Ch Veto Register: " << gateChannelRegBitset.to_string() << std::endl;
+			__CFG_COUT__ << "Gate Ch Veto Register: " << gateChannelReg << std::endl;
+			__CFG_COUT__ << "Gate Ch Veto Register: " << gateChannelRegBitset.to_string() << std::endl;
 			
 
 			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x1800E, outputMuxSelect); //setup burst output mux select
@@ -564,7 +591,7 @@ void FENIMPlusInterface::configure(void)
 
 		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x06, 0x02); //renable selection  logic
 		OtsUDPHardware::write(writeBuffer);
-		__COUT__ << "Selection Logic word is  " << std::bitset<16>(coincidenceLogicWord) << std::endl;
+		__CFG_COUT__ << "Selection Logic word is  " << std::bitset<16>(coincidenceLogicWord) << std::endl;
 		
 		 
 		
@@ -578,13 +605,13 @@ void FENIMPlusInterface::configure(void)
 		
 		if (optionalLink.getNode("SignalGeneratorEnable").getValue<bool>())
 		{
-			nimResets.reset(5); //set bit 5 in resets to 0 to take sig gen out of reset
-			nimEnables.set(5); //set bit 5 in enables to 1 to enable sig gen
+			nimResets_.reset(5); //set bit 5 in resets to 0 to take sig gen out of reset
+			nimEnables_.set(5); //set bit 5 in enables to 1 to enable sig gen
 
 			writeBuffer.resize(0);
 			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, 0xFFFF); //reset all (is this safe to do?)
 			OtsUDPHardware::write(writeBuffer);
-			__COUT__ << "Resets all for sig gen!" << std::endl;
+			__CFG_COUT__ << "Resets all for sig gen!" << std::endl;
 
 			//signal generator setup
 			writeBuffer.resize(0);
@@ -600,32 +627,32 @@ void FENIMPlusInterface::configure(void)
 			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x1800D, sigGenPolarityMask); //sig gen polarity
 			OtsUDPHardware::write(writeBuffer);
 
-			__COUT__ << "Configured signal generator with a count of " << sigGenCount << " (0 is continuous output), a high period of " <<
+			__CFG_COUT__ << "Configured signal generator with a count of " << sigGenCount << " (0 is continuous output), a high period of " <<
 					sigGenHighPer << ", a low period of " << sigGenLowPer << ", and output inversion set to " << sigGenPolarity << std::endl;
 		}
 		else
 		{
-			nimResets.set(5); //set bit 5 in resets to 1 to take sig gen out of reset
-			nimEnables.reset(5); //set bit 5 in enables to 0 to disable sig gen
-			__COUT__ << "Signal Generator disabled" << std::endl;
+			nimResets_.set(5); //set bit 5 in resets to 1 to take sig gen out of reset
+			nimEnables_.reset(5); //set bit 5 in enables to 0 to disable sig gen
+			__CFG_COUT__ << "Signal Generator disabled" << std::endl;
 		}
 
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, nimResets.to_ulong()); //set sig gen in or out of reset
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, nimResets_.to_ulong()); //set sig gen in or out of reset
 		OtsUDPHardware::write(writeBuffer);
-		__COUT__ << "Nim Resets set to " << nimResets << std::endl;
+		__CFG_COUT__ << "Nim Resets set to " << nimResets_ << std::endl;
 
 		writeBuffer.resize(0);
-		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18001, nimEnables.to_ulong()); //enable or disable sig gen
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18001, nimEnables_.to_ulong()); //enable or disable sig gen
 		OtsUDPHardware::write(writeBuffer);
-		__COUT__ << "Nim Enables set to " << nimEnables << std::endl;
+		__CFG_COUT__ << "Nim Enables set to " << nimEnables_ << std::endl;
 		
 		
 		
 	}
 	catch(const std::runtime_error &e)
 	{
-		__COUT__ << "Failed output stage setup!\n" << e.what() << std::endl;
+		__CFG_COUT__ << "Failed output stage setup!\n" << e.what() << std::endl;
 		throw;
 	}
 
@@ -635,12 +662,12 @@ void FENIMPlusInterface::configure(void)
 			10 /*address*/); //read back sig log
 	OtsUDPHardware::read(writeBuffer,sel_ctl_register_);
 
-	__COUT__ << "receiveQuadWord all = 0x" << std::hex <<
+	__CFG_COUT__ << "receiveQuadWord all = 0x" << std::hex <<
 			sel_ctl_register_ << std::dec << std::endl;
 
 	sel_ctl_register_ = ((sel_ctl_register_>>(5*8))&0x0FF);
 
-	__COUT__ << "sel_ctl_register_ = 0x" << std::hex <<
+	__CFG_COUT__ << "sel_ctl_register_ = 0x" << std::hex <<
 			sel_ctl_register_ << std::dec << std::endl;
 
 
@@ -648,27 +675,27 @@ void FENIMPlusInterface::configure(void)
 	//at this point sig_log should be active (for chipscope, and recognizing of trigger input active)
 
 
-	__COUT__ << "Done with configuring."  << std::endl;
+	__CFG_COUT__ << "Done with configuring."  << std::endl;
 }
 
 //========================================================================================================================
 void FENIMPlusInterface::halt(void)
 {
-	__COUT__ << "\tHalt" << std::endl;
+	__CFG_COUT__ << "\tHalt" << std::endl;
 	stop();
 }
 
 //========================================================================================================================
 void FENIMPlusInterface::pause(void)
 {
-	__COUT__ << "\tPause" << std::endl;
+	__CFG_COUT__ << "\tPause" << std::endl;
 	stop();
 }
 
 //========================================================================================================================
 void FENIMPlusInterface::resume(void)
 {
-	__COUT__ << "\tResume" << std::endl;
+	__CFG_COUT__ << "\tResume" << std::endl;
 	start("");
 }
 
@@ -676,7 +703,7 @@ void FENIMPlusInterface::resume(void)
 void FENIMPlusInterface::start(std::string runNumber)
 {
 	runNumber_ = runNumber;
-	__COUT__ << "\tStart " << runNumber_ << std::endl;
+	__CFG_COUT__ << "\tStart " << runNumber_ << std::endl;
 	    std::string writeBuffer;
 
 	//Run Start Sequence Commands
@@ -689,7 +716,7 @@ void FENIMPlusInterface::start(std::string runNumber)
 
 	if(usingOptionalParams && optionalLink.getNode("EnableBurstData").getValue<bool>())
 	{
-		__COUT__ << "Enabling burst mode!" << __E__;
+		__CFG_COUT__ << "Enabling burst mode!" << __E__;
 		OtsUDPFirmwareCore::startBurst(writeBuffer);
 		OtsUDPHardware::write(writeBuffer);
 	}
@@ -712,17 +739,21 @@ void FENIMPlusInterface::stop(void)
 
 
 
-	__COUT__ << "\tStop" << std::endl;
-
-
+	__CFG_COUT__ << "\tStop" << std::endl;
 
 	//Run Stop Sequence Commands
+	runSequenceOfCommands("LinkToStopSequence");
 
-	//runSequenceOfCommands("LinkToStopSequence");
+
 	
 	//attempt to stop burst always
 	OtsUDPFirmwareCore::stopBurst(writeBuffer);
 	OtsUDPHardware::write(writeBuffer);
+
+
+	uint64_t readQuadWord;
+
+
 
 
 	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
@@ -744,16 +775,16 @@ void FENIMPlusInterface::stop(void)
 			{
 				filename +=	"_" + runNumber_ + ".cnt";
 
-				__COUT__ << "Attempting to save counts to " << filename << __E__;
+				__CFG_COUT__ << "Attempting to save counts to " << filename << __E__;
 				FILE *fp = fopen(//("/data/TestBeam/2017_12_December/NimPlus/TriggerCount_" +
 						//runNumber_ + ".cnt").c_str()
 						filename.c_str()
 						,"w");
 				if(fp)
 				{
-					__COUT__ << "Saving counts to " << filename << __E__;
+					__CFG_COUT__ << "Saving counts to " << filename << __E__;
 					//std::string readBuffer;
-					uint64_t readQuadWord;
+
 					uint32_t count;
 					uint8_t tag;
 
@@ -763,13 +794,13 @@ void FENIMPlusInterface::stop(void)
 					count = (readQuadWord >> 32);
 					tag = count>>28; //top 4 bits
 					count = (count & 0x0FFFFFFF); //only 28 bits
-					__COUT__ << "sig_log count = " << count << __E__;
+					__CFG_COUT__ << "sig_log count = " << count << __E__;
 					fprintf(fp,"sig_log   \t [tag=%d] %d 0x%4.4X\n",tag,count,count);
 
 					count = (readQuadWord & 0x0FFFFFFFF);
 					tag = count>>28; //top 4 bits
 					count = (count & 0x0FFFFFFF); //only 28 bits
-					__COUT__ << "sig_norm(out0) count = " << count << __E__;
+					__CFG_COUT__ << "sig_norm(out0) count = " << count << __E__;
 					fprintf(fp,"sig_norm(out0) \t [tag=%d] %d 0x%4.4X\n",tag,count,count);
 
 
@@ -779,13 +810,13 @@ void FENIMPlusInterface::stop(void)
 					count = (readQuadWord & 0x0FFFFFFFF);
 					tag = count>>28; //top 4 bits
 					count = (count & 0x0FFFFFFF); //only 28 bits
-					__COUT__ << "sig_cms1(out1) count = " << count << __E__;
+					__CFG_COUT__ << "sig_cms1(out1) count = " << count << __E__;
 					fprintf(fp,"sig_cms1(out1) \t [tag=%d] %d 0x%4.4X\n",tag,count,count);
 
 					count = (readQuadWord >> 32);
 					tag = count>>28; //top 4 bits
 					count = (count & 0x0FFFFFFF); //only 28 bits
-					__COUT__ << "sig_cms2(out2) count = " << count << __E__;
+					__CFG_COUT__ << "sig_cms2(out2) count = " << count << __E__;
 					fprintf(fp,"sig_cms2(out2) \t [tag=%d] %d 0x%4.4X\n",tag,count,count);
 
 
@@ -795,13 +826,13 @@ void FENIMPlusInterface::stop(void)
 					count = (readQuadWord & 0x0FFFFFFFF);
 					tag = count>>28; //top 4 bits
 					count = (count & 0x0FFFFFFF); //only 28 bits
-					__COUT__ << "muxout-A count = " << count << __E__;
+					__CFG_COUT__ << "muxout-A count = " << count << __E__;
 					fprintf(fp,"muxout-A \t [tag=%d] %d 0x%4.4X\n",tag,count,count);
 
 					count = (readQuadWord >> 32);
 					tag = count>>28; //top 4 bits
 					count = (count & 0x0FFFFFFF); //only 28 bits
-					__COUT__ << "muxout-B count = " << count << __E__;
+					__CFG_COUT__ << "muxout-B count = " << count << __E__;
 					fprintf(fp,"muxout-B \t [tag=%d] %d 0x%4.4X\n",tag,count,count);
 
 					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x106);
@@ -810,15 +841,32 @@ void FENIMPlusInterface::stop(void)
 					count = (readQuadWord & 0x0FFFFFFFF);
 					tag = count>>28; //top 4 bits
 					count = (count & 0x0FFFFFFF); //only 28 bits
-					__COUT__ << "muxout-C count = " << count << __E__;
+					__CFG_COUT__ << "muxout-C count = " << count << __E__;
 					fprintf(fp,"muxout-C \t [tag=%d] %d 0x%4.4X\n",tag,count,count);
 
 					count = (readQuadWord >> 32);
 					tag = count>>28; //top 4 bits
 					count = (count & 0x0FFFFFFF); //only 28 bits
-					__COUT__ << "muxout-D count = " << count << __E__;
+					__CFG_COUT__ << "muxout-D count = " << count << __E__;
 					fprintf(fp,"muxout-D \t [tag=%d] %d 0x%4.4X\n",tag,count,count);
 
+
+
+
+					//check for clock loss
+					OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x10);
+					OtsUDPHardware::read(writeBuffer,readQuadWord);
+
+					__CFG_COUT__ << "Clocks lock loss " << count << __E__;
+
+					count = (((readQuadWord>>24)&0xF) >> 0)&1;
+					fprintf(fp,"DAC       Clock-Lock-Loss \t %d 0x%4.4X\n",count,count);
+					count = (((readQuadWord>>24)&0xF) >> 1)&1;
+					fprintf(fp,"Main      Clock-Lock-Loss \t %d 0x%4.4X\n",count,count);
+					count = (((readQuadWord>>24)&0xF) >> 2)&1;
+					fprintf(fp,"External  Clock-Lock-Loss \t %d 0x%4.4X\n",count,count);
+					count = (((readQuadWord>>24)&0xF) >> 3)&1;
+					fprintf(fp,"OutPhase  Clock-Lock-Loss \t %d 0x%4.4X\n",count,count);
 
 
 					fclose(fp);
@@ -843,7 +891,7 @@ bool FENIMPlusInterface::running(void)
 	std::string writeBuffer;
 
 
-	__COUT__ << "Disabling sig_log" << std::endl;
+	__CFG_COUT__ << "Disabling sig_log" << std::endl;
 
 	OtsUDPFirmwareCore::writeAdvanced(writeBuffer,
 			0x6 /*address*/,
@@ -851,7 +899,7 @@ bool FENIMPlusInterface::running(void)
 	OtsUDPHardware::write(writeBuffer);
 
 
-	__COUT__ << "Resetting all counters (including sig log)" << std::endl;
+	__CFG_COUT__ << "Resetting all counters (including sig log)" << std::endl;
 	//0x18000 ==> counter resets
 
 	OtsUDPFirmwareCore::writeAdvanced(writeBuffer,
@@ -874,7 +922,7 @@ bool FENIMPlusInterface::running(void)
 
 
 
-	__COUT__ << "Running" << std::endl;
+	__CFG_COUT__ << "Running" << std::endl;
 
 	//		//example!
 	//		//play with array of 8 LEDs at address 0x1003
@@ -895,12 +943,12 @@ bool FENIMPlusInterface::running(void)
 			}
 			catch(...)
 			{
-				__COUT__ << "Ingore missing SecondsDelayBeforeStartingTriggers field..." << __E__;
+				__CFG_COUT__ << "Ingore missing SecondsDelayBeforeStartingTriggers field..." << __E__;
 			}
 		}
 
 		if(!sleepSeconds) sleepSeconds = 22;
-		__COUT__ << "Sleeping for " << sleepSeconds << " seconds..." << __E__;
+		__CFG_COUT__ << "Sleeping for " << sleepSeconds << " seconds..." << __E__;
 		sleep(sleepSeconds);
 
 		unsigned char channelCount = 0;
@@ -910,7 +958,7 @@ bool FENIMPlusInterface::running(void)
 		//there are 3 output channels (alias: signorm, sigcms1, sigcms2)
 		std::array<std::string,3> outChannelNames = {"Channel0","Channel1","Channel2"};
 
-		__COUT__ << "Enabling output trigger channels!" << std::endl;
+		__CFG_COUT__ << "Enabling output trigger channels!" << std::endl;
 
 		//must do channel 0 last!! (synchronously enables all 3 channels)
 		for(channelCount = 2; channelCount <= 2; --channelCount)
@@ -927,7 +975,7 @@ bool FENIMPlusInterface::running(void)
 			OtsUDPHardware::write(writeBuffer);
 		}
 
-		__COUT__ << "Enabling sig mod block!" << __E__;
+		__CFG_COUT__ << "Enabling sig mod block!" << __E__;
 		OtsUDPFirmwareCore::writeAdvanced(writeBuffer,
 				0x6 /*address*/,
 				sel_ctl_register_); //enable sig mod block and restore original register value
@@ -938,7 +986,7 @@ bool FENIMPlusInterface::running(void)
 	catch(const std::runtime_error &e)
 	{
 		__SS__ << "Failed start setup!\n" << e.what() << std::endl;
-		__COUT_ERR__ << ss.str();
+		__CFG_COUT_ERR__ << ss.str();
 		throw std::runtime_error(ss.str());
 	}
 
@@ -950,7 +998,7 @@ bool FENIMPlusInterface::running(void)
 //void FENIMPlusInterface::FEMacroGenerateTriggers(FEVInterface::frontEndMacroInArgs_t argsIn,
 //		FEVInterface::frontEndMacroOutArgs_t argsOut)
 //{
-//	__COUT__ << "FEMacroGenerateTriggers" << __E__;
+//	__CFG_COUT__ << "FEMacroGenerateTriggers" << __E__;
 //
 //	unsigned int numberOfTriggers =
 //			FEVInterface::getFEMacroInputArgument<unsigned int>(argsIn,"numberOfTriggers");
@@ -962,70 +1010,77 @@ bool FENIMPlusInterface::running(void)
 //	unsigned int numberOfTriggersStr =
 //			FEVInterface::getFEMacroInputArgument<std::string>(argsIn,"numberOfTriggers");
 //
-//	__COUT__ << "numberOfTriggers " << numberOfTriggers << __E__;
-//	__COUT__ << "numberOfTriggersStr " << numberOfTriggersStr << __E__;
-//	__COUT__ << "clocksOfDelayBetweenTriggers " << clocksOfDelayBetweenTriggers << __E__;
+//	__CFG_COUT__ << "numberOfTriggers " << numberOfTriggers << __E__;
+//	__CFG_COUT__ << "numberOfTriggersStr " << numberOfTriggersStr << __E__;
+//	__CFG_COUT__ << "clocksOfDelayBetweenTriggers " << clocksOfDelayBetweenTriggers << __E__;
 //
 //
 //	//TODO launch triggers based on parameters...
 //
 //
-//	__COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
+//	__CFG_COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
 //	triggersWereLaunched = "Done!";
-//	__COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
+//	__CFG_COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
 //	FEVInterface::setFEMacroOutputArgument<unsigned int>(argsOut,"triggersWereLaunched",
 //			42.2f);
-//	__COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
+//	__CFG_COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
 //}
 
 //========================================================================================================================
 void FENIMPlusInterface::FEMacroGenerateTriggers(__ARGS__)
 {
-	__COUT__ << "FEMacroGenerateTriggers" << __E__;
+	__CFG_COUT__ << "FEMacroGenerateTriggers" << __E__;
 
-	unsigned int numberOfTriggers =	__GET_ARG_IN__("numberOfTriggers",unsigned int);
-	unsigned int clocksOfDelayBetweenTriggers = __GET_ARG_IN__("clocksOfDelayBetweenTriggers",unsigned int);
-	std::string& triggersWereLaunched =	__GET_ARG_OUT__("triggersWereLaunched");
-	std::string numberOfTriggersStr = __GET_ARG_IN__("numberOfTriggers",std::string);
+	unsigned int numberOfTriggers 		= __GET_ARG_IN__("numberOfTriggers",unsigned int);
+	unsigned int signalHiDuration 		= __GET_ARG_IN__("signalHiDuration",unsigned int);
+	unsigned int signalLoDuration 		= __GET_ARG_IN__("signalLoDuration",unsigned int);
+	std::string& triggersWereLaunched 	= __GET_ARG_OUT__("triggersWereLaunched");
+	std::string numberOfTriggersStr 	= __GET_ARG_IN__("numberOfTriggers",std::string);
 
-	__COUT__ << "numberOfTriggers " << numberOfTriggers << __E__;
-	__COUT__ << "numberOfTriggersStr " << numberOfTriggersStr << __E__;
-	__COUT__ << "clocksOfDelayBetweenTriggers " << clocksOfDelayBetweenTriggers << __E__;
+	__CFG_COUTV__(numberOfTriggers);
+	__CFG_COUTV__(signalHiDuration);
+	__CFG_COUTV__(signalLoDuration);
+	__CFG_COUTV__(numberOfTriggersStr);
 
 
-	//TODO launch triggers based on parameters...
-
+	//launch triggers based on parameters...
 	{
 		std::string writeBuffer;
 
 		//clear bit 5 in 0x18001
-//		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18001, nimEnables.to_ulong()); //enable or disable sig gen
-//		OtsUDPHardware::write(writeBuffer);
-//		__COUT__ << "Nim Enables set to " << nimEnables << std::endl;
+		nimEnables_.reset(5);
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18001, nimEnables_.to_ulong()); //enable or disable sig gen
+		OtsUDPHardware::write(writeBuffer);
+		__CFG_COUT__ << "Nim Enables set to 0x" << std::hex << nimEnables_ << std::dec << std::endl;
 
 
-		//3 registers
+		//3 registers:
 		//	count 		0x18005 (27:0)
 		//	hi_duration 0x18006 (27:0)
 		//	lo_duration 0x18007 (31:0)
+
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18005, nimEnables_.to_ulong()); //enable or disable sig gen
+		OtsUDPHardware::write(writeBuffer);
+		__CFG_COUT__ << "Nim Enables set to 0x" << std::hex << nimEnables_ << std::dec << std::endl;
 
 		//Note: select input mux to sig gen
 		//	muxInputA 0x108 => 1
 		//		B, C, D are on same register shifted up by 3 bits.
 
 		//set bit 5
-//		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18001, nimEnables.to_ulong()); //enable or disable sig gen
-//		OtsUDPHardware::write(writeBuffer);
-//		__COUT__ << "Nim Enables set to " << nimEnables << std::endl;
+		nimEnables_.set(5);
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18001, numberOfTriggers); //enable or disable sig gen
+		OtsUDPHardware::write(writeBuffer);
+		__CFG_COUT__ << "Nim Enables set to 0x" << std::hex << nimEnables_ << std::dec << std::endl;
 	}
 
-	__COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
+	__CFG_COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
 	triggersWereLaunched = "Done!";
-	__COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
+	__CFG_COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
 	__SET_ARG_OUT__("triggersWereLaunched",42.2f);//,unsigned int);
-	__COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
+	__CFG_COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
 	__SET_ARG_OUT__("triggersWereLaunched",42.2f);//,float);
-	__COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
+	__CFG_COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
 }
 
 
