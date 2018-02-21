@@ -6,6 +6,7 @@
 				<COLUMN Type="YesNo" 	 Name="EnableExpertWebappFeatures" 	 StorageName="ENABLE_EXPERT_WEBAPP_FEATURES" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="YesNo" 	 Name="EnableClockResetDuringConfigure" 	 StorageName="ENABLE_CLOCK_RESET_DURING_CONFIGURE" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="YesNo" 	 Name="UseExternalClock" 	 StorageName="USE_EXTERNAL_CLOCK" 		DataType="VARCHAR2" 		DataChoices=""/>
+				<COLUMN Type="Data" 	 Name="SecondsDelayBeforeStartingTriggers" 	 StorageName="SECONDS_DELAY_BEFORE_STARTING_TRIGGERS" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="YesNo" 	 Name="EnableDACSetupDuringConfigure" 	 StorageName="ENABLE_DAC_SETUP_DURING_CONFIGURE" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="DACValueChannelA" 	 StorageName="DAC_VALUE_CHANNEL_A" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="DACValueChannelB" 	 StorageName="DAC_VALUE_CHANNEL_B" 		DataType="NUMBER" 		DataChoices=""/>
