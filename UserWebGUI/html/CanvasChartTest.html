@@ -62,20 +62,41 @@
             var dataDef = { title: "Test Title",
                             xLabel: 'Test X', 
                             yLabel: 'Test Y',
-                            labelFont: '19pt Arial', 
-                            dataPointFont: '10pt Arial',
+                            labelFont: '12pt Arial', 
+                            dataPointFont: '7pt Arial',
                             useGrid: true,
 			    useAxisLabels: true,
 			    useDataLabels: false,
 			    chartWidth: 800, //Width of chart to display data, DOES NOT INCLUDE MARGINS
 			    chartHeight: 600, //Height of chart to display data, DOES NOT INCLUDE MARGINS
 			    HorizontalDivs: 10, //Horizontal divisions of the chart desired, should divide into chart height cleanly
-			    VeticalDivs: 10,//Vertical divisions of the chart desired, should divide into chart width cleanly
-			    renderTypes: [LineChartVar.renderType.lines, LineChartVar.renderType.points] };
+			    VeticalDivs: 16,//Vertical divisions of the chart desired, should divide into chart width cleanly
+			    //renderTypes: [LineChartVar.renderType.lines, LineChartVar.renderType.points], 
+			    dataPoints:  [{x: 0 , y: -6 },
+					  {x: 1 , y: 23.4 },
+					  {x: 2 , y: 33.5 },
+					  {x: 3 , y: 40.2},
+					  {x: 4 , y: 45.24 },
+					  {x: 5 , y: 22.12 },
+					  {x: 6 , y: 3.3 },
+					  {x: 7 , y: 34.63 },
+					  {x: 8 , y: 12.1 },
+					  {x: 9 , y: 23.4 },
+					  {x: 10 , y: 33.5 },
+					  {x: 11 , y: 40.2},
+					  {x: 12 , y: 45.24 },
+					  {x: 13 , y: 22.12 },
+					  {x: 14 , y: 3.3 },
+					  {x: 15 , y: 34.63 },
+					  {x: 16 , y: 12.1 }
+					  ]
+			    
+			    };
 			    
 			    
 			    
 	    LineChartVar.render("testCanvas","testGrid",dataDef);
+	    //LineChartVar.enableFadeOut();
 	  
 	  });  
 	  </script>
@@ -83,9 +104,9 @@
 </head>    
 <body>
     		<p><div class="mainBlock" id="testBlock" style="position:relative; display:block;">
-		  <canvas id="testGrid" width=800px height=600px
+		  <canvas id="testGrid" width=900 height=700
 		  style="position:absolute; left: 0; top: 0; z-index: 1;"></canvas>
-		  <canvas id="testCanvas" width=800px height=600px
+		  <canvas id="testCanvas" width=900 height=700
 		  style="position:absolute; left: 0; top: 0; z-index: 2;"></canvas>		  
 		</div>
 		<div><br></div>
