@@ -35,47 +35,43 @@ FENIMPlusInterface::~FENIMPlusInterface(void)
 //========================================================================================================================
 void FENIMPlusInterface::configure(void)
 {
-	FEOtsUDPTemplateInterface::configure();
-
 	__CFG_COUT__ << "configure" << std::endl;
 
 	std::string writeBuffer;
 	std::string readBuffer;
 	uint64_t readQuadWord;
 
-
-//	__CFG_COUT__ << "Setting Destination IP: " <<
-//			theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("StreamToIPAddress").getValue<std::string>()
-//			<< std::endl;
-//	__CFG_COUT__ << "And Destination Port: " <<
-//			theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("StreamToPort").getValue<unsigned int>()
-//			<< std::endl;
-//
-//	writeBuffer.resize(0);
-//	OtsUDPFirmwareCore::setDataDestination(writeBuffer,
-//			theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("StreamToIPAddress").getValue<std::string>(),
-//			theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("StreamToPort").getValue<uint64_t>()
-//	);
-//	OtsUDPHardware::write(writeBuffer);
-
-	//
-	//
-//	__CFG_COUT__ << "Reading back burst dest MAC/IP/Port: "  << std::endl;
-//	writeBuffer.resize(0);
-//	OtsUDPFirmwareCore::readAdvancedDataDestinationMAC(writeBuffer);
-//	OtsUDPHardware::read(writeBuffer,readBuffer);
-//	writeBuffer.resize(0);
-//	OtsUDPFirmwareCore::readAdvancedDataDestinationIP(writeBuffer);
-//	OtsUDPHardware::read(writeBuffer,readBuffer);
-//	writeBuffer.resize(0);
-//	OtsUDPFirmwareCore::readAdvancedDataDestinationPort(writeBuffer);
-//	OtsUDPHardware::read(writeBuffer,readBuffer);
-//
-
-
 	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
 	bool usingOptionalParams =
 			!optionalLink.isDisconnected();
+
+	////////////////////////////////////////////////////////////////////////////////
+	//if clock reset is enabled reset clock
+	{
+		try
+		{
+			if((usingOptionalParams &&
+					optionalLink.getNode("EnableClockResetDuringConfigure").getValue<bool>()))
+			{
+				__CFG_COUT__ << "Resetting NIM PLUS Ethernet!" << std::endl;
+
+				OtsUDPFirmwareCore::ethernetReset(writeBuffer);
+				OtsUDPHardware::write(writeBuffer);
+
+				OtsUDPFirmwareCore::ethernetUnreset(writeBuffer);
+				OtsUDPHardware::write(writeBuffer);
+
+				sleep(5); //seconds
+			}
+		}
+		catch(...)
+		{
+			__CFG_COUT__ << "Could not find reset clock flag, so not resetting... " << std::endl;
+		}
+	}
+
+	FEOtsUDPTemplateInterface::configure(); //sets up destination IP/port
+
 
 	//choose external or internal clock
 	__CFG_COUT__ << "Choosing external or internal clock..." << std::endl;
@@ -86,33 +82,6 @@ void FENIMPlusInterface::configure(void)
 	OtsUDPHardware::write(writeBuffer);
 
 
-	////////////////////////////////////////////////////////////////////////////////
-	//if clock reset is enabled reset clock
-	{
-		try
-		{
-			if(usingOptionalParams &&
-					optionalLink.getNode("EnableClockResetDuringConfigure").getValue<bool>())
-			{
-				__CFG_COUT__ << "Resetting Ethernet!" << std::endl;
-
-				OtsUDPFirmwareCore::ethernetReset(writeBuffer);
-				OtsUDPHardware::write(writeBuffer);
-
-				OtsUDPFirmwareCore::ethernetUnreset(writeBuffer);
-				OtsUDPHardware::write(writeBuffer);
-				sleep(1); //seconds
-
-
-
-
-			}
-		}
-		catch(...)
-		{
-			__CFG_COUT__ << "Could not find reset clock flag, so not resetting... " << std::endl;
-		}
-	}
 
 	{ //debug read
 		//read NIM+ version (for debugging)
@@ -304,7 +273,7 @@ void FENIMPlusInterface::configure(void)
 			
 			
 			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/((channelCount+1) << 8) | 0x4, /*data*/ 0x3); //reset channel
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/((channelCount+1) << 8) , /*data*/ 0x3); //reset channel
 			OtsUDPHardware::write(writeBuffer);
 			
 			writeBuffer.resize(0);
@@ -398,8 +367,9 @@ void FENIMPlusInterface::configure(void)
 					outputWidth = 0;
 				}
 				outputModMask = (0xFFFFFFFFFFFFFFFF >> (64-outputWidthMask)) << outputDelay;
+
 				outputTimeVetoDuration = optionalLink.getNode("OutputTimeVetoDuration" +
-						channelName).getValue<unsigned int>(); //0 ignores time veto, units of 3ns
+						channelName).getValue<unsigned int>(); //0 ignores time veto, units of 3ns (NIM+X) or 6ns (NIM+)
 				outputPrescaleCount = optionalLink.getNode("OutputPrescaleCount" +
 						channelName).getValue<unsigned int>();
 				outputBackpressureSelect = optionalLink.getNode("OutputBackpressureSelect" +
@@ -517,14 +487,14 @@ void FENIMPlusInterface::configure(void)
 					outputMuxSelect << ", written to 0x" << std::hex <<
 					(channelCount == 0?0x5:(0x18013 + channelCount - 1)) <<
 					std::dec << std::endl;
-						
-			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/0x1800C, /*data*/ outputPolarityMask); //setup output polarity
-			OtsUDPHardware::write(writeBuffer);
-			__CFG_COUT__ << "Input polarity mask is " << std::bitset<8>(outputPolarityMask) << std::endl;
 
 			++channelCount;
 		}
+
+		writeBuffer.resize(0);
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/0x1800C, /*data*/ outputPolarityMask); //setup output polarity
+		OtsUDPHardware::write(writeBuffer);
+		__CFG_COUT__ << "Output polarity mask is " << std::bitset<8>(outputPolarityMask) << std::endl;
 
 		//setup burst data blocks
 		{
