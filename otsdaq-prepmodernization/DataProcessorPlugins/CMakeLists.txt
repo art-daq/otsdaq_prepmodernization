@@ -7,9 +7,11 @@ simple_plugin(BurstDataAndTimeSaverConsumer "processor"
   )
   
 simple_plugin(NimStreamConsumer "processor"
+    Configurable
 	DataManager
 	${CETLIB}
 	WorkLoopManager
+	${MF_MESSAGELOGGER}
   )  
 
 
