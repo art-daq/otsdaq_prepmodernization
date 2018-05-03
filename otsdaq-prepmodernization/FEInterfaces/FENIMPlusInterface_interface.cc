@@ -1,6 +1,6 @@
 #include "otsdaq-prepmodernization/FEInterfaces/FENIMPlusInterface.h"
 #include "otsdaq-core/MessageFacility/MessageFacility.h"
-#include "otsdaq-core/Macros/CoutHeaderMacros.h"
+#include "otsdaq-core/Macros/CoutMacros.h"
 #include "otsdaq-core/Macros/InterfacePluginMacros.h"
 #include <iostream>     // std::cout, std::dec, std::hex, std::oct
 #include <set>
