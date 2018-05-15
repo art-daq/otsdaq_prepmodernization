@@ -24,6 +24,8 @@ public:
     bool running          					(void) override;
     void stop             					(void) override;
 
+    void changeDACLevel                     (const std::string& channelName, unsigned int value);
+
 
 
     /////////////////////////////////////

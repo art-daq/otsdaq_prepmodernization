@@ -6,6 +6,7 @@
 				<COLUMN Type="YesNo" 	 Name="EnableExpertWebappFeatures" 	 StorageName="ENABLE_EXPERT_WEBAPP_FEATURES" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="YesNo" 	 Name="EnableClockResetDuringConfigure" 	 StorageName="ENABLE_CLOCK_RESET_DURING_CONFIGURE" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="YesNo" 	 Name="UseExternalClock" 	 StorageName="USE_EXTERNAL_CLOCK" 		DataType="VARCHAR2" 		DataChoices=""/>
+				<COLUMN Type="FixedChoiceData" 	 Name="ExternalClockSource" 	 StorageName="EXTERNAL_CLOCK_SOURCE" 		DataType="VARCHAR2" 		DataChoices="arbitraryBool=0,NW-FMC-PTA%20Clock%20Source,Nim-Input-A,Nim-Input-B,Nim-Input-C,Nim-Input-D"/>
 				<COLUMN Type="Data" 	 Name="SecondsDelayBeforeStartingTriggers" 	 StorageName="SECONDS_DELAY_BEFORE_STARTING_TRIGGERS" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="YesNo" 	 Name="EnableDACSetupDuringConfigure" 	 StorageName="ENABLE_DAC_SETUP_DURING_CONFIGURE" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="DACValueChannelA" 	 StorageName="DAC_VALUE_CHANNEL_A" 		DataType="NUMBER" 		DataChoices=""/>
@@ -15,15 +16,19 @@
 				<COLUMN Type="Data" 	 Name="DelayInputChannelA" 	 StorageName="DELAY_INPUT_CHANNEL_A" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="WidthInputChannelA" 	 StorageName="WIDTH_INPUT_CHANNEL_A" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="YesNo" 	 Name="InvertPolarityInputChannelA" 	 StorageName="INVERT_POLARITY_INPUT_CHANNEL_A" 		DataType="VARCHAR2" 		DataChoices=""/>
+				<COLUMN Type="TrueFalse" 	 Name="DoNotUseDelayAndWidthForChannelA" 	 StorageName="DO_NOT_USE_DELAY_AND_WIDTH_FOR_CHANNEL_A" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="DelayInputChannelB" 	 StorageName="DELAY_INPUT_CHANNEL_B" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="WidthInputChannelB" 	 StorageName="WIDTH_INPUT_CHANNEL_B" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="YesNo" 	 Name="InvertPolarityInputChannelB" 	 StorageName="INVERT_POLARITY_INPUT_CHANNEL_B" 		DataType="VARCHAR2" 		DataChoices=""/>
+				<COLUMN Type="TrueFalse" 	 Name="DoNotUseDelayAndWidthForChannelB" 	 StorageName="DO_NOT_USE_DELAY_AND_WIDTH_FOR_CHANNEL_B" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="DelayInputChannelC" 	 StorageName="DELAY_INPUT_CHANNEL_C" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="WidthInputChannelC" 	 StorageName="WIDTH_INPUT_CHANNEL_C" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="YesNo" 	 Name="InvertPolarityInputChannelC" 	 StorageName="INVERT_POLARITY_INPUT_CHANNEL_C" 		DataType="VARCHAR2" 		DataChoices=""/>
+				<COLUMN Type="TrueFalse" 	 Name="DoNotUseDelayAndWidthForChannelC" 	 StorageName="DO_NOT_USE_DELAY_AND_WIDTH_FOR_CHANNEL_C" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="DelayInputChannelD" 	 StorageName="DELAY_INPUT_CHANNEL_D" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="WidthInputChannelD" 	 StorageName="WIDTH_INPUT_CHANNEL_D" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="YesNo" 	 Name="InvertPolarityInputChannelD" 	 StorageName="INVERT_POLARITY_INPUT_CHANNEL_D" 		DataType="VARCHAR2" 		DataChoices=""/>
+				<COLUMN Type="TrueFalse" 	 Name="DoNotUseDelayAndWidthForChannelD" 	 StorageName="DO_NOT_USE_DELAY_AND_WIDTH_FOR_CHANNEL_D" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="TrueFalse" 	 Name="EnableBackPressureInputA" 	 StorageName="ENABLE_BACK_PRESSURE_INPUT_A" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="TrueFalse" 	 Name="EnableBackPressureInputB" 	 StorageName="ENABLE_BACK_PRESSURE_INPUT_B" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="Data" 	 Name="Override1stANDWithSelectionLogicRegister" 	 StorageName="OVERRIDE1ST_AND_WITH_SELECTION_LOGIC_REGISTER" 		DataType="NUMBER" 		DataChoices=""/>
@@ -65,6 +70,8 @@
 				<COLUMN Type="FixedChoiceData" 	 Name="BurstDataLogicSampleDelay" 	 StorageName="BURST_DATA_LOGIC_SAMPLE_DELAY" 		DataType="NUMBER" 		DataChoices="arbitraryBool=0"/>
 				<COLUMN Type="FixedChoiceData" 	 Name="BurstDataGateInputChannel" 	 StorageName="BURST_DATA_GATE_INPUT_CHANNEL" 		DataType="VARCHAR2" 		DataChoices="arbitraryBool=0,Input%20Channel-A,Input%20Channel-B,Input%20Channel-C,Input%20Channel-D"/>
 				<COLUMN Type="Data" 	 Name="TriggerCountAtRunStopFilename" 	 StorageName="TRIGGER_COUNT_AT_RUN_STOP_FILENAME" 		DataType="VARCHAR2" 		DataChoices=""/>
+				<COLUMN Type="BitMap" 	 Name="TrigerMuxSelectionsBankA" 	 StorageName="TRIGER_MUX_SELECTIONS_BANK_A" 		DataType="VARCHAR2" 		DataChoices="arbitraryBool%3D0,9,2,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,No,Yes,No,No"/>
+				<COLUMN Type="BitMap" 	 Name="TrigerMuxSelectionsBankB" 	 StorageName="TRIGER_MUX_SELECTIONS_BANK_B" 		DataType="VARCHAR2" 		DataChoices="arbitraryBool%3D0,9,2,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,No,Yes,No,No"/>
 				<COLUMN Type="Comment" 	 Name="CommentDescription" 	 StorageName="COMMENT_DESCRIPTION" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="Author" 	 Name="Author" 	 StorageName="AUTHOR" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="Timestamp" 	 Name="RecordInsertionTime" 	 StorageName="RECORD_INSERTION_TIME" 		DataType="TIMESTAMP WITH TIMEZONE" 		DataChoices=""/>
