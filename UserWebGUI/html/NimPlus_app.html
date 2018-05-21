@@ -156,6 +156,8 @@
       <p>NimPlus Port: <input type="number" id="NimPlusPort" oninput="addModifiedList('InterfacePort',this.value);">
       <p>Host IP Address: <input type="text" id="otsHostIP" class='ip_address' oninput="addModifiedList('HostIPAddress',this.value);">
       <p>Host Port: <input type="number" id="otsHostPort" oninput="addModifiedList('HostPort',this.value);">
+      <p>Trigger Count Output Filename: <input type="text" id="triggerFilename" oninput="addModifiedList('TriggerCountAtRunStopFilename',this.value.replace(/(?!\.[^.]+$)\.|[^\w.]+/g, ''));">
+      <!-- Sanitize this on the c++ side too?-->
     </div>
 </div>
 
@@ -172,8 +174,17 @@
         </br><input type="checkbox" id="ChDInEn" onclick="addModifiedList('EnableInputChannelD',this.checked?'ON':'OFF');"><label for="ChDInEn">Enable Channel D?</label>
         <input type="checkbox" id="ChDInInv" onclick="addModifiedList('InvertPolarityInputChannelD',this.checked?'yes':'no');"><label for="ChDInInv">Invert Ch D Input?</label>
         </br></br><input type="checkbox" id="useExtClk" onclick="addModifiedList('UseExternalClock', this.checked?'yes':'no');"><label for="useExtClk">Use External Clock?</label>
-       
-       <!-- Hackey Temp fix for CH Sources, need to investigate/debug further -->
+	  <br><p>External Clock Source - <select id="ExtClkSel" oninput="addModifiedList('ExternalClockSource', this.value);">
+	  <option value="NW-FMC-PTA Clock Source">NW FMC Connector</option>
+	  <option value="Nim-Input-A">Input A</option>
+	  <option value="Nim-Input-B">Input B</option>
+	  <option value="Nim-Input-C">Input C</option>
+	  <option value="Nim-Input-D">Input D</option>
+	  </select>
+	  
+	<br>Seconds to delay before starting triggers - <input type="number" id="triggerDelaySecs" min=0 step=1 oninput="addModifiedList('SecondsDelayBeforeStartingTriggers',this.value);" style="width: 50px;">
+	  
+        <!-- Hackey Temp fix for CH Sources, need to investigate/debug further -->
         <br><p>Source for SigCMS1 - <select id="OutputSourceOutput1" oninput="addModifiedList('OutputSourceSelectChannel1', this.value);">
 		<option value="SigNorm">SigLog</option>
 		<option value="SigLog">SigNorm</option>
@@ -211,7 +222,7 @@
         </div>
 
         <div class="ControlBox">
-            <p>CH D Dac Steps: 0<input type="range" id="ChDDacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChDDacEl2','ChDDacEl1'); addModifiedList('DACValueChannelD',this.value);">4095</p>
+            <p>CH D Dac Steps: 0<input type="range" id="ChDDacEl0" max=40WidthOutputChannel095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChDDacEl2','ChDDacEl1'); addModifiedList('DACValueChannelD',this.value);">4095</p>
             <p>CH D Dac Steps: <input type=number id="ChDDacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChDDacEl2','ChDDacEl0'); addModifiedList('DACValueChannelD',this.value);"></p>
             <p>Ch D Dac Voltage: <input type="number" id="ChDDacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChDDacEl0','ChDDacEl1'); addModifiedList('DACValueChannelD',valByID('ChDDacEl1'));"></p>
         </div>
@@ -326,6 +337,131 @@
         <input type="checkbox" id="ChDOutInv" onclick="addModifiedList('InvertPolarityOutputChannelD',this.checked?'yes':'no');"><label for="ChDOutInv">Invert Ch D Output?</label>
         </p>
 
+        
+        <br>
+        Trigger Mux Selection Bank A:
+        <br>
+        (1-6 are 53Mhz, 7-9 are 40Mhz)        
+        <p>   
+        1: <select id="TMuxA1" oninput="addModifiedList('TrigerMuxSelectionsBankA', TMuxAWordCalc(Number(this.value),0));">
+                <option value=0>A</option>
+                <option value=1>B</option>
+                <option value=2>C</option>	
+                <option value=3>D</option>		
+                </select> 
+        2: <select id="TMuxA2" oninput="addModifiedList('TrigerMuxSelectionsBankA', TMuxAWordCalc(Number(this.value),1));">
+                <option value=0>A</option>
+                <option value=1>B</option>
+                <option value=2>C</option>	
+                <option value=3>D</option>		
+                </select>
+	3: <select id="TMuxA3" oninput="addModifiedList('TrigerMuxSelectionsBankA', TMuxAWordCalc(Number(this.value),2));">
+                <option value=0>A</option>
+                <option value=1>B</option>
+                <option value=2>C</option>	
+                <option value=3>D</option>		
+                </select>
+	4: <select id="TMuxA4" oninput="addModifiedList('TrigerMuxSelectionsBankA', TMuxAWordCalc(Number(this.value),3));">
+                <option value=0>A</option>
+                <option value=1>B</option>
+                <option value=2>C</option>	
+                <option value=3>D</option>		
+                </select>
+	5: <select id="TMuxA5" oninput="addModifiedList('TrigerMuxSelectionsBankA', TMuxAWordCalc(Number(this.value),4));">
+                <option value=0>A</option>
+                <option value=1>B</option>
+                <option value=2>C</option>	
+                <option value=3>D</option>		
+                </select>
+	6: <select id="TMuxA6" oninput="addModifiedList('TrigerMuxSelectionsBankA', TMuxAWordCalc(Number(this.value),5));">
+                <option value=0>A</option>
+                <option value=1>B</option>
+                <option value=2>C</option>	
+                <option value=3>D</option>		
+                </select>
+	7: <select id="TMuxA7" oninput="addModifiedList('TrigerMuxSelectionsBankA', TMuxAWordCalc(Number(this.value),6));">
+                <option value=0>A</option>
+                <option value=1>B</option>
+                <option value=2>C</option>	
+                <option value=3>D</option>		
+                </select>
+	8: <select id="TMuxA8" oninput="addModifiedList('TrigerMuxSelectionsBankA', TMuxAWordCalc(Number(this.value),7));">
+                <option value=0>A</option>
+                <option value=1>B</option>
+                <option value=2>C</option>	
+                <option value=3>D</option>		
+                </select>
+        9: <select id="TMuxA9" oninput="addModifiedList('TrigerMuxSelectionsBankA', TMuxAWordCalc(Number(this.value),8));">
+                <option value=0>A</option>
+                <option value=1>B</option>
+                <option value=2>C</option>	
+                <option value=3>D</option>		
+                </select>
+        </p>
+
+                
+        <br>
+        Trigger Mux Selection Bank B:
+        <br>
+        (1-6 are 53Mhz, 7-9 are 40Mhz)
+        <p>   
+        1: <select id="TMuxB1" oninput="addModifiedList('TrigerMuxSelectionsBankB', TMuxBWordCalc(Number(this.value),0));">
+                <option value=0>A</option>
+                <option value=1>B</option>
+                <option value=2>C</option>	
+                <option value=3>D</option>		
+                </select> 
+        2: <select id="TMuxB2" oninput="addModifiedList('TrigerMuxSelectionsBankB', TMuxBWordCalc(Number(this.value),1));">
+                <option value=0>A</option>
+                <option value=1>B</option>
+                <option value=2>C</option>	
+                <option value=3>D</option>		
+                </select>
+	3: <select id="TMuxB3" oninput="addModifiedList('TrigerMuxSelectionsBankB', TMuxBWordCalc(Number(this.value),2));">
+                <option value=0>A</option>
+                <option value=1>B</option>
+                <option value=2>C</option>	
+                <option value=3>D</option>		
+                </select>
+	4: <select id="TMuxB4" oninput="addModifiedList('TrigerMuxSelectionsBankB', TMuxBWordCalc(Number(this.value),3));">
+                <option value=0>A</option>
+                <option value=1>B</option>
+                <option value=2>C</option>	
+                <option value=3>D</option>		
+                </select>
+	5: <select id="TMuxB5" oninput="addModifiedList('TrigerMuxSelectionsBankB', TMuxBWordCalc(Number(this.value),4));">
+                <option value=0>A</option>
+                <option value=1>B</option>
+                <option value=2>C</option>	
+                <option value=3>D</option>		
+                </select>
+	6: <select id="TMuxB6" oninput="addModifiedList('TrigerMuxSelectionsBankB', TMuxBWordCalc(Number(this.value),5));">
+                <option value=0>A</option>
+                <option value=1>B</option>
+                <option value=2>C</option>	
+                <option value=3>D</option>		
+                </select>
+	7: <select id="TMuxB7" oninput="addModifiedList('TrigerMuxSelectionsBankB', TMuxBWordCalc(Number(this.value),6));">
+                <option value=0>A</option>
+                <option value=1>B</option>
+                <option value=2>C</option>	
+                <option value=3>D</option>		
+                </select>
+	8: <select id="TMuxB8" oninput="addModifiedList('TrigerMuxSelectionsBankB', TMuxBWordCalc(Number(this.value),7));">
+                <option value=0>A</option>
+                <option value=1>B</option>
+                <option value=2>C</option>	
+                <option value=3>D</option>		
+                </select>
+        9: <select id="TMuxB9" oninput="addModifiedList('TrigerMuxSelectionsBankB', TMuxBWordCalc(Number(this.value),8));">
+                <option value=0>A</option>
+                <option value=1>B</option>
+                <option value=2>C</option>	
+                <option value=3>D</option>		
+                </select>
+        </p>
+        
+        
     </div>
 </div>
 
@@ -347,6 +483,16 @@
         <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync6" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,5));">6</label>
         <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync7" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,6));">7</label>
         <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync8" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,7));">8</label>
+        
+         <br><br>Accelerator Clock Mask/Portion of 40Mhz Clock Phase relative to accelerator clock to sync with
+        <br><label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="AccSync1" onclick="addModifiedList('AcceleratorClockMask', accelMaskCalc(this.checked?1:0,0));">1</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="AccSync2" onclick="addModifiedList('AcceleratorClockMask', accelMaskCalc(this.checked?1:0,1));">2</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="AccSync3" onclick="addModifiedList('AcceleratorClockMask', accelMaskCalc(this.checked?1:0,2));">3</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="AccSync4" onclick="addModifiedList('AcceleratorClockMask', accelMaskCalc(this.checked?1:0,3));">4</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="AccSync5" onclick="addModifiedList('AcceleratorClockMask', accelMaskCalc(this.checked?1:0,4));">5</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="AccSync6" onclick="addModifiedList('AcceleratorClockMask', accelMaskCalc(this.checked?1:0,5));">6</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="AccSync7" onclick="addModifiedList('AcceleratorClockMask', accelMaskCalc(this.checked?1:0,6));">7</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="AccSync8" onclick="addModifiedList('AcceleratorClockMask', accelMaskCalc(this.checked?1:0,7));">8</label>
     </div>
 </div>
 
@@ -430,8 +576,10 @@
     <div id="BkpCtl" class="Dropdown">
         <input type="checkbox" id="bkpEnableA" onclick="addModifiedList('EnableBackPressureInputA', this.checked);"><label for="bkpEnableA" >Enable Backpressure Veto A?</label>
         </br><input type="checkbox" id="bkpEnableB" onclick="addModifiedList('EnableBackPressureInputB', this.checked);"><label for="bkpEnableB" >Enable Backpressure Veto B?</label>
-
-    </div>
+	</br><input type="checkbox" id="bkpOutSel0" onclick="addModifiedList('OutputBackpressureSelectChannel0', this.checked);"><label for="bkpOutSel0" >SigNorm Output Backpressure Select</label>
+	</br><input type="checkbox" id="bkpOutSel1" onclick="addModifiedList('OutputBackpressureSelectChannel1', this.checked);"><label for="bkpOutSel1" >SigCMS1 Output Backpressure Select</label>
+   	</br><input type="checkbox" id="bkpOutSel2" onclick="addModifiedList('OutputBackpressureSelectChannel2', this.checked);"><label for="bkpOutSel2" >SigCMS2 Output Backpressure Select</label>
+   </div>
 </div>
 
 <div id="SigGenBox" class="ControlBox">
