@@ -27,6 +27,9 @@ var timeout = null; //voltField timeout value, used to wait till user done enter
 var modifiedList = []; //List of values that are modified, used to keep track of what values need to be updated
 var invalidInput = false; //Track if any textbox input is invalid, used to prevent saving if there is
 var syncArray = [0,0,0,0,0,0,0,0] //empty array for 40Mhz Sync Word
+var accelMaskArray = [0,0,0,0,0,0,0,0] //empty array for Accel Clock Sync Word
+var tMuxAArray = [[0,0,0,0,0,0,0,0,0]]; //empty array for Trigger Mux Bank A
+var tMuxBArray=  [[0,0,0,0,0,0,0,0,0]]; //empty array for Trigger Mux Bank B
 var logicArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] //empty array for coincidence logic word
 var _subsetBasePath = "FENIMPlusInterfaceConfiguration";
 var _modifiedTables = [];
@@ -62,6 +65,7 @@ var fieldList = [["NimStatus","Status"],
 ["ChCOutInv","InvertPolarityOutputChannelC"],
 ["ChDOutInv","InvertPolarityOutputChannelD"],
 ["Sync1","TriggerClockMask"],
+["AccSync1","AcceleratorClockMask"],
 ["EnableSync0","EnableClockMaskChannel0"],
 ["EnableSync1","EnableClockMaskChannel1"],
 ["EnableSync2","EnableClockMaskChannel2"],
@@ -95,7 +99,15 @@ var fieldList = [["NimStatus","Status"],
 ["ChSCMS1DelayEl","DelayOutputChannel1"],
 ["ChSCMS1WidthEl","WidthOutputChannel1"],
 ["ChSCMS2DelayEl","DelayOutputChannel2"],
-["ChSCMS2WidthEl","WidthOutputChannel2"]
+["ChSCMS2WidthEl","WidthOutputChannel2"],
+["triggerDelaySecs","SecondsDelayBeforeStartingTriggers"],
+["ExtClkSel","ExternalClockSource"],
+["bkpOutSel0","OutputBackpressureSelectChannel0"],
+["bkpOutSel1","OutputBackpressureSelectChannel1"],
+["bkpOutSel2","OutputBackpressureSelectChannel2"],
+["TMuxB1","TrigerMuxSelectionsBankB"],
+["TMuxA1","TrigerMuxSelectionsBankA"],
+["triggerFilename","TriggerCountAtRunStopFilename"]
 ]
 
 
@@ -303,6 +315,18 @@ function syncMaskCalc(val,a) {
     return n;
 }
 
+//Calculate the Accelerator Clock Sync Mask
+function accelMaskCalc(val,a) {
+    accelMaskArray[a]=val;
+    var n = 0;
+    var l = accelMaskArray.length;
+    for (var i = 0; i < l; i++) {
+        n = (n << 1) + (accelMaskArray[i]?1:0);
+        }
+    console.log(n)
+    return n;
+}
+
 //Calculate the Coincidence Logic Word
 function LogicWordCalc(val,a) {
     logicArray[a]=val;
@@ -314,6 +338,19 @@ function LogicWordCalc(val,a) {
     console.log(n)
     return n;
 }
+
+//Calculate the Trigger Mux Word for Bank A
+function TMuxAWordCalc(val,a) {
+    tMuxAArray[0][a]=val;
+    return JSON.stringify(tMuxAArray);
+}
+
+//Calculate the Trigger Mux Word for Bank B
+function TMuxBWordCalc(val,a) {
+    tMuxBArray[0][a]=val;
+    return JSON.stringify(tMuxBArray);
+}
+
 
 //Return an element by it's ID string
 function elByID(id) {
@@ -606,18 +643,22 @@ function getNimValuesForPage(recFields) {
     
     for (let i of fieldList) {
         for (let a of recFields) {
+	 // console.log(i)
+	  //console.log(a.fieldPath)
+	  //console.log(a.fieldPath.includes(i[1]));
           if(a.fieldPath.includes(i[1])) { //found value
 	    try{
-			if(elByID(i[0]).type == "checkbox" && !a.fieldPath.includes("CoincidenceLogicWord") && !a.fieldPath.includes("TriggerClockMask")){
-				if(a.fieldValue == "Yes" || a.fieldValue == "True" || a.fieldValue == "On"){
+			if(elByID(i[0]).type == "checkbox" && !a.fieldPath.includes("CoincidenceLogicWord") && !a.fieldPath.includes("TriggerClockMask") && !a.fieldPath.includes("AcceleratorClockMask"))
+				{
+				    if(a.fieldValue == "Yes" || a.fieldValue == "True" || a.fieldValue == "On"){
 					elByID(i[0]).checked = true;
 					console.log("checkbox element " + i[0] + " set to checked = true")
-				}
-				else{
+				    }
+				    else{
 					elByID(i[0]).checked = false;
 					console.log("checkbox element " + i[0] + " set to checked = false")
+				    }
 				}
-			}
 			else if(a.fieldPath.includes("CoincidenceLogicWord")){
 				for(bitCnt=0; bitCnt<=15; bitCnt++){
 				elByID("SL"+bitCnt.toString()).checked=((a.fieldValue>>(bitCnt)) % 2 != 0);
@@ -633,6 +674,13 @@ function getNimValuesForPage(recFields) {
 				}
 				console.log("Trigger Clock Mask set")			
 			}
+			else if(a.fieldPath.includes("AcceleratorClockMask")){
+			  	for(bitCnt=0; bitCnt<=7; bitCnt++){
+				elByID("AccSync"+(bitCnt+1).toString()).checked=((a.fieldValue>>(7-bitCnt)) % 2 != 0); //intentionally reversing bit order
+				accelMaskArray[bitCnt]=((a.fieldValue>>(7-bitCnt)) % 2 != 0);  //intentionally reversing bit order
+				}
+				console.log("Accelerator Clock Mask set")			
+			}
 			else if(a.fieldPath.includes("Status")){
 			  	if(a.fieldValue == "Yes" || a.fieldValue == "True" || a.fieldValue == "On"){
 					ogBoardState = "On";
@@ -644,6 +692,23 @@ function getNimValuesForPage(recFields) {
 					elByID(i[0]).checked = false;
 					console.log("checkbox element " + i[0] + " set to checked = false")
 				}
+			}
+			else if(a.fieldPath.includes("TrigerMuxSelectionsBankA")){
+				loadMuxArr = JSON.parse(a.fieldValue);
+				      for(k=0; k<=8; k++){
+					  elByID("TMuxA"+(k+1).toString()).value=loadMuxArr[0][k];
+					  tMuxAArray[0][k]=loadMuxArr[0][k];
+				      }
+				console.log("Loaded TMux Bank A with values: " + loadMuxArr );
+			}
+			else if(a.fieldPath.includes("TrigerMuxSelectionsBankB")){
+				loadMuxArr = JSON.parse(a.fieldValue);
+			  	for(k=0; k<=8; k++){
+				    elByID("TMuxB"+(k+1).toString()).value=loadMuxArr[0][k];
+				    tMuxBArray[0][k]=loadMuxArr[0][k];
+				}
+				
+				console.log("Loaded TMux Bank B with values: " + loadMuxArr);
 			}
 			else if(elByID(i[0]).id=="ChADacEl1"){
 			  voltSteps(a.fieldValue, "ChADacEl2", "ChADacEl0")
@@ -667,7 +732,7 @@ function getNimValuesForPage(recFields) {
 			}
 			else{
 				elByID(i[0]).value = a.fieldValue;
-				console.log("set element " + i[0] + " to value " + a.fieldValue)
+				console.log("set element " + i[0] + " to value " + a.fieldValue + " from " + a.fieldPath)
 			  }
 	    }
 	    catch(e){

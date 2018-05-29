@@ -140,7 +140,7 @@ function handlerFunction(req) {
 
 function getData() {
   while(getDataReq){
-    DesktopContent.XMLHttpRequest("dataRequest?RequestType=getRawData","",handlerFunction);
+    DesktopContent.XMLHttpRequest("Request?RequestType=getRawData","",handlerFunction);
     setTimeout(getDataReq,500);
   }
 }

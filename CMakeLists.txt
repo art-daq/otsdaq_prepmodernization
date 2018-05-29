@@ -18,10 +18,11 @@ IF (NOT CETBUILDTOOLS_VERSION)
     MESSAGE (FATAL_ERROR "ERROR: setup cetbuildtools to get the cmake modules")
 ENDIF()
 
-set(CMAKE_MODULE_PATH 
+set(CMAKE_MODULE_PATH
         $ENV{ART_DIR}/Modules
         $ENV{CETBUILDTOOLS_DIR}/Modules
         $ENV{XDAQ_DIR}/Modules
+        $ENV{ARTDAQ_UTILITIES_DIR}/Modules
         ${CMAKE_MODULE_PATH})
 message(STATUS "CMAKE_MODULE_PATH is ${CMAKE_MODULE_PATH}")
 
@@ -64,7 +65,7 @@ find_ups_boost( v1_50_0 filesystem
  )
 
 
-find_package(MPI QUIET)
+#find_package(MPI QUIET)
 
 check_ups_version(xdaq "$ENV{XDAQ_VERSION}" v14_0_0 PRODUCT_OLDER_VAR slf6_xdaq)
 if(slf6_xdaq)
@@ -86,6 +87,9 @@ add_subdirectory(otsdaq-prepmodernization)
 
 # Test Programs
 #add_subdirectory(test)
+
+# Documentation directory
+add_subdirectory(doc)
 
 # UPS
 add_subdirectory(ups)

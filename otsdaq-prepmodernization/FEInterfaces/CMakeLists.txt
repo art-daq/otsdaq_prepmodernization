@@ -7,6 +7,7 @@
   ConfigurationInterface
   ConfigurationDataFormats
   NetworkUtilities
+  Macros
   #$ENV{XERCES_C_LIB}/libxerces-c.so
   #${CETLIB}
   )
