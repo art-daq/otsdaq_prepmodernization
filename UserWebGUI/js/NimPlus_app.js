@@ -308,7 +308,8 @@ function syncMaskCalc(val,a) {
     var n = 0;
     var l = syncArray.length;
     for (var i = 0; i < l; i++) {
-        n = (n << 1) + (syncArray[i]?1:0);
+	n |= ((syncArray[i]?1:0) << i)
+        //n = (n << 1) + (syncArray[i]?1:0);
     };
     console.log(n)
     $("#triggerSyncWord").val(n);
@@ -463,8 +464,12 @@ function triggerSyncWordCalc(val){
     clearTimeout(trigTimeout);
     setTimeout(function () {
 	for(bitCnt=0; bitCnt<=23; bitCnt++){
+	elByID("Sync"+(bitCnt+1).toString()).checked=((val>>(bitCnt)) % 2 != 0); //intentionally reversing bit order
+	syncArray[bitCnt]=((val>>(bitCnt)) % 2 != 0);  //intentionally reversing bit order
+	/*
 	elByID("Sync"+(bitCnt+1).toString()).checked=((val>>(23-bitCnt)) % 2 != 0); //intentionally reversing bit order
 	syncArray[bitCnt]=((val>>(23-bitCnt)) % 2 != 0);  //intentionally reversing bit order
+	 */
 	}
     },900)
 }
@@ -694,16 +699,19 @@ function getNimValuesForPage(recFields) {
 			}
 			else if(a.fieldPath.includes("TriggerClockMask")){
 			  	for(bitCnt=0; bitCnt<=23; bitCnt++){
-				elByID("Sync"+(bitCnt+1).toString()).checked=((a.fieldValue>>(23-bitCnt)) % 2 != 0); //intentionally reversing bit order
-				syncArray[bitCnt]=((a.fieldValue>>(23-bitCnt)) % 2 != 0);  //intentionally reversing bit order
-				}
+// 				elByID("Sync"+(bitCnt+1).toString()).checked=((a.fieldValue>>(23-bitCnt)) % 2 != 0); //intentionally reversing bit order
+// 				syncArray[bitCnt]=((a.fieldValue>>(23-bitCnt)) % 2 != 0);  //intentionally reversing bit order
+// 				}
+				elByID("Sync"+(bitCnt+1).toString()).checked=((a.fieldValue>>(bitCnt)) % 2 != 0);
+				syncArray[bitCnt]=((a.fieldValue>>(bitCnt)) % 2 != 0);
+				}  
 				elByID("triggerSyncWord").value = a.fieldValue;
 				console.log("Trigger Clock Mask set")			
 			}
 			else if(a.fieldPath.includes("AcceleratorClockMask")){
 			  	for(bitCnt=0; bitCnt<=7; bitCnt++){
-				elByID("AccSync"+(bitCnt+1).toString()).checked=((a.fieldValue>>(7-bitCnt)) % 2 != 0); //intentionally reversing bit order
-				accelMaskArray[bitCnt]=((a.fieldValue>>(7-bitCnt)) % 2 != 0);  //intentionally reversing bit order
+				elByID("AccSync"+(bitCnt+1).toString()).checked=((a.fieldValue>>(bitCnt)) % 2 != 0); 
+				accelMaskArray[bitCnt]=((a.fieldValue>>(bitCnt)) % 2 != 0);
 				}
 				console.log("Accelerator Clock Mask set")			
 			}
