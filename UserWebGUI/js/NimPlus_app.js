@@ -23,11 +23,12 @@ TODO
 var _TABLE_BOOL_TYPE_TRUE_COLOR = "rgb(201, 255, 201)";
 var _TABLE_BOOL_TYPE_FALSE_COLOR = "rgb(255, 178, 178)";
 var _nimUids = null;
-var timeout = null; //voltField timeout value, used to wait till user done entering a value		
+var timeout = null; //voltField timeout value, used to wait till user done entering a value	
+var trigTimeout = null; //triggerSyncWordCalc timeout val, used to wait till user done entering a value
 var modifiedList = []; //List of values that are modified, used to keep track of what values need to be updated
 var invalidInput = false; //Track if any textbox input is invalid, used to prevent saving if there is
-var syncArray = [0,0,0,0,0,0,0,0] //empty array for 40Mhz Sync Word
-var accelMaskArray = [0,0,0,0,0,0,0,0] //empty array for Accel Clock Sync Word
+var syncArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] //empty array for 40Mhz Sync Word, 24 bits
+var accelMaskArray = [0,0,0,0,0,0,0,0] //empty array for Accel Clock Sync Word, 8 bits, only 1 true max
 var tMuxAArray = [[0,0,0,0,0,0,0,0,0]]; //empty array for Trigger Mux Bank A
 var tMuxBArray=  [[0,0,0,0,0,0,0,0,0]]; //empty array for Trigger Mux Bank B
 var logicArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] //empty array for coincidence logic word
@@ -109,8 +110,6 @@ var fieldList = [["NimStatus","Status"],
 ["TMuxA1","TrigerMuxSelectionsBankA"],
 ["triggerFilename","TriggerCountAtRunStopFilename"]
 ]
-
-
 
 //----------------------------------------- Save Functions -----------------------------------------
 
@@ -310,21 +309,17 @@ function syncMaskCalc(val,a) {
     var l = syncArray.length;
     for (var i = 0; i < l; i++) {
         n = (n << 1) + (syncArray[i]?1:0);
-        }
+    };
     console.log(n)
+    $("#triggerSyncWord").val(n);
     return n;
 }
 
 //Calculate the Accelerator Clock Sync Mask
 function accelMaskCalc(val,a) {
-    accelMaskArray[a]=val;
-    var n = 0;
-    var l = accelMaskArray.length;
-    for (var i = 0; i < l; i++) {
-        n = (n << 1) + (accelMaskArray[i]?1:0);
-        }
-    console.log(n)
-    return n;
+    n = (val?1:0) << a // Should only have 1 bit true ever, so dont save values like the 40Mhz mask
+    console.log(n);
+    return n;   
 }
 
 //Calculate the Coincidence Logic Word
@@ -464,6 +459,16 @@ function voltSteps(myValue, VoltElId, SlideElId) {
 
 }
 
+function triggerSyncWordCalc(val){
+    clearTimeout(trigTimeout);
+    setTimeout(function () {
+	for(bitCnt=0; bitCnt<=23; bitCnt++){
+	elByID("Sync"+(bitCnt+1).toString()).checked=((val>>(23-bitCnt)) % 2 != 0); //intentionally reversing bit order
+	syncArray[bitCnt]=((val>>(23-bitCnt)) % 2 != 0);  //intentionally reversing bit order
+	}
+    },900)
+}
+
 // ------------------------------ JQuery UI Stuff ------------------------------
 
 $(document).ready(function () {
@@ -577,7 +582,27 @@ $(document).ready(function () {
 
     //Setup IP Address Mask for input
     $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {translation: {'Z': {pattern: /[0-9]/, optional: true}}}); 
+    
+    //Setup Hex/Dec mask for triggerSyncWord input
+    $('#triggerSyncWord').mask('ZZHHHHHHL', {'translation': {
+    Z: {pattern: /[0x]/, optional: true},
+    H: {pattern: /[A-Fa-f0-9]/},
+    L: {pattern: /[0-9]/}
+    }
+    });
 
+    //Setup trigger sync word as a spinner
+   var spinner = $( "#triggerSyncWord" ).spinner({
+               min: 0, 
+               max: 1777215 
+            });
+     $("#triggerSyncWord").on("spinstop", function(){
+     triggerSyncWordCalc(this.value);
+     addModifiedList('AcceleratorClockMask',this.value);
+     });
+   console.log(spinner);
+   console.log("jquery ui setup done!")
+    
     //Grab values to populate fields
     	ConfigurationAPI.getSubsetRecords(
         _subsetBasePath /*subsetBasePath*/ ,
@@ -668,10 +693,11 @@ function getNimValuesForPage(recFields) {
 				console.log("Coincidence Logic Word set");
 			}
 			else if(a.fieldPath.includes("TriggerClockMask")){
-			  	for(bitCnt=0; bitCnt<=7; bitCnt++){
-				elByID("Sync"+(bitCnt+1).toString()).checked=((a.fieldValue>>(7-bitCnt)) % 2 != 0); //intentionally reversing bit order
-				syncArray[bitCnt]=((a.fieldValue>>(7-bitCnt)) % 2 != 0);  //intentionally reversing bit order
+			  	for(bitCnt=0; bitCnt<=23; bitCnt++){
+				elByID("Sync"+(bitCnt+1).toString()).checked=((a.fieldValue>>(23-bitCnt)) % 2 != 0); //intentionally reversing bit order
+				syncArray[bitCnt]=((a.fieldValue>>(23-bitCnt)) % 2 != 0);  //intentionally reversing bit order
 				}
+				elByID("triggerSyncWord").value = a.fieldValue;
 				console.log("Trigger Clock Mask set")			
 			}
 			else if(a.fieldPath.includes("AcceleratorClockMask")){
