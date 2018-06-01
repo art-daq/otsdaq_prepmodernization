@@ -218,7 +218,7 @@
         </div>
 
         <div class="ControlBox">
-            <p>CH D Dac Steps: 0<input type="range" id="ChDDacEl0" max=40WidthOutputChannel095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChDDacEl2','ChDDacEl1'); addModifiedList('DACValueChannelD',this.value);">4095</p>
+            <p>CH D Dac Steps: 0<input type="range" id="ChDDacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChDDacEl2','ChDDacEl1'); addModifiedList('DACValueChannelD',this.value);">4095</p>
             <p>CH D Dac Steps: <input type=number id="ChDDacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChDDacEl2','ChDDacEl0'); addModifiedList('DACValueChannelD',this.value);"></p>
             <p>Ch D Dac Voltage: <input type="number" id="ChDDacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChDDacEl0','ChDDacEl1'); addModifiedList('DACValueChannelD',valByID('ChDDacEl1'));"></p>
         </div>
@@ -495,7 +495,7 @@
         <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync22" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,21));">21</label>
         <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync23" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,22));">22</label>
         <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync24" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,23));">23</label>
-        <br> <input id="triggerSyncWord">
+        <br> Trigger Sync Word (Dec or Hex): <input id="triggerSyncWord">
         
         
          <br><br>Accelerator Clock Mask/Portion of 40Mhz Clock Phase relative to accelerator clock to sync with
