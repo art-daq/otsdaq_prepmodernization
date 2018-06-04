@@ -159,15 +159,32 @@
 
 
 <div id="InChEnBox" class="ControlBox">
-    <p>Input Channel Enable Control <button id="InChEnCtlBtn">Show/Hide</button></p>
+    <p>Input Channel Configuration <button id="InChEnCtlBtn">Show/Hide</button></p>
     <div id="InChEnCtl" class="Dropdown">
-        <input type="checkbox" id="ChAInEn" onclick="addModifiedList('EnableInputChannelA',this.checked?'ON':'OFF');"><label for="ChAInEn">Enable Channel A?</label>
+        <label for="ChAInEn">Input Channel A Selection/Enable </label><select id="ChAInEn" oninput="addModifiedList('LogicInputChannelA', this.value);">
+	  <option value="NIM Input CH-A Raw (Invertible)">NIM Input CH-A Raw (Invertible)</option>
+	  <option value="NIM Input CH-A Modified">NIM Input CH-A Modified</option>
+	  <option value="True">True</option>
+	  <option value="False">False</option>
+	  </select>
         <input type="checkbox" id="ChAInInv" onclick="addModifiedList('InvertPolarityInputChannelA',this.checked?'yes':'no');"><label for="ChAInInv">Invert Ch A Input?</label>
-        </br><input type="checkbox" id="ChBInEn" onclick="addModifiedList('EnableInputChannelB',this.checked?'ON':'OFF');"><label for="ChBInEn">Enable Channel B?</label>
+        </br><label for="ChBInEn">Input Channel B Selection/Enable </label><select id="ChBInEn" oninput="addModifiedList('LogicInputChannelB', this.value);">
+	  <option value="NIM Input CH-B Raw (Invertible)">NIM Input CH-B Raw (Invertible)</option>
+	  <option value="NIM Input CH-B Modified">NIM Input CH-B Modified</option>
+	  <option value="True">True</option>
+	  <option value="False">False</option>
         <input type="checkbox" id="ChBInInv" onclick="addModifiedList('InvertPolarityInputChannelB',this.checked?'yes':'no');"><label for="ChBInInv">Invert Ch B Input?</label>
-        </br><input type="checkbox" id="ChCInEn" onclick="addModifiedList('EnableInputChannelC',this.checked?'ON':'OFF');"><label for="ChCInEn">Enable Channel C?</label>
+        </br><label for="ChCInEn">Input Channel C Selection/Enable </label><select id="ChCInEn" oninput="addModifiedList('LogicInputChannelC', this.value);">
+	  <option value="NIM Input CH-C Raw (Invertible)">NIM Input CH-C Raw (Invertible)</option>
+	  <option value="NIM Input CH-C Modified">NIM Input CH-C Modified</option>
+	  <option value="True">True</option>
+	  <option value="False">False</option>
         <input type="checkbox" id="ChCInInv" onclick="addModifiedList('InvertPolarityInputChannelC',this.checked?'yes':'no');"><label for="ChCInInv">Invert Ch C Input?</label>
-        </br><input type="checkbox" id="ChDInEn" onclick="addModifiedList('EnableInputChannelD',this.checked?'ON':'OFF');"><label for="ChDInEn">Enable Channel D?</label>
+        </br><label for="ChDInEn">Input Channel D Selection/Enable </label><select id="ChDInEn" oninput="addModifiedList('LogicInputChannelD', this.value);">
+	  <option value="NIM Input CH-D Raw (Invertible)">NIM Input CH-D Raw (Invertible)</option>
+	  <option value="NIM Input CH-D Modified">NIM Input CH-D Modified</option>
+	  <option value="True">True</option>
+	  <option value="False">False</option>
         <input type="checkbox" id="ChDInInv" onclick="addModifiedList('InvertPolarityInputChannelD',this.checked?'yes':'no');"><label for="ChDInInv">Invert Ch D Input?</label>
         </br></br><input type="checkbox" id="useExtClk" onclick="addModifiedList('UseExternalClock', this.checked?'yes':'no');"><label for="useExtClk">Use External Clock?</label>
 	  <br><p>External Clock Source - <select id="ExtClkSel" oninput="addModifiedList('ExternalClockSource', this.value);">
@@ -179,16 +196,15 @@
 	  </select>
 	  
 	<br>Seconds to delay before starting triggers - <input type="number" id="triggerDelaySecs" min=0 step=1 oninput="addModifiedList('SecondsDelayBeforeStartingTriggers',this.value);" style="width: 50px;">
-	  
-        <!-- Hackey Temp fix for CH Sources, need to investigate/debug further -->
-        <br><p>Source for SigCMS1 - <select id="OutputSourceOutput1" oninput="addModifiedList('OutputSourceSelectChannel1', this.value);">
-		<option value="SigNorm">SigLog</option>
-		<option value="SigLog">SigNorm</option>
+	 
+        <br><p>Source for Trigger Output CH 1 - <select id="OutputSourceOutput1" oninput="addModifiedList('TriggerInputChannel1', this.value);">
+		<option value="Logic Output">Logic Output</option>
+		<option value="Trigger CH-0">Trigger CH-0</option>
 		</select>
 		
-	<p>Source for SigCMS2 - <select id="OutputSourceOutput2" oninput="addModifiedList('OutputSourceSelectChannel2', this.value);">
-		<option value="SigNorm">SigLog</option>
-		<option value="SigLog">SigNorm</option>
+	<p>Source for Trigger Output CH 2 - <select id="OutputSourceOutput2" oninput="addModifiedList('TriggerInputChannel2', this.value);">
+		<option value="Logic Output">Logic Output</option>
+		<option value="Trigger CH-0">Trigger CH-0</option>
 		</select>
 
 
@@ -248,15 +264,15 @@
             <div id="ChDMsgEl"></div>
         </div>
         <div class="ControlBox">
-            <p>SigNorm Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChSNDelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChSNWidthEl','ChSNMsgEl'); addModifiedList('DelayOutputChannel0',this.value);"> Width (Clock Periods) <input type="number" id="ChSNWidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChSNDelayEl','ChSNMsgEl'); addModifiedList('WidthOutputChannel0',this.value);">
+            <p>Trigger Output CH-0 Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChSNDelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChSNWidthEl','ChSNMsgEl'); addModifiedList('DelayTriggerOutputChannel0',this.value);"> Width (Clock Periods) <input type="number" id="ChSNWidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChSNDelayEl','ChSNMsgEl'); addModifiedList('WidthTriggerOutputChannel0',this.value);">
             <div id="ChSNMsgEl"></div>
         </div>
         <div class="ControlBox">
-            <p>SigCMS1 Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChSCMS1DelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChSCMS1WidthEl','ChSCMS1MsgEl'); addModifiedList('DelayOutputChannel1',this.value);"> Width (Clock Periods) <input type="number" id="ChSCMS1WidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChSCMS1DelayEl','ChSCMS1MsgEl'); addModifiedList('WidthOutputChannel1',this.value);">
+            <p>Trigger Output CH-1 Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChSCMS1DelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChSCMS1WidthEl','ChSCMS1MsgEl'); addModifiedList('DelayTriggerOutputChannel1',this.value);"> Width (Clock Periods) <input type="number" id="ChSCMS1WidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChSCMS1DelayEl','ChSCMS1MsgEl'); addModifiedList('WidthTriggerOutputChannel1',this.value);">
             <div id="ChSCMS1MsgEl"></div>
         </div>
         <div class="ControlBox">
-            <p>SigCMS2 Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChSCMS2DelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChSCMS2WidthEl','ChSCMS2MsgEl'); addModifiedList('DelayOutputChannel2',this.value);"> Width (Clock Periods) <input type="number" id="ChSCMS2WidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChSCMS2DelayEl','ChSCMS2MsgEl'); addModifiedList('WidthOutputChannel2',this.value);">
+            <p>Trigger Output CH-2 Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChSCMS2DelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChSCMS2WidthEl','ChSCMS2MsgEl'); addModifiedList('DelayTriggerOutputChannel2',this.value);"> Width (Clock Periods) <input type="number" id="ChSCMS2WidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChSCMS2DelayEl','ChSCMS2MsgEl'); addModifiedList('WidthTriggerOutputChannel2',this.value);">
             <div id="ChSCMS2MsgEl"></div>
         </div>
 
@@ -265,23 +281,23 @@
 
 
 <div id="OutMuxBox" class="ControlBox">
-    <p>Output Mux Control <button id="OutMuxCtlBtn">Show/Hide</button></p>
+    <p>Output Mux Configuratrion <button id="OutMuxCtlBtn">Show/Hide</button></p>
     <div id="OutMuxCtl" class="Dropdown">
 
         <p>Output A (TestMux)- <select id="ChAOutMux" oninput="addModifiedList('OutputMuxSelectChannelA', this.value);">
-			<option value="Sig Norm">Sig Norm</option>
-			<option value="NIM Input CH-A Raw">NIM Input CH-A Raw</option>
-			<option value="NIM Input CH-B Raw">NIM Input CH-B Raw</option>
-			<option value="NIM Input CH-C Raw">NIM Input CH-C Raw</option>
-			<option value="NIM Input CH-D Raw">NIM Input CH-D Raw</option>
+			<option value="Trigger Output CH-0">Trigger Output CH-0</option>
+			<option value="NIM Input CH-A Raw (Invertible)">NIM Input CH-A Raw</option>
+			<option value="NIM Input CH-B Raw (Invertible)">NIM Input CH-B Raw</option>
+			<option value="NIM Input CH-C Raw (Invertible)">NIM Input CH-C Raw</option>
+			<option value="NIM Input CH-D Raw (Invertible)">NIM Input CH-D Raw</option>
 			<option value="NIM Input CH-A Modified">NIM Input CH-A Modified</option>
 			<option value="NIM Input CH-B Modified">NIM Input CH-B Modified</option>
 			<option value="NIM Input CH-C Modified">NIM Input CH-C Modified</option>
 			<option value="NIM Input CH-D Modified">NIM Input CH-D Modified</option>
-			<option value="SigLog">SigLog</option>
+			<option value="Logic Output">Logic Output</option>
 			<option value="Ground">Ground</option>
-			<option value="SigCMS1">SigCMS1</option>
-			<option value="SigCMS2">SigCMS2</option>
+			<option value="Trigger Output CH-1">Trigger Output CH-1</option>
+			<option value="Trigger Output CH-2">Trigger Output CH-2</option>
 			<option value="Veto Out n1">Veto Out n1</option>
 			<option value="Veto Out n2">Veto Out n2</option>
 			<option value="Backpressure Out">Backpressure Out</option>
@@ -292,43 +308,50 @@
 			<option value="In Event Counter 2">In Event Counter 2</option>
 			<option value="Burst Out Write Enable">Burst Out Write Enable</option>
 			<option value="40MHz System Clock">40MHz System Clock</option>
-			<option value="Sync W/40MHz">Sync W/40MHz</option>
+			<option value="Sync W/40MHz Logic Mask">Sync W/40MHz Logic Mask</option>
 			<option value="Signal Generator Output">Signal Generator Output</option>
 			<option value="Output CH-B">Output CH-B</option>
 			<option value="Output CH-C">Output CH-C</option>
 			<option value="Output CH-D">Output CH-D</option>
-			<option value="External Clock after DCM">External Clock after DCM</option>
-			<option value="External Clock"></option>
+			<option value="External Clock after DCM @ 26.5">External Clock after DCM @ 26.5</option>
+			<option value="System Clock after DCM @ 53">System Clock after DCM @ 53</option>
+			<option value="External Clock after DCM @ 53">External Clock after DCM @ 53</option>
 			</select>
         <input type="checkbox" id="ChAOutInv" onclick="addModifiedList('InvertPolarityOutputChannelA',this.checked?'yes':'no');"><label for="ChAOutInv">Invert Ch A Output?</label>
         </p>
 
         <p>Output B - <select id="ChBOutMux" oninput="addModifiedList('OutputMuxSelectChannelB', this.value);">
-			<option value="SigNorm/SigCMS">SigNorm/SigCMS</option>
-			<option value="SigCMS1">SigCMS1</option>
-			<option value="SigCMS2">SigCMS2</option>
+			<option value="Trigger Output CH-0">Trigger Output CH-0</option>
+			<option value="Trigger Output CH-1">Trigger Output CH-1</option>
+			<option value="Trigger Output CH-2">Trigger Output CH-2</option>
 			<option value="40MHz System Clock">40MHz System Clock</option>
 			<option value="Signal Generator Output">Signal Generator Output</option>
+			<option value="External Clock after DCM @ 53">External Clock after DCM @ 53</option>
+			<option value="Ground">Ground</option>
 			</select>
         <input type="checkbox" id="ChBOutInv" onclick="addModifiedList('InvertPolarityOutputChannelB',this.checked?'yes':'no');"><label for="ChBOutInv">Invert Ch B Output?</label>
         </p>
 
         <p>Output C - <select id="ChCOutMux" oninput="addModifiedList('OutputMuxSelectChannelC', this.value);">
-			<option value="SigNorm/SigCMS">SigNorm/SigCMS</option>
-			<option value="SigCMS1">SigCMS1</option>
-			<option value="SigCMS2">SigCMS2</option>
+			<option value="Trigger Output CH-0">Trigger Output CH-0</option>
+			<option value="Trigger Output CH-1">Trigger Output CH-1</option>
+			<option value="Trigger Output CH-2">Trigger Output CH-2</option>
 			<option value="40MHz System Clock">40MHz System Clock</option>
 			<option value="Signal Generator Output">Signal Generator Output</option>
+			<option value="External Clock after DCM @ 53">External Clock after DCM @ 53</option>
+			<option value="Ground">Ground</option>
 			</select>
         <input type="checkbox" id="ChCOutInv" onclick="addModifiedList('InvertPolarityOutputChannelC',this.checked?'yes':'no');"><label for="ChCOutInv">Invert Ch C Output?</label>
         </p>
 
         <p>Output D - <select id="ChDOutMux" oninput="addModifiedList('OutputMuxSelectChannelD', this.value);">
-			<option value="SigNorm/SigCMS">SigNorm/SigCMS</option>
-			<option value="SigCMS1">SigCMS1</option>
-			<option value="SigCMS2">SigCMS2</option>
+			<option value="Trigger Output CH-0">Trigger Output CH-0</option>
+			<option value="Trigger Output CH-1">Trigger Output CH-1</option>
+			<option value="Trigger Output CH-2">Trigger Output CH-2</option>
 			<option value="40MHz System Clock">40MHz System Clock</option>
 			<option value="Signal Generator Output">Signal Generator Output</option>
+			<option value="External Clock after DCM @ 53">External Clock after DCM @ 53</option>
+			<option value="Ground">Ground</option>
 			</select>
         <input type="checkbox" id="ChDOutInv" onclick="addModifiedList('InvertPolarityOutputChannelD',this.checked?'yes':'no');"><label for="ChDOutInv">Invert Ch D Output?</label>
         </p>
@@ -463,50 +486,50 @@
 
 <div id="SyncBox" class="ControlBox">
     <!-- "Expert" feature-->
-    <p>40Mhz Sync Control <button id="SyncCtlBtn">Show/Hide</button></p>
+    <p>40Mhz Sync Configuratrion <button id="SyncCtlBtn">Show/Hide</button></p>
     <div id="SyncCtl" class="Dropdown">
 	
 	<input type="checkbox" id="EnableSync0" onclick="addModifiedList('EnableClockMaskChannel0',this.checked?'yes':'no');"><label for="EnableSync0">Enable 40Mhz Syncing for SigNorm/SigCMS?</label>
 	<br><input type="checkbox" id="EnableSync1" onclick="addModifiedList('EnableClockMaskChannel1',this.checked?'yes':'no');"><label for="EnableSync1">Enable 40Mhz Syncing for SigCMS1?</label>
 	<br><input type="checkbox" id="EnableSync2" onclick="addModifiedList('EnableClockMaskChannel2',this.checked?'yes':'no');"><label for="EnableSync2">Enable 40Mhz Syncing for SigCMS2?</label>
 	
-        <br><br>Trigger Clock Mask/Portion of the 40Mhz Signal to sync with
-        <br><label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync1" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,0));">0</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync2" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,1));">1</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync3" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,2));">2</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync4" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,3));">3</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync5" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,4));">4</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync6" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,5));">5</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync7" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,6));">6</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync8" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,7));">7</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync9" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,8));">8</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync10" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,9));">9</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync11" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,10));">10</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync12" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,11));">11</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync13" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,12));">12</label>
-        <br><label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync14" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,13));">13</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync15" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,14));">14</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync16" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,15));">15</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync17" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,16));">16</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync18" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,17));">17</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync19" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,18));">18</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync20" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,19));">19</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync21" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,20));">20</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync22" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,21));">21</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync23" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,22));">22</label>
-        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync24" onclick="addModifiedList('TriggerClockMask', syncMaskCalc(this.checked?1:0,23));">23</label>
-        <br> Trigger Sync Word (Dec or Hex): <input id="triggerSyncWord">
+        <br><br>Trigger Clock Mask:
+        <br><label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync1" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,0));">0</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync2" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,1));">1</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync3" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,2));">2</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync4" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,3));">3</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync5" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,4));">4</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync6" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,5));">5</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync7" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,6));">6</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync8" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,7));">7</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync9" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,8));">8</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync10" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,9));">9</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync11" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,10));">10</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync12" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,11));">11</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync13" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,12));">12</label>
+        <br><label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync14" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,13));">13</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync15" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,14));">14</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync16" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,15));">15</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync17" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,16));">16</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync18" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,17));">17</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync19" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,18));">18</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync20" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,19));">19</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync21" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,20));">20</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync22" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,21));">21</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync23" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,22));">22</label>
+        <label class="checkbox-label"><input class="checkbox-vert" type="checkbox" id="Sync24" onclick="addModifiedList('ClockMaskSetup', syncMaskCalc(this.checked?1:0,23));">23</label>
+        <br> Trigger Clock Mask Word (Dec or Hex): <input id="triggerSyncWord">
         
         
-         <br><br>Accelerator Clock Mask/Portion of 40Mhz Clock Phase relative to accelerator clock to sync with
-        <br><label class="checkbox-label"><input class="checkbox-vert one-cb" type="checkbox" id="AccSync1" name="AccSync" onclick="addModifiedList('AcceleratorClockMask', accelMaskCalc(this.checked?1:0,0));  $('.one-cb').not(this).prop('checked', false);">0</label>
-        <label class="checkbox-label"><input class="checkbox-vert one-cb" type="checkbox" id="AccSync2" name="AccSync" onclick="addModifiedList('AcceleratorClockMask', accelMaskCalc(this.checked?1:0,1)); $('.one-cb').not(this).prop('checked', false);">1</label>
-        <label class="checkbox-label"><input class="checkbox-vert one-cb" type="checkbox" id="AccSync3" name="AccSync" onclick="addModifiedList('AcceleratorClockMask', accelMaskCalc(this.checked?1:0,2)); $('.one-cb').not(this).prop('checked', false);">2</label>
-        <label class="checkbox-label"><input class="checkbox-vert one-cb" type="checkbox" id="AccSync4" name="AccSync" onclick="addModifiedList('AcceleratorClockMask', accelMaskCalc(this.checked?1:0,3)); $('.one-cb').not(this).prop('checked', false);">3</label>
-        <label class="checkbox-label"><input class="checkbox-vert one-cb" type="checkbox" id="AccSync5" name="AccSync" onclick="addModifiedList('AcceleratorClockMask', accelMaskCalc(this.checked?1:0,4)); $('.one-cb').not(this).prop('checked', false);">4</label>
-        <label class="checkbox-label"><input class="checkbox-vert one-cb" type="checkbox" id="AccSync6" name="AccSync" onclick="addModifiedList('AcceleratorClockMask', accelMaskCalc(this.checked?1:0,5)); $('.one-cb').not(this).prop('checked', false);">5</label>
-        <label class="checkbox-label"><input class="checkbox-vert one-cb" type="checkbox" id="AccSync7" name="AccSync" onclick="addModifiedList('AcceleratorClockMask', accelMaskCalc(this.checked?1:0,6)); $('.one-cb').not(this).prop('checked', false);">6</label>
-        <label class="checkbox-label"><input class="checkbox-vert one-cb" type="checkbox" id="AccSync8" name="AccSync" onclick="addModifiedList('AcceleratorClockMask', accelMaskCalc(this.checked?1:0,7)); $('.one-cb').not(this).prop('checked', false);">7</label>
+         <br><br> 40 Mhz Clock Delay
+        <br><label class="checkbox-label"><input class="checkbox-vert one-cb" type="checkbox" id="AccSync1" name="AccSync" onclick="addModifiedList('40MHzClockDelay', accelMaskCalc(this.checked?1:0,0));  $('.one-cb').not(this).prop('checked', false);">0</label>
+        <label class="checkbox-label"><input class="checkbox-vert one-cb" type="checkbox" id="AccSync2" name="AccSync" onclick="addModifiedList('40MHzClockDelay', accelMaskCalc(this.checked?1:0,1)); $('.one-cb').not(this).prop('checked', false);">1</label>
+        <label class="checkbox-label"><input class="checkbox-vert one-cb" type="checkbox" id="AccSync3" name="AccSync" onclick="addModifiedList('40MHzClockDelay', accelMaskCalc(this.checked?1:0,2)); $('.one-cb').not(this).prop('checked', false);">2</label>
+        <label class="checkbox-label"><input class="checkbox-vert one-cb" type="checkbox" id="AccSync4" name="AccSync" onclick="addModifiedList('40MHzClockDelay', accelMaskCalc(this.checked?1:0,3)); $('.one-cb').not(this).prop('checked', false);">3</label>
+        <label class="checkbox-label"><input class="checkbox-vert one-cb" type="checkbox" id="AccSync5" name="AccSync" onclick="addModifiedList('40MHzClockDelay', accelMaskCalc(this.checked?1:0,4)); $('.one-cb').not(this).prop('checked', false);">4</label>
+        <label class="checkbox-label"><input class="checkbox-vert one-cb" type="checkbox" id="AccSync6" name="AccSync" onclick="addModifiedList('40MHzClockDelay', accelMaskCalc(this.checked?1:0,5)); $('.one-cb').not(this).prop('checked', false);">5</label>
+        <label class="checkbox-label"><input class="checkbox-vert one-cb" type="checkbox" id="AccSync7" name="AccSync" onclick="addModifiedList('40MHzClockDelay', accelMaskCalc(this.checked?1:0,6)); $('.one-cb').not(this).prop('checked', false);">6</label>
+        <label class="checkbox-label"><input class="checkbox-vert one-cb" type="checkbox" id="AccSync8" name="AccSync" onclick="addModifiedList('40MHzClockDelay', accelMaskCalc(this.checked?1:0,7)); $('.one-cb').not(this).prop('checked', false);">7</label>
     </div>
 </div>
 
@@ -516,15 +539,15 @@
 
 
 <div id="VetoBox" class="ControlBox">
-    <p>Veto(s) Control <button id="VetoCtlBtn">Show/Hide</button></p>
+    <p>Veto(s) Configuratrion <button id="VetoCtlBtn">Show/Hide</button></p>
     <div id="VetoCtl" class="Dropdown">
-        SigNorm/SigCMS Veto Count:  <input type="number" id="VetoCount" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel0', this.value); addModifiedList('OutputPrescaleCountChannel0', 0); elByID('PsCount').value=0; validInput();" oninvalid="invalidInput();"></input>
+        Trigger Output CH-0 Veto Count:  <input type="number" id="VetoCount" min=0 step=1 oninput="addModifiedList('TimeVetoTriggerOutputChannel0', this.value); addModifiedList('PrescaleTriggerOutputChannel0', 0); elByID('PsCount').value=0; validInput();" oninvalid="invalidInput();"></input>
 
-        <br>SigCMS1 Veto Count: <input type="number" id="Veto1Count" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel1', this.value); addModifiedList('OutputPrescaleCountChannel1', 0); elByID('PsCount1').value=0; validInput();" oninvalid="invalidInput();"></input>
+        <br>Trigger Output CH-1 Veto Count: <input type="number" id="Veto1Count" min=0 step=1 oninput="addModifiedList('TimeVetoTriggerOutputChannel1', this.value); addModifiedList('PrescaleTriggerOutputChannel1', 0); elByID('PsCount1').value=0; validInput();" oninvalid="invalidInput();"></input>
 
-        <br>SigCMS2 Veto Count: <input type="number" id="Veto2Count" min=0 step=1 oninput="addModifiedList('OutputTimeVetoDurationChannel2', this.value); addModifiedList('OutputPrescaleCountChannel2', 0); elByID('PsCount2').value=0; validInput();" oninvalid="invalidInput();"></input>
+        <br>Trigger Output CH-2 Veto Count: <input type="number" id="Veto2Count" min=0 step=1 oninput="addModifiedList('TimeVetoTriggerOutputChannel2', this.value); addModifiedList('PrescaleTriggerOutputChannel2', 0); elByID('PsCount2').value=0; validInput();" oninvalid="invalidInput();"></input>
    
-           <p>External Veto Source for Output Ch 0 - <select id="VetoSourceOutput0" oninput="addModifiedList('InputChannelVetoSourceForOutputChannel0', this.value);">
+           <p>External Veto Source for Trigger Output CH-0 - <select id="VetoSourceOutput0" oninput="addModifiedList('VetoSourceTriggerOutputChannel0', this.value);">
                 <option value="No-Veto">No Veto</option>
                 <option value="Input-Ch-A">Input Channel-A</option>
                 <option value="Input-Ch-B">Input Channel-B</option>	
@@ -532,15 +555,15 @@
                 <option value="Input-Ch-D">Input Channel-D</option>
                 </select>
 	
-        <p>External Veto Source for Output Ch 1 - <select id="VetoSourceOutput1" oninput="addModifiedList('InputChannelVetoSourceForOutputChannel1', this.value);">
+        <p>External Veto Source for Trigger Output CH-1 - <select id="VetoSourceOutput1" oninput="addModifiedList('VetoSourceTriggerOutputChannel1', this.value);">
                  <option value="No-Veto">No Veto</option>
                 <option value="Input-Ch-A">Input Channel-A</option>
                 <option value="Input-Ch-B">Input Channel-B</option>	
-                <option value="Input-Ch-C">Inp<p>ut Channel-C</option>	
+                <option value="Input-Ch-C">Input Channel-C</option>	
                 <option value="Input-Ch-D">Input Channel-D</option>	
                 </select>
 	
-        <p>External Veto Source for Output Ch 2 - <select id="VetoSourceOutput2" oninput="addModifiedList('InputChannelVetoSourceForOutputChannel2', this.value);">
+        <p>External Veto Source for Trigger Output CH-2 - <select id="VetoSourceOutput2" oninput="addModifiedList('VetoSourceTriggerOutputChannel2', this.value);">
                 <option value="No-Veto">No Veto</option>
                 <option value="Input-Ch-A">Input Channel-A</option>
                 <option value="Input-Ch-B">Input Channel-B</option>	
@@ -553,18 +576,19 @@
 </div>
 
 <div id="PsBox" class="ControlBox">
-    <p>Prescaler Control <button id="PsCtlBtn">Show/Hide</button></p>
+    <p>Prescaler Configuratrion <button id="PsCtlBtn">Show/Hide</button></p>
     <div id="PsCtl" class="Dropdown">
-        SigNorm Prescaler Count:  <input type="number" id="PsCount" min=0 step=1 oninput="addModifiedList('OutputPrescaleCountChannel0', this.value); addModifiedList('OutputTimeVetoDurationChannel0', 0); elByID('VetoCount').value=0; validInput();" oninvalid="invalidInput();"></input>
-        </br>SigCMS1 Prescaler Count: <input type="number" id="PsCount1" min=0 step=1 oninput="addModifiedList('OutputPrescaleCountChannel1', this.value); addModifiedList('OutputTimeVetoDurationChannel1', 0); elByID('Veto1Count').value=0; validInput();" oninvalid="invalidInput();"></input>
-        </br>SigCMS2 Prescaler Count: <input type="number" id="PsCount2" min=0 step=1 oninput="addModifiedList('OutputPrescaleCountChannel2', this.value); addModifiedList('OutputTimeVetoDurationChannel2', 0); elByID('Veto2Count').value=0; validInput();" oninvalid="invalidInput();"></input>
+        Trigger Output CH-0 Prescaler Count:  <input type="number" id="PsCount" min=0 step=1 oninput="addModifiedList('PrescaleTriggerOutputChannel0', this.value); addModifiedList('TimeVetoTriggerOutputChannel0', 0); elByID('VetoCount').value=0; validInput();" oninvalid="invalidInput();"></input>
+        </br>Trigger Output CH-1 Prescaler Count: <input type="number" id="PsCount1" min=0 step=1 oninput="addModifiedList('PrescaleTriggerOutputChannel1', this.value); addModifiedList('TimeVetoTriggerOutputChannel1', 0); elByID('Veto1Count').value=0; validInput();" oninvalid="invalidInput();"></input>
+        </br>Trigger Output CH-2 Prescaler Count: <input type="number" id="PsCount2" min=0 step=1 oninput="addModifiedList('PrescaleTriggerOutputChannel2', this.value); addModifiedList('TimeVetoTriggerOutputChannel2', 0); elByID('Veto2Count').value=0; validInput();" oninvalid="invalidInput();"></input>
     </div>
 </div>
 
 <div id="SelLogBox" class="ControlBox">
-    <p>Selection Logic Control <button id="SelLogCtlBtn">Show/Hide</button></p>
+    <p>Selection Logic Output Configuratrion <button id="SelLogCtlBtn">Show/Hide</button></p>
     <div id="SelLogCtl" class="Dropdown">
-        Channels: ABCD , Cases output when true and are OR'd together
+        Selections represent input (Raw or modifed per selections in Input Channel control) channels in the following order: ABCD 
+        Cases output when true and are OR'd together so that any selected cases will output a trigger
         </br><input type="checkbox" id="SL0" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,15));"><label for="SL0">FFFF</label>
         <input type="checkbox" id="SL1" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,14));"><label for="SL1">TFFF</label>
         <input type="checkbox" id="SL2" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,13));"><label for="SL2">FTFF</label>
@@ -586,10 +610,10 @@
 
 <div id="BkpBox" class="ControlBox">
     <!-- "Expert" feature-->
-    <p>Back Pressure Control <button id="BkpCtlBtn">Show/Hide</button></p>
+    <p>Back Pressure Configuratrion <button id="BkpCtlBtn">Show/Hide</button></p>
     <div id="BkpCtl" class="Dropdown">
-        <input type="checkbox" id="bkpEnableA" onclick="addModifiedList('EnableBackPressureInputA', this.checked);"><label for="bkpEnableA" >Enable Backpressure Veto A?</label>
-        </br><input type="checkbox" id="bkpEnableB" onclick="addModifiedList('EnableBackPressureInputB', this.checked);"><label for="bkpEnableB" >Enable Backpressure Veto B?</label>
+        <input type="checkbox" id="bkpEnableA" onclick="addModifiedList('EnableBackPressureNwFmcPta1', this.checked);"><label for="bkpEnableA" >Enable Backpressure Veto A?</label>
+        </br><input type="checkbox" id="bkpEnableB" onclick="addModifiedList('EnableBackPressureNwFmcPta2', this.checked);"><label for="bkpEnableB" >Enable Backpressure Veto B?</label>
 	</br><input type="checkbox" id="bkpOutSel0" onclick="addModifiedList('OutputBackpressureSelectChannel0', this.checked);"><label for="bkpOutSel0" >SigNorm Output Backpressure Select</label>
 	</br><input type="checkbox" id="bkpOutSel1" onclick="addModifiedList('OutputBackpressureSelectChannel1', this.checked);"><label for="bkpOutSel1" >SigCMS1 Output Backpressure Select</label>
    	</br><input type="checkbox" id="bkpOutSel2" onclick="addModifiedList('OutputBackpressureSelectChannel2', this.checked);"><label for="bkpOutSel2" >SigCMS2 Output Backpressure Select</label>
@@ -598,7 +622,7 @@
 
 <div id="SigGenBox" class="ControlBox">
     <!-- "Expert" feature-->
-    <p>Signal Generator Control <button id="SigGenCtlBtn">Show/Hide</button></p>
+    <p>Signal Generator Configuratrion <button id="SigGenCtlBtn">Show/Hide</button></p>
     <div id="SigGenCtl" class="Dropdown">
         Output Pulse Count (0 for continuous)<input type="number" id="SGPulseCnt" min=0 step=1 oninput="addModifiedList('SignalGeneratorPulseCount', this.value); validInput();" oninvalid="invalidInput();">
 
