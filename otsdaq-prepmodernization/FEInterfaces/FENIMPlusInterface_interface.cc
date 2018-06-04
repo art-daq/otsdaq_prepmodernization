@@ -631,6 +631,15 @@ void FENIMPlusInterface::configure(void)
 
 			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18004, gateChannelReg); //setup burst block gate signal choice
 			OtsUDPHardware::write(writeBuffer);
+			
+			if(outputMuxSelect == 1){ //enable timestamp counter if using the scope
+				OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x1800F, 0x2); //Enable Timestamp counter for scope
+				OtsUDPHardware::write(writeBuffer);
+			}
+			else{
+				OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x1800F, 0); //Enable Timestamp counter for scope
+				OtsUDPHardware::write(writeBuffer);
+			}
 		}
 		
 		//selection logic setup
