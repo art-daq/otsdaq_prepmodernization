@@ -108,7 +108,12 @@ var fieldList = [["NimStatus","Status"],
 ["bkpOutSel2","BackpressureTriggerOutputChannel2"],
 ["TMuxB1","TrigerMuxSelectionsBankB"],
 ["TMuxA1","TrigerMuxSelectionsBankA"],
-["triggerFilename","TriggerCountAtRunStopFilename"]
+["triggerFilename","TriggerCountAtRunStopFilename"],
+["BurstEn","EnableBurstData"],
+["BurstLogicDelay","BurstDataLogicSampleDelay"],
+["BurstMuxSel","BurstDataMuxSelect"],
+["BurstGateInputCh","BurstDataGateInputChannel"]
+
 ]
 
 //----------------------------------------- Save Functions -----------------------------------------
@@ -484,7 +489,6 @@ $(document).ready(function () {
     // CSS for Inner (hidden) divs
     //Hide the divs by default
 
-
     //InChEnCtl
     $("#InChEnCtl").hide();
 
@@ -526,7 +530,10 @@ $(document).ready(function () {
     
     //ConnCtl
     $("#ConnCtl").hide();
-
+    
+    //BurstCtl
+    $("#BurstCtl").hide(); 
+    
     //Setup button actions to hide/show the divs
 
     $("#InChEnCtlBtn").click(function () {
@@ -583,6 +590,10 @@ $(document).ready(function () {
     
     $("#ConnCtlBtn").click(function () {
         $("#ConnCtl").toggle(400);
+    });
+
+    $("#BurstCtlBtn").click(function () {
+        $("#BurstCtl").toggle(400);
     });
 
     //Setup IP Address Mask for input
@@ -783,11 +794,13 @@ function getNimValuesForPage(recFields) {
 		$("#SigGenBox").show() //Signal Generator
 		$("#BkpBox").show() //Backpressure Vetos
 		$("#SyncBox").show() //40Mhz Sync
+		$("#BurstBox").show() //40Mhz Sync
 	      }
 	      else{
 		$("#SigGenBox").hide() //Signal Generator
 		$("#BkpBox").hide() //Backpressure Vetos
 		$("#SyncBox").hide() //40Mhz Sync
+		$("#BurstBox").hide() //40Mhz Sync
 	      }
 	    }
 	    else{/*

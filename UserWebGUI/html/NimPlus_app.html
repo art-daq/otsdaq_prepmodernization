@@ -189,10 +189,10 @@
         </br></br><input type="checkbox" id="useExtClk" onclick="addModifiedList('UseExternalClock', this.checked?'yes':'no');"><label for="useExtClk">Use External Clock?</label>
 	  <br><p>External Clock Source - <select id="ExtClkSel" oninput="addModifiedList('ExternalClockSource', this.value);">
 	  <option value="NW-FMC-PTA Clock Source">NW FMC Connector</option>
-	  <option value="Nim-Input-A">Input A</option>
-	  <option value="Nim-Input-B">Input B</option>
-	  <option value="Nim-Input-C">Input C</option>
-	  <option value="Nim-Input-D">Input D</option>
+	  <option value="NIM Input CH-A Raw">NIM Input CH-A Raw</option>
+	  <option value="NIM Input CH-B Raw">NIM Input CH-B Raw</option>
+	  <option value="NIM Input CH-C Raw">NIM Input CH-C Raw</option>
+	  <option value="NIM Input CH-D Raw">NIM Input CH-D Raw</option>
 	  </select>
 	  
 	<br>Seconds to delay before starting triggers - <input type="number" id="triggerDelaySecs" min=0 step=1 oninput="addModifiedList('SecondsDelayBeforeStartingTriggers',this.value);" style="width: 50px;">
@@ -549,26 +549,26 @@
    
            <p>External Veto Source for Trigger Output CH-0 - <select id="VetoSourceOutput0" oninput="addModifiedList('VetoSourceTriggerOutputChannel0', this.value);">
                 <option value="No-Veto">No Veto</option>
-                <option value="Input-Ch-A">Input Channel-A</option>
-                <option value="Input-Ch-B">Input Channel-B</option>	
-                <option value="Input-Ch-C">Input Channel-C</option>	
-                <option value="Input-Ch-D">Input Channel-D</option>
+                <option value="NIM Input CH-A Raw (Invertible)">NIM Input CH-A Raw (Invertible)</option>
+                <option value="NIM Input CH-B Raw (Invertible)">NIM Input CH-B Raw (Invertible)</option>	
+                <option value="NIM Input CH-C Raw (Invertible)">NIM Input CH-C Raw (Invertible)</option>	
+                <option value="NIM Input CH-D Raw (Invertible)">NIM Input CH-D Raw (Invertible)</option>	
                 </select>
 	
         <p>External Veto Source for Trigger Output CH-1 - <select id="VetoSourceOutput1" oninput="addModifiedList('VetoSourceTriggerOutputChannel1', this.value);">
-                 <option value="No-Veto">No Veto</option>
-                <option value="Input-Ch-A">Input Channel-A</option>
-                <option value="Input-Ch-B">Input Channel-B</option>	
-                <option value="Input-Ch-C">Input Channel-C</option>	
-                <option value="Input-Ch-D">Input Channel-D</option>	
+                <option value="No-Veto">No Veto</option>
+                <option value="NIM Input CH-A Raw (Invertible)">NIM Input CH-A Raw (Invertible)</option>
+                <option value="NIM Input CH-B Raw (Invertible)">NIM Input CH-B Raw (Invertible)</option>	
+                <option value="NIM Input CH-C Raw (Invertible)">NIM Input CH-C Raw (Invertible)</option>	
+                <option value="NIM Input CH-D Raw (Invertible)">NIM Input CH-D Raw (Invertible)</option>	
                 </select>
 	
         <p>External Veto Source for Trigger Output CH-2 - <select id="VetoSourceOutput2" oninput="addModifiedList('VetoSourceTriggerOutputChannel2', this.value);">
                 <option value="No-Veto">No Veto</option>
-                <option value="Input-Ch-A">Input Channel-A</option>
-                <option value="Input-Ch-B">Input Channel-B</option>	
-                <option value="Input-Ch-C">Input Channel-C</option>	
-                <option value="Input-Ch-D">Input Channel-D</option>	
+                <option value="NIM Input CH-A Raw (Invertible)">NIM Input CH-A Raw (Invertible)</option>
+                <option value="NIM Input CH-B Raw (Invertible)">NIM Input CH-B Raw (Invertible)</option>	
+                <option value="NIM Input CH-C Raw (Invertible)">NIM Input CH-C Raw (Invertible)</option>	
+                <option value="NIM Input CH-D Raw (Invertible)">NIM Input CH-D Raw (Invertible)</option>	
                 </select>
    
    
@@ -634,6 +634,35 @@
 
     </div>
 </div>
+
+
+<div id="BurstBox" class="ControlBox">
+    <p>Burst Data Configuration <button id="BurstCtlBtn">Show/Hide</button></p>
+    <div id="BurstCtl" class="Dropdown">
+        
+        <label for="BurstEn">Enable Burst Data?</label><input type="checkbox" id="BurstEn" onclick="addModifiedList('EnableBurstData',this.checked?'True':'False');">
+        
+        
+        <br>Burst Data Logic Sample Delay: <input type="number" id="BurstLogicDelay" min=0 step=1 oninput="addModifiedList('BurstDataLogicSampleDelay',this.value);" style="width: 50px;">
+	
+        
+        <p>Burst Data Mux Selection: <select id="BurstMuxSel" oninput="addModifiedList('BurstDataMuxSelect', this.value);">
+                <option value="Event Counters">Event Counters</option>
+                <option value="4-Channel Scope">4-Channel Scope</option>	
+                <option value="Delta-Time Samples">Delta-Time Samples</option>	
+                <option value="Output Counters">Output Counters</option>
+                </select>
+	
+        <p>Burst Data Gate Input Channel: <select id="BurstGateInputCh" oninput="addModifiedList('BurstDataGateInputChannel', this.value);">
+                <option value="Input Channel-A">Input Channel-A</option>
+                <option value="Input Channel-B">Input Channel-B</option>	
+                <option value="Input Channel-C">Input Channel-C</option>	
+                <option value="Input Channel-D">Input Channel-D</option>	
+                </select>
+	
+   </div>
+</div>
+
 <!-- Add New Nimplus, Unstable/Disabled for release 
 <div id="newNimPlusPopup" class="modal">
   <div class="modal-content">
