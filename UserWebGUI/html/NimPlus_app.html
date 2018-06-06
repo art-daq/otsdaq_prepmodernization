@@ -212,6 +212,31 @@
 </div>
 
 
+<div id="SelLogBox" class="ControlBox">
+    <p>Selection Logic Output Configuratrion <button id="SelLogCtlBtn">Show/Hide</button></p>
+    <div id="SelLogCtl" class="Dropdown">
+        Selections represent input (Raw or modifed per selections in Input Channel control) channels in the following order: ABCD 
+        Cases output when true and are OR'd together so that any selected cases will output a trigger
+        </br><input type="checkbox" id="SL0" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,15));"><label for="SL0">FFFF</label>
+        <input type="checkbox" id="SL1" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,14));"><label for="SL1">TFFF</label>
+        <input type="checkbox" id="SL2" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,13));"><label for="SL2">FTFF</label>
+        <input type="checkbox" id="SL3" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,12));"><label for="SL3">TTFF</label>
+        </br><input type="checkbox" id="SL4" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1this.checked:0,11));"><label for="SL5">FFTF</label>
+        <input type="checkbox" id="SL5" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,10));"><label for="SL5">TFTF</label>
+        <input type="checkbox" id="SL6" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,9));"><label for="SL6">FTTF</label>
+        <input type="checkbox" id="SL7" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,8));"><label for="SL7">TTTF</label>
+        </br><input type="checkbox" id="SL8" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,7));"><label for="SL8">FFFT</label>
+        <input type="checkbox" id="SL9" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,6));"><label for="SL9">TFFT</label>
+        <input type="checkbox" id="SL10" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,5));"><label for="SL10">FTFT</label>
+        <input type="checkbox" id="SL11" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,4));"><label for="SL11">TTFT</label>
+        </br><input type="checkbox" id="SL12" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,3));"><label for="SL12">FFTT</label>
+        <input type="checkbox" id="SL13" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,2));"><label for="SL13">TFTT</label>
+        <input type="checkbox" id="SL14" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,1));"><label for="SL14">FTTT</label>
+        <input type="checkbox" id="SL15" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,0));"><label for="SL15">TTTT</label>
+    </div>
+</div>
+
+
 <div id="DacBox" class="ControlBox">
     <p>DAC Threshold Configuration <button id="DacCtlBtn">Show/Hide</button></p>
     <div id="DacCtl" class="Dropdown">
@@ -581,30 +606,6 @@
         Trigger Output CH-0 Prescaler Count:  <input type="number" id="PsCount" min=0 step=1 oninput="addModifiedList('PrescaleTriggerOutputChannel0', this.value); addModifiedList('TimeVetoTriggerOutputChannel0', 0); elByID('VetoCount').value=0; validInput();" oninvalid="invalidInput();"></input>
         </br>Trigger Output CH-1 Prescaler Count: <input type="number" id="PsCount1" min=0 step=1 oninput="addModifiedList('PrescaleTriggerOutputChannel1', this.value); addModifiedList('TimeVetoTriggerOutputChannel1', 0); elByID('Veto1Count').value=0; validInput();" oninvalid="invalidInput();"></input>
         </br>Trigger Output CH-2 Prescaler Count: <input type="number" id="PsCount2" min=0 step=1 oninput="addModifiedList('PrescaleTriggerOutputChannel2', this.value); addModifiedList('TimeVetoTriggerOutputChannel2', 0); elByID('Veto2Count').value=0; validInput();" oninvalid="invalidInput();"></input>
-    </div>
-</div>
-
-<div id="SelLogBox" class="ControlBox">
-    <p>Selection Logic Output Configuratrion <button id="SelLogCtlBtn">Show/Hide</button></p>
-    <div id="SelLogCtl" class="Dropdown">
-        Selections represent input (Raw or modifed per selections in Input Channel control) channels in the following order: ABCD 
-        Cases output when true and are OR'd together so that any selected cases will output a trigger
-        </br><input type="checkbox" id="SL0" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,15));"><label for="SL0">FFFF</label>
-        <input type="checkbox" id="SL1" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,14));"><label for="SL1">TFFF</label>
-        <input type="checkbox" id="SL2" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,13));"><label for="SL2">FTFF</label>
-        <input type="checkbox" id="SL3" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,12));"><label for="SL3">TTFF</label>
-        </br><input type="checkbox" id="SL4" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1this.checked:0,11));"><label for="SL5">FFTF</label>
-        <input type="checkbox" id="SL5" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,10));"><label for="SL5">TFTF</label>
-        <input type="checkbox" id="SL6" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,9));"><label for="SL6">FTTF</label>
-        <input type="checkbox" id="SL7" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,8));"><label for="SL7">TTTF</label>
-        </br><input type="checkbox" id="SL8" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,7));"><label for="SL8">FFFT</label>
-        <input type="checkbox" id="SL9" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,6));"><label for="SL9">TFFT</label>
-        <input type="checkbox" id="SL10" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,5));"><label for="SL10">FTFT</label>
-        <input type="checkbox" id="SL11" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,4));"><label for="SL11">TTFT</label>
-        </br><input type="checkbox" id="SL12" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,3));"><label for="SL12">FFTT</label>
-        <input type="checkbox" id="SL13" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,2));"><label for="SL13">TFTT</label>
-        <input type="checkbox" id="SL14" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,1));"><label for="SL14">FTTT</label>
-        <input type="checkbox" id="SL15" onclick="addModifiedList('CoincidenceLogicWord', LogicWordCalc(this.checked?1:0,0));"><label for="SL15">TTTT</label>
     </div>
 </div>
 
