@@ -24,6 +24,7 @@ var _TABLE_BOOL_TYPE_TRUE_COLOR = "rgb(201, 255, 201)";
 var _TABLE_BOOL_TYPE_FALSE_COLOR = "rgb(255, 178, 178)";
 var _nimUids = null;
 var timeout = null; //voltField timeout value, used to wait till user done entering a value	
+var stepTimeout = null;
 var trigTimeout = null; //triggerSyncWordCalc timeout val, used to wait till user done entering a value
 var modifiedList = []; //List of values that are modified, used to keep track of what values need to be updated
 var invalidInput = false; //Track if any textbox input is invalid, used to prevent saving if there is
@@ -402,11 +403,13 @@ function dwValidCheck(firstVal, secondValElId, msgElId) {
     existsAt = $.inArray(tableVal, modifiedListNames);
     //document.getElementById("saveEl").innerHTML = "";
     if (existsAt < 0) {
-//        console.log(existsAt);
-//        console.log($.inArray(tableVal, modifiedList[0]));
-//        console.log(tableVal);
-//        console.log(modifiedList[0]);
+       console.log(existsAt);
+       console.log($.inArray(tableVal, modifiedList[0]));
+       console.log(tableVal);
+       console.log(modifiedList[0]);
+       console.log([tableVal, tableDat]);
        modifiedList.push([tableVal, tableDat]);
+       console.log(modifiedList);
 //       console.log(modifiedList);
     } else {
        modifiedList[existsAt] = [tableVal,tableDat];
@@ -458,11 +461,13 @@ function voltField(VoltElId, SlideElId, StepElId) {
 }
 // update the slider and field when the steps are changed
 function voltSteps(myValue, VoltElId, SlideElId) {
+  clearTimeout(stepTimeout);
+    stepTimeout = setTimeout(function () {
     voltVal = (((10000 * ((myValue * (33 / 40950)))) + (((8 - (10000 * ((myValue * (33 / 40950)))) % 8)))) / 10000) - 0.0008;
     document.getElementById(SlideElId).value = (myValue);
     document.getElementById(VoltElId).value = voltVal.toFixed(4) //(myValue * 33 / 40950);
     invalidInput = false;
-
+   }, 900);
 }
 
 function triggerSyncWordCalc(val){
@@ -729,13 +734,13 @@ function getNimValuesForPage(recFields) {
 			else if(a.fieldPath.includes("Status")){
 			  	if(a.fieldValue == "Yes" || a.fieldValue == "True" || a.fieldValue == "On"){
 					ogBoardState = "On";
-					elByID(i[0]).checked = true;
-					console.log("checkbox element " + i[0] + " set to checked = true")
+					elByID(i[0]).value = "On";
+					console.log("NimPlus Status " + i[0] + " set to On/Enabled")
 				}
 				else{
 					ogBoardState = "Off";
-					elByID(i[0]).checked = false;
-					console.log("checkbox element " + i[0] + " set to checked = false")
+					elByID(i[0]).value = "Off";
+					console.log("NimPlus Status " + i[0] + " set to Off/Disabled")
 				}
 			}
 			else if(a.fieldPath.includes("TrigerMuxSelectionsBankA")){
