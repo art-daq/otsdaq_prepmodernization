@@ -102,9 +102,7 @@ if [ ! -e ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed ]; t
 	fi
   else 
     if kdialog --title "WARNING - DATA DIRECTORY MUST EXIST" \
-      --warningcontinuecancel "Note that since you are NOT installing within a VM,\n /
-      a user data directroy MUST exist and be set as such in your setup_ots.sh file.\n
-      Only continue if this is the case. Otherwise, installation will fail."
+      --warningcontinuecancel "Note that since you are NOT installing within a VM,\na user data directroy MUST exist and be set as such in your setup_ots.sh file.\nOnly continue if this is the case. Otherwise, installation will fail.\n"
     then
       kdialog --error "User aborted install. Exiting..."
       echo "User aborted install during confirmation that User Data Folder exists, exiting..." >> ${PWD}/script_log/install_ots_repo.sh.script
