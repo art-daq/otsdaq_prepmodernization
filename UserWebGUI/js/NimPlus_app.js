@@ -459,15 +459,11 @@ function voltField(VoltElId, SlideElId, StepElId) {
 
 
 }
-// update the slider and field when the steps are changed
 function voltSteps(myValue, VoltElId, SlideElId) {
-  clearTimeout(stepTimeout);
-    stepTimeout = setTimeout(function () {
     voltVal = (((10000 * ((myValue * (33 / 40950)))) + (((8 - (10000 * ((myValue * (33 / 40950)))) % 8)))) / 10000) - 0.0008;
     document.getElementById(SlideElId).value = (myValue);
     document.getElementById(VoltElId).value = voltVal.toFixed(4) //(myValue * 33 / 40950);
     invalidInput = false;
-   }, 900);
 }
 
 function triggerSyncWordCalc(val){

@@ -139,7 +139,7 @@ function handlerFunction(req) {
 }
 
 function getData() {
-    DesktopContent.XMLHttpRequest("Request?RequestType=getRawData","",handlerFunction);
+    DesktopContent.XMLHttpRequest("Request?RequestType=getNext&bufferName=DB1&consumerName=NimStreamConsumer&args={timestamp:0,count:1200}","",handlerFunction);
     setTimeout(getData,5000);
 }
 

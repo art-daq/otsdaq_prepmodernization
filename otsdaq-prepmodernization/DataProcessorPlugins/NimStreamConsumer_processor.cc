@@ -9,9 +9,9 @@ using namespace ots;
 
 //========================================================================================================================
 NimStreamConsumer::NimStreamConsumer(std::string supervisorApplicationUID, std::string bufferUID, std::string processorUID, const ConfigurationTree& theXDAQContextConfigTree, const std::string& configurationPath)
-: WorkLoop(processorUID) 
-, DataConsumer(supervisorApplicationUID, bufferUID, processorUID, LowConsumerPriority)
-, Configurable(theXDAQContextConfigTree, configurationPath)
+: WorkLoop(processorUID), VisualVConsumer(supervisorApplicationUID, bufferUID, processorUID, theXDAQContextConfigTree, configurationPath)
+//, DataConsumer(supervisorApplicationUID, bufferUID, processorUID, LowConsumerPriority)
+//, Configurable(theXDAQContextConfigTree, configurationPath)
 {
 }
 
@@ -22,16 +22,16 @@ NimStreamConsumer::~NimStreamConsumer(void)
 }
 
 //========================================================================================================================
-void NimStreamConsumer::startProcessingData(std::string runNumber)
-{
-	DataConsumer::startProcessingData(runNumber);
-}
-
-//========================================================================================================================
-void NimStreamConsumer::stopProcessingData(void)
-{
-	DataConsumer::stopProcessingData();
-}
+// void NimStreamConsumer::startProcessingData(std::string runNumber)
+// {
+// 	DataConsumer::startProcessingData(runNumber);
+// }
+// 
+// //========================================================================================================================
+// void NimStreamConsumer::stopProcessingData(void)
+// {
+// 	DataConsumer::stopProcessingData();
+// }
 
 //========================================================================================================================
 bool NimStreamConsumer::workLoopThread(toolbox::task::WorkLoop* workLoop)
@@ -72,36 +72,74 @@ void NimStreamConsumer::slowRead(void)
 		return;
 	}
 	else{
-	      struct timeline_pt newPt;
-	      newPt.timestamp = (data_ & 0x0000FFFFFFFF0000) >> 2 //One Quadword, Mask out header and state data #TODO VERIFY THAT TIMESTAMP IS 32b
-	      newPt.y_0 = (data_ & 0x0000000000000010) >> 1; //Get y0 
-	      newPt.y_1 = (data_ & 0x0000000000000020) >> 1; //Get y1 
-	      newPt.y_2 = (data_ & 0x0000000000000040) >> 1; //Get y2 
-	      newPt.y_3 = (data_ & 0x0000000000000080) >> 1; //Get y3 
+	      timeline_pt newPt;
+	      unsigned long long int data_int;
+	      int cpyLen;
+	      if(sizeof(data_)>=64){
+		cpyLen = 64;
+	      }
+	      else{
+		cpyLen = sizeof(data_);
+	      }
+	      memcpy(&data_int, &data_, cpyLen);
+	      newPt.timestamp = (data_int & 0x0000FFFFFFFF0000) >> 2; //One Quadword, Mask out header and state data #TODO VERIFY THAT TIMESTAMP IS 32b
+	      newPt.y_0 = (data_int & 0x0000000000000010) >> 1; //Get y0 
+	      newPt.y_1 = (data_int & 0x0000000000000020) >> 1; //Get y1 
+	      newPt.y_2 = (data_int & 0x0000000000000040) >> 1; //Get y2 
+	      newPt.y_3 = (data_int & 0x0000000000000080) >> 1; //Get y3 
 	      timeline.push_back(newPt);  
 	}
 	__MOUT__ << DataProcessor::processorUID_ << " UID: " << supervisorApplicationUID_ << std::endl;
 }
 //=========================================================================================================================
-const std::vector<timeline_pt> NimStreamConsumer::getTimelineData(int timestamp,int count){
-  struct timeline closePt;
+std::string NimStreamConsumer::getNext(std::map<std::string,std::string> args){
+  
+  timeline_pt closePt;
   std::vector<timeline_pt> retPts;
-  int retCtr = count;
+  int retCtr = stoi(args["count"]);
+  int timestamp = stoi(args["timestamp"]);
+  int toTimestamp;
+  std::string retStr = "{ ";
+  std::string y0Str = "\"y0\" : \"";
+  std::string y1Str = "\"y1\" : \"";
+  std::string y2Str = "\"y2\" : \"";
+  std::string y3Str = "\"y3\" : \"";
   //Find the closest timestamp and return up to "count" timestamp points via vector for the VisualDataManager to interpret and send to the js frontend 
-  for(int j=0; j<timeline.size();j++){
-      struct timeline cPt = timeline[j];
-      if(retCtr > 0){
+  for(const auto &cPt : timeline){
+      if(cPt.timestamp <= (timestamp+retCtr)){
 	  if(cPt.timestamp >= timestamp){
 	    retPts.push_back(cPt);
-	    retCtr--;
 	  }
       }
       else{
 	  break;
       }
   }
- return retPts;
+  for(const auto& pt : retPts){
+    try{
+     timeline_pt tmpPt = *(&pt+1);
+     toTimestamp = tmpPt.timestamp;
+    }
+    catch(...){
+      toTimestamp = timestamp+retCtr;
+    }
+	
+    
+    for(int k = pt.timestamp; k < toTimestamp; k++){
+      y0Str += std::to_string(pt.y_0);
+      y1Str += std::to_string(pt.y_1);
+      y2Str += std::to_string(pt.y_2);
+      y3Str += std::to_string(pt.y_3);
+    }
+    
+  }
   
-};
+      y0Str += "\",";
+      y1Str += "\",";
+      y2Str += "\",";
+      y3Str += "\"";
+      retStr += (y0Str + y1Str + y2Str + y3Str + " }");
+      return retStr;
+}
 
 DEFINE_OTS_PROCESSOR(NimStreamConsumer)
