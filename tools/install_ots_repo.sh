@@ -13,8 +13,8 @@ if [ ! -e ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed ]; t
       #setup data folders for user data and copy example data into them
       mkdir ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitData
       mkdir ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitDatabases
-      cp -r ${MRB_SOURCE}/otsdaq_prepmodernization/Data/* ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitData/
-      cp -r ${MRB_SOURCE}/otsdaq_prepmodernization/Databases/* ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitDatabases/
+      cp -r ${MRB_SOURCE}/otsdaq_prepmodernization/Data/* ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitData/ #*/ for eclipse coloring
+      cp -r ${MRB_SOURCE}/otsdaq_prepmodernization/Databases/* ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitDatabases/  #*/ for eclipse coloring
 
       qdbus $progress Set "" value 1 > /dev/null;
       qdbus $progress setLabelText "Modifying OTS Setup Script" > /dev/null;
