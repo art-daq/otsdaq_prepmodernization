@@ -1,32 +1,32 @@
 {
 "ouid" : [
-"4f8f41cb6a08423e919e8805",
-"cdcfbb79d861403f93bdb9be"
+"0af65094226c41eebc65bf4e",
+"aa8b896387bc471f8dd522d5"
 ],
 "version" : {
 "0" : [
-"4f8f41cb6a08423e919e8805"
+"0af65094226c41eebc65bf4e"
 ],
 "3" : [
-"cdcfbb79d861403f93bdb9be"
+"aa8b896387bc471f8dd522d5"
 ]
 },
 "configurations.name" : {
 "notprovided" : [
-"4f8f41cb6a08423e919e8805",
-"cdcfbb79d861403f93bdb9be"
+"0af65094226c41eebc65bf4e",
+"aa8b896387bc471f8dd522d5"
 ],
-"GroupAliasSaveWizBackbone_v0" : [
-"4f8f41cb6a08423e919e8805"
+"TableEditWizBackbone_v0" : [
+"0af65094226c41eebc65bf4e"
 ],
-"GroupAliasSaveWizBackbone_v3" : [
-"cdcfbb79d861403f93bdb9be"
+"TableEditWizBackbone_v3" : [
+"aa8b896387bc471f8dd522d5"
 ]
 },
 "entities.name" : {
 "OTSROOT" : [
-"4f8f41cb6a08423e919e8805",
-"cdcfbb79d861403f93bdb9be"
+"0af65094226c41eebc65bf4e",
+"aa8b896387bc471f8dd522d5"
 ]
 },
 "aliases.active.name" : {
@@ -34,5 +34,17 @@
 },
 "runs.name" : {
 
+},
+"configurations.assigned" : {
+"notprovided" : [
+"2018-07-05T10:22:02.390-0500",
+"2018-07-05T10:22:03.777-0500"
+],
+"TableEditWizBackbone_v0" : [
+"2018-07-05T10:22:02.456-0500"
+],
+"TableEditWizBackbone_v3" : [
+"2018-07-05T10:22:03.822-0500"
+]
 }
 }

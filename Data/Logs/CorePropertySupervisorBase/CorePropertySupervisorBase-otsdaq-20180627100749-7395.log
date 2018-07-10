@@ -1,0 +1,45 @@
+%MSG-i configureMessageFacility:  CorePropertySupervisorBase  27-Jun-2018 10:07:49 CDT pre-events configureMessageFacility.cc:300
+Message Facility Application CorePropertySupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/home/otsdaq/otsdaq-mrb-base/srcs/otsdaq_demo/NoGitData/Logs/CorePropertySupervisorBase" pattern:"CorePropertySupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  RunControlStateMachine  27-Jun-2018 10:07:49 CDT pre-events configureMessageFacility.cc:300
+Message Facility Application RunControlStateMachine configured with: debugModules:["*"] destinations:{file:{append:false directory:"/home/otsdaq/otsdaq-mrb-base/srcs/otsdaq_demo/NoGitData/Logs/RunControlStateMachine" pattern:"RunControlStateMachine-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CoreSupervisorBase 27-Jun-2018 10:07:49 CDT  pre-events configureMessageFacility.cc:300
+Message Facility Application CoreSupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/home/otsdaq/otsdaq-mrb-base/srcs/otsdaq_demo/NoGitData/Logs/CoreSupervisorBase" pattern:"CoreSupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  ConfigurationGUI 27-Jun-2018 10:07:49 CDT  pre-events configureMessageFacility.cc:300
+Message Facility Application ConfigurationGUI configured with: debugModules:["*"] destinations:{file:{append:false directory:"/home/otsdaq/otsdaq-mrb-base/srcs/otsdaq_demo/NoGitData/Logs/ConfigurationGUI" pattern:"ConfigurationGUI-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  OtsConfigurationWizard  27-Jun-2018 10:07:49 CDT pre-events configureMessageFacility.cc:300
+Message Facility Application OtsConfigurationWizard configured with: debugModules:["*"] destinations:{file:{append:false directory:"/home/otsdaq/otsdaq-mrb-base/srcs/otsdaq_demo/NoGitData/Logs/OtsConfigurationWizard" pattern:"OtsConfigurationWizard-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CorePropertySupervisorBase  27-Jun-2018 10:07:49 CDT pre-events configureMessageFacility.cc:300
+Message Facility Application CorePropertySupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/home/otsdaq/otsdaq-mrb-base/srcs/otsdaq_demo/NoGitData/Logs/CorePropertySupervisorBase" pattern:"CorePropertySupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  RunControlStateMachine  27-Jun-2018 10:07:49 CDT pre-events configureMessageFacility.cc:300
+Message Facility Application RunControlStateMachine configured with: debugModules:["*"] destinations:{file:{append:false directory:"/home/otsdaq/otsdaq-mrb-base/srcs/otsdaq_demo/NoGitData/Logs/RunControlStateMachine" pattern:"RunControlStateMachine-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CoreSupervisorBase 27-Jun-2018 10:07:49 CDT  pre-events configureMessageFacility.cc:300
+Message Facility Application CoreSupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/home/otsdaq/otsdaq-mrb-base/srcs/otsdaq_demo/NoGitData/Logs/CoreSupervisorBase" pattern:"CoreSupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  ConsoleSupervisor 27-Jun-2018 10:07:49 CDT  pre-events configureMessageFacility.cc:300
+Message Facility Application ConsoleSupervisor configured with: debugModules:["*"] destinations:{file:{append:false directory:"/home/otsdaq/otsdaq-mrb-base/srcs/otsdaq_demo/NoGitData/Logs/ConsoleSupervisor" pattern:"ConsoleSupervisor-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-d Console:  Early 27-Jun-2018 10:07:51 CDT pre-events
+Console is alive and waiting... (if no messages, next heartbeat is in approximately two minutes)
+%MSG
+%MSG-d Console:  Early 27-Jun-2018 10:07:51 CDT pre-events
+otsdaq_utilities/otsdaq-utilities/Console/ConsoleSupervisor.cc [157]	DEBUG messages look like this.
+%MSG
+%MSG-i Console:  Early 27-Jun-2018 10:07:51 CDT pre-events
+otsdaq_utilities/otsdaq-utilities/Console/ConsoleSupervisor.cc [158]	INFO messages look like this.
+%MSG
+%MSG-w Console:  Early 27-Jun-2018 10:07:51 CDT pre-events
+otsdaq_utilities/otsdaq-utilities/Console/ConsoleSupervisor.cc [159]	WARNING messages look like this.
+%MSG
+%MSG-e Console:  Early 27-Jun-2018 10:07:51 CDT pre-events
+otsdaq_utilities/otsdaq-utilities/Console/ConsoleSupervisor.cc [160]	ERROR messages look like this.
+%MSG
+%MSG-e ots:  Early 27-Jun-2018 10:08:03 CDT pre-events
+otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [140]	'getGroupAliases' ERROR encountered: :CfgGUI-ConfigurationGUISupervisor:otsdaq_utilities/otsdaq-utilities/ConfigurationGUI/ConfigurationGUISupervisor.cc [398] Error loading active groups!  :ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [167] Failed to load config group in ConfigurationManager::init() with name &apos;defaultConfig_v1&apos; :ConfigurationView-FE_INTERFACE_CONFIGURATION:FE_INTERFACE_CONFIGURATION:v1:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationView.cc [336] Configuration Error: &apos;FENIMPlusInterface&apos; in column FEInterfacePluginName is not a valid Fixed Choice option. Possible values are as follows: arbitraryBool=0, FEOtsUDPTemplateInterface.
+%MSG

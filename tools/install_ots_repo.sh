@@ -32,7 +32,11 @@ if [ ! -e ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed ]; t
       echo "Creating prepmodenization .gitignore file" >> ${PWD}/script_log/install_ots_repo.sh.script
 
       #create .gitignore to ignore user data
-      touch ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
+      if [ ! -f ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore ]; then
+	  touch ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
+      else
+	  cp ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore.bk
+      fi
       echo ".gitignore" >> ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
       echo "NoGitData/" >> ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
       echo "NoGitDatabases/" >> ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
@@ -63,7 +67,7 @@ if [ ! -e ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed ]; t
 	  echo "Build Successful! Creating Symlink for webapp" >> ${PWD}/script_log/install_ots_repo.sh.script
 	    
 	    #create a symlink for our webapp
-	    ln -sfn /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_prepmodernization/UserWebGUI /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_utilities/WebGUI/UserWebPath
+	    ln -sfn ${MRB_SOURCE}/otsdaq_prepmodernization/UserWebGUI ${MRB_SOURCE}/otsdaq_utilities/WebGUI/UserWebPath
 	    touch ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
 	    INSTALL_DATE=$(date '+%Y-%m-%d %H:%M:%S')
 	    echo "prepmodenization repo installed on: " >> ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
@@ -88,11 +92,16 @@ if [ ! -e ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed ]; t
 	    mv setup_ots.sh.bk setup_ots.sh
 	    rm -rf ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitData/
 	    rm -rf ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitDatabases/
-	    rm ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
+	    if [ ! -f ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore.bk ]; then
+	      rm ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
+	    else
+	      rm ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
+	      mv ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore.bk ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
+	    fi
 	    mrb z
 	fi
   else 
-    if kdialog --title "Example ContinueCancel warning dialog" \
+    if kdialog --title "WARNING - DATA DIRECTORY MUST EXIST" \
       --warningcontinuecancel "Note that since you are NOT installing within a VM,\n /
       a user data directroy MUST exist and be set as such in your setup_ots.sh file.\n
       Only continue if this is the case. Otherwise, installation will fail."
@@ -106,8 +115,14 @@ if [ ! -e ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed ]; t
       echo "Creating prepmodenization .gitignore file" >> ${PWD}/script_log/install_ots_repo.sh.script
 
       #create .gitignore to ignore user data
-      touch ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
+      if [ ! -f ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore ]; then
+	  touch ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
+      else
+	  cp ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore.bk
+      fi
       echo ".gitignore" >> ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
+      echo "NoGitData/" >> ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
+      echo "NoGitDatabases/" >> ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
       echo "UserWebGUI/UserWebGUI" >> ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
 
       qdbus $progress Set "" value 2 > /dev/null;
@@ -135,7 +150,7 @@ if [ ! -e ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed ]; t
 	echo "Build Successful! Creating Symlink for webapp" >> ${PWD}/script_log/install_ots_repo.sh.script
 	
 	#create a symlink for our webapp
-	ln -sfn /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_prepmodernization/UserWebGUI /home/otsdaq/Desktop/otsdaq-v1_01_01/srcs/otsdaq_utilities/WebGUI/UserWebPath
+	ln -sfn ${MRB_SOURCE}/otsdaq_prepmodernization/UserWebGUI ${MRB_SOURCE}/otsdaq_utilities/WebGUI/UserWebPath
 	touch ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
 	INSTALL_DATE=$(date '+%Y-%m-%d %H:%M:%S')
 	echo "prepmodenization repo installed on: " >> ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed
@@ -157,7 +172,12 @@ if [ ! -e ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed ]; t
 	qdbus $progress close > /dev/null;
 	kdialog --error "Error encountered while building!\nAborting setup.\nIf the problem persists, contact the OTSDAQ/PREPModernization developers."
 	#Clean up work already done
-	rm ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
+	if [ ! -f ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore.bk ]; then
+	  rm ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
+	else
+	  rm ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
+	  mv ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore.bk ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
+	fi
 	mrb z
       fi
   fi
