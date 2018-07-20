@@ -51,6 +51,8 @@ private:
 	//For slow read
 	std::string                        data_;
 	std::map<std::string,std::string>  header_;
+	
+	std::string 			   data_str;
 };
 }
 

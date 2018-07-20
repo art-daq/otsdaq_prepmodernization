@@ -107,8 +107,8 @@ var fieldList = [["NimStatus","Status"],
 ["bkpOutSel0","BackpressureTriggerOutputChannel0"],
 ["bkpOutSel1","BackpressureTriggerOutputChannel1"],
 ["bkpOutSel2","BackpressureTriggerOutputChannel2"],
-["TMuxB1","TrigerMuxSelectionsBankB"],
-["TMuxA1","TrigerMuxSelectionsBankA"],
+["TMuxB1","TriggerMuxSelectionsBankB"],
+["TMuxA1","TriggerMuxSelectionsBankA"],
 ["triggerFilename","TriggerCountAtRunStopFilename"],
 ["BurstEn","EnableBurstData"],
 ["BurstLogicDelay","BurstDataLogicSampleDelay"],
@@ -739,7 +739,7 @@ function getNimValuesForPage(recFields) {
 					console.log("NimPlus Status " + i[0] + " set to Off/Disabled")
 				}
 			}
-			else if(a.fieldPath.includes("TrigerMuxSelectionsBankA")){
+			else if(a.fieldPath.includes("TriggerMuxSelectionsBankA")){
 				loadMuxArr = JSON.parse(a.fieldValue);
 				      for(k=0; k<=8; k++){
 					  elByID("TMuxA"+(k+1).toString()).value=loadMuxArr[0][k];
@@ -747,7 +747,7 @@ function getNimValuesForPage(recFields) {
 				      }
 				console.log("Loaded TMux Bank A with values: " + loadMuxArr );
 			}
-			else if(a.fieldPath.includes("TrigerMuxSelectionsBankB")){
+			else if(a.fieldPath.includes("TriggerMuxSelectionsBankB")){
 				loadMuxArr = JSON.parse(a.fieldValue);
 			  	for(k=0; k<=8; k++){
 				    elByID("TMuxB"+(k+1).toString()).value=loadMuxArr[0][k];
