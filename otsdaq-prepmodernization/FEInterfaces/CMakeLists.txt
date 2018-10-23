@@ -1,13 +1,8 @@
  simple_plugin(FENIMPlusInterface "interface"
- 	otsdaq-components_FEInterfaces_FEOtsUDPTemplateInterface_interface
-  DAQHardware
-  Configurable
-  FECore
-  WorkLoopManager
-  ConfigurationInterface
-  ConfigurationDataFormats
-  NetworkUtilities
-  Macros
-  #$ENV{XERCES_C_LIB}/libxerces-c.so
-  #${CETLIB}
-  )
+	OTSDAQComponentsFEInterfaces
+	DAQHardware
+	Configurable
+	FECore
+	WorkLoopManager
+	Macros
+)

@@ -213,7 +213,7 @@
 
 
 <div id="SelLogBox" class="ControlBox">
-    <p>Selection Logic Output Configuratrion <button id="SelLogCtlBtn">Show/Hide</button></p>
+    <p>Selection Logic Output Configuration <button id="SelLogCtlBtn">Show/Hide</button></p>
     <div id="SelLogCtl" class="Dropdown">
         Selections represent input (Raw or modifed per selections in Input Channel control) channels in the following order: ABCD 
         Cases output when true and are OR'd together so that any selected cases will output a trigger
@@ -303,7 +303,7 @@
 
 
 <div id="OutMuxBox" class="ControlBox">
-    <p>Output Mux Configuratrion <button id="OutMuxCtlBtn">Show/Hide</button></p>
+    <p>Output Mux Configuration <button id="OutMuxCtlBtn">Show/Hide</button></p>
     <div id="OutMuxCtl" class="Dropdown">
 
         <p>Output A (TestMux)- <select id="ChAOutMux" oninput="addModifiedList('OutputMuxSelectChannelA', this.value);">
@@ -508,7 +508,7 @@
 
 <div id="SyncBox" class="ControlBox">
     <!-- "Expert" feature-->
-    <p>40Mhz Sync Configuratrion <button id="SyncCtlBtn">Show/Hide</button></p>
+    <p>40Mhz Sync Configuration <button id="SyncCtlBtn">Show/Hide</button></p>
     <div id="SyncCtl" class="Dropdown">
 	
 	<input type="checkbox" id="EnableSync0" onclick="addModifiedList('EnableClockMaskChannel0',this.checked?'yes':'no');"><label for="EnableSync0">Enable 40Mhz Syncing for Output Ch-0?</label>
@@ -561,7 +561,7 @@
 
 
 <div id="VetoBox" class="ControlBox">
-    <p>Veto(s) Configuratrion <button id="VetoCtlBtn">Show/Hide</button></p>
+    <p>Veto(s) Configuration <button id="VetoCtlBtn">Show/Hide</button></p>
     <div id="VetoCtl" class="Dropdown">
         Trigger Output CH-0 Veto Count:  <input type="number" id="VetoCount" min=0 step=1 oninput="addModifiedList('TimeVetoTriggerOutputChannel0', this.value); addModifiedList('PrescaleTriggerOutputChannel0', 0); elByID('PsCount').value=0; validInput();" oninvalid="invalidInput();"></input>
 
@@ -598,7 +598,7 @@
 </div>
 
 <div id="PsBox" class="ControlBox">
-    <p>Prescaler Configuratrion <button id="PsCtlBtn">Show/Hide</button></p>
+    <p>Prescaler Configuration <button id="PsCtlBtn">Show/Hide</button></p>
     <div id="PsCtl" class="Dropdown">
         Trigger Output CH-0 Prescaler Count:  <input type="number" id="PsCount" min=0 step=1 oninput="addModifiedList('PrescaleTriggerOutputChannel0', this.value); addModifiedList('TimeVetoTriggerOutputChannel0', 0); elByID('VetoCount').value=0; validInput();" oninvalid="invalidInput();"></input>
         </br>Trigger Output CH-1 Prescaler Count: <input type="number" id="PsCount1" min=0 step=1 oninput="addModifiedList('PrescaleTriggerOutputChannel1', this.value); addModifiedList('TimeVetoTriggerOutputChannel1', 0); elByID('Veto1Count').value=0; validInput();" oninvalid="invalidInput();"></input>
@@ -608,7 +608,7 @@
 
 <div id="BkpBox" class="ControlBox">
     <!-- "Expert" feature-->
-    <p>Back Pressure Configuratrion <button id="BkpCtlBtn">Show/Hide</button></p>
+    <p>Back Pressure Configuration <button id="BkpCtlBtn">Show/Hide</button></p>
     <div id="BkpCtl" class="Dropdown">
         <input type="checkbox" id="bkpEnableA" onclick="addModifiedList('EnableBackPressureNwFmcPta1', this.checked);"><label for="bkpEnableA" >Enable Backpressure Veto A?</label>
         </br><input type="checkbox" id="bkpEnableB" onclick="addModifiedList('EnableBackPressureNwFmcPta2', this.checked);"><label for="bkpEnableB" >Enable Backpressure Veto B?</label>
@@ -620,7 +620,7 @@
 
 <div id="SigGenBox" class="ControlBox">
     <!-- "Expert" feature-->
-    <p>Signal Generator Configuratrion <button id="SigGenCtlBtn">Show/Hide</button></p>
+    <p>Signal Generator Configuration <button id="SigGenCtlBtn">Show/Hide</button></p>
     <div id="SigGenCtl" class="Dropdown">
         Output Pulse Count (0 for continuous)<input type="number" id="SGPulseCnt" min=0 step=1 oninput="addModifiedList('SignalGeneratorPulseCount', this.value); validInput();" oninvalid="invalidInput();">
 
