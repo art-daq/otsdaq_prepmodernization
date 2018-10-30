@@ -19,7 +19,7 @@ FENIMPlusInterface::FENIMPlusInterface(const std::string& interfaceUID, const Co
 				"HostIPAddress").getValue<std::string>()
 		, theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode(
 				"HostPort").getValue<unsigned int>())
-, FEOtsUDPTemplateInterface(interfaceUID,theXDAQContextConfigTree,interfaceConfigurationPath)
+, FEOtsUDPBaseInterface(interfaceUID,theXDAQContextConfigTree,interfaceConfigurationPath)
 {
 	//register FE Macro Functions
 	registerFEMacroFunction("GenerateTriggers",	//feMacroName
@@ -44,10 +44,8 @@ void FENIMPlusInterface::configure(void)
 	std::string readBuffer;
 	uint64_t readQuadWord;
 
-	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(
-			theConfigurationPath_).getNode("LinkToOptionalParameters");
-	bool usingOptionalParams =
-			!optionalLink.isDisconnected();
+	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
+	bool usingOptionalParams = !optionalLink.isDisconnected();
 
 	////////////////////////////////////////////////////////////////////////////////
 	//if clock reset is enabled reset clock
@@ -76,7 +74,7 @@ void FENIMPlusInterface::configure(void)
 		}
 	}
 
-	FEOtsUDPTemplateInterface::configure(); //sets up destination IP/port
+	FEOtsUDPBaseInterface::configure(); //sets up destination IP/port
 
 
 	//choose external or internal clock
@@ -1173,11 +1171,15 @@ void FENIMPlusInterface::changeDACLevel(const std::string& channelName, unsigned
 	//   - 15:12 channel := 2=A, 6=B, A=C, E=D
 	//   - 11:0 value  := 0-3.3V
 	std::map<std::string, unsigned int> channelNameToAddressMap;
-	channelNameToAddressMap["ChannelA"] = 0x6;
-	channelNameToAddressMap["ChannelB"] = 0xe;
-	channelNameToAddressMap["ChannelC"] = 0x2;
-	channelNameToAddressMap["ChannelD"] = 0xa;
+	//channelNameToAddressMap["ChannelA"] = 0x6;
+	//channelNameToAddressMap["ChannelB"] = 0xe;
+	//channelNameToAddressMap["ChannelC"] = 0x2;
+	//channelNameToAddressMap["ChannelD"] = 0xa;
 
+	channelNameToAddressMap["ChannelA"] = 0x2;
+	channelNameToAddressMap["ChannelB"] = 0x6;
+	channelNameToAddressMap["ChannelC"] = 0x9;
+	channelNameToAddressMap["ChannelD"] = 0xe;
 	const std::string dacValueField = "DACValue";
 	writeBuffer.resize(0);
 	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x1, /*data*/ 0x0);
