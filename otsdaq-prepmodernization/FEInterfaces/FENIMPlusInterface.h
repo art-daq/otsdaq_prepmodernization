@@ -1,7 +1,7 @@
 #ifndef _ots_FENIMPlusInterface_h_
 #define _ots_FENIMPlusInterface_h_
 
-#include "otsdaq-components/FEInterfaces/FEOtsUDPBaseInterface.h"
+#include "otsdaq-components/FEInterfaces/FEOtsUDPHardwareBaseInterface.h"
 #include <bitset>
 
 namespace ots
@@ -9,7 +9,7 @@ namespace ots
 class FEInterfaceConfigurationBase;
 class FENIMPlusInterfaceConfiguration;
 
-class FENIMPlusInterface : public FEOtsUDPBaseInterface
+class FENIMPlusInterface : public FEOtsUDPHardwareBaseInterface
 {
 
 public:
