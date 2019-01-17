@@ -1101,7 +1101,7 @@ void FENIMPlusInterface::FEMacroGenerateTriggers(__ARGS__)
 	unsigned int numberOfTriggers 		= __GET_ARG_IN__("numberOfTriggers",unsigned int);
 	unsigned int signalHiDuration 		= __GET_ARG_IN__("signalHiDuration",unsigned int);
 	unsigned int signalLoDuration 		= __GET_ARG_IN__("signalLoDuration",unsigned int);
-	std::string& triggersWereLaunched 	= __GET_ARG_OUT__("triggersWereLaunched");
+	std::string& triggersWereLaunched 	= getFEMacroArgument(argsOut, "triggersWereLaunched");
 	std::string numberOfTriggersStr 	= __GET_ARG_IN__("numberOfTriggers",std::string);
 
 	__CFG_COUTV__(numberOfTriggers);

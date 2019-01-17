@@ -31,7 +31,7 @@ public:
     /////////////////////////////////////
     //start declaration of FE Macros
 
-    void FEMacroGenerateTriggers			(frontEndMacroInArgs_t argsIn, frontEndMacroOutArgs_t argsOut);
+    void FEMacroGenerateTriggers			(frontEndMacroConstArgs_t argsIn, frontEndMacroArgs_t argsOut);
 
     //end declaration of FE Macros
     /////////////////////////////////////
