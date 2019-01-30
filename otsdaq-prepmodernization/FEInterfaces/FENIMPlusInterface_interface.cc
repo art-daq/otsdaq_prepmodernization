@@ -19,7 +19,7 @@ FENIMPlusInterface::FENIMPlusInterface(const std::string& interfaceUID, const Co
 				"HostIPAddress").getValue<std::string>()
 				, theXDAQContextConfigTree.getNode(interfaceConfigurationPath).getNode(
 						"HostPort").getValue<unsigned int>())
-, FEOtsUDPHardwareBaseInterface(interfaceUID,theXDAQContextConfigTree,interfaceConfigurationPath)
+, FEOtsUDPTemplateInterface(interfaceUID,theXDAQContextConfigTree,interfaceConfigurationPath)
 {
 	//register FE Macro Functions
 	registerFEMacroFunction("GenerateTriggers",	//feMacroName
@@ -71,7 +71,7 @@ void FENIMPlusInterface::configure(void)
 		}
 	}
 
-	FEOtsUDPHardwareBaseInterface::configure(); //sets up destination IP/port
+	FEOtsUDPTemplateInterface::configure(); //sets up destination IP/port
 
 
 	//choose external or internal clock

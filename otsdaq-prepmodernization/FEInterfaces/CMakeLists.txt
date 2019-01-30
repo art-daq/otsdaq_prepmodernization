@@ -1,5 +1,6 @@
  simple_plugin(FENIMPlusInterface "interface"
-	OTSDAQComponentsFEInterfaces
+	
+	otsdaq-components_FEInterfaces_FEOtsUDPTemplateInterface_interface
 	DAQHardware
 	Configurable
 	FECore
