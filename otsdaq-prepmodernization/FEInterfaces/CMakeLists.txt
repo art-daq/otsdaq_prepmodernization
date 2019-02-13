@@ -6,4 +6,9 @@
 	FECore
 	WorkLoopManager
 	Macros
+	ConfigurationDataFormats
+	ConfigurationInterface
+	NetworkUtilities
+	${XDAQ_XERCES-C}
+	pthread
 )
