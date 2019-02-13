@@ -1,0 +1,486 @@
+%MSG-i configureMessageFacility:  CorePropertySupervisorBase  27-Jun-2018 10:12:00 CDT pre-events configureMessageFacility.cc:300
+Message Facility Application CorePropertySupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/home/otsdaq/otsdaq-mrb-base/srcs/otsdaq_demo/NoGitData/Logs/CorePropertySupervisorBase" pattern:"CorePropertySupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  RunControlStateMachine  27-Jun-2018 10:12:00 CDT pre-events configureMessageFacility.cc:300
+Message Facility Application RunControlStateMachine configured with: debugModules:["*"] destinations:{file:{append:false directory:"/home/otsdaq/otsdaq-mrb-base/srcs/otsdaq_demo/NoGitData/Logs/RunControlStateMachine" pattern:"RunControlStateMachine-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CoreSupervisorBase 27-Jun-2018 10:12:00 CDT  pre-events configureMessageFacility.cc:300
+Message Facility Application CoreSupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/home/otsdaq/otsdaq-mrb-base/srcs/otsdaq_demo/NoGitData/Logs/CoreSupervisorBase" pattern:"CoreSupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  ConfigurationGUI 27-Jun-2018 10:12:00 CDT  pre-events configureMessageFacility.cc:300
+Message Facility Application ConfigurationGUI configured with: debugModules:["*"] destinations:{file:{append:false directory:"/home/otsdaq/otsdaq-mrb-base/srcs/otsdaq_demo/NoGitData/Logs/ConfigurationGUI" pattern:"ConfigurationGUI-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  OtsConfigurationWizard  27-Jun-2018 10:12:00 CDT pre-events configureMessageFacility.cc:300
+Message Facility Application OtsConfigurationWizard configured with: debugModules:["*"] destinations:{file:{append:false directory:"/home/otsdaq/otsdaq-mrb-base/srcs/otsdaq_demo/NoGitData/Logs/OtsConfigurationWizard" pattern:"OtsConfigurationWizard-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CorePropertySupervisorBase  27-Jun-2018 10:12:00 CDT pre-events configureMessageFacility.cc:300
+Message Facility Application CorePropertySupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/home/otsdaq/otsdaq-mrb-base/srcs/otsdaq_demo/NoGitData/Logs/CorePropertySupervisorBase" pattern:"CorePropertySupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  RunControlStateMachine  27-Jun-2018 10:12:00 CDT pre-events configureMessageFacility.cc:300
+Message Facility Application RunControlStateMachine configured with: debugModules:["*"] destinations:{file:{append:false directory:"/home/otsdaq/otsdaq-mrb-base/srcs/otsdaq_demo/NoGitData/Logs/RunControlStateMachine" pattern:"RunControlStateMachine-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CoreSupervisorBase 27-Jun-2018 10:12:00 CDT  pre-events configureMessageFacility.cc:300
+Message Facility Application CoreSupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/home/otsdaq/otsdaq-mrb-base/srcs/otsdaq_demo/NoGitData/Logs/CoreSupervisorBase" pattern:"CoreSupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  ConsoleSupervisor 27-Jun-2018 10:12:00 CDT  pre-events configureMessageFacility.cc:300
+Message Facility Application ConsoleSupervisor configured with: debugModules:["*"] destinations:{file:{append:false directory:"/home/otsdaq/otsdaq-mrb-base/srcs/otsdaq_demo/NoGitData/Logs/ConsoleSupervisor" pattern:"ConsoleSupervisor-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-d Console:  Early 27-Jun-2018 10:12:01 CDT pre-events
+otsdaq_utilities/otsdaq-utilities/Console/ConsoleSupervisor.cc [157]	DEBUG messages look like this.
+%MSG
+%MSG-i Console:  Early 27-Jun-2018 10:12:01 CDT pre-events
+otsdaq_utilities/otsdaq-utilities/Console/ConsoleSupervisor.cc [158]	INFO messages look like this.
+%MSG
+%MSG-w Console:  Early 27-Jun-2018 10:12:01 CDT pre-events
+otsdaq_utilities/otsdaq-utilities/Console/ConsoleSupervisor.cc [159]	WARNING messages look like this.
+%MSG
+%MSG-e Console:  Early 27-Jun-2018 10:12:01 CDT pre-events
+otsdaq_utilities/otsdaq-utilities/Console/ConsoleSupervisor.cc [160]	ERROR messages look like this.
+%MSG
+%MSG-d Console:  Early 27-Jun-2018 10:14:02 CDT pre-events
+Console is alive and waiting... (if no messages, next heartbeat is in approximately two minutes)
+%MSG
+%MSG-d Console:  Early 27-Jun-2018 10:16:03 CDT pre-events
+Console is alive and waiting... (if no messages, next heartbeat is in approximately two minutes)
+%MSG
+%MSG-d Console:  Early 27-Jun-2018 10:18:05 CDT pre-events
+Console is alive and waiting... (if no messages, next heartbeat is in approximately two minutes)
+%MSG
+%MSG-d Console:  Early 27-Jun-2018 10:20:06 CDT pre-events
+Console is alive and waiting... (if no messages, next heartbeat is in approximately two minutes)
+%MSG
+%MSG-d Console:  Early 27-Jun-2018 10:22:07 CDT pre-events
+Console is alive and waiting... (if no messages, next heartbeat is in approximately two minutes)
+%MSG
+%MSG-d Console:  Early 27-Jun-2018 11:14:30 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 27-Jun-2018 12:14:57 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 27-Jun-2018 13:15:23 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 27-Jun-2018 14:15:50 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 27-Jun-2018 15:16:18 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 27-Jun-2018 16:16:44 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 27-Jun-2018 17:17:09 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 27-Jun-2018 18:17:34 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 27-Jun-2018 19:18:00 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 27-Jun-2018 20:18:25 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 27-Jun-2018 21:18:52 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 27-Jun-2018 22:19:18 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 27-Jun-2018 23:19:47 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 00:20:13 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 01:20:42 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 02:21:08 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 03:21:35 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 04:22:02 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 05:22:27 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 06:22:55 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 07:23:19 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 08:23:47 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 09:24:14 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 10:24:39 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 11:25:05 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 12:25:34 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 13:26:03 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 14:26:28 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 15:26:54 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 16:27:21 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 17:27:45 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 18:28:11 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 19:28:39 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 20:29:06 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 21:29:32 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 22:29:57 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 28-Jun-2018 23:30:22 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 00:30:48 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 01:31:13 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 02:31:41 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 03:32:08 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 04:32:36 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 05:33:05 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 06:33:36 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 07:34:05 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 08:34:32 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 09:34:58 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 10:35:27 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 11:35:52 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 12:36:18 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 13:36:45 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 14:37:11 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 15:37:37 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 16:38:06 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 17:38:36 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 18:39:03 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 19:39:32 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 20:40:00 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 21:40:26 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 22:40:52 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 29-Jun-2018 23:41:18 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 00:41:45 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 01:42:10 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 02:42:36 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 03:43:01 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 04:43:27 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 05:43:55 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 06:44:22 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 07:44:50 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 08:45:17 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 09:45:42 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 10:46:10 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 11:46:34 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 12:47:01 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 13:47:27 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 14:47:56 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 15:48:23 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 16:48:47 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 17:49:14 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 18:49:39 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 19:50:07 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 20:50:34 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 21:51:00 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 22:51:28 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 30-Jun-2018 23:51:54 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 00:52:22 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 01:52:45 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 02:53:10 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 03:53:36 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 04:54:03 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 05:54:29 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 06:54:55 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 07:55:21 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 08:55:46 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 09:56:14 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 10:56:40 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 11:57:06 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 12:57:31 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 13:57:57 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 14:58:24 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 15:58:49 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 16:59:17 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 17:59:43 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 19:00:08 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 20:00:34 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 21:00:58 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 22:01:23 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 01-Jul-2018 23:01:49 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 00:02:17 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 01:02:41 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 02:03:05 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 03:03:31 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 04:03:55 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 05:04:20 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 06:04:46 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 07:05:11 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 08:05:36 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 09:05:59 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 10:06:25 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 11:06:48 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 12:07:10 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 13:07:36 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 14:07:58 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 15:08:23 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 16:08:48 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 17:09:12 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 18:09:36 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 19:10:00 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 20:10:25 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 21:10:49 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 22:11:16 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 02-Jul-2018 23:11:41 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 03-Jul-2018 00:12:05 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 03-Jul-2018 01:12:30 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 03-Jul-2018 02:12:55 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 03-Jul-2018 03:13:20 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 03-Jul-2018 04:13:46 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 03-Jul-2018 05:14:09 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 03-Jul-2018 06:14:35 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 03-Jul-2018 07:14:59 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 03-Jul-2018 08:15:24 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 03-Jul-2018 09:15:52 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-d Console:  Early 03-Jul-2018 10:16:15 CDT pre-events
+Console is alive and waiting a long time... (if no messages, next heartbeat is in approximately one hour)
+%MSG
+%MSG-w CfgGUI:  Early 03-Jul-2018 10:21:33 CDT pre-events
+otsdaq_utilities/otsdaq-utilities/ConfigurationGUI/ConfigurationGUISupervisor.cc [228]	gatewayLaunchOTS command received! 
+%MSG

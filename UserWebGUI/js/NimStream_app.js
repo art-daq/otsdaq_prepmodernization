@@ -128,21 +128,19 @@ var getDataReq = true;
 
 function handlerFunction(req) {
 	console.log("handlerFunction() was called. Req: " + req.responseText);
-	Debug.log("handlerFunction() was called. Req: " + req.responseText);
+	//Debug.log("handlerFunction() was called. Req: " + req.responseText);
 
 	var child1data = DesktopContent.getXMLValue(req,"rawData");
 	//var child2data = DesktopContent.getXMLValue(req,"child2");
-	block1El.innerHTML = child1data;
-	block1El.innerHTML += "<br>";	
+	("#tstBlkEl").innerHTML = child1data;
+	("#tstBlkEl").innerHTML += "<br>";	
 	console.log("--child1data:" + child1data/*," --child2data:",child2data*/);
 	
 }
 
 function getData() {
-  while(getDataReq){
-    DesktopContent.XMLHttpRequest("Request?RequestType=getRawData","",handlerFunction);
-    setTimeout(getDataReq,500);
-  }
+    DesktopContent.XMLHttpRequest("Request?RequestType=getNext&bufferName=DB1&consumerName=NimStreamConsumer&args={timestamp:0,count:1200000}","",handlerFunction);
+    setTimeout(getData,5000);
 }
 
 /* 
@@ -325,7 +323,7 @@ fadeOut(ctx1,canvas1,gblAlpha1,defaultTimeoutval);
 fadeOut(ctx2,canvas2,gblAlpha2,defaultTimeoutval);
 fadeOut(ctx3,canvas3,gblAlpha3,defaultTimeoutval);
 fadeOut(ctx4,canvas4,gblAlpha4,defaultTimeoutval);
-//$(document).ready(getData());	
+$(document).ready(getData());	
 	
 
 			

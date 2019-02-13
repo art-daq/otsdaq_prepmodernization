@@ -1,6 +1,7 @@
 #ifndef _ots_FENIMPlusInterface_h_
 #define _ots_FENIMPlusInterface_h_
 
+//#include "otsdaq-components/FEInterfaces/FEOtsUDPHardwareBaseInterface.h"
 #include "otsdaq-components/FEInterfaces/FEOtsUDPTemplateInterface.h"
 #include <bitset>
 
@@ -31,7 +32,7 @@ public:
     /////////////////////////////////////
     //start declaration of FE Macros
 
-    void FEMacroGenerateTriggers			(frontEndMacroInArgs_t argsIn, frontEndMacroOutArgs_t argsOut);
+    void FEMacroGenerateTriggers			(frontEndMacroConstArgs_t argsIn, frontEndMacroArgs_t argsOut);
 
     //end declaration of FE Macros
     /////////////////////////////////////

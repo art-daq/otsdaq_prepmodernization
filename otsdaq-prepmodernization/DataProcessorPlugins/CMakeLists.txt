@@ -6,13 +6,14 @@ simple_plugin(BurstDataAndTimeSaverConsumer "processor"
 	WorkLoopManager
   )
   
-simple_plugin(NimStreamConsumer "processor"
-    Configurable
-	DataManager
-	${CETLIB}
-	WorkLoopManager
-	${MF_MESSAGELOGGER}
-  )  
+# simple_plugin(NimStreamConsumer "processor"
+# 	Configurable
+# 	DataManager
+# 	${CETLIB}
+# 	WorkLoopManager
+# 	${MF_MESSAGELOGGER}
+# 	Visualization
+#   )  
 
 
 

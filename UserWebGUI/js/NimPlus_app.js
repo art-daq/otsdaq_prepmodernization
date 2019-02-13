@@ -23,11 +23,13 @@ TODO
 var _TABLE_BOOL_TYPE_TRUE_COLOR = "rgb(201, 255, 201)";
 var _TABLE_BOOL_TYPE_FALSE_COLOR = "rgb(255, 178, 178)";
 var _nimUids = null;
-var timeout = null; //voltField timeout value, used to wait till user done entering a value		
+var timeout = null; //voltField timeout value, used to wait till user done entering a value	
+var stepTimeout = null;
+var trigTimeout = null; //triggerSyncWordCalc timeout val, used to wait till user done entering a value
 var modifiedList = []; //List of values that are modified, used to keep track of what values need to be updated
 var invalidInput = false; //Track if any textbox input is invalid, used to prevent saving if there is
-var syncArray = [0,0,0,0,0,0,0,0] //empty array for 40Mhz Sync Word
-var accelMaskArray = [0,0,0,0,0,0,0,0] //empty array for Accel Clock Sync Word
+var syncArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] //empty array for 40Mhz Sync Word, 24 bits
+var accelMaskArray = [0,0,0,0,0,0,0,0] //empty array for Accel Clock Sync Word, 8 bits, only 1 true max
 var tMuxAArray = [[0,0,0,0,0,0,0,0,0]]; //empty array for Trigger Mux Bank A
 var tMuxBArray=  [[0,0,0,0,0,0,0,0,0]]; //empty array for Trigger Mux Bank B
 var logicArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] //empty array for coincidence logic word
@@ -41,13 +43,13 @@ var fieldList = [["NimStatus","Status"],
 ["NimPlusPort","InterfacePort"],
 ["otsHostIP","HostIPAddress"],
 ["otsHostPort","HostPort"],
-["ChAInEn","EnableInputChannelA"],
-["ChBInEn","EnableInputChannelB"],
-["ChCInEn","EnableInputChannelC"],
-["ChDInEn","EnableInputChannelD"],
+["ChAInEn","LogicInputChannelA"],
+["ChBInEn","LogicInputChannelB"],
+["ChCInEn","LogicInputChannelC"],
+["ChDInEn","LogicInputChannelD"],
 ["useExtClk","UseExternalClock"],
-["OutputSourceOutput1","OutputSourceSelectChannel1"],
-["OutputSourceOutput2","OutputSourceSelectChannel2"],
+["OutputSourceOutput1","TriggerInputChannel1"],
+["OutputSourceOutput2","TriggerInputChannel2"],
 ["ChAInInv","InvertPolarityInputChannelA"],
 ["ChBInInv","InvertPolarityInputChannelB"],
 ["ChCInInv","InvertPolarityInputChannelC"],
@@ -64,23 +66,23 @@ var fieldList = [["NimStatus","Status"],
 ["ChBOutInv","InvertPolarityOutputChannelB"],
 ["ChCOutInv","InvertPolarityOutputChannelC"],
 ["ChDOutInv","InvertPolarityOutputChannelD"],
-["Sync1","TriggerClockMask"],
-["AccSync1","AcceleratorClockMask"],
-["EnableSync0","EnableClockMaskChannel0"],
-["EnableSync1","EnableClockMaskChannel1"],
-["EnableSync2","EnableClockMaskChannel2"],
-["VetoCount","OutputTimeVetoDurationChannel0"],
-["Veto1Count","OutputTimeVetoDurationChannel1"],
-["Veto2Count","OutputTimeVetoDurationChannel2"],
-["VetoSourceOutput0","InputChannelVetoSourceForOutputChannel0"],
-["VetoSourceOutput1","InputChannelVetoSourceForOutputChannel1"],
-["VetoSourceOutput2","InputChannelVetoSourceForOutputChannel2"],
-["PsCount","OutputPrescaleCountChannel0"],
-["PsCount1","OutputPrescaleCountChannel1"],
-["PsCount2","OutputPrescaleCountChannel2"],
+["Sync1","ClockMaskSetup"],
+["AccSync1","40MHzClockDelay"],
+["EnableSync0","EnableClockMaskTriggerOutputChannel0"],
+["EnableSync1","EnableClockMaskTriggerOutputChannel1"],
+["EnableSync2","EnableClockMaskTriggerOutputChannel2"],
+["VetoCount","TimeVetoTriggerOutputChannel0"],
+["Veto1Count","TimeVetoTriggerOutputChannel1"],
+["Veto2Count","TimeVetoTriggerOutputChannel2"],
+["VetoSourceOutput0","VetoSourceTriggerOutputChannel0"],
+["VetoSourceOutput1","VetoSourceTriggerOutputChannel1"],
+["VetoSourceOutput2","VetoSourceTriggerOutputChannel2"],
+["PsCount","PrescaleTriggerOutputChannel0"],
+["PsCount1","PrescaleTriggerOutputChannel1"],
+["PsCount2","PrescaleTriggerOutputChannel2"],
 ["SL0","CoincidenceLogicWord"],
-["bkpEnableA","EnableBackPressureInputA"],
-["bkpEnableB","EnableBackPressureInputB"],
+["bkpEnableA","EnableBackPressureNwFmcPta1"],
+["bkpEnableB","EnableBackPressureNwFmcPta2"],
 ["SGPulseCnt","SignalGeneratorPulseCount"],
 ["SGHighPer","SignalGeneratorHighPeriod"],
 ["SGLowPer","SignalGeneratorLowPeriod"],
@@ -94,23 +96,26 @@ var fieldList = [["NimStatus","Status"],
 ["ChCWidthEl","WidthInputChannelC"],
 ["ChDDelayEl","DelayInputChannelD"],
 ["ChDWidthEl","WidthInputChannelD"],
-["ChSNDelayEl","DelayOutputChannel0"],
-["ChSNWidthEl","WidthOutputChannel0"],
-["ChSCMS1DelayEl","DelayOutputChannel1"],
-["ChSCMS1WidthEl","WidthOutputChannel1"],
-["ChSCMS2DelayEl","DelayOutputChannel2"],
-["ChSCMS2WidthEl","WidthOutputChannel2"],
+["ChSNDelayEl","DelayTriggerOutputChannel0"],
+["ChSNWidthEl","WidthTriggerOutputChannel0"],
+["ChSCMS1DelayEl","DelayTriggerOutputChannel1"],
+["ChSCMS1WidthEl","WidthTriggerOutputChannel1"],
+["ChSCMS2DelayEl","DelayTriggerOutputChannel2"],
+["ChSCMS2WidthEl","WidthTriggerOutputChannel2"],
 ["triggerDelaySecs","SecondsDelayBeforeStartingTriggers"],
 ["ExtClkSel","ExternalClockSource"],
-["bkpOutSel0","OutputBackpressureSelectChannel0"],
-["bkpOutSel1","OutputBackpressureSelectChannel1"],
-["bkpOutSel2","OutputBackpressureSelectChannel2"],
-["TMuxB1","TrigerMuxSelectionsBankB"],
-["TMuxA1","TrigerMuxSelectionsBankA"],
-["triggerFilename","TriggerCountAtRunStopFilename"]
+["bkpOutSel0","BackpressureTriggerOutputChannel0"],
+["bkpOutSel1","BackpressureTriggerOutputChannel1"],
+["bkpOutSel2","BackpressureTriggerOutputChannel2"],
+["TMuxB1","TriggerMuxSelectionsBankB"],
+["TMuxA1","TriggerMuxSelectionsBankA"],
+["triggerFilename","TriggerCountAtRunStopFilename"],
+["BurstEn","EnableBurstData"],
+["BurstLogicDelay","BurstDataLogicSampleDelay"],
+["BurstMuxSel","BurstDataMuxSelect"],
+["BurstGateInputCh","BurstDataGateInputChannel"]
+
 ]
-
-
 
 //----------------------------------------- Save Functions -----------------------------------------
 
@@ -309,22 +314,19 @@ function syncMaskCalc(val,a) {
     var n = 0;
     var l = syncArray.length;
     for (var i = 0; i < l; i++) {
-        n = (n << 1) + (syncArray[i]?1:0);
-        }
+	n |= ((syncArray[i]?1:0) << i)
+        //n = (n << 1) + (syncArray[i]?1:0);
+    };
     console.log(n)
+    $("#triggerSyncWord").val(n);
     return n;
 }
 
 //Calculate the Accelerator Clock Sync Mask
 function accelMaskCalc(val,a) {
-    accelMaskArray[a]=val;
-    var n = 0;
-    var l = accelMaskArray.length;
-    for (var i = 0; i < l; i++) {
-        n = (n << 1) + (accelMaskArray[i]?1:0);
-        }
-    console.log(n)
-    return n;
+    n = (val?1:0) << a // Should only have 1 bit true ever, so dont save values like the 40Mhz mask
+    console.log(n);
+    return n;   
 }
 
 //Calculate the Coincidence Logic Word
@@ -405,8 +407,10 @@ function dwValidCheck(firstVal, secondValElId, msgElId) {
        console.log($.inArray(tableVal, modifiedList[0]));
        console.log(tableVal);
        console.log(modifiedList[0]);
+       console.log([tableVal, tableDat]);
        modifiedList.push([tableVal, tableDat]);
        console.log(modifiedList);
+//       console.log(modifiedList);
     } else {
        modifiedList[existsAt] = [tableVal,tableDat];
         //console.log(" element already exists in modified list, not updating list...")
@@ -455,13 +459,25 @@ function voltField(VoltElId, SlideElId, StepElId) {
 
 
 }
-// update the slider and field when the steps are changed
 function voltSteps(myValue, VoltElId, SlideElId) {
     voltVal = (((10000 * ((myValue * (33 / 40950)))) + (((8 - (10000 * ((myValue * (33 / 40950)))) % 8)))) / 10000) - 0.0008;
     document.getElementById(SlideElId).value = (myValue);
     document.getElementById(VoltElId).value = voltVal.toFixed(4) //(myValue * 33 / 40950);
     invalidInput = false;
+}
 
+function triggerSyncWordCalc(val){
+    clearTimeout(trigTimeout);
+    setTimeout(function () {
+	for(bitCnt=0; bitCnt<=23; bitCnt++){
+	elByID("Sync"+(bitCnt+1).toString()).checked=((val>>(bitCnt)) % 2 != 0); //intentionally reversing bit order
+	syncArray[bitCnt]=((val>>(bitCnt)) % 2 != 0);  //intentionally reversing bit order
+	/*
+	elByID("Sync"+(bitCnt+1).toString()).checked=((val>>(23-bitCnt)) % 2 != 0); //intentionally reversing bit order
+	syncArray[bitCnt]=((val>>(23-bitCnt)) % 2 != 0);  //intentionally reversing bit order
+	 */
+	}
+    },900)
 }
 
 // ------------------------------ JQuery UI Stuff ------------------------------
@@ -473,7 +489,6 @@ $(document).ready(function () {
 
     // CSS for Inner (hidden) divs
     //Hide the divs by default
-
 
     //InChEnCtl
     $("#InChEnCtl").hide();
@@ -516,7 +531,10 @@ $(document).ready(function () {
     
     //ConnCtl
     $("#ConnCtl").hide();
-
+    
+    //BurstCtl
+    $("#BurstCtl").hide(); 
+    
     //Setup button actions to hide/show the divs
 
     $("#InChEnCtlBtn").click(function () {
@@ -575,9 +593,33 @@ $(document).ready(function () {
         $("#ConnCtl").toggle(400);
     });
 
+    $("#BurstCtlBtn").click(function () {
+        $("#BurstCtl").toggle(400);
+    });
+
     //Setup IP Address Mask for input
     $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {translation: {'Z': {pattern: /[0-9]/, optional: true}}}); 
+    
+    //Setup Hex/Dec mask for triggerSyncWord input
+    $('#triggerSyncWord').mask('ZZHHHHHHL', {'translation': {
+    Z: {pattern: /[0x]/, optional: true},
+    H: {pattern: /[A-Fa-f0-9]/},
+    L: {pattern: /[0-9]/}
+    }
+    });
 
+    //Setup trigger sync word as a spinner
+   var spinner = $( "#triggerSyncWord" ).spinner({
+               min: 0, 
+               max: 1777215 
+            });
+     $("#triggerSyncWord").on("spinstop", function(){
+     triggerSyncWordCalc(this.value);
+     addModifiedList('AcceleratorClockMask',this.value);
+     });
+   console.log(spinner);
+   console.log("jquery ui setup done!")
+    
     //Grab values to populate fields
     	ConfigurationAPI.getSubsetRecords(
         _subsetBasePath /*subsetBasePath*/ ,
@@ -668,32 +710,36 @@ function getNimValuesForPage(recFields) {
 				console.log("Coincidence Logic Word set");
 			}
 			else if(a.fieldPath.includes("TriggerClockMask")){
-			  	for(bitCnt=0; bitCnt<=7; bitCnt++){
-				elByID("Sync"+(bitCnt+1).toString()).checked=((a.fieldValue>>(7-bitCnt)) % 2 != 0); //intentionally reversing bit order
-				syncArray[bitCnt]=((a.fieldValue>>(7-bitCnt)) % 2 != 0);  //intentionally reversing bit order
-				}
+			  	for(bitCnt=0; bitCnt<=23; bitCnt++){
+// 				elByID("Sync"+(bitCnt+1).toString()).checked=((a.fieldValue>>(23-bitCnt)) % 2 != 0); //intentionally reversing bit order
+// 				syncArray[bitCnt]=((a.fieldValue>>(23-bitCnt)) % 2 != 0);  //intentionally reversing bit order
+// 				}
+				elByID("Sync"+(bitCnt+1).toString()).checked=((a.fieldValue>>(bitCnt)) % 2 != 0);
+				syncArray[bitCnt]=((a.fieldValue>>(bitCnt)) % 2 != 0);
+				}  
+				elByID("triggerSyncWord").value = a.fieldValue;
 				console.log("Trigger Clock Mask set")			
 			}
 			else if(a.fieldPath.includes("AcceleratorClockMask")){
 			  	for(bitCnt=0; bitCnt<=7; bitCnt++){
-				elByID("AccSync"+(bitCnt+1).toString()).checked=((a.fieldValue>>(7-bitCnt)) % 2 != 0); //intentionally reversing bit order
-				accelMaskArray[bitCnt]=((a.fieldValue>>(7-bitCnt)) % 2 != 0);  //intentionally reversing bit order
+				elByID("AccSync"+(bitCnt+1).toString()).checked=((a.fieldValue>>(bitCnt)) % 2 != 0); 
+				accelMaskArray[bitCnt]=((a.fieldValue>>(bitCnt)) % 2 != 0);
 				}
 				console.log("Accelerator Clock Mask set")			
 			}
 			else if(a.fieldPath.includes("Status")){
 			  	if(a.fieldValue == "Yes" || a.fieldValue == "True" || a.fieldValue == "On"){
 					ogBoardState = "On";
-					elByID(i[0]).checked = true;
-					console.log("checkbox element " + i[0] + " set to checked = true")
+					elByID(i[0]).value = "On";
+					console.log("NimPlus Status " + i[0] + " set to On/Enabled")
 				}
 				else{
 					ogBoardState = "Off";
-					elByID(i[0]).checked = false;
-					console.log("checkbox element " + i[0] + " set to checked = false")
+					elByID(i[0]).value = "Off";
+					console.log("NimPlus Status " + i[0] + " set to Off/Disabled")
 				}
 			}
-			else if(a.fieldPath.includes("TrigerMuxSelectionsBankA")){
+			else if(a.fieldPath.includes("TriggerMuxSelectionsBankA")){
 				loadMuxArr = JSON.parse(a.fieldValue);
 				      for(k=0; k<=8; k++){
 					  elByID("TMuxA"+(k+1).toString()).value=loadMuxArr[0][k];
@@ -701,7 +747,7 @@ function getNimValuesForPage(recFields) {
 				      }
 				console.log("Loaded TMux Bank A with values: " + loadMuxArr );
 			}
-			else if(a.fieldPath.includes("TrigerMuxSelectionsBankB")){
+			else if(a.fieldPath.includes("TriggerMuxSelectionsBankB")){
 				loadMuxArr = JSON.parse(a.fieldValue);
 			  	for(k=0; k<=8; k++){
 				    elByID("TMuxB"+(k+1).toString()).value=loadMuxArr[0][k];
@@ -749,11 +795,13 @@ function getNimValuesForPage(recFields) {
 		$("#SigGenBox").show() //Signal Generator
 		$("#BkpBox").show() //Backpressure Vetos
 		$("#SyncBox").show() //40Mhz Sync
+		$("#BurstBox").show() //40Mhz Sync
 	      }
 	      else{
 		$("#SigGenBox").hide() //Signal Generator
 		$("#BkpBox").hide() //Backpressure Vetos
 		$("#SyncBox").hide() //40Mhz Sync
+		$("#BurstBox").hide() //40Mhz Sync
 	      }
 	    }
 	    else{/*
