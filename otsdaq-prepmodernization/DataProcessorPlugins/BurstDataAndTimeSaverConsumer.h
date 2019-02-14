@@ -9,17 +9,15 @@
 
 namespace ots
 {
-
 class BurstDataAndTimeSaverConsumer : public RawDataSaverConsumerBase
 {
-public:
-	BurstDataAndTimeSaverConsumer(std::string supervisorApplicationUID, std::string bufferUID, std::string processorUID, const ConfigurationTree& theXDAQContextConfigTree, const std::string& configurationPath);
-	virtual ~BurstDataAndTimeSaverConsumer(void);
+  public:
+	BurstDataAndTimeSaverConsumer (std::string supervisorApplicationUID, std::string bufferUID, std::string processorUID, const ConfigurationTree& theXDAQContextConfigTree, const std::string& configurationPath);
+	virtual ~BurstDataAndTimeSaverConsumer (void);
 
-protected:
-	void writePacketHeader   (const std::string& data) override;
+  protected:
+	void writePacketHeader (const std::string& data) override;
 };
-
 }
 
 #endif
