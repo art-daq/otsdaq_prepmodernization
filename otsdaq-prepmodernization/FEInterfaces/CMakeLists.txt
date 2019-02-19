@@ -6,7 +6,7 @@
 	FECore
 	WorkLoopManager
 	Macros
-	ConfigurationDataFormats
+	TableCore
 	ConfigurationInterface
 	NetworkUtilities
 	${XDAQ_XERCES-C}

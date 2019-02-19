@@ -15,12 +15,16 @@ namespace ots
 class NimStreamConsumer : public VisualVConsumer
 {
   public:
-	NimStreamConsumer (std::string supervisorApplicationUID, std::string bufferUID, std::string processorUID, const ConfigurationTree& theXDAQContextConfigTree, const std::string& configurationPath);
-	virtual ~NimStreamConsumer (void);
+	NimStreamConsumer(std::string              supervisorApplicationUID,
+	                  std::string              bufferUID,
+	                  std::string              processorUID,
+	                  const ConfigurationTree& theXDAQContextConfigTree,
+	                  const std::string&       configurationPath);
+	virtual ~NimStreamConsumer(void);
 
-	virtual std::string getNext (std::map<std::string, std::string>);
+	virtual std::string getNext(std::map<std::string, std::string>);
 
-	//structure to hold state change data
+	// structure to hold state change data
 	struct timeline_pt
 	{
 		int timestamp;
@@ -30,20 +34,20 @@ class NimStreamConsumer : public VisualVConsumer
 		int y_3;
 	};
 
-	//Timeline of state change data
+	// Timeline of state change data
 	std::vector<timeline_pt> timeline;
 
-	const std::vector<std::string> getTimelineData (int timestamp, int count);
+	const std::vector<std::string> getTimelineData(int timestamp, int count);
 
   private:
-	bool workLoopThread (toolbox::task::WorkLoop* workLoop) override;
-	void fastRead (void) override;
-	void slowRead (void) override;
+	bool workLoopThread(toolbox::task::WorkLoop* workLoop) override;
+	void fastRead(void) override;
+	void slowRead(void) override;
 
-	//For fast read
+	// For fast read
 	std::string*                        dataP_;
 	std::map<std::string, std::string>* headerP_;
-	//For slow read
+	// For slow read
 	std::string                        data_;
 	std::map<std::string, std::string> header_;
 
