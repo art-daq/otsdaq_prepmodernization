@@ -1371,7 +1371,7 @@ void FENIMPlusInterface::changeDACLevel(const std::string& channelName,
 	//			<< "-has value: " << (int)dacValue
 	//			<< std::hex << " hex: " << (unsigned int)dacValue
 	//			<< " Writing: " << std::hex << (channelNameToAddressMap[channelName] <<
-	//12) | (dacValue & 0xFFF)
+	// 12) | (dacValue & 0xFFF)
 	//			<< " only register: " << channelNameToAddressMap[channelName]
 	//			<< std::dec
 	//			<< std::endl;
