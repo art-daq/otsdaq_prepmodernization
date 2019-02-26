@@ -31,8 +31,7 @@ class FENIMPlusInterface : public FEOtsUDPTemplateInterface
 	/////////////////////////////////////
 	// start declaration of FE Macros
 
-	void FEMacroGenerateTriggers(frontEndMacroConstArgs_t argsIn,
-	                             frontEndMacroArgs_t      argsOut);
+	void FEMacroGenerateTriggers(__ARGS__);
 
 	// end declaration of FE Macros
 	/////////////////////////////////////
