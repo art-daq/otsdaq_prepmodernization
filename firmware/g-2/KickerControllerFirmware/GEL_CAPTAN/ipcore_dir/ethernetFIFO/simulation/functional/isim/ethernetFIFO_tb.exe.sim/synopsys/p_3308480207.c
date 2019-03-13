@@ -13,8 +13,8 @@
 /* This file is designed for use with ISim build 0x7708f090 */
 
 #define XSI_HIDE_SYMBOL_SPEC true
-#include "xsi.h"
 #include <memory.h>
+#include "xsi.h"
 #ifdef __GNUC__
 #include <stdlib.h>
 #else
@@ -22,10 +22,8 @@
 #define alloca _alloca
 #endif
 
-
-
-
 extern void synopsys_p_3308480207_init()
 {
-	xsi_register_didat("synopsys_p_3308480207", "isim/ethernetFIFO_tb.exe.sim/synopsys/p_3308480207.didat");
+	xsi_register_didat("synopsys_p_3308480207",
+	                   "isim/ethernetFIFO_tb.exe.sim/synopsys/p_3308480207.didat");
 }
