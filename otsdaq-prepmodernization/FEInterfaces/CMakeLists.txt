@@ -9,6 +9,9 @@
 	TableCore
 	ConfigurationInterface
 	NetworkUtilities
+	artdaq_DAQdata
 	${XDAQ_XERCES-C}
+	${MF_MESSAGELOGGER}
+	${Boost_SYSTEM_LIBRARY}
 	pthread
 )
