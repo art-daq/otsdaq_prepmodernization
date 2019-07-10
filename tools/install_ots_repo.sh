@@ -56,7 +56,7 @@ if [ ! -e ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed ]; t
 	
 	echo "otsdaq_prepmodernization" >> ${USER_DATA}/ServiceData/InstalledRepoNames.dat
 	
-	#to add FENIMPlusInterface as an entry to FEInterfaceConfiguration
+	#to add FENIMPlusInterface as an entry to FEInterfaceTable
 	source ${MRB_SOURCE}/otsdaq_prepmodernization/tools/update_ots_repo.sh
 	      
 	qdbus $progress Set "" value 6 > /dev/null;
@@ -68,7 +68,7 @@ if [ ! -e ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed ]; t
       else
 	echo "Failed build detected, aborting install" >> ${PWD}/script_log/install_ots_repo.sh.script
 	qdbus $progress close > /dev/null;
-	kdialog --error "Error encountered while building!\nAborting setup.\nIf the problem persists, contact the OTSDAQ/PREPModernization developers."
+	kdialog --error "Error encountered while building!\nAborting setup. Please try install again.\nIf the problem persists, contact the OTSDAQ/PREPModernization developers."
 	#Clean up work already done
 	if [ ! -f ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore.bk ]; then
 	  rm ${MRB_SOURCE}/otsdaq_prepmodernization/.gitignore
