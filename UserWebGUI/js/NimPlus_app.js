@@ -33,7 +33,7 @@ var accelMaskArray = [0,0,0,0,0,0,0,0] //empty array for Accel Clock Sync Word, 
 var tMuxAArray = [[0,0,0,0,0,0,0,0,0]]; //empty array for Trigger Mux Bank A
 var tMuxBArray=  [[0,0,0,0,0,0,0,0,0]]; //empty array for Trigger Mux Bank B
 var logicArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] //empty array for coincidence logic word
-var _subsetBasePath = "FENIMPlusInterfaceConfiguration";
+var _subsetBasePath = "FENIMPlusInterfaceTable";
 var _modifiedTables = [];
 var writeFEInterfaceStatus = false;
 var FEInterfaceStatusValue = "";
@@ -47,6 +47,10 @@ var fieldList = [["NimStatus","Status"],
 ["ChBInEn","LogicInputChannelB"],
 ["ChCInEn","LogicInputChannelC"],
 ["ChDInEn","LogicInputChannelD"],
+["ChEInEn","LogicInputChannelE"],
+["ChFInEn","LogicInputChannelF"],
+["ChGInEn","LogicInputChannelG"],
+["ChHInEn","LogicInputChannelH"],
 ["useExtClk","UseExternalClock"],
 ["OutputSourceOutput1","TriggerInputChannel1"],
 ["OutputSourceOutput2","TriggerInputChannel2"],
@@ -54,10 +58,18 @@ var fieldList = [["NimStatus","Status"],
 ["ChBInInv","InvertPolarityInputChannelB"],
 ["ChCInInv","InvertPolarityInputChannelC"],
 ["ChDInInv","InvertPolarityInputChannelD"],
+["ChEInInv","InvertPolarityInputChannelE"],
+["ChFInInv","InvertPolarityInputChannelF"],
+["ChGInInv","InvertPolarityInputChannelG"],
+["ChHInInv","InvertPolarityInputChannelH"],
 ["ChADacEl1","DACValueChannelA"],
 ["ChBDacEl1","DACValueChannelB"],
 ["ChCDacEl1","DACValueChannelC"],
 ["ChDDacEl1","DACValueChannelD"],
+["ChEDacEl1","DACValueChannelE"],
+["ChFDacEl1","DACValueChannelF"],
+["ChGDacEl1","DACValueChannelG"],
+["ChHDacEl1","DACValueChannelH"],
 ["ChAOutMux","OutputMuxSelectChannelA"],
 ["ChBOutMux","OutputMuxSelectChannelB"],
 ["ChCOutMux","OutputMuxSelectChannelC"],
@@ -96,6 +108,14 @@ var fieldList = [["NimStatus","Status"],
 ["ChCWidthEl","WidthInputChannelC"],
 ["ChDDelayEl","DelayInputChannelD"],
 ["ChDWidthEl","WidthInputChannelD"],
+["ChEDelayEl","DelayInputChannelE"],
+["ChEWidthEl","WidthInputChannelE"],
+["ChFDelayEl","DelayInputChannelF"],
+["ChFWidthEl","WidthInputChannelF"],
+["ChGDelayEl","DelayInputChannelG"],
+["ChGWidthEl","WidthInputChannelG"],
+["ChHDelayEl","DelayInputChannelH"],
+["ChHWidthEl","WidthInputChannelH"],
 ["ChSNDelayEl","DelayTriggerOutputChannel0"],
 ["ChSNWidthEl","WidthTriggerOutputChannel0"],
 ["ChSCMS1DelayEl","DelayTriggerOutputChannel1"],
@@ -133,7 +153,7 @@ function savePageValues(e) {
 //        getNimFieldsForSave /*responseHandler*/ ,
 //        _modifiedTables /*modifiedTables*/ )      
 	if(writeFEInterfaceStatus == false){ //Dont need to set FEInterface status 
-	      console.log("Don't need to write to FEInterfaceconfiguration, skipping that write.");
+	      console.log("Don't need to write to FEInterfaceTable, skipping that write.");
 	      ConfigurationAPI.getFieldsOfRecords(
 	      _subsetBasePath, selUID,//["NimPlus0"]
 	      "",/*_editableFieldList*/
@@ -143,9 +163,9 @@ function savePageValues(e) {
 			      )
 	}
 	else{
-	      console.log("Need to write to FEInterfaceconfiguration...");
+	      console.log("Need to write to FEInterfaceTable...");
 	      ConfigurationAPI.getFieldsOfRecords( //Need to set FEInterface status
-	      "FEInterfaceConfiguration", selUID,//["NimPlus0"]
+	      "FEInterfaceTable", selUID,//["NimPlus0"]
 	      "",/*_editableFieldList*/
 	      -1,//maxDepth
 	      setFEInterfaceStatusForSave,//responseHandler
@@ -191,14 +211,14 @@ function getNimFieldsForSave(nimUids) {
 }
 */
  function setFEInterfaceStatusForSave(recFields){
-  console.log("setFEInterfaceStatusForSave hit");
+  //console.log("setFEInterfaceStatusForSave hit");
   var valsToWrite = [];
   var objToWrite = [];
   //Debug.log("recFields found = " + recFields.length);	
     
-    console.log("setFEInterfaceStatusForSave input: \n");
-    console.log(recFields);
-    console.log("\n"); 
+    //console.log("setFEInterfaceStatusForSave input: \n");
+    //console.log(recFields);
+    //console.log("\n"); 
         for (let a of recFields) {
           if(a.fieldColumnName == "Status" && a.fieldRelativePath == "") {
 		objToWrite.push(a); //objects to update
@@ -209,11 +229,11 @@ function getNimFieldsForSave(nimUids) {
 	    }
 	}
     ogBoardState = FEInterfaceStatusValue;
-    console.log(objToWrite);
-    console.log(valsToWrite);
+    //console.log(objToWrite);
+    //console.log(valsToWrite);
     
     ConfigurationAPI.setFieldValuesForRecords(
-        "FEInterfaceConfiguration",//subsetBasePath 
+        "FEInterfaceTable",//subsetBasePath 
 	selUID,//recordArr
         objToWrite,//fieldObjArr
 	valsToWrite,//valueArr
@@ -225,9 +245,9 @@ function getNimFieldsForSave(nimUids) {
 
  function FEInterfaceToNIMPlusConfigWrite(newModifiedTables){
  _modifiedTables.push(newModifiedTables[0])
- console.log("FEInterfaceToNimplus handoff hit");
- console.log(newModifiedTables[0]);
- console.log(_modifiedTables);
+ //console.log("FEInterfaceToNimplus handoff hit");
+ //console.log(newModifiedTables[0]);
+ //console.log(_modifiedTables);
  	      ConfigurationAPI.getFieldsOfRecords(
 	      _subsetBasePath, selUID,//["NimPlus0"]
 	      "",/*_editableFieldList*/
@@ -242,9 +262,9 @@ function setNimFieldValuesForSave(recFields) {
   var objToWrite = [];
   //Debug.log("recFields found = " + recFields.length);	
     
-    console.log("setNimFields input: \n");
-    console.log(recFields);
-    console.log("\n");
+    //console.log("setNimFields input: \n");
+    //console.log(recFields);
+    //console.log("\n");
 
       
 //Compare Modified list and list of returned fields, populate a 2 arrays with the objects and data to write 
@@ -254,15 +274,15 @@ function setNimFieldValuesForSave(recFields) {
           if(a.fieldColumnName == i[0]) {
 		objToWrite.push(a); //objects to update
 		valsToWrite.push(i[1]); //values for the corresponding objects
-                console.log("Object found");
+                //console.log("Object found");
 	    }
 	    else{
 	    //console.log("\nno match for " + a.fieldColumnName);      
 	    }
 	}
     }
-    console.log(objToWrite);
-    console.log(valsToWrite);
+    //console.log(objToWrite);
+    //console.log(valsToWrite);
     
     ConfigurationAPI.setFieldValuesForRecords(
         _subsetBasePath,//subsetBasePath 
@@ -277,10 +297,10 @@ function setNimFieldValuesForSave(recFields) {
 
 function saveNimTableDialog(newModifiedTables){
   modifiedList = [];  
-  console.log(newModifiedTables);
-  console.log(_modifiedTables);
+  //console.log(newModifiedTables);
+  //console.log(_modifiedTables);
   _modifiedTables = newModifiedTables.splice(0);
-  console.log(_modifiedTables);   
+  //console.log(_modifiedTables);   
     ConfigurationAPI.saveModifiedTables(
     _modifiedTables,
     activateNimTables
@@ -317,7 +337,7 @@ function syncMaskCalc(val,a) {
 	n |= ((syncArray[i]?1:0) << i)
         //n = (n << 1) + (syncArray[i]?1:0);
     };
-    console.log(n)
+    //console.log(n)
     $("#triggerSyncWord").val(n);
     return n;
 }
@@ -325,7 +345,7 @@ function syncMaskCalc(val,a) {
 //Calculate the Accelerator Clock Sync Mask
 function accelMaskCalc(val,a) {
     n = (val?1:0) << a // Should only have 1 bit true ever, so dont save values like the 40Mhz mask
-    console.log(n);
+    //console.log(n);
     return n;   
 }
 
@@ -337,7 +357,7 @@ function LogicWordCalc(val,a) {
     for (var i = 0; i < l; i++) {
         n = (n << 1) + (logicArray[i]?1:0);
         }
-    console.log(n)
+    //console.log(n)
     return n;
 }
 
@@ -403,13 +423,13 @@ function dwValidCheck(firstVal, secondValElId, msgElId) {
     existsAt = $.inArray(tableVal, modifiedListNames);
     //document.getElementById("saveEl").innerHTML = "";
     if (existsAt < 0) {
-       console.log(existsAt);
-       console.log($.inArray(tableVal, modifiedList[0]));
-       console.log(tableVal);
-       console.log(modifiedList[0]);
-       console.log([tableVal, tableDat]);
+       //console.log(existsAt);
+       //console.log($.inArray(tableVal, modifiedList[0]));
+       //console.log(tableVal);
+       //console.log(modifiedList[0]);
+       //console.log([tableVal, tableDat]);
        modifiedList.push([tableVal, tableDat]);
-       console.log(modifiedList);
+       //console.log(modifiedList);
 //       console.log(modifiedList);
     } else {
        modifiedList[existsAt] = [tableVal,tableDat];
@@ -418,8 +438,8 @@ function dwValidCheck(firstVal, secondValElId, msgElId) {
 
 }
  function FEInterfaceSetStatus(state){
-  console.log("ogBoardState = " + ogBoardState);
-  console.log("desired board state = " + state);
+  //console.log("ogBoardState = " + ogBoardState);
+  //console.log("desired board state = " + state);
   
   FEInterfaceStatusValue = state; 
   if(state == ogBoardState)
@@ -427,7 +447,7 @@ function dwValidCheck(firstVal, secondValElId, msgElId) {
   else
      writeFEInterfaceStatus = true;
   
-  console.log("writeFEInterfaceStatus = " + writeFEInterfaceStatus)
+  //console.log("writeFEInterfaceStatus = " + writeFEInterfaceStatus)
    
 }
 
@@ -452,8 +472,8 @@ function voltField(VoltElId, SlideElId, StepElId) {
         document.getElementById(SlideElId).value = Math.round((40950000 * newValue / 33000));
         document.getElementById(StepElId).value = Math.round((40950000 * newValue / 33000));
         VoltElId.value = newValue.toFixed(4);
-        console.log(newValue)
-        console.log(newValue.toFixed(4));
+        //console.log(newValue)
+        //console.log(newValue.toFixed(4));
         invalidInput = false;
     }, 900);
 
@@ -617,8 +637,8 @@ $(document).ready(function () {
      triggerSyncWordCalc(this.value);
      addModifiedList('AcceleratorClockMask',this.value);
      });
-   console.log(spinner);
-   console.log("jquery ui setup done!")
+   //console.log(spinner);
+   //console.log("jquery ui setup done!")
     
     //Grab values to populate fields
     	ConfigurationAPI.getSubsetRecords(
@@ -640,35 +660,35 @@ function getNimUidsForList(nimUids) {
         Debug.log("No NIMPlus UID's found", Debug.HIGH_PRIORITY);
         return;
     }
-	else{
-    _nimUids = nimUids;
-    console.log("getNimUIDs' Input: \n")
-    console.log(nimUids);
-    console.log("\n");
-    //Debug.log("getNimUIDs ", Debug.INFO_PRIORITY);
-    console.log(nimUids)
-    console.log("first index: " + nimUids[0])
+    else{
+	_nimUids = nimUids;
+      //console.log("getNimUIDs' Input: \n")
+      //console.log(nimUids);
+      //console.log("\n");
+      //Debug.log("getNimUIDs ", Debug.INFO_PRIORITY);
+      //console.log(nimUids)
+      //console.log("first index: " + nimUids[0])
 	$.each(nimUids, function(val, text) {
             $('#nimUIDSelect').append( $('<option></option>').val(text).html(text) )
 	    $('#nimUIDToCopySelect').append( $('<option></option>').val(text).html(text) )
-	    console.log(val)
-	    console.log(text)
+	    //console.log(val)
+	    //console.log(text)
             }); 
-    selUID = [nimUids[0]];
-    console.log(selUID);
-    ConfigurationAPI.getFieldsOfRecords(
-        _subsetBasePath, selUID,//["NimPlus0"]
-        "",/*_editableFieldList*/
-        -1,//maxDepth
-        getNimFieldsForPage,//responseHandler
-        _modifiedTables//modifiedTablesto
-    );
+	selUID = [nimUids[0]];
+	//console.log(selUID);
+	ConfigurationAPI.getFieldsOfRecords(
+	    _subsetBasePath, selUID,//["NimPlus0"]
+	    "",/*_editableFieldList*/
+	    -1,//maxDepth
+	    getNimFieldsForPage,//responseHandler
+	    _modifiedTables//modifiedTablesto
+      );
 	}
 }
 
 function getNimFieldsForPage(recFields){
-      console.log("recFields:  \n");
-      console.log(recFields);
+      //console.log("recFields:  \n");
+      //console.log(recFields);
       ConfigurationAPI.getFieldValuesForRecords(
         _subsetBasePath, selUID,
         recFields,
@@ -679,9 +699,9 @@ function getNimFieldsForPage(recFields){
 function getNimValuesForPage(recFields) {
   //Debug.log("recFields found = " + recFields.length);	
     
-    console.log("getNimValuesForPage input: \n");
-    console.log(recFields);
-    console.log("\n");
+    //console.log("getNimValuesForPage input: \n");
+    //console.log(recFields);
+    //console.log("\n");
     
     for (let i of fieldList) {
         for (let a of recFields) {
@@ -694,11 +714,11 @@ function getNimValuesForPage(recFields) {
 				{
 				    if(a.fieldValue == "Yes" || a.fieldValue == "True" || a.fieldValue == "On"){
 					elByID(i[0]).checked = true;
-					console.log("checkbox element " + i[0] + " set to checked = true")
+					//console.log("checkbox element " + i[0] + " set to checked = true")
 				    }
 				    else{
 					elByID(i[0]).checked = false;
-					console.log("checkbox element " + i[0] + " set to checked = false")
+					//console.log("checkbox element " + i[0] + " set to checked = false")
 				    }
 				}
 			else if(a.fieldPath.includes("CoincidenceLogicWord")){
@@ -707,7 +727,7 @@ function getNimValuesForPage(recFields) {
 				logicArray[bitCnt]=((a.fieldValue>>(15-bitCnt)) % 2 != 0); //intentionally reversing bit order
 				}
 			  
-				console.log("Coincidence Logic Word set");
+				//console.log("Coincidence Logic Word set");
 			}
 			else if(a.fieldPath.includes("TriggerClockMask")){
 			  	for(bitCnt=0; bitCnt<=23; bitCnt++){
@@ -718,25 +738,25 @@ function getNimValuesForPage(recFields) {
 				syncArray[bitCnt]=((a.fieldValue>>(bitCnt)) % 2 != 0);
 				}  
 				elByID("triggerSyncWord").value = a.fieldValue;
-				console.log("Trigger Clock Mask set")			
+				//console.log("Trigger Clock Mask set")			
 			}
 			else if(a.fieldPath.includes("AcceleratorClockMask")){
 			  	for(bitCnt=0; bitCnt<=7; bitCnt++){
 				elByID("AccSync"+(bitCnt+1).toString()).checked=((a.fieldValue>>(bitCnt)) % 2 != 0); 
 				accelMaskArray[bitCnt]=((a.fieldValue>>(bitCnt)) % 2 != 0);
 				}
-				console.log("Accelerator Clock Mask set")			
+				//console.log("Accelerator Clock Mask set")			
 			}
 			else if(a.fieldPath.includes("Status")){
 			  	if(a.fieldValue == "Yes" || a.fieldValue == "True" || a.fieldValue == "On"){
 					ogBoardState = "On";
 					elByID(i[0]).value = "On";
-					console.log("NimPlus Status " + i[0] + " set to On/Enabled")
+					//console.log("NimPlus Status " + i[0] + " set to On/Enabled")
 				}
 				else{
 					ogBoardState = "Off";
 					elByID(i[0]).value = "Off";
-					console.log("NimPlus Status " + i[0] + " set to Off/Disabled")
+					//console.log("NimPlus Status " + i[0] + " set to Off/Disabled")
 				}
 			}
 			else if(a.fieldPath.includes("TriggerMuxSelectionsBankA")){
@@ -745,7 +765,7 @@ function getNimValuesForPage(recFields) {
 					  elByID("TMuxA"+(k+1).toString()).value=loadMuxArr[0][k];
 					  tMuxAArray[0][k]=loadMuxArr[0][k];
 				      }
-				console.log("Loaded TMux Bank A with values: " + loadMuxArr );
+				//console.log("Loaded TMux Bank A with values: " + loadMuxArr );
 			}
 			else if(a.fieldPath.includes("TriggerMuxSelectionsBankB")){
 				loadMuxArr = JSON.parse(a.fieldValue);
@@ -754,31 +774,31 @@ function getNimValuesForPage(recFields) {
 				    tMuxBArray[0][k]=loadMuxArr[0][k];
 				}
 				
-				console.log("Loaded TMux Bank B with values: " + loadMuxArr);
+				//console.log("Loaded TMux Bank B with values: " + loadMuxArr);
 			}
 			else if(elByID(i[0]).id=="ChADacEl1"){
 			  voltSteps(a.fieldValue, "ChADacEl2", "ChADacEl0")
 			  elByID(i[0]).value = a.fieldValue
-			  console.log("Set CH A Dac")
+			  //console.log("Set CH A Dac")
 			}
 			else if(elByID(i[0]).id=="ChBDacEl1"){
 			  voltSteps(a.fieldValue, "ChBDacEl2", "ChBDacEl0")
 			  elByID(i[0]).value = a.fieldValue
-			  console.log("Set CH B Dac")
+			  //console.log("Set CH B Dac")
 			}
 			else if(elByID(i[0]).id=="ChCDacEl1"){
 			  voltSteps(a.fieldValue, "ChCDacEl2", "ChCDacEl0")
 			  elByID(i[0]).value = a.fieldValue
-			  console.log("Set CH C Dac")
+			  //console.log("Set CH C Dac")
 			}
 			else if(elByID(i[0]).id=="ChDDacEl1"){
 			  voltSteps(a.fieldValue, "ChDDacEl2", "ChDDacEl0")
 			  elByID(i[0]).value = a.fieldValue
-			  console.log("Set CH D Dac")
+			  //console.log("Set CH D Dac")
 			}
 			else{
 				elByID(i[0]).value = a.fieldValue;
-				console.log("set element " + i[0] + " to value " + a.fieldValue + " from " + a.fieldPath)
+				//console.log("set element " + i[0] + " to value " + a.fieldValue + " from " + a.fieldPath)
 			  }
 	    }
 	    catch(e){
@@ -822,7 +842,7 @@ function getNimValuesForPage(recFields) {
 function getNimValuesOnUIDSelect(selValue) {
 	  
   selUID = [selValue];
-  console.log(selUID);
+  //console.log(selUID);
     ConfigurationAPI.getFieldsOfRecords(
         _subsetBasePath, selUID,//["NimPlus0"]
         "",/*_editableFieldList*/
@@ -872,7 +892,7 @@ function checkNewNIMPlusUID(){
   copyUID = [valByID("nimUIDToCopySelect")]
   //create new UID stuff
       	ConfigurationAPI.addSubsetRecords( //NimPlusConfiguration
-        "FENIMPlusInterfaceConfiguration",
+        "FENIMPlusInterfaceTable",
         selUID, //new NIMUID
 	loadNewNIMPlusConfigTable,
         _modifiedTables);
@@ -884,7 +904,7 @@ function checkNewNIMPlusUID(){
         _modifiedTables);
 	
 	ConfigurationAPI.addSubsetRecords( //FEInterfaces
-	"FEInterfaceConfiguration",
+	"FEInterfaceTable",
         selUID, //new NIMUID
 	loadNewNIMPlusFEInterfaceTable,
         _modifiedTables);
@@ -941,7 +961,7 @@ function setNimOptionalLinkForNewNIMPlus(recFields) {
   _recFields = recFields.splice(0);
   //...forge some objects
   var linkObj = {}
-    linkObj.fieldTableName = "FENIMPlusInterfaceConfiguration"
+    linkObj.fieldTableName = "FENIMPlusInterfaceTable"
     linkObj.fieldUID = selUID[0]
     linkObj.fieldColumnName = "LinkToOptionalParameters"
     linkObj.fieldRelativePath = ""
@@ -950,7 +970,7 @@ function setNimOptionalLinkForNewNIMPlus(recFields) {
     linkObj.fieldColumnDataChoicesArr = []
     linkObj.fieldColumnDefaultValue = ""
   var linkUIDObj = {};
-    linkUIDObj.fieldTableName = "FENIMPlusInterfaceConfiguration"
+    linkUIDObj.fieldTableName = "FENIMPlusInterfaceTable"
     linkUIDObj.fieldUID = selUID[0]
     linkUIDObj.fieldColumnName = "LinkToOptionalParametersUID"
     linkUIDObj.fieldRelativePath = ""

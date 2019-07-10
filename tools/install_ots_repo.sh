@@ -81,8 +81,7 @@ if [ ! -e ${MRB_SOURCE}/otsdaq_prepmodernization/prepmodenization_installed ]; t
     else
      kdialog --error "User aborted install. Exiting..."
      echo "User aborted install during confirmation that User Data Folder exists, exiting..." >> ${PWD}/script_log/install_ots_repo.sh.script  
-  fi
- fi 
+    fi 
 else
 
    echo "Nothing to do, prepmodenization already installed! Running Update script instead..." >> ${PWD}/script_log/install_ots_repo.sh.script

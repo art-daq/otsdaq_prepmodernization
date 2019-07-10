@@ -6,4 +6,7 @@ obj
 NoGitData/
 NoGitDatabases/
 UserWebGUI/UserWebGUI
-prepmodenization_installed
+prepmodenization_installed.gitignore
+NoGitData/
+NoGitDatabases/
+UserWebGUI/UserWebGUI
