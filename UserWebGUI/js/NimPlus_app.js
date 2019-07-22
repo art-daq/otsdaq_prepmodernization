@@ -28,6 +28,7 @@ var stepTimeout = null;
 var trigTimeout = null; //triggerSyncWordCalc timeout val, used to wait till user done entering a value
 var modifiedList = []; //List of values that are modified, used to keep track of what values need to be updated
 var invalidInput = false; //Track if any textbox input is invalid, used to prevent saving if there is
+var loadMuxArr = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 var syncArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] //empty array for 40Mhz Sync Word, 24 bits
 var inputMuxArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] //Empty Input Mux Array, 4 vals per fw block, current max of 4 fw blocks/Physical NIM+ Unit
 var outputMuxArray = [0,0,0,0,0,0,0,0] //Empty Output Mux Array, 4 vals per NimPlus Board, current max of 2 NimPlus Boards/Physical NIM+ Unit
@@ -55,6 +56,8 @@ var fieldList = [["NimStatus","Status"],
 ["ChHInEn","LogicInputChannelH"],
 ["useExtClk","UseExternalClock"],
 ["PrimaryCfg","PrimaryBoardConfig"],
+["inMux1","InputMuxConfig"],
+["outMux1","OutputMuxConfig"],
 ["OutputSourceOutput1","TriggerInputChannel1"],
 ["OutputSourceOutput2","TriggerInputChannel2"],
 ["ChAInInv","InvertPolarityInputChannelA"],
@@ -353,7 +356,7 @@ function inputMuxCalc(val,a) {
 	n |= ((inputMuxArray[i]) << i*2)
         //n = (n << 1) + (syncArray[i]?1:0);
     };
-    console.log(n)
+    console.log(inputMuxArray)
     return n;
 }
 
@@ -365,7 +368,7 @@ function outputMuxCalc(val,a) {
 	n |= ((outputMuxArray[i]) << i*2)
         //n = (n << 1) + (syncArray[i]?1:0);
     };
-    console.log(n)
+    console.log(outputMuxArray)
     return n;
 }
 
@@ -543,7 +546,7 @@ $(document).ready(function () {
     $("#InChEnCtl").hide();
     
     //BoardCfgCtl
-    $("BoardCfgCtl").hide();
+    $("#BoardCfgCtl").hide();
 
     //DacCtl
     $("#DacCtl").hide();
@@ -595,8 +598,8 @@ $(document).ready(function () {
         $("#InChEnCtl").toggle(400);
     });
 
-    $("BoardCfgCtlBtn").click(function () {
-        $("BoardCfgCtl").toggle(400);
+    $("#BoardCfgCtlBtn").click(function () {
+        $("#BoardCfgCtl").toggle(400);
     });
     
     $("#DacCtlBtn").click(function () {
@@ -815,6 +818,38 @@ function getNimValuesForPage(recFields) {
 				
 				//console.log("Loaded TMux Bank B with values: " + loadMuxArr);
 			}
+			else if(a.fieldPath.includes("InputMuxConfig")){
+				console.log("hit1")
+				var muxWrd = a.fieldValue;
+				      for(k=0; k<8; k++){ // 8 inputs
+					  loadMuxArr[k]=(muxWrd & 3)
+					  console.log(muxWrd)
+					  muxWrd = muxWrd >>> 2;
+					  var currEL = "inMux"+(k+1).toString()
+					  console.log(currEL);
+					  elByID(currEL).value=loadMuxArr[k];
+					  inputMuxArray[k]=loadMuxArr[k];
+					  console.log(inputMuxArray);
+				      }
+				//console.log("Loaded TMux Bank A with values: " + loadMuxArr );
+			}
+			else if(a.fieldPath.includes("OutputMuxConfig")){
+				//loadMuxArr = JSON.parse(a.fieldValue);
+				console.log("hit2")
+				var muxWrd = a.fieldValue;
+			  	for(k=0; k<4; k++){ //4 outputs
+					  loadMuxArr[k]=(muxWrd & 3)
+					  console.log(muxWrd)
+					  muxWrd = muxWrd >>> 2;
+					  var currEL = "outMux"+(k+1).toString();
+					  console.log(currEL);
+					  elByID(currEL).value=loadMuxArr[k];
+					  outputMuxArray[k]=loadMuxArr[k];
+					  console.log(outputMuxArray);					  
+				}
+				
+				//console.log("Loaded TMux Bank B with values: " + loadMuxArr);
+			}
 			else if(elByID(i[0]).id=="ChADacEl1"){
 			  voltSteps(a.fieldValue, "ChADacEl2", "ChADacEl0")
 			  elByID(i[0]).value = a.fieldValue
@@ -861,6 +896,16 @@ function getNimValuesForPage(recFields) {
 		$("#BkpBox").hide() //Backpressure Vetos
 		$("#SyncBox").hide() //40Mhz Sync
 		$("#BurstBox").hide() //40Mhz Sync
+	      }
+	    }
+	    else if(a.fieldPath.includes("PrimaryBoardConfig")){ //Show/Hide expert features
+	      if(a.fieldValue == "True"){
+		$("#BoardCfgBox").show() //Signal Generator
+		$("#DacBox").show() //Signal Generator
+	      }
+	      else{
+		$("#BoardCfgBox").hide() //Signal Generator
+		$("#DacBox").hide() //Signal Generator
 	      }
 	    }
 	    else{/*
