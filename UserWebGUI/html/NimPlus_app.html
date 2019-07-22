@@ -154,8 +154,92 @@
       <p>Host Port: <input type="number" id="otsHostPort" oninput="addModifiedList('HostPort',this.value);">
       <p>Trigger Count Output Filename: <input type="text" id="triggerFilename" oninput="addModifiedList('TriggerCountAtRunStopFilename',this.value.replace(/(?!\.[^.]+$)\.|[^\w.]+/g, ''));">
       <!-- Sanitize this on the c++ side too?-->
+      <br><input type="checkbox" id="PrimaryCfg" onclick="addModifiedList('PrimaryBoardConfig',this.checked?'True':'False');"><label for="PrimaryCfg">Set as Primary Board Configuration? (Use's this config's DAC Values, clock settings, etc.)</label>
+      <p>Firmware Block Address Offset: <input type="number" id="addressOffset" oninput="addModifiedList('AddressOffset',this.value);">
+  </div>
+</div>
+
+<div id="BoardCfgBox" class="ControlBox">
+    <p>Boardwide Configuration <button id="BoardCfgCtlBtn">Show/Hide</button></p>
+    <div id="BoardCfgCtl" class="Dropdown">
+        Input Mux for Block A: <select id="inMuxA1" oninput="addModifiedList('inputMuxConfig', inputMuxCalc(Number(this.value),0));">
+                <option value=0>Input A</option>
+                <option value=1>Input E</option>
+                <option value=2>Block A - Out A</option>	
+                <option value=3>Block B - Out A</option>		
+                </select> 
+        2: <select id="inMuxA2" oninput="addModifiedList('InputMuxConfig', inputMuxCalc(Number(this.value),1));">
+                <option value=0>Input B</option>
+                <option value=1>Input F</option>
+                <option value=2>Block A - Out B</option>	
+                <option value=3>Block B - Out B</option>		
+                </select>
+	3: <select id="inMuxA3" oninput="addModifiedList('InputMuxConfig', inputMuxCalc(Number(this.value),2));">
+                <option value=0>Input C</option>
+                <option value=1>Input G</option>
+                <option value=2>Block A - Out C</option>	
+                <option value=3>Block B - Out C</option>		
+                </select>
+        3: <select id="inMuxA4" oninput="addModifiedList('InputMuxConfig', inputMuxCalc(Number(this.value),3));">
+                <option value=0>Input D</option>
+                <option value=1>Input H</option>
+                <option value=2>Block A - Out D</option>	
+                <option value=3>Block B - Out D</option>		
+                </select>  
+                <br>
+       Input Mux for Block B: <select id="inMuxA5" oninput="addModifiedList('InputMuxConfig', inputMuxCalc(Number(this.value),4));">
+                <option value=0>Input E</option>
+                <option value=1>Input A</option>
+                <option value=2>Block A - Out A</option>	
+                <option value=3>Block B - Out A</option>		
+                </select> 
+        2: <select id="inMuxA6" oninput="addModifiedList('InputMuxConfig', inputMuxCalc(Number(this.value),5));">
+                <option value=0>Input F</option>
+                <option value=1>Input B</option>
+                <option value=2>Block A - Out B</option>	
+                <option value=3>Block B - Out B</option>		
+                </select>
+	3: <select id="inMuxA7" oninput="addModifiedList('InputMuxConfig', inputMuxCalc(Number(this.value),6));">
+                <option value=0>Input G</option>
+                <option value=1>Input H</option>
+                <option value=2>Block A - Out C</option>	
+                <option value=3>Block B - Out C</option>		
+                </select>
+        3: <select id="inMuxA8" oninput="addModifiedList('InputMuxConfig', inputMuxCalc(Number(this.value),7));">
+                <option value=0>Input H</option>
+                <option value=1>Input D</option>
+                <option value=2>Block A - Out D</option>	
+                <option value=3>Block B - Out D</option>		
+                </select>          
+                <br>
+        Output Mux: <select id="outMuxA1" oninput="addModifiedList('OutputMuxConfig', outputMuxCalc(Number(this.value),0));">
+                <option value=0>Block A - Out A</option>
+                <option value=1>Block B - Out A</option>
+                <option value=2>A Out A OR B Out A</option>	
+                <option value=3>A Out A AND B Out A</option>		
+                </select> 
+        2: <select id="outMuxA2" oninput="addModifiedList('OutputMuxConfig', outputMuxCalc(Number(this.value),1));">
+                <option value=0>Block A - Out B</option>
+                <option value=1>Block B - Out B</option>
+                <option value=2>A Out B OR B Out B</option>	
+                <option value=3>A Out B AND B Out B</option>		
+                </select>
+	3: <select id="outMuxA3" oninput="addModifiedList('OutputMuxConfig', outputMuxCalc(Number(this.value),2));">
+                <option value=0>Block A - Out C</option>
+                <option value=1>Block B - Out C</option>
+                <option value=2>A Out C OR B Out C</option>	
+                <option value=3>A Out C AND B Out C</option>		
+                </select>
+        3: <select id="outMuxA3" oninput="addModifiedList('OutputMuxConfig', outputMuxCalc(Number(this.value),3));">
+                <option value=0>Block A - Out D</option>
+                <option value=1>Block B - Out D</option>
+                <option value=2>A Out D OR B Out D</option>	
+                <option value=3>A Out D AND B Out D</option>		
+                </select>         
+       <br>         
     </div>
 </div>
+
 
 
 <div id="InChEnBox" class="ControlBox">

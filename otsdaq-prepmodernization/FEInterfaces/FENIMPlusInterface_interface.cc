@@ -64,7 +64,8 @@ void FENIMPlusInterface::configure(void)
 		try
 		{
 			if((usingOptionalParams &&
-			    optionalLink.getNode("EnableClockResetDuringConfigure").getValue<bool>()))
+			    optionalLink.getNode("EnableClockResetDuringConfigure").getValue<bool>() &&
+			    optionalLink.getNode("PrimaryBoardConfig").getValue<bool>()))
 			{
 				__CFG_COUT__ << "\"Soft\" Resetting NIM PLUS Ethernet!" << std::endl;
 
@@ -83,51 +84,67 @@ void FENIMPlusInterface::configure(void)
 	}
 
 	FEOtsUDPTemplateInterface::configure();  // sets up destination IP/port
+		if((optionalLink.getNode("PrimaryBoardConfig").getValue<bool>())){  //only configure clocks only if on "Primary" board config, to avoid configuring clocks (among other things) more than once
+		//NimPlus v2 Input/Output Mux control
+		//b7-b0 - FW Block A Input b15-b8 FW Block B Input
+		uint64_t iomux_config = 0x0;
+		uint64_t input_mux_config = ((optionalLink.getNode("InputMuxConfig").getValue<int>()));
+		uint64_t output_mux_config = ((optionalLink.getNode("OutputMuxConfig").getValue<int>())) ;
+		
+		
+			iomux_config = output_mux_config << 32 | input_mux_config;
+			__CFG_COUT__ << "input mux config : 0x" << input_mux_config << std::hex << __E__;
+			__CFG_COUT__ << "output mux config : 0x" << output_mux_config << std::hex << __E__;
+			__CFG_COUT__ << "iomux config : 0x" << iomux_config << std::hex << __E__;
+		
+		  	OtsUDPFirmwareCore::writeAdvanced(
+			    writeBuffer, /*address*/ 0x1000000999, /*data*/ iomux_config);
+			OtsUDPHardware::write(writeBuffer);
+		  
+		  
+		  
+		// choose external or internal clock
+		__CFG_COUT__ << "Choosing external or internal clock..." << std::endl;
+		OtsUDPFirmwareCore::writeAdvanced(
+		    writeBuffer,
+		    0x3,
+		    (usingOptionalParams
+			? (optionalLink.getNode("UseExternalClock").getValue<bool>() ? 1 : 0)
+			: 0) |
+			(((usingOptionalParams
+			      ? (optionalLink.getNode("ExternalClockSource").getValue<unsigned int>()
+				      ? (optionalLink.getNode("ExternalClockSource")
+					    .getValue<unsigned int>() -
+					1) /*subtract 1 to normal index*/
+				      : 0 /*default to NW-FMC-PTA*/)
+			      : 0) &
+			  0x7)
+			<< 4)  // Choosing external clock source := 1-4 (front panel NIM-input A-D),
+				// 0 (NW-FMC-PTA clk source)
 
-	// choose external or internal clock
-	__CFG_COUT__ << "Choosing external or internal clock..." << std::endl;
-	OtsUDPFirmwareCore::writeAdvanced(
-	    writeBuffer,
-	    addrOffset + 0x3,
-	    (usingOptionalParams
-	         ? (optionalLink.getNode("UseExternalClock").getValue<bool>() ? 1 : 0)
-	         : 0) |
-	        (((usingOptionalParams
-	               ? (optionalLink.getNode("ExternalClockSource").getValue<unsigned int>()
-	                      ? (optionalLink.getNode("ExternalClockSource")
-	                             .getValue<unsigned int>() -
-	                         1) /*subtract 1 to normal index*/
-	                      : 0 /*default to NW-FMC-PTA*/)
-	               : 0) &
-	          0x7)
-	         << 4)  // Choosing external clock source := 1-4 (front panel NIM-input A-D),
-	                // 0 (NW-FMC-PTA clk source)
+		);  // Choosing external := 1, internal := 0
 
-	);  // Choosing external := 1, internal := 0
+		unsigned val =
+		    (usingOptionalParams
+			? (optionalLink.getNode("UseExternalClock").getValue<bool>() ? 1 : 0)
+			: 0) |
+		    (((usingOptionalParams
+			  ? (optionalLink.getNode("ExternalClockSource").getValue<unsigned int>()
+				  ? (optionalLink.getNode("ExternalClockSource")
+					.getValue<unsigned int>() -
+				    1) /*subtract 1 to normal index*/
+				  : 0 /*default to NW-FMC-PTA*/)
+			  : 0) &
+		      0x7)
+		    << 4);
 
-	unsigned val =
-	    (usingOptionalParams
-	         ? (optionalLink.getNode("UseExternalClock").getValue<bool>() ? 1 : 0)
-	         : 0) |
-	    (((usingOptionalParams
-	           ? (optionalLink.getNode("ExternalClockSource").getValue<unsigned int>()
-	                  ? (optionalLink.getNode("ExternalClockSource")
-	                         .getValue<unsigned int>() -
-	                     1) /*subtract 1 to normal index*/
-	                  : 0 /*default to NW-FMC-PTA*/)
-	           : 0) &
-	      0x7)
-	     << 4);
-
-	__CFG_COUT__ << "CHOOSING EXTERNAL CLOCK: " << usingOptionalParams << " : "
-	             << optionalLink.getNode("UseExternalClock").getValue<bool>() << " : "
-	             << optionalLink.getNode("ExternalClockSource").getValue<unsigned int>()
-	             << std::hex << " : " << val << std::dec << std::endl;
-	;
-	OtsUDPHardware::write(writeBuffer);
-	usleep(100000);  // micro seconds
-
-	if((optionalLink.getNode("PrimaryBoardConfig").getValue<bool>())){  //only configure clocks only if on "Primary" board config, to avoid configuring clocks (among other things) more than once
+		__CFG_COUT__ << "CHOOSING EXTERNAL CLOCK: " << usingOptionalParams << " : "
+			    << optionalLink.getNode("UseExternalClock").getValue<bool>() << " : "
+			    << optionalLink.getNode("ExternalClockSource").getValue<unsigned int>()
+			    << std::hex << " : " << val << std::dec << std::endl;
+		;
+		OtsUDPHardware::write(writeBuffer);
+		usleep(100000);  // micro seconds
 		// read NIM+ version (for debugging)
 		OtsUDPFirmwareCore::readAdvanced(writeBuffer,
 		                                 addrOffset + 0x5);  // This can be removed when you want
@@ -146,19 +163,19 @@ void FENIMPlusInterface::configure(void)
 			__CFG_COUT__ << "Re-locking clocks..." << std::endl;
 			// reset clock PLLs
 			OtsUDPFirmwareCore::writeAdvanced(
-			    writeBuffer, /*address*/ addrOffset + 0x999, /*data*/ 0x7);  // reset wiz0, wiz1, and nimDacClk
+			    writeBuffer, /*address*/ 0x999, /*data*/ 0x7);  // reset wiz0, wiz1, and nimDacClk
 			OtsUDPHardware::write(writeBuffer);
 			usleep(100000);  // micro seconds
 			OtsUDPFirmwareCore::writeAdvanced(
-			    writeBuffer, /*address*/ addrOffset + 0x999, /*data*/ 0);  // unreset
+			    writeBuffer, /*address*/ 0x999, /*data*/ 0);  // unreset
 			OtsUDPHardware::write(writeBuffer);
 			usleep(100000);  // micro seconds
 			OtsUDPFirmwareCore::writeAdvanced(
-			    writeBuffer, /*address*/ addrOffset + 0x999, /*data*/ 0x8);  // reset phase shift output clock
+			    writeBuffer, /*address*/ 0x999, /*data*/ 0x8);  // reset phase shift output clock
 			OtsUDPHardware::write(writeBuffer);
 			usleep(100000);  // micro seconds
 			OtsUDPFirmwareCore::writeAdvanced(
-			    writeBuffer, /*address*/ addrOffset + 0x999, /*data*/ 0);  // unreset
+			    writeBuffer, /*address*/ 0x999, /*data*/ 0);  // unreset
 			OtsUDPHardware::write(writeBuffer);
 			usleep(100000);  // micro seconds
 

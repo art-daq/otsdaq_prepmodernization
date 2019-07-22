@@ -5,7 +5,7 @@
 				<COLUMN Type="UID" 	 Name="InterfaceID" 	 StorageName="INTERFACE_ID" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="YesNo" 	 Name="EnableExpertWebappFeatures" 	 StorageName="ENABLE_EXPERT_WEBAPP_FEATURES" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="YesNo" 	 Name="EnableClockResetDuringConfigure" 	 StorageName="ENABLE_CLOCK_RESET_DURING_CONFIGURE" 		DataType="VARCHAR2" 		DataChoices=""/>
-				<COLUMN Type="Data" 	 Name="BoardVersion" 	 StorageName="BOARD_VERSION" 		DataType="VARCHAR2" 		DataChoices=""/>
+				<COLUMN Type="Data" 	 Name="BoardVersion" 	 StorageName="BOARD_VERSION" 		DataType="NUMBER" 		DataChoices=""/>
 				<COLUMN Type="YesNo" 	 Name="UseExternalClock" 	 StorageName="USE_EXTERNAL_CLOCK" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="TrueFalse" 	 Name="PrimaryBoardConfig" 	 StorageName="PRIMARY_BOARD_CONFIG" 		DataType="VARCHAR2" 		DataChoices=""/>
 				<COLUMN Type="FixedChoiceData" 	 Name="ExternalClockSource" 	 StorageName="EXTERNAL_CLOCK_SOURCE" 		DataType="VARCHAR2" 		DataChoices="arbitraryBool=0,NW-FMC-PTA%20Clock%20Source,NIM%20Input%20CH-A%20Raw,NIM%20Input%20CH-B%20Raw,NIM%20Input%20CH-C%20Raw,NIM%20Input%20CH-D%20Raw,NIM%20Input%20CH-E%20Raw,NIM%20Input%20CH-F%20Raw,NIM%20Input%20CH-G%20Raw,NIM%20Input%20CH-H%20Raw"/>

@@ -29,6 +29,8 @@ var trigTimeout = null; //triggerSyncWordCalc timeout val, used to wait till use
 var modifiedList = []; //List of values that are modified, used to keep track of what values need to be updated
 var invalidInput = false; //Track if any textbox input is invalid, used to prevent saving if there is
 var syncArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] //empty array for 40Mhz Sync Word, 24 bits
+var inputMuxArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] //Empty Input Mux Array, 4 vals per fw block, current max of 4 fw blocks/Physical NIM+ Unit
+var outputMuxArray = [0,0,0,0,0,0,0,0] //Empty Output Mux Array, 4 vals per NimPlus Board, current max of 2 NimPlus Boards/Physical NIM+ Unit
 var accelMaskArray = [0,0,0,0,0,0,0,0] //empty array for Accel Clock Sync Word, 8 bits, only 1 true max
 var tMuxAArray = [[0,0,0,0,0,0,0,0,0]]; //empty array for Trigger Mux Bank A
 var tMuxBArray=  [[0,0,0,0,0,0,0,0,0]]; //empty array for Trigger Mux Bank B
@@ -52,6 +54,7 @@ var fieldList = [["NimStatus","Status"],
 ["ChGInEn","LogicInputChannelG"],
 ["ChHInEn","LogicInputChannelH"],
 ["useExtClk","UseExternalClock"],
+["PrimaryCfg","PrimaryBoardConfig"],
 ["OutputSourceOutput1","TriggerInputChannel1"],
 ["OutputSourceOutput2","TriggerInputChannel2"],
 ["ChAInInv","InvertPolarityInputChannelA"],
@@ -342,6 +345,32 @@ function syncMaskCalc(val,a) {
     return n;
 }
 
+function inputMuxCalc(val,a) {
+    inputMuxArray[a]=val;
+    var n = 0;
+    var l = inputMuxArray.length;
+    for (var i = 0; i < l; i++) {
+	n |= ((inputMuxArray[i]) << i*2)
+        //n = (n << 1) + (syncArray[i]?1:0);
+    };
+    console.log(n)
+    return n;
+}
+
+function outputMuxCalc(val,a) {
+    outputMuxArray[a]=val;
+    var n = 0;
+    var l = outputMuxArray.length;
+    for (var i = 0; i < l; i++) {
+	n |= ((outputMuxArray[i]) << i*2)
+        //n = (n << 1) + (syncArray[i]?1:0);
+    };
+    console.log(n)
+    return n;
+}
+
+
+
 //Calculate the Accelerator Clock Sync Mask
 function accelMaskCalc(val,a) {
     n = (val?1:0) << a // Should only have 1 bit true ever, so dont save values like the 40Mhz mask
@@ -512,10 +541,13 @@ $(document).ready(function () {
 
     //InChEnCtl
     $("#InChEnCtl").hide();
+    
+    //BoardCfgCtl
+    $("BoardCfgCtl").hide();
 
     //DacCtl
     $("#DacCtl").hide();
-
+    
     //DWConfig
     $("#DWConfigCtl").hide();
 
@@ -555,12 +587,18 @@ $(document).ready(function () {
     //BurstCtl
     $("#BurstCtl").hide(); 
     
+
+    
     //Setup button actions to hide/show the divs
 
     $("#InChEnCtlBtn").click(function () {
         $("#InChEnCtl").toggle(400);
     });
 
+    $("BoardCfgCtlBtn").click(function () {
+        $("BoardCfgCtl").toggle(400);
+    });
+    
     $("#DacCtlBtn").click(function () {
         $("#DacCtl").toggle(400);
     });
@@ -616,6 +654,7 @@ $(document).ready(function () {
     $("#BurstCtlBtn").click(function () {
         $("#BurstCtl").toggle(400);
     });
+
 
     //Setup IP Address Mask for input
     $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {translation: {'Z': {pattern: /[0-9]/, optional: true}}}); 
