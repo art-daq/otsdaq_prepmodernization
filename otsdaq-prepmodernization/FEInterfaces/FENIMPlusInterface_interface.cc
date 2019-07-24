@@ -53,7 +53,9 @@ void FENIMPlusInterface::configure(void)
 	std::string readBuffer;
 	uint64_t    readQuadWord;
 	
-	addrOffset = optionalLink.getNode("AddressOffset").getValue<int>();
+	addrOffset = optionalLink.getNode("AddressOffset").getValue<uint64_t>();
+	__CFG_COUT__ << "FW Block Address offset is configured as: 0x" << std::hex << addrOffset << __E__;
+	__CFG_COUT__ << "Raw Offset Read: 0x" << std::hex << optionalLink.getNode("AddressOffset").getValue<int>() << __E__;
 	//uint32_t    addrOffset = optionalLink.getNode("AddressOffset").getValue<int>();  // Used for when you have multiple NIM+/NIM+ Firmware blocks on one board, different fw blocks are addressed w/ different offsets in the upper 32b of all addresses
 
 
@@ -83,6 +85,7 @@ void FENIMPlusInterface::configure(void)
 		}
 	}
 
+	__CFG_COUT__ << "FW Block Address offset is configured as: 0x" << std::hex << addrOffset << __E__;
 	FEOtsUDPTemplateInterface::configure();  // sets up destination IP/port
 		if((optionalLink.getNode("PrimaryBoardConfig").getValue<bool>())){  //only configure clocks only if on "Primary" board config, to avoid configuring clocks (among other things) more than once
 		//NimPlus v2 Input/Output Mux control

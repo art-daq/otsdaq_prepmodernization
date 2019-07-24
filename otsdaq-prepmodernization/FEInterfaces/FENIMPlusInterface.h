@@ -41,7 +41,7 @@ class FENIMPlusInterface : public FEOtsUDPTemplateInterface
   private:
 	std::string runNumber_;
 	uint64_t    sel_ctl_register_;
-	uint32_t    addrOffset = 0;
+	uint64_t    addrOffset = 0;
 	// bitsets for enables and resets
 	std::bitset<16> nimResets_, nimEnables_;
 };
