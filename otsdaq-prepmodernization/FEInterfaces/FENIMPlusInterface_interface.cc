@@ -55,8 +55,7 @@ void FENIMPlusInterface::configure(void)
 	
 	addrOffset = optionalLink.getNode("AddressOffset").getValue<uint64_t>();
 	__CFG_COUT__ << "FW Block Address offset is configured as: 0x" << std::hex << addrOffset << __E__;
-	__CFG_COUT__ << "Raw Offset Read: 0x" << std::hex << optionalLink.getNode("AddressOffset").getValue<int>() << __E__;
-	//uint32_t    addrOffset = optionalLink.getNode("AddressOffset").getValue<int>();  // Used for when you have multiple NIM+/NIM+ Firmware blocks on one board, different fw blocks are addressed w/ different offsets in the upper 32b of all addresses
+	// Used for when you have multiple NIM+/NIM+ Firmware blocks on one board, different fw blocks are addressed w/ different offsets in the upper 32b of all addresses
 
 
 	////////////////////////////////////////////////////////////////////////////////
@@ -84,21 +83,20 @@ void FENIMPlusInterface::configure(void)
 			             << std::endl;
 		}
 	}
-
-	__CFG_COUT__ << "FW Block Address offset is configured as: 0x" << std::hex << addrOffset << __E__;
 	FEOtsUDPTemplateInterface::configure();  // sets up destination IP/port
 		if((optionalLink.getNode("PrimaryBoardConfig").getValue<bool>())){  //only configure clocks only if on "Primary" board config, to avoid configuring clocks (among other things) more than once
 		//NimPlus v2 Input/Output Mux control
 		//b7-b0 - FW Block A Input b15-b8 FW Block B Input
 		uint64_t iomux_config = 0x0;
-		uint64_t input_mux_config = ((optionalLink.getNode("InputMuxConfig").getValue<int>()));
-		uint64_t output_mux_config = ((optionalLink.getNode("OutputMuxConfig").getValue<int>())) ;
+		uint64_t input_mux_config = ((optionalLink.getNode("InputMuxConfig").getValue<uint32_t>()));
+		uint64_t output_mux_config = ((optionalLink.getNode("OutputMuxConfig").getValue<uint32_t>())) ;
 		
 		
-			iomux_config = output_mux_config << 32 | input_mux_config;
-			__CFG_COUT__ << "input mux config : 0x" << input_mux_config << std::hex << __E__;
-			__CFG_COUT__ << "output mux config : 0x" << output_mux_config << std::hex << __E__;
-			__CFG_COUT__ << "iomux config : 0x" << iomux_config << std::hex << __E__;
+			iomux_config = (output_mux_config <<  32) | input_mux_config;
+			__CFG_COUT__ << "input mux config : 0x" << std::hex << input_mux_config << std::hex << __E__;
+			__CFG_COUT__ << "output mux config : 0x" << std::hex << output_mux_config  << __E__;
+			__CFG_COUT__ << "output mux config shifted: 0x" << std::hex << (output_mux_config << 32)  << __E__;
+			__CFG_COUT__ << "iomux config : 0x" << std::hex << iomux_config  << __E__;
 		
 		  	OtsUDPFirmwareCore::writeAdvanced(
 			    writeBuffer, /*address*/ 0x1000000999, /*data*/ iomux_config);
