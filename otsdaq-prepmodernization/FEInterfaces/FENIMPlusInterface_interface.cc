@@ -99,7 +99,7 @@ void FENIMPlusInterface::configure(void)
 			__CFG_COUT__ << "iomux config : 0x" << std::hex << iomux_config  << __E__;
 		
 		  	OtsUDPFirmwareCore::writeAdvanced(
-			    writeBuffer, /*address*/ 0x1000000999, /*data*/ iomux_config);
+			    writeBuffer, /*address*/ 0x10000000999, /*data*/ iomux_config);
 			OtsUDPHardware::write(writeBuffer);
 		  
 		  

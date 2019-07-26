@@ -156,6 +156,10 @@
       <!-- Sanitize this on the c++ side too?-->
       <br><input type="checkbox" id="PrimaryCfg" onclick="addModifiedList('PrimaryBoardConfig',this.checked?'True':'False');"><label for="PrimaryCfg">Set as Primary Board Configuration? (Use's this config's DAC Values, clock settings, etc.)</label>
       <p>Firmware Block Address Offset: <input type="number" id="addressOffset" oninput="addModifiedList('AddressOffset',this.value);">
+      <p> NIMPlus Board Versions: <select id="boardVersion" oninput="addModifiedList('BoardVersion', this.value);">
+                <option value=1>NimPlus v1</option>
+                <option value=2>NimPlus v2</option>		
+                </select> 
   </div>
 </div>
 
