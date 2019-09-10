@@ -73,7 +73,7 @@ if(slf6_xdaq)
 endif()
 
 # macros for art_dictionary and simple_plugin
-include(ArtDictionary)
+#include(ArtDictionary)
 include(ArtMake)
 include(BuildPlugins)
 include(CetTest)
