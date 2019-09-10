@@ -1,9 +1,9 @@
 #include <stdint.h>
 #include <iostream>  // std::cout, std::dec, std::hex, std::oct
 #include <set>
-#include "otsdaq-core/Macros/CoutMacros.h"
-#include "otsdaq-core/Macros/InterfacePluginMacros.h"
-#include "otsdaq-core/MessageFacility/MessageFacility.h"
+#include "otsdaq/Macros/CoutMacros.h"
+#include "otsdaq/Macros/InterfacePluginMacros.h"
+#include "otsdaq/MessageFacility/MessageFacility.h"
 #include "otsdaq-prepmodernization/FEInterfaces/FENIMPlusInterface.h"
 
 using namespace ots;
