@@ -25,8 +25,10 @@ class FENIMPlusInterface : public FEOtsUDPTemplateInterface
 	void start(std::string runNumber) override;
 	bool running(void) override;
 	void stop(void) override;
-
-	void changeDACLevel(const std::string& channelName, unsigned int value);
+	
+	void changeDACLevelv1(const std::string& channelName, unsigned int value);
+	void changeDACLevelv2(const std::string& channelName, unsigned int value);
+	void initDAC(void);		
 
 	/////////////////////////////////////
 	// start declaration of FE Macros
@@ -39,7 +41,7 @@ class FENIMPlusInterface : public FEOtsUDPTemplateInterface
   private:
 	std::string runNumber_;
 	uint64_t    sel_ctl_register_;
-
+	uint64_t    addrOffset = 0;
 	// bitsets for enables and resets
 	std::bitset<16> nimResets_, nimEnables_;
 };

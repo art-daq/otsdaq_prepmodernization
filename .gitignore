@@ -7,3 +7,7 @@ NoGitData/
 NoGitDatabases/
 UserWebGUI/UserWebGUI
 prepmodenization_installed
+.gitignore
+NoGitData/
+NoGitDatabases/
+UserWebGUI/UserWebGUI

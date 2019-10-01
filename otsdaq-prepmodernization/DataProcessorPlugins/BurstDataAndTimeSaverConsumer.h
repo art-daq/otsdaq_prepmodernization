@@ -7,7 +7,7 @@
 // should inherit from BurstDataAndTimeSaverConsumerBase the same way this consumer is
 // doing.
 
-#include "otsdaq-core/DataManager/RawDataSaverConsumerBase.h"
+#include "otsdaq/DataManager/RawDataSaverConsumerBase.h"
 
 namespace ots
 {

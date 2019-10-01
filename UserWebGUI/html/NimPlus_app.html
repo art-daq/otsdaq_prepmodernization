@@ -154,8 +154,96 @@
       <p>Host Port: <input type="number" id="otsHostPort" oninput="addModifiedList('HostPort',this.value);">
       <p>Trigger Count Output Filename: <input type="text" id="triggerFilename" oninput="addModifiedList('TriggerCountAtRunStopFilename',this.value.replace(/(?!\.[^.]+$)\.|[^\w.]+/g, ''));">
       <!-- Sanitize this on the c++ side too?-->
+      <br><input type="checkbox" id="PrimaryCfg" onclick="addModifiedList('PrimaryBoardConfig',this.checked?'True':'False');"><label for="PrimaryCfg">Set as Primary Board Configuration? (Use's this config's DAC Values, clock settings, etc.)</label>
+      <p>Firmware Block Address Offset: <input type="number" id="addressOffset" oninput="addModifiedList('AddressOffset',this.value);">
+      <p> NIMPlus Board Versions: <select id="boardVersion" oninput="addModifiedList('BoardVersion', this.value);">
+                <option value=1>NimPlus v1</option>
+                <option value=2>NimPlus v2</option>		
+                </select> 
+  </div>
+</div>
+
+<div id="BoardCfgBox" class="ControlBox">
+    <p>Boardwide Configuration <button id="BoardCfgCtlBtn">Show/Hide</button></p>
+    <div id="BoardCfgCtl" class="Dropdown">
+        Input Mux for Block A: <select id="inMux1" oninput="addModifiedList('inputMuxConfig', inputMuxCalc(Number(this.value),0));">
+                <option value=0>Input A</option>
+                <option value=1>Input E</option>
+                <option value=2>Block A - Out A</option>	
+                <option value=3>Block B - Out A</option>		
+                </select> 
+        2: <select id="inMux2" oninput="addModifiedList('InputMuxConfig', inputMuxCalc(Number(this.value),1));">
+                <option value=0>Input B</option>
+                <option value=1>Input F</option>
+                <option value=2>Block A - Out B</option>	
+                <option value=3>Block B - Out B</option>		
+                </select>
+	3: <select id="inMux3" oninput="addModifiedList('InputMuxConfig', inputMuxCalc(Number(this.value),2));">
+                <option value=0>Input C</option>
+                <option value=1>Input G</option>
+                <option value=2>Block A - Out C</option>	
+                <option value=3>Block B - Out C</option>		
+                </select>
+        3: <select id="inMux4" oninput="addModifiedList('InputMuxConfig', inputMuxCalc(Number(this.value),3));">
+                <option value=0>Input D</option>
+                <option value=1>Input H</option>
+                <option value=2>Block A - Out D</option>	
+                <option value=3>Block B - Out D</option>		
+                </select>  
+                <br>
+       Input Mux for Block B: <select id="inMux5" oninput="addModifiedList('InputMuxConfig', inputMuxCalc(Number(this.value),4));">
+                <option value=0>Input A</option>
+                <option value=1>Input E</option>
+                <option value=2>Block A - Out A</option>	
+                <option value=3>Block B - Out A</option>		
+                </select> 
+        2: <select id="inMux6" oninput="addModifiedList('InputMuxConfig', inputMuxCalc(Number(this.value),5));">
+                <option value=0>Input B</option>
+                <option value=1>Input F</option>
+                <option value=2>Block A - Out B</option>	
+                <option value=3>Block B - Out B</option>		
+                </select>
+	3: <select id="inMux7" oninput="addModifiedList('InputMuxConfig', inputMuxCalc(Number(this.value),6));">
+                <option value=0>Input C</option>
+                <option value=1>Input G</option>
+                <option value=2>Block A - Out C</option>	
+                <option value=3>Block B - Out C</option>		
+                </select>
+        3: <select id="inMux8" oninput="addModifiedList('InputMuxConfig', inputMuxCalc(Number(this.value),7));">
+                <option value=0>Input D</option>
+                <option value=1>Input H</option>
+                <option value=2>Block A - Out D</option>	
+                <option value=3>Block B - Out D</option>		
+                </select>          
+                <br>
+        Output Mux: <select id="outMux1" oninput="addModifiedList('OutputMuxConfig', outputMuxCalc(Number(this.value),0));">
+                <option value=0>Block A - Out A</option>
+                <option value=1>Block B - Out A</option>
+                <option value=2>A Out A OR B Out A</option>	
+                <option value=3>A Out A AND B Out A</option>		
+                </select> 
+        2: <select id="outMux2" oninput="addModifiedList('OutputMuxConfig', outputMuxCalc(Number(this.value),1));">
+                <option value=0>Block A - Out B</option>
+                <option value=1>Block B - Out B</option>
+                <option value=2>A Out B OR B Out B</option>	
+                <option value=3>A Out B AND B Out B</option>		
+                </select>
+	3: <select id="outMux3" oninput="addModifiedList('OutputMuxConfig', outputMuxCalc(Number(this.value),2));">
+                <option value=0>Block A - Out C</option>
+                <option value=1>Block B - Out C</option>
+                <option value=2>A Out C OR B Out C</option>	
+                <option value=3>A Out C AND B Out C</option>		
+                </select>
+        3: <select id="outMux4" oninput="addModifiedList('OutputMuxConfig', outputMuxCalc(Number(this.value),3));">
+                <option value=0>Block A - Out D</option>
+                <option value=1>Block B - Out D</option>
+                <option value=2>A Out D OR B Out D</option>	
+                <option value=3>A Out D AND B Out D</option>		
+                </select>         
+       <br>         
     </div>
 </div>
+
 
 
 <div id="InChEnBox" class="ControlBox">
@@ -186,6 +274,31 @@
 	  <option value="True">True</option>
 	  <option value="False">False</option>
         <input type="checkbox" id="ChDInInv" onclick="addModifiedList('InvertPolarityInputChannelD',this.checked?'yes':'no');"><label for="ChDInInv">Invert Ch D Input?</label>
+        </br><label for="ChEInEn">Input Channel E Selection/Enable </label><select id="ChEInEn" oninput="addModifiedList('LogicInputChannelE', this.value);">
+	  <option value="NIM Input CH-E Raw (Invertible)">NIM Input CH-E Raw (Invertible)</option>
+	  <option value="NIM Input CH-E Modified">NIM Input CH-E Modified</option>
+	  <option value="True">True</option>
+	  <option value="False">False</option>
+	  </select>	  
+	<input type="checkbox" id="ChEInInv" onclick="addModifiedList('InvertPolarityInputChannelE',this.checked?'yes':'no');"><label for="ChEInInv">Invert Ch E Input?</label>
+        </br><label for="ChFInEn">Input Channel F Selection/Enable </label><select id="ChFInEn" oninput="addModifiedList('LogicInputChannelF', this.value);">
+	  <option value="NIM Input CH-F Raw (Invertible)">NIM Input CH-F Raw (Invertible)</option>
+	  <option value="NIM Input CH-F Modified">NIM Input CH-F Modified</option>
+	  <option value="True">True</option>
+	  <option value="False">False</option>
+        <input type="checkbox" id="ChFInInv" onclick="addModifiedList('InvertPolarityInputChannelF',this.checked?'yes':'no');"><label for="ChFInInv">Invert Ch F Input?</label>
+        </br><label for="ChGInEn">Input Channel G Selection/Enable </label><select id="ChGInEn" oninput="addModifiedList('LogicInputChannelG', this.value);">
+	  <option value="NIM Input CH-G Raw (Invertible)">NIM Input CH-G Raw (Invertible)</option>
+	  <option value="NIM Input CH-G Modified">NIM Input CH-G Modified</option>
+	  <option value="True">True</option>
+	  <option value="False">False</option>
+        <input type="checkbox" id="ChGInInv" onclick="addModifiedList('InvertPolarityInputChannelG',this.checked?'yes':'no');"><label for="ChGInInv">Invert Ch G Input?</label>
+        </br><label for="ChDInEn">Input Channel H Selection/Enable </label><select id="ChHInEn" oninput="addModifiedList('LogicInputChannelH', this.value);">
+	  <option value="NIM Input CH-H Raw (Invertible)">NIM Input CH-H Raw (Invertible)</option>
+	  <option value="NIM Input CH-H Modified">NIM Input CH-H Modified</option>
+	  <option value="True">True</option>
+	  <option value="False">False</option>
+        <input type="checkbox" id="ChHInInv" onclick="addModifiedList('InvertPolarityInputChannelH',this.checked?'yes':'no');"><label for="ChHInInv">Invert Ch H Input?</label>
         </br></br><input type="checkbox" id="useExtClk" onclick="addModifiedList('UseExternalClock', this.checked?'yes':'no');"><label for="useExtClk">Use External Clock?</label>
 	  <br><p>External Clock Source - <select id="ExtClkSel" oninput="addModifiedList('ExternalClockSource', this.value);">
 	  <option value="NW-FMC-PTA Clock Source">NW FMC Connector</option>
@@ -193,6 +306,10 @@
 	  <option value="NIM Input CH-B Raw">NIM Input CH-B Raw</option>
 	  <option value="NIM Input CH-C Raw">NIM Input CH-C Raw</option>
 	  <option value="NIM Input CH-D Raw">NIM Input CH-D Raw</option>
+	  <option value="NIM Input CH-E Raw">NIM Input CH-E Raw</option>
+	  <option value="NIM Input CH-F Raw">NIM Input CH-F Raw</option>
+	  <option value="NIM Input CH-G Raw">NIM Input CH-G Raw</option>
+	  <option value="NIM Input CH-H Raw">NIM Input CH-H Raw</option>
 	  </select>
 	  
 	<br>Seconds to delay before starting triggers - <input type="number" id="triggerDelaySecs" min=0 step=1 oninput="addModifiedList('SecondsDelayBeforeStartingTriggers',this.value);" style="width: 50px;">
@@ -260,6 +377,26 @@
             <p>CH D Dac Steps: <input type=number id="ChDDacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChDDacEl2','ChDDacEl0'); addModifiedList('DACValueChannelD',this.value);"></p>
             <p>Ch D Dac Voltage: <input type="number" id="ChDDacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChDDacEl0','ChDDacEl1'); addModifiedList('DACValueChannelD',valByID('ChDDacEl1'));"></p>
         </div>
+        <div class="ControlBox">
+            <p>CH E Dac Steps: 0<input type="range" id="ChEDacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChEDacEl2','ChEDacEl1'); addModifiedList('DACValueChannelE',this.value);">4095</p>
+            <p>CH E Dac Steps: <input type=number id="ChEDacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChEDacEl2','ChEDacEl0'); addModifiedList('DACValueChannelE',this.value);"></p>
+            <p>Ch E Dac Voltage: <input type="number" id="ChEDacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChEDacEl0','ChEDacEl1'); addModifiedList('DACValueChannelE',valByID('ChEDacEl1'));"></p>
+        </div>
+        <div class="ControlBox">
+            <p>CH F Dac Steps: 0<input type="range" id="ChFDacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChFDacEl2','ChFDacEl1'); addModifiedList('DACValueChannelF',this.value);">4095</p>
+            <p>CH F Dac Steps: <input type=number id="ChFDacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChFDacEl2','ChFDacEl0'); addModifiedList('DACValueChannelF',this.value);"></p>
+            <p>Ch F Dac Voltage: <input type="number" id="ChFDacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChFDacEl0','ChFDacEl1'); addModifiedList('DACValueChannelF',valByID('ChFDacEl1'));"></p>
+        </div>
+        <div class="ControlBox">
+            <p>CH G Dac Steps: 0<input type="range" id="ChGDacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChGDacEl2','ChGDacEl1'); addModifiedList('DACValueChannelG',this.value);">4095</p>
+            <p>CH G Dac Steps: <input type=number id="ChGDacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChGDacEl2','ChGDacEl0'); addModifiedList('DACValueChannelG',this.value);"></p>
+            <p>Ch G Dac Voltage: <input type="number" id="ChGDacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChGDacEl0','ChGDacEl1'); addModifiedList('DACValueChannelG',valByID('ChGDacEl1'));"></p>
+        </div>
+        <div class="ControlBox">
+            <p>CH H Dac Steps: 0<input type="range" id="ChHDacEl0" max=4095 min=0 step=1 value=2500 oninput="voltSlider(this.value,'ChHDacEl2','ChHDacEl1'); addModifiedList('DACValueChannelH',this.value);">4095</p>
+            <p>CH H Dac Steps: <input type=number id="ChHDacEl1" max=4095 min=0 step=1 value=0 oninput="voltSteps(this.value,'ChHDacEl2','ChHDacEl0'); addModifiedList('DACValueChannelH',this.value);"></p>
+            <p>Ch H Dac Voltage: <input type="number" id="ChHDacEl2" max=3.3 min=0 step=0.0008 value=0 oninput="voltField(this,'ChHDacEl0','ChHDacEl1'); addModifiedList('DACValueChannelH',valByID('ChHDacEl1'));"></p>
+        </div>
 
 
     </div>
@@ -285,6 +422,22 @@
             <p>CH D Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChDDelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChDWidthEl','ChDMsgEl'); addModifiedList('DelayInputChannelD',this.value);"> Width (Clock Periods) <input type="number" id="ChDWidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChDDelayEl','ChDMsgEl'); addModifiedList('WidthInputChannelD',this.value);">
             <div id="ChDMsgEl"></div>
         </div>
+        <div class="ControlBox">
+            <p>CH E Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChEDelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChEWidthEl','ChEMsgEl'); addModifiedList('DelayInputChannelE',this.value);"> Width (Clock Periods) <input type="number" id="ChEWidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChEDelayEl','ChEMsgEl'); addModifiedList('WidthInputChannelE',this.value);">
+            <div id="ChAMsgEl"></div>
+        </div>
+        <div class="ControlBox">
+            <p>CH F Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChFDelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChFWidthEl','ChFMsgEl'); addModifiedList('DelayInputChannelF',this.value);"> Width (Clock Periods) <input type="number" id="ChFWidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChFDelayEl','ChFMsgEl'); addModifiedList('WidthInputChannelF',this.value);">
+            <div id="ChBMsgEl"></div>
+        </div>
+        <div class="ControlBox">
+            <p>CH G Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChGDelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChGWidthEl','ChGMsgEl'); addModifiedList('DelayInputChannelG',this.value);"> Width (Clock Periods) <input type="number" id="ChGWidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChGDelayEl','ChGMsgEl'); addModifiedList('WidthInputChannelG',this.value);">
+            <div id="ChCMsgEl"></div>
+        </div>
+        <div class="ControlBox">
+            <p>CH H Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChHDelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChHWidthEl','ChHMsgEl'); addModifiedList('DelayInputChannelH',this.value);"> Width (Clock Periods) <input type="number" id="ChHWidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChHDelayEl','ChHMsgEl'); addModifiedList('WidthInputChannelH',this.value);">
+            <div id="ChDMsgEl"></div>
+        </div>        
         <div class="ControlBox">
             <p>Trigger Output CH-0 Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChSNDelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChSNWidthEl','ChSNMsgEl'); addModifiedList('DelayTriggerOutputChannel0',this.value);"> Width (Clock Periods) <input type="number" id="ChSNWidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChSNDelayEl','ChSNMsgEl'); addModifiedList('WidthTriggerOutputChannel0',this.value);">
             <div id="ChSNMsgEl"></div>
@@ -655,7 +808,11 @@
                 <option value="Input Channel-A">Input Channel-A</option>
                 <option value="Input Channel-B">Input Channel-B</option>	
                 <option value="Input Channel-C">Input Channel-C</option>	
-                <option value="Input Channel-D">Input Channel-D</option>	
+                <option value="Input Channel-D">Input Channel-D</option>
+                <option value="Input Channel-E">Input Channel-A</option>
+                <option value="Input Channel-F">Input Channel-B</option>	
+                <option value="Input Channel-G">Input Channel-C</option>
+                <option value="Input Channel-H">Input Channel-D</option>
                 </select>
 	
    </div>
