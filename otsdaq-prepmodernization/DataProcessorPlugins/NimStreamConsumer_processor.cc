@@ -6,7 +6,7 @@
 
 using namespace ots;
 
-//========================================================================================================================
+//==============================================================================
 NimStreamConsumer::NimStreamConsumer(std::string              supervisorApplicationUID,
                                      std::string              bufferUID,
                                      std::string              processorUID,
@@ -23,22 +23,22 @@ NimStreamConsumer::NimStreamConsumer(std::string              supervisorApplicat
 {
 }
 
-//========================================================================================================================
+//==============================================================================
 NimStreamConsumer::~NimStreamConsumer(void) { timeline.clear(); }
 
-//========================================================================================================================
+//==============================================================================
 // void NimStreamConsumer::startProcessingData(std::string runNumber)
 // {
 // 	DataConsumer::startProcessingData(runNumber);
 // }
 //
-// //========================================================================================================================
+// //==============================================================================
 // void NimStreamConsumer::stopProcessingData(void)
 // {
 // 	DataConsumer::stopProcessingData();
 // }
 
-//========================================================================================================================
+//==============================================================================
 bool NimStreamConsumer::workLoopThread(toolbox::task::WorkLoop* workLoop)
 {
 	//__MOUT__ << DataProcessor::processorUID_ << " running, because workloop: " <<
@@ -76,7 +76,7 @@ bool NimStreamConsumer::workLoopThread(toolbox::task::WorkLoop* workLoop)
 	return WorkLoop::continueWorkLoop_;
 }
 
-//========================================================================================================================
+//==============================================================================
 void NimStreamConsumer::fastRead(void)
 {
 	__MOUT__ << processorUID_ << " running!" << std::endl;
@@ -96,7 +96,7 @@ void NimStreamConsumer::fastRead(void)
 	DataConsumer::setReadSubBuffer<std::string, std::map<std::string, std::string>>();
 }
 
-//========================================================================================================================
+//==============================================================================
 void NimStreamConsumer::slowRead(void)
 {
 	__MOUT__ << DataProcessor::processorUID_ << " running!" << std::endl;
@@ -117,7 +117,7 @@ void NimStreamConsumer::slowRead(void)
 	__MOUT__ << DataProcessor::processorUID_ << " UID: " << supervisorApplicationUID_
 	         << std::endl;
 }
-//=========================================================================================================================
+//===============================================================================
 std::string NimStreamConsumer::getNext(std::map<std::string, std::string> args)
 {
 	timeline_pt              closePt;

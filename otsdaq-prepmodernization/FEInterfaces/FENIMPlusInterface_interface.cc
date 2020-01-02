@@ -36,10 +36,10 @@ FENIMPlusInterface::FENIMPlusInterface(const std::string&       interfaceUID,
 }
 	    
 
-//========================================================================================================================
+//==============================================================================
 FENIMPlusInterface::~FENIMPlusInterface(void) {}
 
-//========================================================================================================================
+//==============================================================================
 void FENIMPlusInterface::configure(void)
 {
 	__CFG_COUT__ << "configure" << std::endl;
@@ -956,28 +956,28 @@ void FENIMPlusInterface::configure(void)
 	__CFG_COUT__ << "Done with configuring." << std::endl;
 }  // end configure()
 
-//========================================================================================================================
+//==============================================================================
 void FENIMPlusInterface::halt(void)
 {
 	__CFG_COUT__ << "\tHalt" << std::endl;
 	stop();
 }
 
-//========================================================================================================================
+//==============================================================================
 void FENIMPlusInterface::pause(void)
 {
 	__CFG_COUT__ << "\tPause" << std::endl;
 	stop();
 }
 
-//========================================================================================================================
+//==============================================================================
 void FENIMPlusInterface::resume(void)
 {
 	__CFG_COUT__ << "\tResume" << std::endl;
 	start("");
 }
 
-//========================================================================================================================
+//==============================================================================
 void FENIMPlusInterface::start(std::string runNumber)
 {
 	runNumber_ = runNumber;
@@ -1026,7 +1026,7 @@ void FENIMPlusInterface::start(std::string runNumber)
 	__CFG_COUT__ << "\tStart Done" << std::endl;
 }
 
-//========================================================================================================================
+//==============================================================================
 void FENIMPlusInterface::stop(void)
 {
 	std::string writeBuffer;
@@ -1176,7 +1176,7 @@ void FENIMPlusInterface::stop(void)
 	OtsUDPHardware::write(writeBuffer);
 }
 
-//========================================================================================================================
+//==============================================================================
 bool FENIMPlusInterface::running(void)
 {
 	std::string writeBuffer;
@@ -1276,7 +1276,7 @@ bool FENIMPlusInterface::running(void)
 	return false;
 }  // end running()
 
-////========================================================================================================================
+////==============================================================================
 // void FENIMPlusInterface::FEMacroGenerateTriggers(FEVInterface::frontEndMacroInArgs_t
 // argsIn, 		FEVInterface::frontEndMacroOutArgs_t argsOut)
 //{
@@ -1309,7 +1309,7 @@ bool FENIMPlusInterface::running(void)
 //	__CFG_COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
 //}
 
-//========================================================================================================================
+//==============================================================================
 void FENIMPlusInterface::FEMacroGenerateTriggers(__ARGS__)
 {
 	__CFG_COUT__ << "FEMacroGenerateTriggers" << __E__;
@@ -1371,7 +1371,7 @@ void FENIMPlusInterface::FEMacroGenerateTriggers(__ARGS__)
 	__CFG_COUT__ << "triggersWereLaunched " << triggersWereLaunched << __E__;
 }
 
-//========================================================================================================================
+//==============================================================================
 void FENIMPlusInterface::changeDACLevelv1(const std::string& channelName, unsigned int dacValue)//Sets DAC values for a Nim+ v1 Board - WILL NOT SET CORRECTLY FOR OTHER VERSIONS, MUST USE SPECIFIC BOARD VERSION FUNCTION!
 {
 	std::string writeBuffer;

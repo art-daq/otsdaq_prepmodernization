@@ -3,7 +3,7 @@
 
 using namespace ots;
 
-//========================================================================================================================
+//==============================================================================
 BurstDataAndTimeSaverConsumer::BurstDataAndTimeSaverConsumer(
     std::string              supervisorApplicationUID,
     std::string              bufferUID,
@@ -19,10 +19,10 @@ BurstDataAndTimeSaverConsumer::BurstDataAndTimeSaverConsumer(
 {
 }
 
-//========================================================================================================================
+//==============================================================================
 BurstDataAndTimeSaverConsumer::~BurstDataAndTimeSaverConsumer(void) {}
 
-//========================================================================================================================
+//==============================================================================
 // write header to file before each packet
 void BurstDataAndTimeSaverConsumer::writePacketHeader(const std::string& data)
 {
