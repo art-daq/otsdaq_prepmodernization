@@ -49,7 +49,7 @@ void FENIMPlusInterface::configure(void)
 	ConfigurationTree optionalLink =
 	    theXDAQContextConfigTree_.getNode(theConfigurationPath_)
 	        .getNode("LinkToOptionalParameters");
-	bool usingOptionalParams = !optionalLink.isDisconnected();
+	bool usingOptionalParameters = !optionalLink.isDisconnected();
 	
 	std::string writeBuffer;
 	std::string readBuffer;
@@ -66,7 +66,7 @@ void FENIMPlusInterface::configure(void)
 	{
 		try
 		{
-			if((usingOptionalParams &&
+			if((usingOptionalParameters &&
 			    optionalLink.getNode("EnableClockResetDuringConfigure").getValue<bool>() &&
 			    optionalLink.getNode("PrimaryBoardConfig").getValue<bool>()))
 			{
@@ -111,10 +111,10 @@ void FENIMPlusInterface::configure(void)
 		OtsUDPFirmwareCore::writeAdvanced(
 		    writeBuffer,
 		    0x3,
-		    (usingOptionalParams
+		    (usingOptionalParameters
 			? (optionalLink.getNode("UseExternalClock").getValue<bool>() ? 1 : 0)
 			: 0) |
-			(((usingOptionalParams
+			(((usingOptionalParameters
 			      ? (optionalLink.getNode("ExternalClockSource").getValue<unsigned int>()
 				      ? (optionalLink.getNode("ExternalClockSource")
 					    .getValue<unsigned int>() -
@@ -128,10 +128,10 @@ void FENIMPlusInterface::configure(void)
 		);  // Choosing external := 1, internal := 0
 
 		unsigned val =
-		    (usingOptionalParams
+		    (usingOptionalParameters
 			? (optionalLink.getNode("UseExternalClock").getValue<bool>() ? 1 : 0)
 			: 0) |
-		    (((usingOptionalParams
+		    (((usingOptionalParameters
 			  ? (optionalLink.getNode("ExternalClockSource").getValue<unsigned int>()
 				  ? (optionalLink.getNode("ExternalClockSource")
 					.getValue<unsigned int>() -
@@ -141,7 +141,7 @@ void FENIMPlusInterface::configure(void)
 		      0x7)
 		    << 4);
 
-		__CFG_COUT__ << "CHOOSING EXTERNAL CLOCK: " << usingOptionalParams << " : "
+		__CFG_COUT__ << "CHOOSING EXTERNAL CLOCK: " << usingOptionalParameters << " : "
 			    << optionalLink.getNode("UseExternalClock").getValue<bool>() << " : "
 			    << optionalLink.getNode("ExternalClockSource").getValue<unsigned int>()
 			    << std::hex << " : " << val << std::dec << std::endl;
@@ -266,7 +266,7 @@ void FENIMPlusInterface::configure(void)
 	try
 	{ 
 		doWriteDACs =
-		    usingOptionalParams &&
+		    usingOptionalParameters &&
 		    optionalLink.getNode("EnableDACSetupDuringConfigure").getValue<bool>() &&
 		    optionalLink.getNode("PrimaryBoardConfig").getValue<bool>();
 		    //Only configure dacs if enabled and if this is the "Primary" configuration for this NIM+ Board, so that we avoid setting the DAC's (among other things) multiple times in one setup cycle
@@ -336,7 +336,7 @@ void FENIMPlusInterface::configure(void)
 			__CFG_COUT__ << "Logic input " << channelName << " : " << logicInput
 			             << " => sel_ctl_register_= " << std::hex << sel_ctl_register_
 			             << std::dec << std::endl;
-			if(usingOptionalParams)
+			if(usingOptionalParameters)
 			{
 				inputDelay = optionalLink.getNode("DelayInput" + channelName)
 				                 .getValue<unsigned int>();
@@ -356,7 +356,7 @@ void FENIMPlusInterface::configure(void)
 			// selectionRawInputMask |= (selectRawInput << channelCount); //Note! Inverted
 			// relative to user input (default to sigmod as input, i.e. not raw input ys)
 
-			invertPolarity = usingOptionalParams &&
+			invertPolarity = usingOptionalParameters &&
 			                 optionalLink.getNode("InvertPolarityInput" + channelName)
 			                     .getValue<bool>();
 
@@ -407,7 +407,7 @@ void FENIMPlusInterface::configure(void)
 		OtsUDPFirmwareCore::writeAdvanced(
 		    writeBuffer,
 		    addrOffset + 0x107,
-		    (usingOptionalParams
+		    (usingOptionalParameters
 		         ? optionalLink.getNode("40MHzClockDelay").getValue<unsigned int>()
 		         : 0));  // chooses a 40MHz clock phase relative to the accelerator clock
 		                 // (in increments of ~3ns)
@@ -418,7 +418,7 @@ void FENIMPlusInterface::configure(void)
 		    writeBuffer,
 		    addrOffset + 0x18008,
 		    //(1<<8) |  //disable sig_log masking with 40MHz clock block
-		    (usingOptionalParams
+		    (usingOptionalParameters
 		         ? optionalLink.getNode("ClockMaskSetup").getValue<unsigned int>()
 		         : 0));  // chooses a section of 40MHz clock
 		OtsUDPHardware::write(writeBuffer);
@@ -480,7 +480,7 @@ void FENIMPlusInterface::configure(void)
 			                               // evaluates to 0, and so on..
 				--outputChannelSourceSelect;
 
-			if(usingOptionalParams)
+			if(usingOptionalParameters)
 			{
 				outputDelay = optionalLink.getNode("DelayTriggerOutput" + channelName)
 				                  .getValue<unsigned int>();
@@ -609,11 +609,11 @@ void FENIMPlusInterface::configure(void)
 		//  bit 4 is 0/1 disable/enable for second input
 		__CFG_COUT__ << "Backpressure Selecting..." << std::endl;
 		outputBackpressureSelect =
-		    usingOptionalParams &&
+		    usingOptionalParameters &&
 		    optionalLink.getNode("EnableBackPressureNwFmcPta1").getValue<bool>();
 		backpressureMask |= outputBackpressureSelect << 3;
 		outputBackpressureSelect =
-		    usingOptionalParams &&
+		    usingOptionalParameters &&
 		    optionalLink.getNode("EnableBackPressureNwFmcPta2").getValue<bool>();
 		backpressureMask |= outputBackpressureSelect << 4;
 		writeBuffer.resize(0);
@@ -645,10 +645,10 @@ void FENIMPlusInterface::configure(void)
 				throw std::runtime_error(ss.str() + "Invalid output mux select!");
 			}
 
-			if(usingOptionalParams)
+			if(usingOptionalParameters)
 			{
 				outputInvertPolarity =
-				    usingOptionalParams &&
+				    usingOptionalParameters &&
 				    optionalLink.getNode("InvertPolarityOutput" + channelName)
 				        .getValue<bool>();
 				outputPolarityMask |= ((outputInvertPolarity ? 1 : 0) << channelCount);
@@ -682,7 +682,7 @@ void FENIMPlusInterface::configure(void)
 		             << std::endl;
 
 		// setting up trigger/clk output banks A and B
-		if(usingOptionalParams)
+		if(usingOptionalParameters)
 		{
 			// trigger/clock output banks are controlled by a single
 			//	64-bit register at address 0x200
@@ -756,7 +756,7 @@ void FENIMPlusInterface::configure(void)
 			// value of 4 is no-gate
 			// 0-3 are input channels A-D depending on polarity
 
-			if(usingOptionalParams)
+			if(usingOptionalParameters)
 			{
 				outputMuxSelect =
 				    optionalLink.getNode("BurstDataMuxSelect").getValue<unsigned int>();
@@ -1013,9 +1013,9 @@ void FENIMPlusInterface::start(std::string runNumber)
 	ConfigurationTree optionalLink =
 	    theXDAQContextConfigTree_.getNode(theConfigurationPath_)
 	        .getNode("LinkToOptionalParameters");
-	bool usingOptionalParams = !optionalLink.isDisconnected();
+	bool usingOptionalParameters = !optionalLink.isDisconnected();
 
-	if(usingOptionalParams && optionalLink.getNode("EnableBurstData").getValue<bool>())
+	if(usingOptionalParameters && optionalLink.getNode("EnableBurstData").getValue<bool>())
 	{
 		__CFG_COUT__ << "Enabling burst mode!" << __E__;
 		OtsUDPFirmwareCore::startBurst(writeBuffer);
@@ -1049,9 +1049,6 @@ void FENIMPlusInterface::stop(void)
 
 	uint64_t readQuadWord;
 
-	ConfigurationTree optionalLink =
-	    theXDAQContextConfigTree_.getNode(theConfigurationPath_)
-	        .getNode("LinkToOptionalParameters");
 	if(!optionalLink.isDisconnected())
 	{
 		std::string
@@ -1200,8 +1197,9 @@ bool FENIMPlusInterface::running(void)
 	ConfigurationTree optionalLink =
 	    theXDAQContextConfigTree_.getNode(theConfigurationPath_)
 	        .getNode("LinkToOptionalParameters");
-	bool usingOptionalParams = !optionalLink.isDisconnected();
+	bool usingOptionalParameters = !optionalLink.isDisconnected();
 
+	unsigned int sleepSeconds = 0;
 	// 0x0/0x8 to 0x4 to use edge detection
 	try
 	{
@@ -1256,11 +1254,11 @@ bool FENIMPlusInterface::running(void)
 		for(channelCount = 2; channelCount <= 2; --channelCount)
 		{
 			enable40MHzMask =
-			    usingOptionalParams && optionalLink
+			    usingOptionalParameters && optionalLink
 			                               .getNode("EnableClockMaskTriggerOutput" +
 			                                        outChannelNames[channelCount])
 			                               .getValue<bool>();
-			gateChannelVetoSel = usingOptionalParams
+			gateChannelVetoSel = usingOptionalParameters
 			                         ? optionalLink
 			                               .getNode("VetoSourceTriggerOutput" +
 			                                        outChannelNames[channelCount])
