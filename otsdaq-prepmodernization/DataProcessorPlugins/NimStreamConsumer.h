@@ -1,8 +1,8 @@
 #ifndef _ots_NimStreamConsumer_h_
 #define _ots_NimStreamConsumer_h_
 
-//#include "otsdaq-core/DataManager/DataConsumer.h"
-//#include "otsdaq-core/Configurable/Configurable.h"
+//#include "otsdaq/DataManager/DataConsumer.h"
+//#include "otsdaq/Configurable/Configurable.h"
 #include "otsdaq-utilities/Visualization/VisualVConsumer.h"
 
 

@@ -1,10 +1,11 @@
 #include "otsdaq-prepmodernization/FEInterfaces/FENIMPlusInterface.h"
-#include "otsdaq-core/MessageFacility/MessageFacility.h"
-#include "otsdaq-core/Macros/CoutMacros.h"
-#include "otsdaq-core/Macros/InterfacePluginMacros.h"
+#include "otsdaq/MessageFacility/MessageFacility.h"
+#include "otsdaq/Macros/CoutMacros.h"
+#include "otsdaq/Macros/InterfacePluginMacros.h"
 #include <iostream>     // std::cout, std::dec, std::hex, std::oct
 #include <set>
 #include <stdint.h>
+#include <algorithm>
 
 
 using namespace ots;
@@ -91,11 +92,11 @@ void FENIMPlusInterface::configure(void)
 	unsigned val = (usingOptionalParams?
 			(optionalLink.getNode("UseExternalClock").getValue<bool>()?1:0):
 			0)
-							|
-							(((usingOptionalParams?
-									(optionalLink.getNode("ExternalClockSource").getValue<unsigned int>()?
-											(optionalLink.getNode("ExternalClockSource").getValue<unsigned int>()-1)/*subtract 1 to normal index*/:0/*default to NW-FMC-PTA*/):
-											0)&0x7)<<4);
+																							|
+																							(((usingOptionalParams?
+																									(optionalLink.getNode("ExternalClockSource").getValue<unsigned int>()?
+																											(optionalLink.getNode("ExternalClockSource").getValue<unsigned int>()-1)/*subtract 1 to normal index*/:0/*default to NW-FMC-PTA*/):
+																											0)&0x7)<<4);
 
 	__CFG_COUT__ << "CHOOSING EXTERNAL CLOCK: " << usingOptionalParams
 			<< " : " << optionalLink.getNode("UseExternalClock").getValue<bool>()
@@ -103,50 +104,50 @@ void FENIMPlusInterface::configure(void)
 			<< std::hex << " : " << val << std::dec
 			<< std::endl;;
 	OtsUDPHardware::write(writeBuffer);
-	usleep(100000); //micro seconds
+	usleep(200000); //micro seconds
 
 
 
 
-	{ //debug read
-		//read NIM+ version (for debugging)
-		OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x5);//This can be removed when you want
-		OtsUDPHardware::read(writeBuffer,readBuffer);//This can be removed when you want
-
-		//read back clock lock loss status
-		OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x10);
-		OtsUDPHardware::read(writeBuffer,readQuadWord);
-		__CFG_COUT__ << "Clocks lock loss " << ((readQuadWord>>24)&0xF) << __E__;
-
-		//if clock lock was lost at some point, reset DCMs here
-		//	and check clock lock again
-		if(!((readQuadWord>>24)&0xF))
-		{
-			__CFG_COUT__ << "Re-locking clocks..." << std::endl;
-			//reset clock PLLs
-			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x999, /*data*/ 0x7); //reset wiz0, wiz1, and nimDacClk
-			OtsUDPHardware::write(writeBuffer);
-			usleep(100000); //micro seconds
-			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x999, /*data*/ 0); //unreset
-			OtsUDPHardware::write(writeBuffer);
-			usleep(100000); //micro seconds
-			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x999, /*data*/ 0x8); //reset phase shift output clock
-			OtsUDPHardware::write(writeBuffer);
-			usleep(100000); //micro seconds
-			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x999, /*data*/ 0); //unreset
-			OtsUDPHardware::write(writeBuffer);
-			usleep(100000); //micro seconds
-
-			//read back clock lock loss status
-			OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x10);
-			OtsUDPHardware::read(writeBuffer,readQuadWord);
-			__CFG_COUT__ << "Clocks lock loss " << ((readQuadWord>>24)&0xF) << __E__;
-		}
-
-		//read NIM+ version (for debugging)
-		OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x5);//This can be removed when you want
-		OtsUDPHardware::read(writeBuffer,readBuffer);//This can be removed when you want
-	}
+//	{ //debug read
+//		//read NIM+ version (for debugging)
+//		OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x5);//This can be removed when you want
+//		OtsUDPHardware::read(writeBuffer,readBuffer);//This can be removed when you want
+//
+//		//read back clock lock loss status
+//		OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x10);
+//		OtsUDPHardware::read(writeBuffer,readQuadWord);
+//		__CFG_COUT__ << "Clocks lock loss " << ((readQuadWord>>24)&0xF) << __E__;
+//
+//		//if clock lock was lost at some point, reset DCMs here
+//		//	and check clock lock again
+//		if(!((readQuadWord>>24)&0xF))
+//		{
+//			__CFG_COUT__ << "Re-locking clocks..." << std::endl;
+//			//reset clock PLLs
+//			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x999, /*data*/ 0x7); //reset wiz0, wiz1, and nimDacClk
+//			OtsUDPHardware::write(writeBuffer);
+//			usleep(100000); //micro seconds
+//			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x999, /*data*/ 0); //unreset
+//			OtsUDPHardware::write(writeBuffer);
+//			usleep(100000); //micro seconds
+//			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x999, /*data*/ 0x8); //reset phase shift output clock
+//			OtsUDPHardware::write(writeBuffer);
+//			usleep(100000); //micro seconds
+//			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x999, /*data*/ 0); //unreset
+//			OtsUDPHardware::write(writeBuffer);
+//			usleep(100000); //micro seconds
+//
+//			//read back clock lock loss status
+//			OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x10);
+//			OtsUDPHardware::read(writeBuffer,readQuadWord);
+//			__CFG_COUT__ << "Clocks lock loss " << ((readQuadWord>>24)&0xF) << __E__;
+//		}
+//
+//		//read NIM+ version (for debugging)
+//		OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x5);//This can be removed when you want
+//		OtsUDPHardware::read(writeBuffer,readBuffer);//This can be removed when you want
+//	}
 
 
 
@@ -367,15 +368,12 @@ void FENIMPlusInterface::configure(void)
 		unsigned int gateChannelVetoSel[3] = {0,0,0};
 
 		__CFG_COUT__ << "Setting up output channels..." << std::endl;
-		//there are 3 output channels (alias: signorm, sigcms1, sigcms2)
-		std::array<std::string,3> outChannelNames = {"Channel0","Channel1","Channel2"};
-		for(const auto &channelName : outChannelNames)
+		for(const auto &channelName : outChannelNames_)
 		{
-			outputChannelSourceSelect = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode(
-					"TriggerInput" + channelName).getValue<unsigned int>(); //0: sig_log   or    1: sig_norm/ch0
+			outputChannelSourceSelect = selectOutputChannelSource(theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode(
+					"TriggerInput" + channelName).getValue<unsigned int>()); //0: sig_log   or    1: sig_norm/ch0
+
 			__CFG_COUT__ << "TriggerInput for " << channelName << " is " << outputChannelSourceSelect << std::endl;
-			if(outputChannelSourceSelect) //if non-default, subtract 1 so choice 1 evaluates to 0, and so on..
-				--outputChannelSourceSelect;
 
 			if(usingOptionalParams)
 			{
@@ -396,21 +394,18 @@ void FENIMPlusInterface::configure(void)
 				else //outputWidth == 0
 					outputModMask = 0; //disables output!
 
-				outputTimeVetoDuration = optionalLink.getNode("TimeVetoTriggerOutput" +
-						channelName).getValue<unsigned int>(); //0 ignores time veto, units of 3ns (NIM+X) or 6ns (NIM+)
-				outputPrescaleCount = optionalLink.getNode("PrescaleTriggerOutput" +
-						channelName).getValue<unsigned int>();
-				outputBackpressureSelect = optionalLink.getNode("BackpressureTriggerOutput" +
-						channelName).getValue<bool>();
-				gateChannelVetoSel[channelCount] = optionalLink.getNode("VetoSourceTriggerOutput" +
-						channelName).getValue<int>();
+				outputTimeVetoDuration           = optionalLink.getNode("TimeVetoTriggerOutput"     + channelName).getValue<unsigned int>(); //0 ignores time veto, units of 3ns (NIM+X) or 6ns (NIM+)
+				outputPrescaleCount              = optionalLink.getNode("PrescaleTriggerOutput"     + channelName).getValue<unsigned int>();
+				outputBackpressureSelect         = optionalLink.getNode("BackpressureTriggerOutput" + channelName).getValue<bool>();
+				gateChannelVetoSel[channelCount] = optionalLink.getNode("VetoSourceTriggerOutput"   + channelName).getValue<int>();
 				__CFG_COUT__ << "Raw gateChannelVetoSelect for " << channelName << " is " << gateChannelVetoSel[channelCount] << std::endl;
 				//0/1 := No Veto, 2-5 := Input_A-D		
 
 			}
 			else //defaults
 			{
-				outputModMask = 0xFFF; outputWidth = 0;
+				outputModMask = 0xFFF;
+				outputWidth = 0;
 				outputTimeVetoDuration = 0;
 				outputPrescaleCount = 0;
 				outputBackpressureSelect = false;
@@ -423,22 +418,20 @@ void FENIMPlusInterface::configure(void)
 
 			backpressureMask |= (outputBackpressureSelect?1:0) << channelCount;
 
-			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelCount==0?0x4:(0x18016 +
-					channelCount - 1), 0x33); //reset output channel block (bits 4/5 are reseting ch1/2)
+			//reset output channel block (bits 4/5 are reseting ch1/2)
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelCount==0?0x4:(0x18016 + channelCount - 1), 0x33);
 			OtsUDPHardware::write(writeBuffer);
 
-			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelCount==0?0x2:(0x18002 +
-					channelCount - 1), outputModMask); //set output channel width/delay mask
+			//set output channel width/delay mask
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelCount==0?0x2:(0x18002 + channelCount - 1), outputModMask);
 			OtsUDPHardware::write(writeBuffer);
 
-			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x106 + channelCount*0x100,
-					outputWidth | (uint64_t(outputWidth?1:0/*enable*/)<<63)); //set output channel long width count
+			//set output channel long width count
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x106 + channelCount*0x100, outputWidth | (uint64_t(outputWidth?1:0/*enable*/)<<63));
 			OtsUDPHardware::write(writeBuffer);
 
-			__CFG_COUT__ << "Output word for " << channelName << " is " << std::bitset<64>(outputModMask) <<
-					std::endl;
-			__CFG_COUT__ << "Output delay of " << outputDelay << " and an extended width of " <<
-					outputWidth << std::endl;
+			__CFG_COUT__ << "Output word for " << channelName << " is " << std::bitset<64>(outputModMask) << std::endl;
+			__CFG_COUT__ << "Output delay of " << outputDelay << " and an extended width of " << outputWidth << std::endl;
 
 			if(channelCount)
 			{
@@ -662,58 +655,31 @@ void FENIMPlusInterface::configure(void)
 		OtsUDPHardware::write(writeBuffer);
 		__CFG_COUT__ << " sel_ctl_register_: 3" << std::bitset<16>(sel_ctl_register_) << std::endl;
 
-
-
-		unsigned int sigGenCount = optionalLink.getNode("SignalGeneratorPulseCount").getValue<unsigned int>();
-		unsigned int sigGenHighPer = optionalLink.getNode("SignalGeneratorHighPeriod").getValue<unsigned int>();
-		unsigned int sigGenLowPer = optionalLink.getNode("SignalGeneratorLowPeriod").getValue<unsigned int>();
-		bool sigGenPolarity = optionalLink.getNode("SignalGeneratorInvertPolarity").getValue<bool>();
-		unsigned int sigGenPolarityMask = (sigGenPolarity?1:0);
-
-
-
-		if (optionalLink.getNode("SignalGeneratorEnable").getValue<bool>())
+		//Signal Generator configuration
+		if (false && optionalLink.getNode("SignalGeneratorEnable").getValue<bool>())
 		{
-			nimResets_.set(5); //set bit 5 in resets to 1 to force a sig gen reset)
-			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, nimResets_.to_ulong()); //reset sig gen
-			OtsUDPHardware::write(writeBuffer);
+			configureSignalGenerator(
+					optionalLink.getNode  ("SignalGeneratorPulseCount")    .getValue<unsigned int>()
+					, optionalLink.getNode("SignalGeneratorHighPeriod")    .getValue<unsigned int>()
+					, optionalLink.getNode("SignalGeneratorLowPeriod")     .getValue<unsigned int>()
+					, optionalLink.getNode("SignalGeneratorInvertPolarity").getValue<bool>()
+			);
 
-			__CFG_COUT__ << "Resets all for sig gen!" << std::endl;
+			__CFG_COUT__
+			<< "Configured signal generator with a count of " << optionalLink.getNode("SignalGeneratorPulseCount").getValue<unsigned int>()
+			<< " (0 is continuous output), a high period of " << optionalLink.getNode("SignalGeneratorHighPeriod").getValue<unsigned int>()
+			<< ", a low period of " <<  optionalLink.getNode("SignalGeneratorLowPeriod").getValue<unsigned int>()
+			<< ", and output inversion set to " << optionalLink.getNode("SignalGeneratorInvertPolarity").getValue<bool>()
+			<< std::endl;
 
-			//signal generator setup
-			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18005, sigGenCount); //sig gen pulse count
-			OtsUDPHardware::write(writeBuffer);
-			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18006, sigGenHighPer); //sig gen high per
-			OtsUDPHardware::write(writeBuffer);
-			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18007, sigGenLowPer); //sig gen low per
-			OtsUDPHardware::write(writeBuffer);
-			writeBuffer.resize(0);
-			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x1800D, sigGenPolarityMask); //sig gen polarity
-			OtsUDPHardware::write(writeBuffer);
-
-			__CFG_COUT__ << "Configured signal generator with a count of " << sigGenCount << " (0 is continuous output), a high period of " <<
-					sigGenHighPer << ", a low period of " << sigGenLowPer << ", and output inversion set to " << sigGenPolarity << std::endl;
-
-			nimResets_.reset(5); //reset bit 5 in resets to 0 to unreset sig gen
-			nimEnables_.set(5); //set bit 5 in enables to 1 to enable sig gen
+			enableSignalGenerator(true);
+			__CFG_COUT__ << "Signal Generator enabled" << std::endl;
 		}
 		else
 		{
-			nimResets_.set(5); //set bit 5 in resets to 1 to make sure sig gen is held in reset
-			nimEnables_.reset(5); //set bit 5 in enables to 0 to disable sig gen
+			enableSignalGenerator(false);
 			__CFG_COUT__ << "Signal Generator disabled" << std::endl;
 		}
-
-		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, nimResets_.to_ulong()); //set sig gen in or out of reset
-		OtsUDPHardware::write(writeBuffer);
-		__CFG_COUT__ << "Nim Resets (after sig gen setup) set to " << nimResets_ << std::endl;
-
-
-		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18001, nimEnables_.to_ulong()); //enable or disable sig gen
-		OtsUDPHardware::write(writeBuffer);
 		__CFG_COUT__ << "Nim Enables (after sig gen setup) set to " << nimEnables_ << std::endl;
 
 
@@ -795,14 +761,13 @@ void FENIMPlusInterface::start(std::string runNumber)
 	//0x18000 ==> counter resets
 	nimResets_.set(); //set all bits to 1
 	nimResets_.reset(6); //do not reset acc sync block
-	nimResets_.reset(5); //do not reset sig gen block
+
 	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, nimResets_.to_ulong()); //reset everything (counters, e.g. sig_log and sig_norm/cms1/cms2 counters, and vetos/ps)
 	OtsUDPHardware::write(writeBuffer);
 
 	nimResets_.reset(); //reset all bits to 0
-	OtsUDPFirmwareCore::writeAdvanced(writeBuffer,
-			0x18000, //address,
-			nimResets_.to_ulong() ); //unreset sig_log and sig_norm/cms1/cms2 counters
+	nimResets_.set(5); //keep always signal generator in reset unless it is needed in running!
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, nimResets_.to_ulong() ); //unreset sig_log and sig_norm/cms1/cms2 counters
 	OtsUDPHardware::write(writeBuffer);
 
 	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
@@ -831,7 +796,10 @@ void FENIMPlusInterface::stop(void)
 			0x6 /*address*/,
 			(sel_ctl_register_) & (~(1<<1))); //disable siglog block
 	OtsUDPHardware::write(writeBuffer);
+	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
 
+	//Stop signal generator and put it back in reset
+	stopSignalGenerator();
 
 
 	__CFG_COUT__ << "\tStop" << std::endl;
@@ -848,7 +816,6 @@ void FENIMPlusInterface::stop(void)
 
 	uint64_t readQuadWord;
 
-	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
 	if(!optionalLink.isDisconnected())
 	{
 
@@ -982,74 +949,64 @@ bool FENIMPlusInterface::running(void)
 {
 	std::string writeBuffer;
 
-	////////////////////////////////
-	////////////////////////////////
-	// long sleep so trigger numbers match
-	//sleep(22);
-	//sleep(1);
-
-
-
 	__CFG_COUT__ << "Running" << std::endl;
 	__CFG_COUT__ << " sel_ctl_register_: " << std::bitset<16>(sel_ctl_register_) << std::endl;
 
-	//		//example!
-	//		//play with array of 8 LEDs at address 0x1003
-
 	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
-	bool usingOptionalParams =
-			!optionalLink.isDisconnected();
+	bool usingOptionalParameters = !optionalLink.isDisconnected();
 
 	// 0x0/0x8 to 0x4 to use edge detection
 	try
 	{
-		unsigned int sleepSeconds = 0;
-		if(usingOptionalParams)
-		{
-			try
-			{
-				sleepSeconds = optionalLink.getNode("SecondsDelayBeforeStartingTriggers").getValue<unsigned int>();
-			}
-			catch(...)
-			{
-				__CFG_COUT__ << "Ingore missing SecondsDelayBeforeStartingTriggers field..." << __E__;
-			}
-		}
-
-		//if(!sleepSeconds) sleepSeconds = 22;
-		__CFG_COUT__ << "Sleeping for " << sleepSeconds << " seconds..." << __E__;
-		sleep(sleepSeconds);
-
-		unsigned char channelCount = 0;
-		bool enable40MHzMask;
-		unsigned int gateChannelVetoSel;
-
-		//there are 3 output channels (alias: signorm, sigcms1, sigcms2)
-		std::array<std::string,3> outChannelNames = {"Channel0","Channel1","Channel2"};
 
 		__CFG_COUT__ << "Enabling output trigger channels!" << std::endl;
-
 		//must do channel 0 last!! (synchronously enables all 3 channels)
-		for(channelCount = 2; channelCount <= 2; --channelCount)
+		for(unsigned char channelCount = 2; channelCount <= 2; --channelCount)
 		{
-			enable40MHzMask = usingOptionalParams && optionalLink.getNode("EnableClockMaskTriggerOutput" +
-					outChannelNames[channelCount]).getValue<bool>();
-			gateChannelVetoSel = usingOptionalParams?
-					optionalLink.getNode("VetoSourceTriggerOutput" + outChannelNames[channelCount]).getValue<int>():
-					0;
-
-			OtsUDPFirmwareCore::writeAdvanced(writeBuffer,
-					channelCount==0?0x4:(0x18016 + channelCount - 1) ,
-							(enable40MHzMask?0x0:0x8) | (gateChannelVetoSel <= 1?0:(1<<2)) ); //unreset output channel block
+			bool          enable40MHzMask    = false;
+			unsigned int  gateChannelVetoSel = 0;
+			if(usingOptionalParameters)
+			{
+				enable40MHzMask    = optionalLink.getNode("EnableClockMaskTriggerOutput" + outChannelNames_[channelCount]).getValue<bool>();
+				gateChannelVetoSel = optionalLink.getNode("VetoSourceTriggerOutput"      + outChannelNames_[channelCount]).getValue<int>();
+			}
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelCount==0?0x4:(0x18016 + channelCount-1), (enable40MHzMask?0x0:0x8) | (gateChannelVetoSel <= 1?0:(1<<2)) ); //unreset output channel block
 			OtsUDPHardware::write(writeBuffer);
 		}
+		if(usingOptionalParameters)
+		{
+			//Sending trigger pattern
+			if(optionalLink.getNode("SignalGeneratorEnable").getValue<bool>())//THIS IS A SUPER PATCH TO RUN JIM FREEMAN STUFF! I have put false on all places where the variable SignalGeneratorEnable is used!
+			{
+				sendPatternTrigger(0xFFF000FFFFFF,"Channel1");
+				__CFG_COUT__ << "Sending trigger pattern!" << __E__;
+			}
 
-		__CFG_COUT__ << "Enabling siglog block!" << __E__;
-		__CFG_COUT__ << " sel_ctl_register_: " << std::bitset<16>(sel_ctl_register_) << std::endl;
-		OtsUDPFirmwareCore::writeAdvanced(writeBuffer,
-				0x6 ,
-				sel_ctl_register_); //enable sig mod block and restore original register value
-		OtsUDPHardware::write(writeBuffer);
+			//Sleeping some time
+			unsigned int sleepSeconds = optionalLink.getNode("SecondsDelayBeforeStartingTriggers").getValue<unsigned int>();
+			__CFG_COUT__ << "Sleeping for " << sleepSeconds << " seconds..." << __E__;
+			for(unsigned int second=0; second<sleepSeconds*10; second++)
+			{
+				if(WorkLoop::continueWorkLoop_ == false)
+					return false;
+				usleep(100000);//100ms so sleepSeconds*10
+			}
+
+		}
+		//Using signal generator or logic
+		if (false && usingOptionalParameters && optionalLink.getNode("SignalGeneratorEnable").getValue<bool>() )
+		{
+			__CFG_COUT__ << "Enabling signal generator!" << __E__;
+			startSignalGenerator();
+		}
+		else
+		{
+			__CFG_COUT__ << "Enabling logic block!" << __E__;
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer,
+					0x6 ,
+					sel_ctl_register_); //enable sig mod block and restore original register value
+			OtsUDPHardware::write(writeBuffer);
+		}
 	}
 	catch(const std::runtime_error &e)
 	{
@@ -1197,6 +1154,207 @@ void FENIMPlusInterface::changeDACLevel(const std::string& channelName, unsigned
 	OtsUDPHardware::write(writeBuffer);
 	//sleep(1); // give a little time to the slow DAC ASIC write
 
+}
+
+//========================================================================================================================
+void FENIMPlusInterface::configureSignalGenerator(
+		unsigned int signalGeneratorPulseCount
+		, unsigned int signalGeneratorHighPeriod
+		, unsigned int signalGeneratorLowPeriod
+		, bool signalGeneratorInvertPolarity)
+{
+	stopSignalGenerator();
+	__CFG_COUT__ << "Resets all for sig gen!" << std::endl;
+
+	//signal generator setup
+	std::string writeBuffer;
+	writeBuffer.resize(0);
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18005, signalGeneratorPulseCount); //sig gen pulse count
+	OtsUDPHardware::write(writeBuffer);
+	writeBuffer.resize(0);
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18006, signalGeneratorHighPeriod); //sig gen high per
+	OtsUDPHardware::write(writeBuffer);
+	writeBuffer.resize(0);
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18007, signalGeneratorLowPeriod); //sig gen low per
+	OtsUDPHardware::write(writeBuffer);
+	writeBuffer.resize(0);
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x1800D, (signalGeneratorInvertPolarity?1:0)); //sig gen polarity
+	OtsUDPHardware::write(writeBuffer);
+}
+
+//========================================================================================================================
+void FENIMPlusInterface::startSignalGenerator(void)
+{
+	std::string writeBuffer;
+	nimResets_.set(5); //set bit 5 in resets to 1 to force a sig gen reset
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, nimResets_.to_ulong()); //reset sig gen
+	OtsUDPHardware::write(writeBuffer);
+
+	nimResets_.reset(5); //set bit 5 in resets to 0 to start pulses!
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, nimResets_.to_ulong()); //reset sig gen
+	OtsUDPHardware::write(writeBuffer);
+}
+
+//========================================================================================================================
+void FENIMPlusInterface::stopSignalGenerator (void)
+{
+	nimResets_.set(5); //set bit 5 in resets to 1 to force a sig gen reset
+	std::string writeBuffer;
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, nimResets_.to_ulong()); //reset sig gen
+	OtsUDPHardware::write(writeBuffer);
+}
+
+//========================================================================================================================
+void FENIMPlusInterface::enableSignalGenerator(bool enable)
+{
+	if(enable)
+		nimEnables_.set(5); //set bit 5 in enables to 1 to enable sig gen
+	else
+		nimEnables_.reset(5); //set bit 5 in enables to 1 to enable sig gen
+
+	std::string writeBuffer;
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18001, nimEnables_.to_ulong()); //enable or disable sig gen
+	OtsUDPHardware::write(writeBuffer);
+}
+
+//========================================================================================================================
+unsigned int FENIMPlusInterface::selectOutputChannelSource(unsigned int value)
+{
+	//The register accepts 0 for SigLog, 1 for SigNorm
+	//Is default which we assume to be SigLog
+	//If the configuration value is 1 = SigLog  => register value = 0
+	//If the configuration value is 2 = SigNorm => register value = 1
+	//If the configuration value is 3 = SignalGenerator => register value = 2
+	if(value > 0)
+		return value-1;
+	return value;
+}
+
+//========================================================================================================================
+void FENIMPlusInterface::sendPatternTrigger(uint64_t patternToSend, std::string channelName)
+{
+
+	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
+	bool usingOptionalParams = !optionalLink.isDisconnected();
+	if(!usingOptionalParams) return;
+
+	__CFG_COUT__ << "Setting up output channels..." << std::endl;
+	//there are 3 output channels (alias: signorm, sigcms1, sigcms2)
+	unsigned int channelNumber = 0;
+	for(const auto &tmpChannelName : outChannelNames_)
+	{
+		if(channelName == tmpChannelName) break;
+		++channelNumber;
+	}
+	__CFG_COUT__ << "Channel: " << channelName << " is  number " << channelNumber << std::endl;
+
+	std::string writeBuffer;
+	try
+	{
+		//select signal generator (0x80 for sigNorm)
+		if(channelNumber == 0)
+		{
+			//WARNING IF YOU SET A PATTERN ON SIGNORM THEN YOU RESET THE EVENTUAL PATTERN ON
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18018, 0x80);
+			OtsUDPHardware::write(writeBuffer);
+		}
+		else
+		{
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, (0x18018 + channelNumber - 1), 0x2);
+			OtsUDPHardware::write(writeBuffer);
+		}
+		//setting the pattern to be send out
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelNumber==0?0x2:(0x18002 + channelNumber - 1), patternToSend);
+		OtsUDPHardware::write(writeBuffer);
+		__CFG_COUT__ << "Output word for " << channelName << " is " << std::bitset<64>(patternToSend) << std::endl;
+
+		configureSignalGenerator(1,2,2,true);
+		enableSignalGenerator(true);
+		startSignalGenerator();
+		stopSignalGenerator();
+		enableSignalGenerator(false);
+
+
+		//Restore channels to their configuration values
+		unsigned int tmpChannelNumber = 0;
+		for(const auto &tmpChannelName : outChannelNames_)
+		{
+			unsigned int outputChannelSourceSelect = selectOutputChannelSource(theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode(
+					"TriggerInput" + channelName).getValue<unsigned int>()); //0: sig_log   or    1: sig_norm/ch0
+			if(tmpChannelNumber == 0)
+			{
+				OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18018, 0x0);
+				OtsUDPHardware::write(writeBuffer);
+				__CFG_COUT__ << "Output channel select for " << tmpChannelName << " is " << std::hex << 0 << std::dec << std::endl;
+			}
+			else
+			{
+				OtsUDPFirmwareCore::writeAdvanced(writeBuffer, (0x18018 + channelNumber - 1), outputChannelSourceSelect);
+				OtsUDPHardware::write(writeBuffer);
+				__CFG_COUT__ << "Output channel select for " << tmpChannelName << " is " << std::hex << outputChannelSourceSelect << std::dec << std::endl;
+			}
+			++tmpChannelNumber;
+		}
+
+		uint64_t outputWidth;
+		uint64_t outputModMask;
+		unsigned int outputDelay     = optionalLink.getNode("DelayTriggerOutput" + channelName).getValue<unsigned int>();
+		unsigned int outputWidthMask = optionalLink.getNode("WidthTriggerOutput" + channelName).getValue<uint64_t>();
+
+		if(outputWidth != 0)
+		{
+			if(outputWidth > 64)
+				outputWidthMask = 64;
+			else
+			{
+				outputWidthMask = outputWidth;
+				outputWidth = 0;
+			}
+			outputModMask = (0xFFFFFFFFFFFFFFFF >> (64-outputWidthMask)) << outputDelay;
+		}
+		else //outputWidth == 0
+			outputModMask = 0; //disables output!
+
+
+		if(channelName == "Channel1")
+			outputModMask = 0xFFF000FFF;
+		//outputModMask = 0x3F03F;
+		//set output channel back to its default
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelNumber==0?0x2:(0x18002 + channelNumber - 1), outputModMask);
+		OtsUDPHardware::write(writeBuffer);
+		__CFG_COUT__ << "Writing back pattern for " << channelName << " is " << std::hex << outputModMask << std::dec << std::endl;
+
+		//Signal Generator configuration
+		if (false && optionalLink.getNode("SignalGeneratorEnable").getValue<bool>())
+		{
+			configureSignalGenerator(
+					optionalLink.getNode  ("SignalGeneratorPulseCount")    .getValue<unsigned int>()
+					, optionalLink.getNode("SignalGeneratorHighPeriod")    .getValue<unsigned int>()
+					, optionalLink.getNode("SignalGeneratorLowPeriod")     .getValue<unsigned int>()
+					, optionalLink.getNode("SignalGeneratorInvertPolarity").getValue<bool>()
+			);
+
+			__CFG_COUT__
+			<< "Configured signal generator with a count of " << optionalLink.getNode("SignalGeneratorPulseCount").getValue<unsigned int>()
+			<< " (0 is continuous output), a high period of " << optionalLink.getNode("SignalGeneratorHighPeriod").getValue<unsigned int>()
+			<< ", a low period of " <<  optionalLink.getNode("SignalGeneratorLowPeriod").getValue<unsigned int>()
+			<< ", and output inversion set to " << optionalLink.getNode("SignalGeneratorInvertPolarity").getValue<bool>()
+			<< std::endl;
+
+			enableSignalGenerator(true);
+			__CFG_COUT__ << "Signal Generator enabled" << std::endl;
+		}
+		else
+		{
+			enableSignalGenerator(false);
+			__CFG_COUT__ << "Signal Generator disabled" << std::endl;
+		}
+	}
+	catch(const std::runtime_error &e)
+	{
+		__CFG_COUT__ << "Failed to send trigger pattern pulse!\n" << e.what() << std::endl;
+		throw;
+	}
 }
 
 
