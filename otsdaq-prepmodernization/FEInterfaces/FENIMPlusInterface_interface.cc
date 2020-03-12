@@ -1449,14 +1449,14 @@ void FENIMPlusInterface::changeDACLevelv2(const std::string& channelName, unsign
 	//channelNameToAddressMap["ChannelD"] = 0xa;
 	//NIMPlus V1 - A = 0x2, B = 0x6, C = 0x9, D = 0xE
 	//NIMPlus v2 - CH A-H = 0x0-0x7
-	channelNameToAddressMap["ChannelA"] = 0x0;
-	channelNameToAddressMap["ChannelB"] = 0x1;
-	channelNameToAddressMap["ChannelC"] = 0x2;
-	channelNameToAddressMap["ChannelD"] = 0x3;
-	channelNameToAddressMap["ChannelE"] = 0x4;
-	channelNameToAddressMap["ChannelF"] = 0x5;
-	channelNameToAddressMap["ChannelG"] = 0x6;
-	channelNameToAddressMap["ChannelH"] = 0x7;
+	channelNameToAddressMap["ChannelA"] = 0x7;
+	channelNameToAddressMap["ChannelB"] = 0x3;
+	channelNameToAddressMap["ChannelC"] = 0x6;
+	channelNameToAddressMap["ChannelD"] = 0x2;
+	channelNameToAddressMap["ChannelE"] = 0x5;
+	channelNameToAddressMap["ChannelF"] = 0x1;
+	channelNameToAddressMap["ChannelG"] = 0x4;
+	channelNameToAddressMap["ChannelH"] = 0x0;
 	const std::string dacValueField = "DACValue";
 	writeBuffer.resize(0);
 	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ addrOffset + 0x1, /*data*/ 0x0);

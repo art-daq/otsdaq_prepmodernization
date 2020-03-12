@@ -88,7 +88,7 @@ add_subdirectory(otsdaq-prepmodernization)
 #add_subdirectory(test)
 
 # Documentation directory
-add_subdirectory(doc)
+#add_subdirectory(doc)
 
 # UPS
 add_subdirectory(ups)

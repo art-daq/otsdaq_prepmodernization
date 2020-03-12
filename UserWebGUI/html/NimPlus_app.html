@@ -407,7 +407,12 @@
     <div id="DWConfigCtl" class="Dropdown">
 
         <div class="ControlBox">
-            <p>CH A Delay/Width Config - </p> <br> Delay (Clock Periods) <input type="number" id="ChADelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChAWidthEl','ChAMsgEl'); addModifiedList('DelayInputChannelA',this.value);"> Width (Clock Periods) <input type="number" id="ChAWidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChADelayEl','ChAMsgEl'); addModifiedList('WidthInputChannelA',this.value);">
+            <p>CH A Delay/Width Config - </p> 
+            <br> 
+            Delay (Clock Periods) <input type="number" id="ChADelayEl" min=0 max=63 step=1 oninput="dwValidCheck(this.value,'ChAWidthEl','ChAMsgEl'); addModifiedList('DelayInputChannelA',this.value);"> 
+            Width (Clock Periods) <input type="number" id="ChAWidthEl" min=1 max=63 step=1 oninput="dwValidCheck(this.value,'ChADelayEl','ChAMsgEl'); addModifiedList('WidthInputChannelA',this.value);">
+        <input type="checkbox" id="ChAWidthOrPatternEl" onclick="addModifiedList('DealyWidthOrPattern');"><label for="ChAWidthOrPatternEl">Pattern</label>
+        Pattern (Clock Periods) <input type="number" id="ChAPatternEl" min=1 max=63 step=1 oninput="dwPatternCheck(this.value,'ChADelayEl','ChAMsgEl'); addModifiedList('PatternInputChannelA',this.value);">
             <div id="ChAMsgEl"></div>
         </div>
         <div class="ControlBox">
