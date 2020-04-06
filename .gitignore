@@ -11,3 +11,6 @@ prepmodenization_installed
 NoGitData/
 NoGitDatabases/
 UserWebGUI/UserWebGUI
+*.tmp
+*.bk
+*.tmp
