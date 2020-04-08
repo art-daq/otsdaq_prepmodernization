@@ -5,6 +5,13 @@
 	FECore
 	WorkLoopManager
 	Macros
+	TableCore
+	ConfigurationInterface
+	NetworkUtilities
+	${XDAQ_XERCES-C}
+	${MF_MESSAGELOGGER}
+	${Boost_SYSTEM_LIBRARY}
+	pthread
 )
 
 simple_plugin(FENIMPlusInterfaceV1 "interface"
