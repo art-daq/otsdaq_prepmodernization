@@ -43,7 +43,7 @@ void FENIMPlusInterfaceV1::configure(void)
 
 	std::string writeBuffer;
 	std::string readBuffer;
-	uint64_t readQuadWord;
+	//uint64_t readQuadWord;
 
 	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
 	bool usingOptionalParams = !optionalLink.isDisconnected();
@@ -354,7 +354,7 @@ void FENIMPlusInterfaceV1::configure(void)
 	try
 	{
 		unsigned char channelCount = 0;
-		bool enableOutput;
+	//	bool enableOutput;
 		unsigned int outputDelay;
 		unsigned int outputWidthMask; //max is 64 bit mask
 		uint64_t outputWidth;
@@ -1296,7 +1296,7 @@ void FENIMPlusInterfaceV1::sendPatternTrigger(uint64_t patternToSend, std::strin
 			++tmpChannelNumber;
 		}
 
-		uint64_t outputWidth;
+		uint64_t outputWidth = 0;
 		uint64_t outputModMask;
 		unsigned int outputDelay     = optionalLink.getNode("DelayTriggerOutput" + channelName).getValue<unsigned int>();
 		unsigned int outputWidthMask = optionalLink.getNode("WidthTriggerOutput" + channelName).getValue<uint64_t>();

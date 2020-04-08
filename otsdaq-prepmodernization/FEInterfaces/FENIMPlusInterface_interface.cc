@@ -452,7 +452,7 @@ void FENIMPlusInterface::configure(void)
 	try
 	{
 		unsigned char channelCount = 0;
-		bool          enableOutput;
+		//bool          enableOutput;
 		unsigned int  outputDelay;
 		unsigned int  outputWidthMask;  // max is 64 bit mask
 		uint64_t      outputWidth;
