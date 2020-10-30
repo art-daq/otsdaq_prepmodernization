@@ -1,0 +1,51 @@
+LogDebug:mfReceiveAndForward:otsdaq_utilities/otsdaq-utilities/Console/MF_ReceiveAndForward.cpp [142]	Starting...
+
+
+LogDebug:mfReceiveAndForward:otsdaq_utilities/otsdaq-utilities/Console/MF_ReceiveAndForward.cpp [149]	port parameter file:/home/uplegger/Programming/otsdaq/srcs/otsdaq_prepmodernization/data_ICARUS/MessageFacilityConfigurations/QuietForwarder.cfg
+
+
+LogDebug:mfReceiveAndForward:otsdaq_utilities/otsdaq-utilities/Console/MF_ReceiveAndForward.cpp [170]	Forwarding from: 30000 to: 127.0.0.1:30001
+
+
+LogDebug:mfReceiveAndForward:otsdaq_utilities/otsdaq-utilities/Console/MF_ReceiveAndForward.cpp [134]	set socket receive size to 0xa00000.
+|Info	|configureMessageFacility.cc|316|Message Facility Application . configured with: destinations:{console:{filename_delimit:"/srcs/" format_string:"|%L:%N:%f [%u]\t%m" threshold:"DEBUG" type:"OTS"} file:"" otsConsole:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+|Info	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/WebUsersUtilities/WebUsers.cc|666|User 'admin' is not a member of the default user group 'allUsers.' Assuming user account is inactive (permission level := 0).
+|Info	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/WebUsersUtilities/WebUsers.cc|2694|User 'admin' has locked out the system!
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Info	|TCPConnect.cc|371|Host resolved as 127.0.0.1
+|Info	|TCPConnect.cc|247|Resolving ip teddy01.dhcp.fnal.gov
+|Info	|configureMessageFacility.cc|316|Message Facility Application . configured with: destinations:{console:{filename_delimit:"/srcs/" format_string:"|%L:%N:%f [%u]\t%m" threshold:"DEBUG" type:"OTS"} file:"" otsConsole:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Info	|/home/uplegger/Programming/otsdaq/srcs/otsdaq_utilities/otsdaq-utilities/Console/ConsoleSupervisor.cc|193|INFO messages look like this.
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq_utilities/otsdaq-utilities/Console/ConsoleSupervisor.cc|194|WARNING messages look like this.
+|Error	|/home/uplegger/Programming/otsdaq/srcs/otsdaq_utilities/otsdaq-utilities/Console/ConsoleSupervisor.cc|195|ERROR messages look like this.
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Info	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|154|Private constructor for write access called.
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Info	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|154|Private constructor for write access called.
+|Info	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManagerRW.cc|447|Updating persistent active groups to /home/uplegger/Programming/otsdaq/srcs/otsdaq_prepmodernization/data_ICARUS/ServiceData/ActiveTableGroups.cfg ...
+|Info	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManagerRW.cc|461|Active Context table group: MainContext(1)
+|Info	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManagerRW.cc|463|Active Backbone table group: TableEditWizBackbone(5)
+|Info	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManagerRW.cc|465|Active Iterate table group: (-1)
+|Info	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManagerRW.cc|468|Active Configuration table group: NimPlusConfiguration(2)
+|Info	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/GatewaySupervisor/GatewaySupervisor.cc|1168|FSM configuration dump Link disconnected.
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Info	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/GatewaySupervisor/GatewaySupervisor.cc|1412|FSM configuration dump Link disconnected.
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Warning	|/home/uplegger/Programming/otsdaq/srcs/otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc|1358|Not loading group because it is not of type Context or Backbone (it is type 'Configuration').

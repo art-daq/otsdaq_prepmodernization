@@ -1,0 +1,170 @@
+{
+"document" : {
+"data" : {
+"NAME" : "DATA_MANAGER_SUPERVISOR_TABLE",
+"COMMENT" : "No comment.",
+"AUTHOR" : "admin",
+"CREATION_TIME" : 1582567360,
+"COL_TYPES" : {
+"SUPERVISOR_UID" : "STRING",
+"LINK_TO_DATA_BUFFER_TABLE" : "STRING",
+"LINK_TO_DATA_BUFFER_GROUP_ID" : "STRING",
+"COMMENT_DESCRIPTION" : "STRING",
+"AUTHOR" : "STRING",
+"RECORD_INSERTION_TIME" : "TIMESTAMP WITH TIMEZONE"
+},
+"DATA_SET" : [
+{
+"SUPERVISOR_UID" : "DataManagerSupervisorFSSR0",
+"LINK_TO_DATA_BUFFER_TABLE" : "DataBufferTable",
+"LINK_TO_DATA_BUFFER_GROUP_ID" : "DataManagerSupervisorFSSR0",
+"COMMENT_DESCRIPTION" : "",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1582567360"
+},
+{
+"SUPERVISOR_UID" : "DataManagerSupervisorFSSR1",
+"LINK_TO_DATA_BUFFER_TABLE" : "DataBufferTable",
+"LINK_TO_DATA_BUFFER_GROUP_ID" : "DataManagerSupervisorFSSR1",
+"COMMENT_DESCRIPTION" : "",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1582567360"
+},
+{
+"SUPERVISOR_UID" : "DataManagerSupervisorFSSR2",
+"LINK_TO_DATA_BUFFER_TABLE" : "DataBufferTable",
+"LINK_TO_DATA_BUFFER_GROUP_ID" : "DataManagerSupervisorFSSR2",
+"COMMENT_DESCRIPTION" : "",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1582567360"
+},
+{
+"SUPERVISOR_UID" : "VisualSupervisor0",
+"LINK_TO_DATA_BUFFER_TABLE" : "DataBufferTable",
+"LINK_TO_DATA_BUFFER_GROUP_ID" : "VisualDataManager",
+"COMMENT_DESCRIPTION" : "",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1582567360"
+},
+{
+"SUPERVISOR_UID" : "ARTDAQDataManagerStripsSupervisor2",
+"LINK_TO_DATA_BUFFER_TABLE" : "DataBufferTable",
+"LINK_TO_DATA_BUFFER_GROUP_ID" : "ARTDAQDataManagerStripsSupervisor2",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1582567360"
+},
+{
+"SUPERVISOR_UID" : "NimPlusDataManagerSupervisor0",
+"LINK_TO_DATA_BUFFER_TABLE" : "DataBufferTable",
+"LINK_TO_DATA_BUFFER_GROUP_ID" : "NimPlusDataManagerSupervisor0",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1582567360"
+}
+]
+},
+"metadata" : {
+
+},
+"search" : [
+
+]
+},
+"comments" : [
+
+],
+"origin" : {
+"source" : "template",
+"name" : "notprovided",
+"format" : "json",
+"created" : "2020-10-30T16:08:07.814-0500",
+"rawdata" : [
+
+]
+},
+"version" : "2",
+"entities" : [
+{
+"name" : "OTSROOT",
+"assigned" : "2020-10-30T16:08:07.815-0500"
+}
+],
+"tables" : [
+{
+"name" : "notprovided",
+"assigned" : "2020-10-30T16:08:07.815-0500"
+},
+{
+"name" : "NimPlusTable_v2",
+"assigned" : "2020-10-30T16:08:08.680-0500"
+}
+],
+"changelog" : "notprovided",
+"bookkeeping" : {
+"isdeleted" : false,
+"isreadonly" : false,
+"updates" : [
+{
+"event" : "addTable",
+"timestamp" : "2020-10-30T16:08:07.815-0500",
+"value" : {
+"name" : "notprovided",
+"assigned" : "2020-10-30T16:08:07.815-0500"
+}
+},
+{
+"event" : "setVersion",
+"timestamp" : "2020-10-30T16:08:07.815-0500",
+"value" : {
+"name" : "2",
+"assigned" : "2020-10-30T16:08:07.815-0500"
+}
+},
+{
+"event" : "setCollection",
+"timestamp" : "2020-10-30T16:08:07.815-0500",
+"value" : {
+"name" : "DataManagerSupervisorTable",
+"assigned" : "2020-10-30T16:08:07.815-0500"
+}
+},
+{
+"event" : "addEntity",
+"timestamp" : "2020-10-30T16:08:07.815-0500",
+"value" : {
+"name" : "OTSROOT",
+"assigned" : "2020-10-30T16:08:07.815-0500"
+}
+},
+{
+"event" : "addTable",
+"timestamp" : "2020-10-30T16:08:08.680-0500",
+"value" : {
+"name" : "NimPlusTable_v2",
+"assigned" : "2020-10-30T16:08:08.680-0500"
+}
+}
+],
+"created" : "2020-10-30T16:08:07.814-0500"
+},
+"_id" : {
+"$oid" : "4a4bffbf7bde40abad05a617"
+},
+"collection" : "DataManagerSupervisorTable",
+"aliases" : {
+"active" : [
+
+],
+"history" : [
+
+]
+},
+"runs" : [
+
+],
+"attachments" : [
+
+],
+"configtype" : "notprovided"
+}

@@ -1,0 +1,124 @@
+NIMPlus: {
+	FEInterfacePluginName: 	"FENIMPlusInterface"
+	LinkToFETypeTable_FENIMPlusInterfaceTable 	{
+		NIMPlus: 	{
+			Status: 				"On"
+			FirmwareVersion: 				2
+			InterfaceIPAddress: 				"192.168.185.253"
+			InterfacePort: 				2001
+			HostIPAddress: 				"192.168.185.1"
+			HostPort: 				5102
+			StreamToIPAddress: 				"192.168.133.1"
+			StreamToPort: 				55001
+			LogicInputChannelA: 				"NIM Input CH-A Modified"
+			LogicInputChannelB: 				"False"
+			LogicInputChannelC: 				"False"
+			LogicInputChannelD: 				"False"
+			LogicInputChannelE: 				"False"
+			LogicInputChannelF: 				"False"
+			LogicInputChannelG: 				"False"
+			LogicInputChannelH: 				"False"
+			TriggerInputChannel0: 				"Logic Output"
+			TriggerInputChannel1: 				"Trigger CH-0"
+			TriggerInputChannel2: 				"Trigger CH-0"
+			OutputMuxSelectChannelA: 				"Trigger Output CH-0"
+			OutputMuxSelectChannelB: 				"Trigger Output CH-0"
+			OutputMuxSelectChannelC: 				"Trigger Output CH-0"
+			OutputMuxSelectChannelD: 				"Trigger Output CH-0"
+			CoincidenceLogicWord: 				2
+			LinkToOptionalParameters_FENIMPlusInterfaceOptionalTable 	{
+				NIMPlus: 	{
+					EnableExpertWebappFeatures: 						"Yes"
+					EnableClockResetDuringConfigure: 						"Yes"
+					BoardVersion: 						2
+					UseExternalClock: 						"No"
+					PrimaryBoardConfig: 						"True"
+					InputMuxConfig: 						0
+					OutputMuxConfig: 						0
+					ExternalClockSource: 						"NIM Input CH-A Raw"
+					AddressOffset: 						0
+					SecondsDelayBeforeStartingTriggers: 						0
+					EnableDACSetupDuringConfigure: 						"Yes"
+					DACValueChannelA: 						2400
+					DACValueChannelB: 						0
+					DACValueChannelC: 						0
+					DACValueChannelD: 						0
+					DACValueChannelE: 						"0"
+					DACValueChannelF: 						"0"
+					DACValueChannelG: 						"0"
+					DACValueChannelH: 						"0"
+					DelayInputChannelA: 						0
+					WidthInputChannelA: 						4
+					InvertPolarityInputChannelA: 						"No"
+					DelayInputChannelB: 						0
+					WidthInputChannelB: 						10
+					InvertPolarityInputChannelB: 						"No"
+					DelayInputChannelC: 						0
+					WidthInputChannelC: 						6
+					InvertPolarityInputChannelC: 						"No"
+					DelayInputChannelD: 						0
+					WidthInputChannelD: 						6
+					InvertPolarityInputChannelD: 						"No"
+					DelayInputChannelE: 						0
+					WidthInputChannelE: 						0
+					InvertPolarityInputChannelE: 						"No"
+					DelayInputChannelF: 						0
+					WidthInputChannelF: 						0
+					InvertPolarityInputChannelF: 						"No"
+					DelayInputChannelG: 						0
+					WidthInputChannelG: 						0
+					InvertPolarityInputChannelG: 						"No"
+					DelayInputChannelH: 						0
+					WidthInputChannelH: 						0
+					InvertPolarityInputChannelH: 						"No"
+					EnableBackPressureNwFmcPta1: 						"False"
+					EnableBackPressureNwFmcPta2: 						"False"
+					40MHzClockDelay: 						0
+					ClockMaskSetup: 						0
+					DelayTriggerOutputChannel0: 						0
+					WidthTriggerOutputChannel0: 						15
+					TimeVetoTriggerOutputChannel0: 						0
+					PrescaleTriggerOutputChannel0: 						0
+					BackpressureTriggerOutputChannel0: 						"False"
+					EnableClockMaskTriggerOutputChannel0: 						"False"
+					VetoSourceTriggerOutputChannel0: 						"No-Veto"
+					DelayTriggerOutputChannel1: 						0
+					WidthTriggerOutputChannel1: 						15
+					TimeVetoTriggerOutputChannel1: 						0
+					PrescaleTriggerOutputChannel1: 						0
+					BackpressureTriggerOutputChannel1: 						"False"
+					EnableClockMaskTriggerOutputChannel1: 						"False"
+					VetoSourceTriggerOutputChannel1: 						"No-Veto"
+					DelayTriggerOutputChannel2: 						0
+					WidthTriggerOutputChannel2: 						15
+					TimeVetoTriggerOutputChannel2: 						0
+					PrescaleTriggerOutputChannel2: 						0
+					BackpressureTriggerOutputChannel2: 						"False"
+					EnableClockMaskTriggerOutputChannel2: 						"False"
+					VetoSourceTriggerOutputChannel2: 						"No-Veto"
+					InvertPolarityOutputChannelA: 						"Yes"
+					InvertPolarityOutputChannelB: 						"Yes"
+					InvertPolarityOutputChannelC: 						"Yes"
+					InvertPolarityOutputChannelD: 						"Yes"
+					SignalGeneratorPulseCount: 						0
+					SignalGeneratorHighPeriod: 						2
+					SignalGeneratorLowPeriod: 						120000
+					SignalGeneratorInvertPolarity: 						"No"
+					SignalGeneratorEnable: 						"Yes"
+					EnableBurstData: 						"False"
+					BurstDataMuxSelect: 						"Output Counters"
+					BurstDataLogicSampleDelay: 						0
+					BurstDataGateInputChannel: 						"DEFAULT"
+					TriggerCountAtRunStopFilename: 						"${OTSDAQ_DATA}/NimPlus/TriggerCountNimPlus"
+					TriggerMuxSelectionsBankA: 						"[
+	[0,0,0,0,0,0,0,0,0]
+]"
+					TriggerMuxSelectionsBankB: 						"[
+	[0,0,0,0,0,0,0,0,0]
+]"
+				} //end NIMPlus record
+			} //end FENIMPlusInterfaceOptionalTable link record
+		} //end NIMPlus record
+	} //end FENIMPlusInterfaceTable link record
+} //end NIMPlus
+

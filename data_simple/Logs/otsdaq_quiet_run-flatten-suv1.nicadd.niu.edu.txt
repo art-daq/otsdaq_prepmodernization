@@ -1,0 +1,333 @@
+=================================================
+=================================================
+=================================================
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [25]	
+Flattening Active System Aliases!
+
+
+usage: Two arguments:
+	 pathToSwapIn <baseFlatVersion> <pathToSwapIn (optional)> 
+
+	 Default values: baseFlatVersion = 0, pathToSwapIn = "" 
+
+
+
+
+Note: you can optionally just swap databases (and not modify their contents at all) by providing an invalid baseFlatVersion of -1.
+
+
+
+
+Note: This assumes artdaq db file type interface. The current database/ will be moved to database_<linuxtime>/ and if a pathToSwapIn is specified it will be copied to database/ before saving the currently active groups.
+
+
+argc = 2
+argv[0] = otsdaq_flatten_system_aliases
+argv[1] = 0
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [66]	flatVersion = 0
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [67]	pathToSwapIn = 
+
+
+
+otsdaq/tools/otsdaq_flatten_system_aliases.cc [100]	Loading active Aliases...
+LogDebug:ConfigurationBase-ConfigurationGroupMetadata:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationBase.cc [1145]	Configuration: ConfigurationGroupMetadata
+LogDebug:ConfigurationBase-ConfigurationGroupMetadata:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationBase.cc [1148]	Num of Views: 0 (Temporary Views: 0)
+LogDebug:ConfigurationBase-ConfigurationGroupMetadata:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationBase.cc [1174]	Using Mock-up view
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [170]	ACTIVE_GROUP_FILENAME = /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/ServiceData/ActiveConfigurationGroups.cfg
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [171]	ARTDAQ_DATABASE_URI = filesystemdb:///work/otsdaq/srcs/otsdaq_drs4ftbf/database
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [978]	StringMacros::mapToString(aliasMap) = 
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1048]	------------------------------------- init start    	 [for all plug-ins in Context group 'T992Context(47)']
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/MessageFacilityConfiguration_configuration.cc [89]	Opened.. /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/MessageFacilityConfigurations/MessageFacilityGen.fcl
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/MessageFacilityConfiguration_configuration.cc [143]	Forwarding to Web GUI with UDP forward MesageFacility configuration.
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1192]	------------------------------------- init complete 	 [for all plug-ins in Context group 'T992Context(47)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [978]	StringMacros::mapToString(aliasMap) = 
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1048]	------------------------------------- init start    	 [for all plug-ins in Backbone group 'GroupAliasTreeEditWizBackbone(62)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1192]	------------------------------------- init complete 	 [for all plug-ins in Backbone group 'GroupAliasTreeEditWizBackbone(62)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [978]	StringMacros::mapToString(aliasMap) = 
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1048]	------------------------------------- init start    	 [for all plug-ins in Iterate group 'iterateDefaultGroup(4)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1192]	------------------------------------- init complete 	 [for all plug-ins in Iterate group 'iterateDefaultGroup(4)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [978]	StringMacros::mapToString(aliasMap) = 
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1048]	------------------------------------- init start    	 [for all plug-ins in Configuration group 'T992Config(47)']
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/FESlowControlsConfiguration_configuration.cc [50]	*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/FESlowControlsConfiguration_configuration.cc [51]	FESlowControlsConfiguration
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/FESlowControlsConfiguration_configuration.cc [61]	BurstDataCount
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/FESlowControlsConfiguration_configuration.cc [63]	childType=unsigned long long
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1192]	------------------------------------- init complete 	 [for all plug-ins in Configuration group 'T992Config(47)']
+LogDebug:ConfigurationManagerRW:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [41]	Using Config Mgr with Write Access! (for flatten_admin)
+otsdaq/tools/otsdaq_flatten_system_aliases.cc [181]	found activeBackboneGroupName = GroupAliasTreeEditWizBackbone
+otsdaq/tools/otsdaq_flatten_system_aliases.cc [199]	found activeConfigGroupName = T992Config
+otsdaq/tools/otsdaq_flatten_system_aliases.cc [187]	found activeContextGroupName = T992Context
+otsdaq/tools/otsdaq_flatten_system_aliases.cc [193]	found activeIterateGroupName = iterateDefaultGroup
+otsdaq/tools/otsdaq_flatten_system_aliases.cc [229]	Identified groups:
+otsdaq/tools/otsdaq_flatten_system_aliases.cc [231]	GroupAliasTreeEditWizBackbone 62
+otsdaq/tools/otsdaq_flatten_system_aliases.cc [231]	T992Config 47
+otsdaq/tools/otsdaq_flatten_system_aliases.cc [231]	T992Context 47
+otsdaq/tools/otsdaq_flatten_system_aliases.cc [231]	iterateDefaultGroup 4
+otsdaq/tools/otsdaq_flatten_system_aliases.cc [232]	
+otsdaq/tools/otsdaq_flatten_system_aliases.cc [233]	
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [270]	Moving current directory: 	/work/otsdaq/srcs/otsdaq_drs4ftbf/database
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [271]		... to: 		/work/otsdaq/srcs/otsdaq_drs4ftbf/database_1543530491
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [329]	****************************
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [330]	Loading members for GroupAliasTreeEditWizBackbone(62)
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [334]	flatVersion = 0
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [360]	REVERT by Moving directory: 	/work/otsdaq/srcs/otsdaq_drs4ftbf/database_1543530491
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [361]		... to: 		/work/otsdaq/srcs/otsdaq_drs4ftbf/database
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [978]	StringMacros::mapToString(aliasMap) = 
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1048]	------------------------------------- init start    	 [for all plug-ins in Backbone group 'GroupAliasTreeEditWizBackbone(62)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [293]	Deactivating Backbone group: GroupAliasTreeEditWizBackbone
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [351]	Destroying Backbone Key: 62
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1192]	------------------------------------- init complete 	 [for all plug-ins in Backbone group 'GroupAliasTreeEditWizBackbone(62)']
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [411]	Moving current directory: 	/work/otsdaq/srcs/otsdaq_drs4ftbf/database
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [412]		... to: 		/work/otsdaq/srcs/otsdaq_drs4ftbf/database_1543530491
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	GroupAliasesConfiguration:v108
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	GroupAliasesConfiguration:v0
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	VersionAliasesConfiguration:v5
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	VersionAliasesConfiguration:v0
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [518]	StringMacros::mapToString(groupAliases) = 
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [519]	groupComment = 
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [520]	groupAuthor = admin
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [521]	groupCreateTime = 1543530472
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [523]	groupCreateTime_t = 1543530472
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [329]	****************************
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [330]	Loading members for T992Config(47)
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [334]	flatVersion = 1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [350]	REVERT by Moving directory: 	/work/otsdaq/srcs/otsdaq_drs4ftbf/database
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [351]		.. to temporary directory: 		/work/otsdaq/srcs/otsdaq_drs4ftbf/database_1543530491_tmp
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [360]	REVERT by Moving directory: 	/work/otsdaq/srcs/otsdaq_drs4ftbf/database_1543530491
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [361]		... to: 		/work/otsdaq/srcs/otsdaq_drs4ftbf/database
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [978]	StringMacros::mapToString(aliasMap) = 
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1048]	------------------------------------- init start    	 [for all plug-ins in Configuration group 'T992Config(47)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [297]	Deactivating Configuration group: T992Config
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [340]	Destroying Configuration Key: 47
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/FESlowControlsConfiguration_configuration.cc [50]	*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/FESlowControlsConfiguration_configuration.cc [51]	FESlowControlsConfiguration
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/FESlowControlsConfiguration_configuration.cc [61]	BurstDataCount
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/FESlowControlsConfiguration_configuration.cc [63]	childType=unsigned long long
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1192]	------------------------------------- init complete 	 [for all plug-ins in Configuration group 'T992Config(47)']
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [411]	Moving current directory: 	/work/otsdaq/srcs/otsdaq_drs4ftbf/database
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [412]		... to: 		/work/otsdaq/srcs/otsdaq_drs4ftbf/database_1543530491
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [431]	Moving temporary directory: 	/work/otsdaq/srcs/otsdaq_drs4ftbf/database_1543530491_tmp
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [432]		.. to current directory: 		/work/otsdaq/srcs/otsdaq_drs4ftbf/database
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	DQMHistosConsumerConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	DQMHistosConsumerConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	DRS4FTBFInterfaceConfiguration:v0
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	DRS4FTBFInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	DataBufferConfiguration:v3
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	DataBufferConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	DataManagerConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	DataManagerConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	DataManagerSupervisorConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	DataManagerSupervisorConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	DetectorConfiguration:v3
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	DetectorConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	FECMSTimingInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	FECMSTimingInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	FECommanderInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	FECommanderInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	FEInterfaceConfiguration:v7
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	FEInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	FENIMPlusInterfaceConfiguration:v9
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	FENIMPlusInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	FENIMPlusInterfaceOptionalConfiguration:v22
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	FENIMPlusInterfaceOptionalConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	FENetScopeInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	FENetScopeInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	FEOtsUDPFSSRInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	FEOtsUDPFSSRInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	FEOtsUDPTemplateInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	FEOtsUDPTemplateInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	FEPixelTelescopeInterfaceConfiguration:v0
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	FEPixelTelescopeInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	FEPurdueFSSRInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	FEPurdueFSSRInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	FEPurdueNetworkMasterInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	FEPurdueNetworkMasterInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	FESlowControlsConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	FESlowControlsConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	FESupervisorConfiguration:v6
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	FESupervisorConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	FEToDetectorConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	FEToDetectorConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	FEWOtsUDPHardwareConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	FEWOtsUDPHardwareConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	FEWireChamberInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	FEWireChamberInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	FEYarrInterfaceConfiguration:v3
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	FEYarrInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	FSSRDACsConfiguration:v2
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	FSSRDACsConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	FSSRDQMHistosConsumerConfiguration:v2
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	FSSRDQMHistosConsumerConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	FSSRInterfaceConfiguration:v3
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	FSSRInterfaceConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	OTDQMHistosConsumerConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	OTDQMHistosConsumerConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	ROCBitMaskConfiguration:v2
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	ROCBitMaskConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	RawDataSaverConsumerConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	RawDataSaverConsumerConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	RootDQMHistosConsumerConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	RootDQMHistosConsumerConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	UDPDataListenerProducerConfiguration:v2
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	UDPDataListenerProducerConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	UDPDataStreamerConsumerConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	UDPDataStreamerConsumerConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	WireChamberDataSaverConsumerConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	WireChamberDataSaverConsumerConfiguration:v1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [518]	StringMacros::mapToString(groupAliases) = 
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [519]	groupComment = No%20comment.
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [520]	groupAuthor = admin
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [521]	groupCreateTime = 1543530042
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [523]	groupCreateTime_t = 1543530042
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [329]	****************************
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [330]	Loading members for T992Context(47)
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [334]	flatVersion = 2
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [350]	REVERT by Moving directory: 	/work/otsdaq/srcs/otsdaq_drs4ftbf/database
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [351]		.. to temporary directory: 		/work/otsdaq/srcs/otsdaq_drs4ftbf/database_1543530491_tmp
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [360]	REVERT by Moving directory: 	/work/otsdaq/srcs/otsdaq_drs4ftbf/database_1543530491
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [361]		... to: 		/work/otsdaq/srcs/otsdaq_drs4ftbf/database
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [978]	StringMacros::mapToString(aliasMap) = 
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1048]	------------------------------------- init start    	 [for all plug-ins in Context group 'T992Context(47)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [291]	Deactivating Context group: T992Context
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [369]	Destroying Context Key: 47
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/MessageFacilityConfiguration_configuration.cc [89]	Opened.. /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/MessageFacilityConfigurations/MessageFacilityGen.fcl
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/MessageFacilityConfiguration_configuration.cc [143]	Forwarding to Web GUI with UDP forward MesageFacility configuration.
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1192]	------------------------------------- init complete 	 [for all plug-ins in Context group 'T992Context(47)']
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [411]	Moving current directory: 	/work/otsdaq/srcs/otsdaq_drs4ftbf/database
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [412]		... to: 		/work/otsdaq/srcs/otsdaq_drs4ftbf/database_1543530491
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [431]	Moving temporary directory: 	/work/otsdaq/srcs/otsdaq_drs4ftbf/database_1543530491_tmp
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [432]		.. to current directory: 		/work/otsdaq/srcs/otsdaq_drs4ftbf/database
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	DesktopIconConfiguration:v2
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	DesktopIconConfiguration:v2
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	DesktopWindowParameterConfiguration:v2
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	DesktopWindowParameterConfiguration:v2
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	MessageFacilityConfiguration:v2
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	MessageFacilityConfiguration:v2
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	StateMachineConfiguration:v2
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	StateMachineConfiguration:v2
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	TheSupervisorConfiguration:v5
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	TheSupervisorConfiguration:v2
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	XDAQApplicationConfiguration:v17
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	XDAQApplicationConfiguration:v2
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	XDAQApplicationPropertyConfiguration:v2
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	XDAQApplicationPropertyConfiguration:v2
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	XDAQContextConfiguration:v23
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	XDAQContextConfiguration:v2
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [518]	StringMacros::mapToString(groupAliases) = 
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [519]	groupComment = NO%20COMMENT%20FOUND
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [520]	groupAuthor = admin
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [521]	groupCreateTime = 1543529965
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [523]	groupCreateTime_t = 1543529965
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [329]	****************************
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [330]	Loading members for iterateDefaultGroup(4)
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [334]	flatVersion = 3
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [350]	REVERT by Moving directory: 	/work/otsdaq/srcs/otsdaq_drs4ftbf/database
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [351]		.. to temporary directory: 		/work/otsdaq/srcs/otsdaq_drs4ftbf/database_1543530491_tmp
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [360]	REVERT by Moving directory: 	/work/otsdaq/srcs/otsdaq_drs4ftbf/database_1543530491
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [361]		... to: 		/work/otsdaq/srcs/otsdaq_drs4ftbf/database
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [978]	StringMacros::mapToString(aliasMap) = 
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1048]	------------------------------------- init start    	 [for all plug-ins in Iterate group 'iterateDefaultGroup(4)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [295]	Deactivating Iterate group: iterateDefaultGroup
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [360]	Destroying Iterate Key: 4
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1192]	------------------------------------- init complete 	 [for all plug-ins in Iterate group 'iterateDefaultGroup(4)']
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [411]	Moving current directory: 	/work/otsdaq/srcs/otsdaq_drs4ftbf/database
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [412]		... to: 		/work/otsdaq/srcs/otsdaq_drs4ftbf/database_1543530491
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [431]	Moving temporary directory: 	/work/otsdaq/srcs/otsdaq_drs4ftbf/database_1543530491_tmp
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [432]		.. to current directory: 		/work/otsdaq/srcs/otsdaq_drs4ftbf/database
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	IterateConfiguration:v4
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	IterateConfiguration:v3
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	IterationCommandBeginLabelConfiguration:v4
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	IterationCommandBeginLabelConfiguration:v3
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	IterationCommandChooseFSMConfiguration:v4
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	IterationCommandChooseFSMConfiguration:v3
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	IterationCommandConfigureAliasConfiguration:v4
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	IterationCommandConfigureAliasConfiguration:v3
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	IterationCommandConfigureGroupConfiguration:v4
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	IterationCommandConfigureGroupConfiguration:v3
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	IterationCommandExecuteFEMacroConfiguration:v4
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	IterationCommandExecuteFEMacroConfiguration:v3
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	IterationCommandExecuteMacroConfiguration:v4
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	IterationCommandExecuteMacroConfiguration:v3
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	IterationCommandModifyGroupConfiguration:v4
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	IterationCommandModifyGroupConfiguration:v3
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	IterationCommandRepeatLabelConfiguration:v4
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	IterationCommandRepeatLabelConfiguration:v3
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	IterationCommandRunConfiguration:v4
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	IterationCommandRunConfiguration:v3
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	IterationPlanConfiguration:v4
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	IterationPlanConfiguration:v3
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [469]	IterationTargetConfiguration:v4
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [511]		 to...	IterationTargetConfiguration:v3
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [518]	StringMacros::mapToString(groupAliases) = 
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [519]	groupComment = NO COMMENT FOUND
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [520]	groupAuthor = NO AUTHOR FOUND
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [521]	groupCreateTime = 0
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [523]	groupCreateTime_t = 0
+
+
+otsdaq/tools/otsdaq_flatten_system_aliases.cc [682]	Modifying the active Backbone table to reflect new table versions and group keys.
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [978]	StringMacros::mapToString(aliasMap) = 
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1048]	------------------------------------- init start    	 [for all plug-ins in Backbone group 'GroupAliasTreeEditWizBackbone(0)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [293]	Deactivating Backbone group: GroupAliasTreeEditWizBackbone
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [351]	Destroying Backbone Key: 62
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1192]	------------------------------------- init complete 	 [for all plug-ins in Backbone group 'GroupAliasTreeEditWizBackbone(0)']
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [704]	
+
+Modifying GroupAliasesConfiguration
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [724]	Changing row 0 for T992Context key=47 to NEW key=2
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [724]	Changing row 1 for T992Config key=47 to NEW key=1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [745]	
+
+Modifying VersionAliasesConfiguration
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [779]	GroupAliasesConfiguration:v0
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [789]		 to...	GroupAliasesConfiguration:v4
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [794]	VersionAliasesConfiguration:v0
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [804]		 to...	VersionAliasesConfiguration:v4
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [816]	New to-be-active backbone group GroupAliasTreeEditWizBackbone:v4
+
+
+otsdaq/tools/otsdaq_flatten_system_aliases.cc [827]	Manipulating the Active Groups file...
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [838]	Backing up file: /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/ServiceData/ActiveConfigurationGroups.cfg
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [847]	Backup file name: /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/ServiceData/ActiveConfigurationGroups.cfg.1543530491
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [868]	Updating persistent active groups to /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/ServiceData/ActiveConfigurationGroups.cfg ...
+
+
+otsdaq/tools/otsdaq_flatten_system_aliases.cc [889]	Resulting Groups:
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [891]		GroupAliasTreeEditWizBackbone: 62 => 0
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [891]		T992Config: 47 => 1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [891]		T992Context: 47 => 2
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [891]		iterateDefaultGroup: 4 => 3
+
+
+otsdaq/tools/otsdaq_flatten_system_aliases.cc [893]	Resulting Groups end.
+
+
+otsdaq/tools/otsdaq_flatten_system_aliases.cc [898]	Resulting Active Groups:
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [900]		GroupAliasTreeEditWizBackbone: 62 => 4
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [900]		T992Config: 47 => 1
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [900]		T992Context: 47 => 2
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [900]		iterateDefaultGroup: 4 => 3
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [903]	GroupAliasTreeEditWizBackbone is the Backbone.
+
+
+otsdaq/tools/otsdaq_flatten_system_aliases.cc [905]	Resulting Active Groups end.
+
+
+otsdaq/tools/otsdaq_flatten_system_aliases.cc [910]	End of Flattening Active Configuration Groups!
+
+
+
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [914]	****************************
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [915]	There were 4 groups considered, and there were 0 errors found handling those groups.
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [918]	The following errors were found handling the groups:
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [922]	End of errors.
+
+
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [925]	Run the following to return to your previous database structure:
+LogDebug:ots:otsdaq/tools/otsdaq_flatten_system_aliases.cc [927]		 otsdaq_flatten_system_aliases -1 /work/otsdaq/srcs/otsdaq_drs4ftbf/database_1543530491
+
+
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [340]	Destroying Configuration Key: 47
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [351]	Destroying Backbone Key: 0
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [360]	Destroying Iterate Key: 4
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [369]	Destroying Context Key: 47

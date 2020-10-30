@@ -1,0 +1,87 @@
+%MSG-i configureMessageFacility:  RunControlStateMachine  29-Nov-2018 15:54:04 CST pre-events configureMessageFacility.cc:286
+Message Facility Application RunControlStateMachine configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/RunControlStateMachine" pattern:"RunControlStateMachine-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i _TCPConnect:  RunControlStateMachine 29-Nov-2018 15:54:04 CST pre-events TCPConnect.cc:334
+Resolving host 127.0.0.1, on port 30000
+%MSG
+%MSG-i _TCPConnect:  RunControlStateMachine 29-Nov-2018 15:54:04 CST pre-events TCPConnect.cc:241
+Resolving ip suv1.nicadd.niu.edu
+%MSG
+%MSG-i configureMessageFacility:  CorePropertySupervisorBase  29-Nov-2018 15:54:05 CST pre-events configureMessageFacility.cc:286
+Message Facility Application CorePropertySupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CorePropertySupervisorBase" pattern:"CorePropertySupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i WebUsers:  CorePropertySupervisorBase-suv1-0 29-Nov-2018 15:54:05 CST  pre-events
+otsdaq/otsdaq-core/WebUsersUtilities/WebUsers.cc [2803]	User 'admin' has locked out the system!
+%MSG
+%MSG-d Iterator:  CorePropertySupervisorBase-suv1-0 29-Nov-2018 15:54:05 CST  pre-events
+otsdaq/otsdaq-core/GatewaySupervisor/Iterator.cc [28]	Iterator constructed.
+%MSG
+%MSG-i configureMessageFacility:  GatewaySupervisor 29-Nov-2018 15:54:05 CST  pre-events configureMessageFacility.cc:286
+Message Facility Application GatewaySupervisor configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/GatewaySupervisor" pattern:"GatewaySupervisor-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CorePropertySupervisorBase  29-Nov-2018 15:54:05 CST pre-events configureMessageFacility.cc:286
+Message Facility Application CorePropertySupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CorePropertySupervisorBase" pattern:"CorePropertySupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  RunControlStateMachine  29-Nov-2018 15:54:06 CST pre-events configureMessageFacility.cc:286
+Message Facility Application RunControlStateMachine configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/RunControlStateMachine" pattern:"RunControlStateMachine-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CoreSupervisorBase 29-Nov-2018 15:54:06 CST  pre-events configureMessageFacility.cc:286
+Message Facility Application CoreSupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CoreSupervisorBase" pattern:"CoreSupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  ChatSupervisor 29-Nov-2018 15:54:06 CST  pre-events configureMessageFacility.cc:286
+Message Facility Application ChatSupervisor configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/ChatSupervisor" pattern:"ChatSupervisor-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CorePropertySupervisorBase  29-Nov-2018 15:54:06 CST pre-events configureMessageFacility.cc:286
+Message Facility Application CorePropertySupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CorePropertySupervisorBase" pattern:"CorePropertySupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  RunControlStateMachine  29-Nov-2018 15:54:06 CST pre-events configureMessageFacility.cc:286
+Message Facility Application RunControlStateMachine configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/RunControlStateMachine" pattern:"RunControlStateMachine-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CoreSupervisorBase 29-Nov-2018 15:54:06 CST  pre-events configureMessageFacility.cc:286
+Message Facility Application CoreSupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CoreSupervisorBase" pattern:"CoreSupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  LogbookSupervisor 29-Nov-2018 15:54:06 CST  pre-events configureMessageFacility.cc:286
+Message Facility Application LogbookSupervisor configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/LogbookSupervisor" pattern:"LogbookSupervisor-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CorePropertySupervisorBase  29-Nov-2018 15:54:06 CST pre-events configureMessageFacility.cc:286
+Message Facility Application CorePropertySupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CorePropertySupervisorBase" pattern:"CorePropertySupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  RunControlStateMachine  29-Nov-2018 15:54:07 CST pre-events configureMessageFacility.cc:286
+Message Facility Application RunControlStateMachine configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/RunControlStateMachine" pattern:"RunControlStateMachine-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CoreSupervisorBase 29-Nov-2018 15:54:07 CST  pre-events configureMessageFacility.cc:286
+Message Facility Application CoreSupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CoreSupervisorBase" pattern:"CoreSupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  VisualSupervisor 29-Nov-2018 15:54:07 CST  pre-events configureMessageFacility.cc:286
+Message Facility Application VisualSupervisor configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/VisualSupervisor" pattern:"VisualSupervisor-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CorePropertySupervisorBase  29-Nov-2018 15:54:07 CST pre-events configureMessageFacility.cc:286
+Message Facility Application CorePropertySupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CorePropertySupervisorBase" pattern:"CorePropertySupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  RunControlStateMachine  29-Nov-2018 15:54:07 CST pre-events configureMessageFacility.cc:286
+Message Facility Application RunControlStateMachine configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/RunControlStateMachine" pattern:"RunControlStateMachine-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CoreSupervisorBase 29-Nov-2018 15:54:07 CST  pre-events configureMessageFacility.cc:286
+Message Facility Application CoreSupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CoreSupervisorBase" pattern:"CoreSupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  ConfigurationGUI 29-Nov-2018 15:54:07 CST  pre-events configureMessageFacility.cc:286
+Message Facility Application ConfigurationGUI configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/ConfigurationGUI" pattern:"ConfigurationGUI-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CorePropertySupervisorBase  29-Nov-2018 15:54:08 CST pre-events configureMessageFacility.cc:286
+Message Facility Application CorePropertySupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CorePropertySupervisorBase" pattern:"CorePropertySupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  RunControlStateMachine  29-Nov-2018 15:54:08 CST pre-events configureMessageFacility.cc:286
+Message Facility Application RunControlStateMachine configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/RunControlStateMachine" pattern:"RunControlStateMachine-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CoreSupervisorBase 29-Nov-2018 15:54:08 CST  pre-events configureMessageFacility.cc:286
+Message Facility Application CoreSupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CoreSupervisorBase" pattern:"CoreSupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  MacroMaker 29-Nov-2018 15:54:08 CST pre-events configureMessageFacility.cc:286
+Message Facility Application MacroMaker configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/MacroMaker" pattern:"MacroMaker-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-d GatewaySupervisor:  Early 29-Nov-2018 15:54:13 CST pre-events
+otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [453]	Making logbook entry: ots started.
+%MSG
+%MSG-d GatewaySupervisor:  Early 29-Nov-2018 15:54:13 CST pre-events
+otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [453]	Making logbook entry: admin logged in.
+%MSG

@@ -1,0 +1,16 @@
+console : { 
+ 	type : cout 
+ 	threshold : "DEBUG"
+ 	format:
+ 	{
+		timestamp: none
+		noLineBreaks: true
+	}
+}
+
+#file: {
+#	type: "file" 
+#	filename: "/dev/null" 
+#}
+file:""
+udp : {}

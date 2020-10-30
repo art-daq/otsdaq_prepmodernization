@@ -1,0 +1,18 @@
+
+
+/data-08/otsdaq/srcs/otsdaq_utilities/otsdaq-utilities/Console/MF_ReceiveAndForward.cpp	Starting...
+
+
+
+
+/data-08/otsdaq/srcs/otsdaq_utilities/otsdaq-utilities/Console/MF_ReceiveAndForward.cpp	 port parameter file:/data-08/otsdaq/srcs/otsdaq_cmsoutertracker/DataDTCSupervisor/MessageFacilityConfigurations/QuietForwarderGen.cfg
+
+
+
+
+/data-08/otsdaq/srcs/otsdaq_utilities/otsdaq-utilities/Console/MF_ReceiveAndForward.cpp	 Forwarding from: 30000 to: 30001:30001
+
+
+listener: bind: Address already in use
+listener: bind: Address already in use
+listener: failed to bind socket

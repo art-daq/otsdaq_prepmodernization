@@ -1,0 +1,144 @@
+{
+"document" : {
+"data" : {
+"NAME" : "MESSAGE_FACILITY_TABLE",
+"COMMENT" : "Defaults for web console.",
+"AUTHOR" : "admin",
+"CREATION_TIME" : 1504628276,
+"COL_TYPES" : {
+"UID" : "STRING",
+"STATUS" : "STRING",
+"ENABLE_UDP_FORWARDING" : "STRING",
+"FORWARD_TO_WEB_CONSOLE_GUI" : "STRING",
+"WEB_CONSOLE_FORWARDING_IP_ADDRESS" : "STRING",
+"WEB_CONSOLE_FORWARDING_PORT0" : "NUMBER",
+"WEB_CONSOLE_FORWARDING_PORT1" : "NUMBER",
+"FORWARD_TO_QT_VIEWER_GUI" : "STRING",
+"QT_VIEWER_FORWARDING_IP_ADDRESS" : "STRING",
+"QT_VIEWER_FORWARDING_PORT" : "NUMBER",
+"COMMENT_DESCRIPTION" : "STRING",
+"AUTHOR" : "STRING",
+"RECORD_INSERTION_TIME" : "TIMESTAMP WITH TIMEZONE"
+},
+"DATA_SET" : [
+{
+"UID" : "MF_Entry",
+"STATUS" : "On",
+"ENABLE_UDP_FORWARDING" : "True",
+"FORWARD_TO_WEB_CONSOLE_GUI" : "Yes",
+"WEB_CONSOLE_FORWARDING_IP_ADDRESS" : "127.0.0.1",
+"WEB_CONSOLE_FORWARDING_PORT0" : "30000",
+"WEB_CONSOLE_FORWARDING_PORT1" : "30001",
+"FORWARD_TO_QT_VIEWER_GUI" : "No",
+"QT_VIEWER_FORWARDING_IP_ADDRESS" : "127.0.0.1",
+"QT_VIEWER_FORWARDING_PORT" : "30000",
+"COMMENT_DESCRIPTION" : "defaults with web console and no QT viewer",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1504628276"
+}
+]
+},
+"metadata" : {
+
+},
+"search" : [
+
+]
+},
+"comments" : [
+
+],
+"origin" : {
+"source" : "template",
+"name" : "notprovided",
+"format" : "json",
+"created" : "2020-10-30T16:08:06.527-0500",
+"rawdata" : [
+
+]
+},
+"version" : "1",
+"entities" : [
+{
+"name" : "OTSROOT",
+"assigned" : "2020-10-30T16:08:06.529-0500"
+}
+],
+"tables" : [
+{
+"name" : "notprovided",
+"assigned" : "2020-10-30T16:08:06.528-0500"
+},
+{
+"name" : "MainContext_v1",
+"assigned" : "2020-10-30T16:08:07.268-0500"
+}
+],
+"changelog" : "notprovided",
+"bookkeeping" : {
+"isdeleted" : false,
+"isreadonly" : false,
+"updates" : [
+{
+"event" : "addTable",
+"timestamp" : "2020-10-30T16:08:06.528-0500",
+"value" : {
+"name" : "notprovided",
+"assigned" : "2020-10-30T16:08:06.528-0500"
+}
+},
+{
+"event" : "setVersion",
+"timestamp" : "2020-10-30T16:08:06.528-0500",
+"value" : {
+"name" : "1",
+"assigned" : "2020-10-30T16:08:06.528-0500"
+}
+},
+{
+"event" : "setCollection",
+"timestamp" : "2020-10-30T16:08:06.528-0500",
+"value" : {
+"name" : "MessageFacilityTable",
+"assigned" : "2020-10-30T16:08:06.529-0500"
+}
+},
+{
+"event" : "addEntity",
+"timestamp" : "2020-10-30T16:08:06.529-0500",
+"value" : {
+"name" : "OTSROOT",
+"assigned" : "2020-10-30T16:08:06.529-0500"
+}
+},
+{
+"event" : "addTable",
+"timestamp" : "2020-10-30T16:08:07.268-0500",
+"value" : {
+"name" : "MainContext_v1",
+"assigned" : "2020-10-30T16:08:07.268-0500"
+}
+}
+],
+"created" : "2020-10-30T16:08:06.528-0500"
+},
+"_id" : {
+"$oid" : "5c180be150be405591ebda46"
+},
+"collection" : "MessageFacilityTable",
+"aliases" : {
+"active" : [
+
+],
+"history" : [
+
+]
+},
+"runs" : [
+
+],
+"attachments" : [
+
+],
+"configtype" : "notprovided"
+}

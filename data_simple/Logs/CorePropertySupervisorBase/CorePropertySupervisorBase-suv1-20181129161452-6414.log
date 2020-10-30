@@ -1,0 +1,15 @@
+%MSG-i configureMessageFacility:  CorePropertySupervisorBase  29-Nov-2018 16:14:52 CST pre-events configureMessageFacility.cc:286
+Message Facility Application CorePropertySupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CorePropertySupervisorBase" pattern:"CorePropertySupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i _TCPConnect:  CorePropertySupervisorBase 29-Nov-2018 16:14:52 CST  pre-events TCPConnect.cc:334
+Resolving host 127.0.0.1, on port 30000
+%MSG
+%MSG-i _TCPConnect:  CorePropertySupervisorBase 29-Nov-2018 16:14:52 CST  pre-events TCPConnect.cc:241
+Resolving ip suv1.nicadd.niu.edu
+%MSG
+%MSG-i configureMessageFacility:  RunControlStateMachine  29-Nov-2018 16:14:52 CST pre-events configureMessageFacility.cc:286
+Message Facility Application RunControlStateMachine configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/RunControlStateMachine" pattern:"RunControlStateMachine-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CoreSupervisorBase 29-Nov-2018 16:14:52 CST  pre-events configureMessageFacility.cc:286
+Message Facility Application CoreSupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CoreSupervisorBase" pattern:"CoreSupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG

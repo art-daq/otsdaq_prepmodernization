@@ -1,0 +1,83 @@
+{
+"ouid" : [
+"22ade0e49e78452f87ca87ae",
+"233ec4ea194147d69b3de176",
+"504f5d3952a9479fb0c89b23",
+"5db0c225dfd7430094bfdff3",
+"ba2d16a03295431fadb631e6"
+],
+"version" : {
+"0" : [
+"5db0c225dfd7430094bfdff3"
+],
+"1" : [
+"504f5d3952a9479fb0c89b23"
+],
+"2" : [
+"22ade0e49e78452f87ca87ae"
+],
+"3" : [
+"ba2d16a03295431fadb631e6"
+],
+"4" : [
+"233ec4ea194147d69b3de176"
+]
+},
+"configurations.name" : {
+"notprovided" : [
+"22ade0e49e78452f87ca87ae",
+"233ec4ea194147d69b3de176",
+"504f5d3952a9479fb0c89b23",
+"5db0c225dfd7430094bfdff3",
+"ba2d16a03295431fadb631e6"
+],
+"MainContext_v1" : [
+"504f5d3952a9479fb0c89b23"
+],
+"NimPlusConfiguration_v2" : [
+"22ade0e49e78452f87ca87ae"
+],
+"TableEditWizBackbone_v3" : [
+"ba2d16a03295431fadb631e6"
+],
+"TableEditWizBackbone_v5" : [
+"233ec4ea194147d69b3de176"
+]
+},
+"entities.name" : {
+"OTSROOT" : [
+"22ade0e49e78452f87ca87ae",
+"233ec4ea194147d69b3de176",
+"504f5d3952a9479fb0c89b23",
+"5db0c225dfd7430094bfdff3",
+"ba2d16a03295431fadb631e6"
+]
+},
+"aliases.active.name" : {
+
+},
+"runs.name" : {
+
+},
+"configurations.assigned" : {
+"notprovided" : [
+"2020-10-30T16:08:06.101-0500",
+"2020-10-30T16:08:07.007-0500",
+"2020-10-30T16:08:08.563-0500",
+"2020-10-30T16:08:09.529-0500",
+"2020-10-30T16:23:20.808-0500"
+],
+"MainContext_v1" : [
+"2020-10-30T16:08:07.414-0500"
+],
+"NimPlusConfiguration_v2" : [
+"2020-10-30T16:08:09.116-0500"
+],
+"TableEditWizBackbone_v3" : [
+"2020-10-30T16:08:09.637-0500"
+],
+"TableEditWizBackbone_v5" : [
+"2020-10-30T16:23:20.934-0500"
+]
+}
+}

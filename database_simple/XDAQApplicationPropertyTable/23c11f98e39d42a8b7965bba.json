@@ -1,0 +1,334 @@
+{
+"document" : {
+"data" : {
+"NAME" : "XDAQ_APPLICATION_PROPERTY_TABLE",
+"COMMENT" : "enabling data sending for DTCSupervisor",
+"AUTHOR" : "admin",
+"CREATION_TIME" : 1512247698,
+"COL_TYPES" : {
+"PROPERTY_GROUP_ID" : "STRING",
+"UID" : "STRING",
+"STATUS" : "STRING",
+"PROPERTY_NAME" : "STRING",
+"PROPERTY_TYPE" : "STRING",
+"PROPERTY_VALUE" : "STRING",
+"COMMENT_DESCRIPTION" : "STRING",
+"AUTHOR" : "STRING",
+"RECORD_INSERTION_TIME" : "TIMESTAMP WITH TIMEZONE"
+},
+"DATA_SET" : [
+{
+"PROPERTY_GROUP_ID" : "DTCSupervisor0",
+"UID" : "FedID",
+"STATUS" : "On",
+"PROPERTY_NAME" : "FedID",
+"PROPERTY_TYPE" : "xsd:unsignedShort",
+"PROPERTY_VALUE" : "51",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1511891173"
+},
+{
+"PROPERTY_GROUP_ID" : "DTCSupervisor0",
+"UID" : "HWDescriptionFile",
+"STATUS" : "On",
+"PROPERTY_NAME" : "HWDescriptionFile",
+"PROPERTY_TYPE" : "xsd:string",
+"PROPERTY_VALUE" : "${PH2ACF_ROOT}/settings/FNAL_TB.xml",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1512055699"
+},
+{
+"PROPERTY_GROUP_ID" : "DTCSupervisor0",
+"UID" : "DataDirectory",
+"STATUS" : "On",
+"PROPERTY_NAME" : "DataDirectory",
+"PROPERTY_TYPE" : "xsd:string",
+"PROPERTY_VALUE" : "/data/TestBeam/2017_12_December/CMSOuterTracker/Data",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1512179525"
+},
+{
+"PROPERTY_GROUP_ID" : "DTCSupervisor0",
+"UID" : "ResultDirectory",
+"STATUS" : "On",
+"PROPERTY_NAME" : "ResultDirectory",
+"PROPERTY_TYPE" : "xsd:string",
+"PROPERTY_VALUE" : "/data/TestBeam/2017_12_December/CMSOuterTracker/Results",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1512179525"
+},
+{
+"PROPERTY_GROUP_ID" : "DTCSupervisor0",
+"UID" : "runNumber",
+"STATUS" : "On",
+"PROPERTY_NAME" : "runNumber",
+"PROPERTY_TYPE" : "xsd:integer",
+"PROPERTY_VALUE" : "-1",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1511909545"
+},
+{
+"PROPERTY_GROUP_ID" : "DTCSupervisor0",
+"UID" : "NEvents",
+"STATUS" : "On",
+"PROPERTY_NAME" : "NEvents",
+"PROPERTY_TYPE" : "xsd:unsignedInt",
+"PROPERTY_VALUE" : "0",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1511976350"
+},
+{
+"PROPERTY_GROUP_ID" : "DTCSupervisor0",
+"UID" : "WriteRAW",
+"STATUS" : "On",
+"PROPERTY_NAME" : "WriteRAW",
+"PROPERTY_TYPE" : "xsd:boolean",
+"PROPERTY_VALUE" : "true",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1511976350"
+},
+{
+"PROPERTY_GROUP_ID" : "DTCSupervisor0",
+"UID" : "WriteDAQ",
+"STATUS" : "On",
+"PROPERTY_NAME" : "WriteDAQ",
+"PROPERTY_TYPE" : "xsd:boolean",
+"PROPERTY_VALUE" : "true",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1511976350"
+},
+{
+"PROPERTY_GROUP_ID" : "DTCSupervisor0",
+"UID" : "ShortPause",
+"STATUS" : "On",
+"PROPERTY_NAME" : "ShortPause",
+"PROPERTY_TYPE" : "xsd:integer",
+"PROPERTY_VALUE" : "10",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1511909545"
+},
+{
+"PROPERTY_GROUP_ID" : "DTCSupervisor0",
+"UID" : "THttpServerPort",
+"STATUS" : "On",
+"PROPERTY_NAME" : "THttpServerPort",
+"PROPERTY_TYPE" : "xsd:integer",
+"PROPERTY_VALUE" : "9090",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1511909545"
+},
+{
+"PROPERTY_GROUP_ID" : "DTCSupervisor0",
+"UID" : "SendData",
+"STATUS" : "On",
+"PROPERTY_NAME" : "SendData",
+"PROPERTY_TYPE" : "xsd:boolean",
+"PROPERTY_VALUE" : "false",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1512247698"
+},
+{
+"PROPERTY_GROUP_ID" : "DTCSupervisor0",
+"UID" : "DataDestination",
+"STATUS" : "On",
+"PROPERTY_NAME" : "DataDestination",
+"PROPERTY_TYPE" : "xsd:string",
+"PROPERTY_VALUE" : "DQM",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1511976350"
+},
+{
+"PROPERTY_GROUP_ID" : "DTCSupervisor0",
+"UID" : "DQMPostScale",
+"STATUS" : "On",
+"PROPERTY_NAME" : "DQMPostScale",
+"PROPERTY_TYPE" : "xsd:integer",
+"PROPERTY_VALUE" : "1",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1511909545"
+},
+{
+"PROPERTY_GROUP_ID" : "DTCSupervisor0",
+"UID" : "DataSourceHost",
+"STATUS" : "On",
+"PROPERTY_NAME" : "DataSourceHost",
+"PROPERTY_TYPE" : "xsd:string",
+"PROPERTY_VALUE" : "localhost",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1511909545"
+},
+{
+"PROPERTY_GROUP_ID" : "DTCSupervisor0",
+"UID" : "DataSourcePort",
+"STATUS" : "On",
+"PROPERTY_NAME" : "DataSourcePort",
+"PROPERTY_TYPE" : "xsd:integer",
+"PROPERTY_VALUE" : "60000",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1512172839"
+},
+{
+"PROPERTY_GROUP_ID" : "DTCSupervisor0",
+"UID" : "DataSinkHost",
+"STATUS" : "On",
+"PROPERTY_NAME" : "DataSinkHost",
+"PROPERTY_TYPE" : "xsd:string",
+"PROPERTY_VALUE" : "localhost",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1511909545"
+},
+{
+"PROPERTY_GROUP_ID" : "DTCSupervisor0",
+"UID" : "DataSinkPort",
+"STATUS" : "On",
+"PROPERTY_NAME" : "DataSinkPort",
+"PROPERTY_TYPE" : "xsd:integer",
+"PROPERTY_VALUE" : "50000",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1512164492"
+},
+{
+"PROPERTY_GROUP_ID" : "DTCSupervisor0",
+"UID" : "PlaybackMode",
+"STATUS" : "On",
+"PROPERTY_NAME" : "PlaybackMode",
+"PROPERTY_TYPE" : "xsd:boolean",
+"PROPERTY_VALUE" : "false",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1511976350"
+},
+{
+"PROPERTY_GROUP_ID" : "DTCSupervisor0",
+"UID" : "PlaybackFile",
+"STATUS" : "On",
+"PROPERTY_NAME" : "PlaybackFile",
+"PROPERTY_TYPE" : "xsd:string",
+"PROPERTY_VALUE" : "",
+"COMMENT_DESCRIPTION" : "No Comment",
+"AUTHOR" : "admin",
+"RECORD_INSERTION_TIME" : "1511976350"
+}
+]
+},
+"metadata" : {
+
+},
+"search" : [
+
+]
+},
+"comments" : [
+
+],
+"origin" : {
+"source" : "template",
+"name" : "notprovided",
+"format" : "json",
+"created" : "2020-10-30T16:08:06.763-0500",
+"rawdata" : [
+
+]
+},
+"version" : "1",
+"entities" : [
+{
+"name" : "OTSROOT",
+"assigned" : "2020-10-30T16:08:06.764-0500"
+}
+],
+"tables" : [
+{
+"name" : "notprovided",
+"assigned" : "2020-10-30T16:08:06.764-0500"
+},
+{
+"name" : "MainContext_v1",
+"assigned" : "2020-10-30T16:08:07.462-0500"
+}
+],
+"changelog" : "notprovided",
+"bookkeeping" : {
+"isdeleted" : false,
+"isreadonly" : false,
+"updates" : [
+{
+"event" : "addTable",
+"timestamp" : "2020-10-30T16:08:06.764-0500",
+"value" : {
+"name" : "notprovided",
+"assigned" : "2020-10-30T16:08:06.764-0500"
+}
+},
+{
+"event" : "setVersion",
+"timestamp" : "2020-10-30T16:08:06.764-0500",
+"value" : {
+"name" : "1",
+"assigned" : "2020-10-30T16:08:06.764-0500"
+}
+},
+{
+"event" : "setCollection",
+"timestamp" : "2020-10-30T16:08:06.764-0500",
+"value" : {
+"name" : "XDAQApplicationPropertyTable",
+"assigned" : "2020-10-30T16:08:06.764-0500"
+}
+},
+{
+"event" : "addEntity",
+"timestamp" : "2020-10-30T16:08:06.764-0500",
+"value" : {
+"name" : "OTSROOT",
+"assigned" : "2020-10-30T16:08:06.764-0500"
+}
+},
+{
+"event" : "addTable",
+"timestamp" : "2020-10-30T16:08:07.462-0500",
+"value" : {
+"name" : "MainContext_v1",
+"assigned" : "2020-10-30T16:08:07.462-0500"
+}
+}
+],
+"created" : "2020-10-30T16:08:06.763-0500"
+},
+"_id" : {
+"$oid" : "23c11f98e39d42a8b7965bba"
+},
+"collection" : "XDAQApplicationPropertyTable",
+"aliases" : {
+"active" : [
+
+],
+"history" : [
+
+]
+},
+"runs" : [
+
+],
+"attachments" : [
+
+],
+"configtype" : "notprovided"
+}

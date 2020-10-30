@@ -1,0 +1,167 @@
+30 Oct 2020 15:12:21.366 [139941869910208] INFO  gov.fnal.dhcp.rulinux04.p:2002 <> - xdaq version: 05.03.01, compiled on Apr 19 2019 at 09:24:24, 64bit
+30 Oct 2020 15:12:21.367 [139941869910208] INFO  gov.fnal.dhcp.rulinux04.p:2002 <> - Loaded profile: /data1/otsdaq/Data/userdata/XDAQConfigurations/otsConfiguration_CMake.xml
+30 Oct 2020 15:12:21.368 [139941869910208] INFO  gov.fnal.dhcp.rulinux04.p:2002 <> - b2innub version: 02.05.01, compiled on Apr 19 2019 at 09:27:11
+30 Oct 2020 15:12:21.368 [139941869910208] INFO  gov.fnal.dhcp.rulinux04.p:2002 <> - executive version: 04.00.06, compiled on Apr 19 2019 at 09:26:38
+30 Oct 2020 15:12:21.369 [139941869910208] INFO  gov.fnal.dhcp.rulinux04.p:2002 <> - b2inutils version: 04.04.05, compiled on Apr 19 2019 at 09:27:18
+30 Oct 2020 15:12:21.370 [139941869910208] INFO  gov.fnal.dhcp.rulinux04.p:2002 <> - pthttp version: 04.05.07, compiled on Apr 19 2019 at 09:25:32
+30 Oct 2020 15:12:21.371 [139941869910208] INFO  gov.fnal.dhcp.rulinux04.p:2002 <> - ptfifo version: 04.03.01, compiled on Apr 19 2019 at 09:26:16
+30 Oct 2020 15:12:21.372 [139941869910208] INFO  gov.fnal.dhcp.rulinux04.p:2002 <> - xrelay version: 04.01.00, compiled on Apr 19 2019 at 09:27:04
+30 Oct 2020 15:12:21.373 [139941869910208] INFO  gov.fnal.dhcp.rulinux04.p:2002 <> - hyperdaq version: 05.02.01, compiled on Apr 19 2019 at 09:27:02
+30 Oct 2020 15:12:21.373 [139941869910208] DEBUG gov.fnal.dhcp.rulinux04.p:2002 <> - Create application descriptor for class: executive::Application id: 0
+30 Oct 2020 15:12:21.391 [139941869910208] INFO  gov.fnal.dhcp.rulinux04.p:2002.executive::Application.lid(0) <> - Log URL not set (was already console)
+30 Oct 2020 15:12:21.391 [139941869910208] INFO  gov.fnal.dhcp.rulinux04.p:2002.executive::Application.lid(0) <> - Changed Log level to INFO
+30 Oct 2020 15:12:21.393 [139941869910208] INFO  gov.fnal.dhcp.rulinux04.p:2002.pt::http::PeerTransportHTTP.lid(1) <> - No security policies on this server
+30 Oct 2020 15:12:21.527 [139941869910208] INFO  gov.fnal.dhcp.rulinux04.p:2002 <> - CoreSupervisors version: 03.00.00, compiled on Feb  4 2020 at 12:05:53
+30 Oct 2020 15:12:21.527 [139941869910208] INFO  gov.fnal.dhcp.rulinux04.p:2002 <> - CoreSupervisors version: 03.00.00, compiled on Feb  4 2020 at 12:05:53
+10-30 10:12:21.531559                       MessageFacility.h dbg Configuring message facility with /data1/otsdaq/Data/userdata/MessageFacilityConfigurations/MessageFacilityGen.fcl
+udp: {
+	type: UDP
+	threshold: DEBUG
+	port: 30000
+	host: "127.0.0.1"
+}
+console: {
+	type: "OTS"
+	threshold: "DEBUG"
+	filename_delimit: "/srcs/"
+	format_string: "|%L:%N:%f [%u]	%m"
+
+}
+
+file: {}
+|Info:configureMessageFacility:configureMessageFacility.cc [290]	Message Facility Application . configured with: debugModules:["*"] destinations:{console:{filename_delimit:"/srcs/" format_string:"|%L:%N:%f [%u]\t%m" threshold:"DEBUG" type:"OTS"} file:{} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+|Info:_TCPConnect:TCPConnect.cc [334]	Resolving host 127.0.0.1, on port 30000
+%MSG-i _TCPConnect:  DAQ 30-Oct-2020 10:12:21 CDT Booted TCPConnect.cc:334
+Resolving host 127.0.0.1, on port 30000
+%MSG
+|Info:_TCPConnect:TCPConnect.cc [241]	Resolving ip rulinux04.dhcp.fnal.gov
+%MSG-i _TCPConnect:  DAQ 30-Oct-2020 10:12:21 CDT Booted TCPConnect.cc:241
+Resolving ip rulinux04.dhcp.fnal.gov
+%MSG
+%MSG-i configureMessageFacility:  Early 30-Oct-2020 10:12:21 CDT pre-events configureMessageFacility.cc:290
+Message Facility Application . configured with: debugModules:["*"] destinations:{console:{filename_delimit:"/srcs/" format_string:"|%L:%N:%f [%u]\t%m" threshold:"DEBUG" type:"OTS"} file:{} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+|Debug:CorePropertySupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CorePropertySupervisorBase.cc [27]	FESupervisor:UNINITIALIZED_supervisorApplicationUID	<> application->getApplicationContext()->getContextDescriptor()->getURL() = http://rulinux04.dhcp.fnal.gov:2002
+|Debug:CorePropertySupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CorePropertySupervisorBase.cc [28]	FESupervisor:UNINITIALIZED_supervisorApplicationUID	<> application->getApplicationDescriptor()->getLocalId() = 210
+|Debug:CorePropertySupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CorePropertySupervisorBase.cc [29]	FESupervisor:UNINITIALIZED_supervisorApplicationUID	<> supervisorClass_ = ots::FESupervisor
+|Debug:CorePropertySupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CorePropertySupervisorBase.cc [30]	FESupervisor:UNINITIALIZED_supervisorApplicationUID	<> supervisorClassNoNamespace_ = FESupervisor
+|Debug:AllSupervisorInfo.cc:otsdaq/otsdaq/SupervisorInfo/AllSupervisorInfo.cc [42]	Initializing info based on XDAQ context...
+|Debug:SupervisorDescriptorInfoBase.cc:otsdaq/otsdaq/SupervisorInfo/SupervisorDescriptorInfoBase.cc [33]	Init
+|Debug:AllSupervisorInfo.cc:otsdaq/otsdaq/SupervisorInfo/AllSupervisorInfo.cc [98]	Initializing info for Normal mode XDAQ context...
+|Debug:TableBase:otsdaq/otsdaq/TableCore/TableBase.cc [1107]	TableBase-TableGroupMetadata	<> Using Mock-up view
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [164]	username_ = READONLY_USER
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [210]	ACTIVE_GROUPS_FILENAME = /data1/otsdaq/Data/userdata/ServiceData/ActiveTableGroups.cfg
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [211]	ARTDAQ_DATABASE_URI = filesystemdb:///data1/otsdaq/Data/database
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [1348]	------------------------------------- init start    	 [for all plug-ins in Context group 'T992Context(17)']
+|Debug:MessageFacilityTable_table.cc:otsdaq/otsdaq/TablePlugins/MessageFacilityTable_table.cc [111]	Forwarding to Web GUI with UDP forward MesageFacility table.
+|Debug:MessageFacilityTable_table.cc:otsdaq/otsdaq/TablePlugins/MessageFacilityTable_table.cc [233]	Opened.. /data1/otsdaq/Data/userdata/MessageFacilityConfigurations/MessageFacilityGen.fcl
+|Debug:MessageFacilityTable_table.cc:otsdaq/otsdaq/TablePlugins/MessageFacilityTable_table.cc [244]	Opened for artdaq.. /data1/otsdaq/Data/userdata/MessageFacilityConfigurations/ARTDAQInterfaceMessageFacilityGen.fcl
+|Debug:XDAQContextTable_table.cc:otsdaq/otsdaq/TablePlugins/XDAQContextTable_table.cc [251]	Fixing deprecated Supervisor class from ots::Supervisor to ots::GatewaySupervisor
+|Debug:XDAQContextTable_table.cc:otsdaq/otsdaq/TablePlugins/XDAQContextTable_table.cc [256]	Fixing deprecated Supervisor class from /home/otsdaq/otsdaq/build_slf7.x86_64/otsdaq/lib/libSupervisor.so to 
+/home/otsdaq/otsdaq/build_slf7.x86_64/otsdaq/lib/libGatewaySupervisor.so
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [1514]	------------------------------------- init complete 	 [for all plug-ins in Context group 'T992Context(17)']
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [1348]	------------------------------------- init start    	 [for all plug-ins in Backbone group 'TableEditWizBackbone(69)']
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [1514]	------------------------------------- init complete 	 [for all plug-ins in Backbone group 'TableEditWizBackbone(69)']
+|Warning:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [1341]	Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Debug:AllSupervisorInfo.cc:otsdaq/otsdaq/SupervisorInfo/AllSupervisorInfo.cc [205]	Supervisor Info initialization complete!
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [427]	Destroying Backbone Key: 69
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [445]	Destroying Context Key: 17
+|Debug:CorePropertySupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CorePropertySupervisorBase.cc [71]	FESupervisor:UNINITIALIZED_supervisorApplicationUID	<> Getting configuration specific info for supervisor 'FESupervisorFSSR0' of class ots::FESupervisor.
+|Debug:TableBase:otsdaq/otsdaq/TableCore/TableBase.cc [1107]	TableBase-TableGroupMetadata	<> Using Mock-up view
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [164]	username_ = READONLY_USER
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [210]	ACTIVE_GROUPS_FILENAME = /data1/otsdaq/Data/userdata/ServiceData/ActiveTableGroups.cfg
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [211]	ARTDAQ_DATABASE_URI = filesystemdb:///data1/otsdaq/Data/database
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [1348]	------------------------------------- init start    	 [for all plug-ins in Context group 'T992Context(17)']
+|Debug:MessageFacilityTable_table.cc:otsdaq/otsdaq/TablePlugins/MessageFacilityTable_table.cc [111]	Forwarding to Web GUI with UDP forward MesageFacility table.
+|Debug:MessageFacilityTable_table.cc:otsdaq/otsdaq/TablePlugins/MessageFacilityTable_table.cc [233]	Opened.. /data1/otsdaq/Data/userdata/MessageFacilityConfigurations/MessageFacilityGen.fcl
+|Debug:MessageFacilityTable_table.cc:otsdaq/otsdaq/TablePlugins/MessageFacilityTable_table.cc [244]	Opened for artdaq.. /data1/otsdaq/Data/userdata/MessageFacilityConfigurations/ARTDAQInterfaceMessageFacilityGen.fcl
+|Debug:XDAQContextTable_table.cc:otsdaq/otsdaq/TablePlugins/XDAQContextTable_table.cc [251]	Fixing deprecated Supervisor class from ots::Supervisor to ots::GatewaySupervisor
+|Debug:XDAQContextTable_table.cc:otsdaq/otsdaq/TablePlugins/XDAQContextTable_table.cc [256]	Fixing deprecated Supervisor class from /home/otsdaq/otsdaq/build_slf7.x86_64/otsdaq/lib/libSupervisor.so to 
+/home/otsdaq/otsdaq/build_slf7.x86_64/otsdaq/lib/libGatewaySupervisor.so
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [1514]	------------------------------------- init complete 	 [for all plug-ins in Context group 'T992Context(17)']
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [1348]	------------------------------------- init start    	 [for all plug-ins in Backbone group 'TableEditWizBackbone(69)']
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [1514]	------------------------------------- init complete 	 [for all plug-ins in Backbone group 'TableEditWizBackbone(69)']
+|Warning:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [1341]	Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Debug:CorePropertySupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CorePropertySupervisorBase.cc [109]	FESupervisor:FESupervisorFSSR0	<> CorePropertySupervisorBase::supervisorContextUID_ = StripTelescopeContext
+|Debug:CorePropertySupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CorePropertySupervisorBase.cc [110]	FESupervisor:FESupervisorFSSR0	<> CorePropertySupervisorBase::supervisorApplicationUID_ = FESupervisorFSSR0
+|Debug:CorePropertySupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CorePropertySupervisorBase.cc [111]	FESupervisor:FESupervisorFSSR0	<> CorePropertySupervisorBase::supervisorConfigurationPath_ = /StripTelescopeContext/LinkToApplicationTable/FESupervisorFSSR0/LinkToSupervisorTable
+|Debug:CorePropertySupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CorePropertySupervisorBase.cc [147]	hostname = rulinux04.dhcp.fnal.gov
+|Debug:CorePropertySupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CorePropertySupervisorBase.cc [161]	Marked alive: /data1/otsdaq/Data/userdata/Logs/otsdaq_is_alive-rulinux04.dhcp.fnal.gov-2002.dat
+|Debug:FSM:otsdaq/otsdaq/FiniteStateMachine/FiniteStateMachine.cc [19]	FSM-FESupervisor:FESupervisorFSSR0	<> Constructing FiniteStateMachine
+|Debug:FSM:otsdaq/otsdaq/FiniteStateMachine/RunControlStateMachine.cc [97]	FSM-FESupervisor:FESupervisorFSSR0	<> Resetting RunControlStateMachine with name 'FESupervisor:FESupervisorFSSR0'...
+|Debug:WorkLoopManager.cc:otsdaq/otsdaq/WorkLoopManager/WorkLoopManager.cc [19]	Request name: StateMachine jobName: StateMachine
+|Debug:CoreSupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CoreSupervisorBase.cc [25]	FESupervisor:FESupervisorFSSR0	<> Constructor.
+|Debug:CoreSupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CoreSupervisorBase.cc [40]	FESupervisor:FESupervisorFSSR0	<> Constructed.
+|Debug:FESupervisor.cc:otsdaq/otsdaq/CoreSupervisors/FESupervisor.cc [40]	FESupervisor:FESupervisorFSSR0	<> Constructing...
+|Debug:Configurable.cc:otsdaq/otsdaq/Configurable/Configurable.cc [16]	FESupervisorFSSR0	<>  Configurable class constructed. 
+|Debug:FEVInterfacesManager.cc:otsdaq/otsdaq/FECore/FEVInterfacesManager.cc [23]	FESupervisorFSSR0	<> Constructed.
+|Debug:FESupervisor.cc:otsdaq/otsdaq/CoreSupervisors/FESupervisor.cc [843]	FESupervisor:FESupervisorFSSR0	<> State Machine 0 WAS of type FEVInterfacesManager
+|Debug:FESupervisor.cc:otsdaq/otsdaq/CoreSupervisors/FESupervisor.cc [853]	FESupervisor:FESupervisorFSSR0	<> theFEInterfacesManager pointer = 0x1a40f80
+|Debug:FESupervisor.cc:otsdaq/otsdaq/CoreSupervisors/FESupervisor.cc [68]	FESupervisor:FESupervisorFSSR0	<> Constructed.
+|Debug:CorePropertySupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CorePropertySupervisorBase.cc [27]	DataManagerSupervisor:UNINITIALIZED_supervisorApplicationUID	<> application->getApplicationContext()->getContextDescriptor()->getURL() = http://rulinux04.dhcp.fnal.gov:2002
+|Debug:CorePropertySupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CorePropertySupervisorBase.cc [28]	DataManagerSupervisor:UNINITIALIZED_supervisorApplicationUID	<> application->getApplicationDescriptor()->getLocalId() = 310
+|Debug:CorePropertySupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CorePropertySupervisorBase.cc [29]	DataManagerSupervisor:UNINITIALIZED_supervisorApplicationUID	<> supervisorClass_ = ots::DataManagerSupervisor
+|Debug:CorePropertySupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CorePropertySupervisorBase.cc [30]	DataManagerSupervisor:UNINITIALIZED_supervisorApplicationUID	<> supervisorClassNoNamespace_ = DataManagerSupervisor
+|Debug:AllSupervisorInfo.cc:otsdaq/otsdaq/SupervisorInfo/AllSupervisorInfo.cc [42]	Initializing info based on XDAQ context...
+|Debug:SupervisorDescriptorInfoBase.cc:otsdaq/otsdaq/SupervisorInfo/SupervisorDescriptorInfoBase.cc [33]	Init
+|Debug:AllSupervisorInfo.cc:otsdaq/otsdaq/SupervisorInfo/AllSupervisorInfo.cc [98]	Initializing info for Normal mode XDAQ context...
+|Debug:TableBase:otsdaq/otsdaq/TableCore/TableBase.cc [1107]	TableBase-TableGroupMetadata	<> Using Mock-up view
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [164]	username_ = READONLY_USER
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [210]	ACTIVE_GROUPS_FILENAME = /data1/otsdaq/Data/userdata/ServiceData/ActiveTableGroups.cfg
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [211]	ARTDAQ_DATABASE_URI = filesystemdb:///data1/otsdaq/Data/database
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [1348]	------------------------------------- init start    	 [for all plug-ins in Context group 'T992Context(17)']
+|Debug:MessageFacilityTable_table.cc:otsdaq/otsdaq/TablePlugins/MessageFacilityTable_table.cc [111]	Forwarding to Web GUI with UDP forward MesageFacility table.
+|Debug:MessageFacilityTable_table.cc:otsdaq/otsdaq/TablePlugins/MessageFacilityTable_table.cc [233]	Opened.. /data1/otsdaq/Data/userdata/MessageFacilityConfigurations/MessageFacilityGen.fcl
+|Debug:MessageFacilityTable_table.cc:otsdaq/otsdaq/TablePlugins/MessageFacilityTable_table.cc [244]	Opened for artdaq.. /data1/otsdaq/Data/userdata/MessageFacilityConfigurations/ARTDAQInterfaceMessageFacilityGen.fcl
+|Debug:XDAQContextTable_table.cc:otsdaq/otsdaq/TablePlugins/XDAQContextTable_table.cc [251]	Fixing deprecated Supervisor class from ots::Supervisor to ots::GatewaySupervisor
+|Debug:XDAQContextTable_table.cc:otsdaq/otsdaq/TablePlugins/XDAQContextTable_table.cc [256]	Fixing deprecated Supervisor class from /home/otsdaq/otsdaq/build_slf7.x86_64/otsdaq/lib/libSupervisor.so to 
+/home/otsdaq/otsdaq/build_slf7.x86_64/otsdaq/lib/libGatewaySupervisor.so
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [1514]	------------------------------------- init complete 	 [for all plug-ins in Context group 'T992Context(17)']
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [1348]	------------------------------------- init start    	 [for all plug-ins in Backbone group 'TableEditWizBackbone(69)']
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [1514]	------------------------------------- init complete 	 [for all plug-ins in Backbone group 'TableEditWizBackbone(69)']
+|Warning:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [1341]	Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Debug:AllSupervisorInfo.cc:otsdaq/otsdaq/SupervisorInfo/AllSupervisorInfo.cc [205]	Supervisor Info initialization complete!
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [427]	Destroying Backbone Key: 69
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [445]	Destroying Context Key: 17
+|Debug:CorePropertySupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CorePropertySupervisorBase.cc [71]	DataManagerSupervisor:UNINITIALIZED_supervisorApplicationUID	<> Getting configuration specific info for supervisor 'DataManagerSupervisorFSSR0' of class ots::DataManagerSupervisor.
+|Debug:TableBase:otsdaq/otsdaq/TableCore/TableBase.cc [1107]	TableBase-TableGroupMetadata	<> Using Mock-up view
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [164]	username_ = READONLY_USER
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [210]	ACTIVE_GROUPS_FILENAME = /data1/otsdaq/Data/userdata/ServiceData/ActiveTableGroups.cfg
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [211]	ARTDAQ_DATABASE_URI = filesystemdb:///data1/otsdaq/Data/database
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [1348]	------------------------------------- init start    	 [for all plug-ins in Context group 'T992Context(17)']
+|Debug:MessageFacilityTable_table.cc:otsdaq/otsdaq/TablePlugins/MessageFacilityTable_table.cc [111]	Forwarding to Web GUI with UDP forward MesageFacility table.
+|Debug:MessageFacilityTable_table.cc:otsdaq/otsdaq/TablePlugins/MessageFacilityTable_table.cc [233]	Opened.. /data1/otsdaq/Data/userdata/MessageFacilityConfigurations/MessageFacilityGen.fcl
+|Debug:MessageFacilityTable_table.cc:otsdaq/otsdaq/TablePlugins/MessageFacilityTable_table.cc [244]	Opened for artdaq.. /data1/otsdaq/Data/userdata/MessageFacilityConfigurations/ARTDAQInterfaceMessageFacilityGen.fcl
+|Debug:XDAQContextTable_table.cc:otsdaq/otsdaq/TablePlugins/XDAQContextTable_table.cc [251]	Fixing deprecated Supervisor class from ots::Supervisor to ots::GatewaySupervisor
+|Debug:XDAQContextTable_table.cc:otsdaq/otsdaq/TablePlugins/XDAQContextTable_table.cc [256]	Fixing deprecated Supervisor class from /home/otsdaq/otsdaq/build_slf7.x86_64/otsdaq/lib/libSupervisor.so to 
+/home/otsdaq/otsdaq/build_slf7.x86_64/otsdaq/lib/libGatewaySupervisor.so
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [1514]	------------------------------------- init complete 	 [for all plug-ins in Context group 'T992Context(17)']
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [1348]	------------------------------------- init start    	 [for all plug-ins in Backbone group 'TableEditWizBackbone(69)']
+|Debug:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [1514]	------------------------------------- init complete 	 [for all plug-ins in Backbone group 'TableEditWizBackbone(69)']
+|Warning:ConfigurationManager:otsdaq/otsdaq/ConfigurationInterface/ConfigurationManager.cc [1341]	Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+Not loading group because it is not of type Context or Backbone (it is type 'Configuration').
+|Debug:CorePropertySupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CorePropertySupervisorBase.cc [109]	DataManagerSupervisor:DataManagerSupervisorFSSR0	<> CorePropertySupervisorBase::supervisorContextUID_ = StripTelescopeContext
+|Debug:CorePropertySupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CorePropertySupervisorBase.cc [110]	DataManagerSupervisor:DataManagerSupervisorFSSR0	<> CorePropertySupervisorBase::supervisorApplicationUID_ = DataManagerSupervisorFSSR0
+|Debug:CorePropertySupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CorePropertySupervisorBase.cc [111]	DataManagerSupervisor:DataManagerSupervisorFSSR0	<> CorePropertySupervisorBase::supervisorConfigurationPath_ = /StripTelescopeContext/LinkToApplicationTable/DataManagerSupervisorFSSR0/LinkToSupervisorTable
+|Debug:CorePropertySupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CorePropertySupervisorBase.cc [147]	hostname = rulinux04.dhcp.fnal.gov
+|Debug:CorePropertySupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CorePropertySupervisorBase.cc [161]	Marked alive: /data1/otsdaq/Data/userdata/Logs/otsdaq_is_alive-rulinux04.dhcp.fnal.gov-2002.dat
+|Debug:FSM:otsdaq/otsdaq/FiniteStateMachine/FiniteStateMachine.cc [19]	FSM-DataManagerSupervisor:DataManagerSupervisorFSSR0	<> Constructing FiniteStateMachine
+|Debug:FSM:otsdaq/otsdaq/FiniteStateMachine/RunControlStateMachine.cc [97]	FSM-DataManagerSupervisor:DataManagerSupervisorFSSR0	<> Resetting RunControlStateMachine with name 'DataManagerSupervisor:DataManagerSupervisorFSSR0'...
+|Debug:WorkLoopManager.cc:otsdaq/otsdaq/WorkLoopManager/WorkLoopManager.cc [19]	Request name: StateMachine jobName: StateMachine
+|Debug:CoreSupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CoreSupervisorBase.cc [25]	DataManagerSupervisor:DataManagerSupervisorFSSR0	<> Constructor.
+|Debug:CoreSupervisorBase.cc:otsdaq/otsdaq/CoreSupervisors/CoreSupervisorBase.cc [40]	DataManagerSupervisor:DataManagerSupervisorFSSR0	<> Constructed.
+|Debug:DataManagerSupervisor.cc:otsdaq/otsdaq/CoreSupervisors/DataManagerSupervisor.cc [13]	DataManagerSupervisor:DataManagerSupervisorFSSR0	<> Constructor.
+|Debug:DataManagerSingleton.h:otsdaq/otsdaq/DataManager/DataManagerSingleton.h [34]	Creating supervisor application UID: DataManagerSupervisorFSSR0 POINTER: (nil)
+|Debug:Configurable.cc:otsdaq/otsdaq/Configurable/Configurable.cc [16]	DataManagerSupervisorFSSR0	<>  Configurable class constructed. 
+|Debug:DataManager.cc:otsdaq/otsdaq/DataManager/DataManager.cc [23]	DataManagerSupervisorFSSR0	<> Constructed.
+|Debug:DataManagerSingleton.h:otsdaq/otsdaq/DataManager/DataManagerSingleton.h [36]	Creating supervisor application UID: DataManagerSupervisorFSSR0 POINTER: 0x19d4650
+|Debug:DataManagerSupervisor.cc:otsdaq/otsdaq/CoreSupervisors/DataManagerSupervisor.cc [20]	DataManagerSupervisor:DataManagerSupervisorFSSR0	<> Constructed.
+30 Oct 2020 15:12:22.375 [139941869910208] INFO  gov.fnal.dhcp.rulinux04.p:2002 <> - Ready.
+Terminating...
+|Debug:MetricManager:MetricManager.cc [178]	MetricManager is shutting down...
+|Debug:MetricManager:MetricManager.cc [154]	Stopping Metrics
+|Debug:MetricManager:MetricManager.cc [157]	Joining Metric-Sending thread
+|Debug:MetricManager:MetricManager.cc [160]	do_stop Complete

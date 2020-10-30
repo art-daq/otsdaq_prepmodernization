@@ -1,0 +1,15 @@
+28 Nov 2017 16:29:20.193 [140264266876992] INFO  gov.fnal.ftbftracker02.p:2015 <> - xdaq version: 04.09.02, compiled on Apr 25 2017 at 16:28:35, 64bit
+28 Nov 2017 16:29:20.195 [140264266876992] INFO  gov.fnal.ftbftracker02.p:2015 <> - Loaded profile: /data-08/otsdaq/srcs/otsdaq_cmsoutertracker/DataDTCSupervisor/XDAQConfigurations/otsConfiguration_CMake.xml
+28 Nov 2017 16:29:20.196 [140264266876992] INFO  gov.fnal.ftbftracker02.p:2015 <> - b2innub version: 02.05.00, compiled on Apr 19 2016 at 13:38:58
+28 Nov 2017 16:29:20.197 [140264266876992] INFO  gov.fnal.ftbftracker02.p:2015 <> - executive version: 04.00.06, compiled on Jan 21 2016 at 15:23:25
+28 Nov 2017 16:29:20.199 [140264266876992] INFO  gov.fnal.ftbftracker02.p:2015 <> - b2inutils version: 04.04.03, compiled on Oct  6 2016 at 16:04:44
+28 Nov 2017 16:29:20.200 [140264266876992] INFO  gov.fnal.ftbftracker02.p:2015 <> - pthttp version: 04.05.04, compiled on Aug 12 2016 at 14:40:18
+28 Nov 2017 16:29:20.201 [140264266876992] INFO  gov.fnal.ftbftracker02.p:2015 <> - ptfifo version: 04.03.00, compiled on Jan 21 2016 at 15:23:15
+28 Nov 2017 16:29:20.202 [140264266876992] INFO  gov.fnal.ftbftracker02.p:2015 <> - xrelay version: 04.01.00, compiled on Jan 21 2016 at 15:23:35
+28 Nov 2017 16:29:20.203 [140264266876992] INFO  gov.fnal.ftbftracker02.p:2015 <> - hyperdaq version: 05.01.07, compiled on May  2 2017 at 15:56:56
+28 Nov 2017 16:29:20.203 [140264266876992] DEBUG gov.fnal.ftbftracker02.p:2015 <> - Create application descriptor for class: executive::Application id: 0
+28 Nov 2017 16:29:20.208 [140264266876992] INFO  gov.fnal.ftbftracker02.p:2015.executive::Application.lid(0) <> - Log URL not set (was already console)
+28 Nov 2017 16:29:20.208 [140264266876992] INFO  gov.fnal.ftbftracker02.p:2015.executive::Application.lid(0) <> - Changed Log level to INFO
+28 Nov 2017 16:29:20.211 [140264266876992] INFO  gov.fnal.ftbftracker02.p:2015.pt::http::PeerTransportHTTP.lid(1) <> - No security policies on this server
+28 Nov 2017 16:29:20.212 [140264266876992] FATAL root <> - Caught exception: xdaq::exception::Exception 'Cannot setup HTTP transport.' raised at init(/usr/local/src/xdaq/baseline13/trunk/daq/xdaq/src/common/ApplicationContextImpl.cc:651);
+	originated by pt::http::exception::Exception 'Cannot start HTTP receiver loop for (binding) address: http://ftbftracker02.fnal.gov:2015. Address already in use' raised at ReceiverLoop(/usr/local/src/xdaq/baseline13/trunk/daq/pt/http/src/common/ReceiverLoop.cc:233)

@@ -1,0 +1,139 @@
+{
+"document" : {
+"data" : {
+"NAME" : "SLOW_CONTROLS_DASHBOARD_SUPERVISOR_TABLE",
+"COMMENT" : "Auto-generated from mock-up.",
+"AUTHOR" : "admin",
+"CREATION_TIME" : 1582566731,
+"COL_TYPES" : {
+"SUPERVISOR_UID" : "STRING",
+"SLOW_CONTROLS_INTERFACE_PLUGIN_TYPE" : "STRING",
+"SLOW_CONTROLS_CHANNEL_SOURCE_TABLE_LIST" : "STRING",
+"LINK_TO_CONFIGURE_ALARMS_TO_MONITOR_TABLE" : "STRING",
+"LINK_TO_CONFIGURE_ALARMS_TO_MONITOR_GROUP_ID" : "STRING",
+"LINK_TO_HALT_ALARMS_TO_MONITOR_TABLE" : "STRING",
+"LINK_TO_HALT_ALARMS_TO_MONITOR_GROUP_ID" : "STRING",
+"LINK_TO_PAUSE_ALARMS_TO_MONITOR_TABLE" : "STRING",
+"LINK_TO_PAUSE_ALARMS_TO_MONITOR_GROUP_ID" : "STRING",
+"LINK_TO_RESUME_ALARMS_TO_MONITOR_TABLE" : "STRING",
+"LINK_TO_RESUME_ALARMS_TO_MONITOR_GROUP_ID" : "STRING",
+"LINK_TO_START_ALARMS_TO_MONITOR_TABLE" : "STRING",
+"LINK_TO_START_ALARMS_TO_MONITOR_GROUP_ID" : "STRING",
+"LINK_TO_STOP_ALARMS_TO_MONITOR_TABLE" : "STRING",
+"LINK_TO_STOP_ALARMS_TO_MONITOR_GROUP_ID" : "STRING",
+"LINK_TO_RUNNING_ALARMS_TO_MONITOR_TABLE" : "STRING",
+"LINK_TO_RUNNING_ALARMS_TO_MONITOR_GROUP_ID" : "STRING",
+"LINK_TO_ALARM_ALERT_NOTIFICATIONS_TABLE" : "STRING",
+"LINK_TO_ALARM_ALERT_NOTIFICATIONS_GROUP_ID" : "STRING",
+"COMMENT_DESCRIPTION" : "STRING",
+"AUTHOR" : "STRING",
+"RECORD_INSERTION_TIME" : "TIMESTAMP WITH TIMEZONE"
+},
+"DATA_SET" : [
+
+]
+},
+"metadata" : {
+
+},
+"search" : [
+
+]
+},
+"comments" : [
+
+],
+"origin" : {
+"source" : "template",
+"name" : "notprovided",
+"format" : "json",
+"created" : "2020-10-30T16:08:06.599-0500",
+"rawdata" : [
+
+]
+},
+"version" : "1",
+"entities" : [
+{
+"name" : "OTSROOT",
+"assigned" : "2020-10-30T16:08:06.600-0500"
+}
+],
+"tables" : [
+{
+"name" : "notprovided",
+"assigned" : "2020-10-30T16:08:06.600-0500"
+},
+{
+"name" : "MainContext_v1",
+"assigned" : "2020-10-30T16:08:07.318-0500"
+}
+],
+"changelog" : "notprovided",
+"bookkeeping" : {
+"isdeleted" : false,
+"isreadonly" : false,
+"updates" : [
+{
+"event" : "addTable",
+"timestamp" : "2020-10-30T16:08:06.600-0500",
+"value" : {
+"name" : "notprovided",
+"assigned" : "2020-10-30T16:08:06.600-0500"
+}
+},
+{
+"event" : "setVersion",
+"timestamp" : "2020-10-30T16:08:06.600-0500",
+"value" : {
+"name" : "1",
+"assigned" : "2020-10-30T16:08:06.600-0500"
+}
+},
+{
+"event" : "setCollection",
+"timestamp" : "2020-10-30T16:08:06.600-0500",
+"value" : {
+"name" : "SlowControlsDashboardSupervisorTable",
+"assigned" : "2020-10-30T16:08:06.600-0500"
+}
+},
+{
+"event" : "addEntity",
+"timestamp" : "2020-10-30T16:08:06.600-0500",
+"value" : {
+"name" : "OTSROOT",
+"assigned" : "2020-10-30T16:08:06.600-0500"
+}
+},
+{
+"event" : "addTable",
+"timestamp" : "2020-10-30T16:08:07.318-0500",
+"value" : {
+"name" : "MainContext_v1",
+"assigned" : "2020-10-30T16:08:07.318-0500"
+}
+}
+],
+"created" : "2020-10-30T16:08:06.599-0500"
+},
+"_id" : {
+"$oid" : "f24110f695024a7889349093"
+},
+"collection" : "SlowControlsDashboardSupervisorTable",
+"aliases" : {
+"active" : [
+
+],
+"history" : [
+
+]
+},
+"runs" : [
+
+],
+"attachments" : [
+
+],
+"configtype" : "notprovided"
+}

@@ -1,0 +1,37 @@
+{
+"ouid" : [
+"82df4ffe84b24e5c9284854c"
+],
+"version" : {
+"2" : [
+"82df4ffe84b24e5c9284854c"
+]
+},
+"configurations.name" : {
+"notprovided" : [
+"82df4ffe84b24e5c9284854c"
+],
+"NimPlusConfiguration_v2" : [
+"82df4ffe84b24e5c9284854c"
+]
+},
+"entities.name" : {
+"OTSROOT" : [
+"82df4ffe84b24e5c9284854c"
+]
+},
+"aliases.active.name" : {
+
+},
+"runs.name" : {
+
+},
+"configurations.assigned" : {
+"notprovided" : [
+"2020-10-30T16:08:07.976-0500"
+],
+"NimPlusConfiguration_v2" : [
+"2020-10-30T16:08:08.800-0500"
+]
+}
+}

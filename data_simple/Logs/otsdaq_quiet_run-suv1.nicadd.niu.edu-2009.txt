@@ -1,0 +1,164 @@
+05 Dec 2018 22:15:25.442 [140696757811392] INFO  edu.niu.nicadd.suv1.p:2009 <> - xdaq version: 05.03.00, compiled on May 15 2018 at 17:19:06, 64bit
+05 Dec 2018 22:15:25.459 [140696757811392] INFO  edu.niu.nicadd.suv1.p:2009 <> - Loaded profile: /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/XDAQConfigurations/otsConfiguration_CMake.xml
+05 Dec 2018 22:15:25.460 [140696757811392] INFO  edu.niu.nicadd.suv1.p:2009 <> - b2innub version: 02.05.01, compiled on May 15 2018 at 17:21:26
+05 Dec 2018 22:15:25.461 [140696757811392] INFO  edu.niu.nicadd.suv1.p:2009 <> - executive version: 04.00.06, compiled on May 15 2018 at 17:20:58
+05 Dec 2018 22:15:25.463 [140696757811392] INFO  edu.niu.nicadd.suv1.p:2009 <> - b2inutils version: 04.04.05, compiled on May 15 2018 at 17:21:32
+05 Dec 2018 22:15:25.465 [140696757811392] INFO  edu.niu.nicadd.suv1.p:2009 <> - pthttp version: 04.05.05, compiled on May 15 2018 at 17:20:00
+05 Dec 2018 22:15:25.466 [140696757811392] INFO  edu.niu.nicadd.suv1.p:2009 <> - ptfifo version: 04.03.01, compiled on May 15 2018 at 17:20:38
+05 Dec 2018 22:15:25.467 [140696757811392] INFO  edu.niu.nicadd.suv1.p:2009 <> - xrelay version: 04.01.00, compiled on May 15 2018 at 17:21:20
+05 Dec 2018 22:15:25.468 [140696757811392] INFO  edu.niu.nicadd.suv1.p:2009 <> - hyperdaq version: 05.01.11, compiled on May 15 2018 at 17:21:18
+05 Dec 2018 22:15:25.469 [140696757811392] DEBUG edu.niu.nicadd.suv1.p:2009 <> - Create application descriptor for class: executive::Application id: 0
+05 Dec 2018 22:15:25.483 [140696757811392] INFO  edu.niu.nicadd.suv1.p:2009.executive::Application.lid(0) <> - Log URL not set (was already console)
+05 Dec 2018 22:15:25.483 [140696757811392] INFO  edu.niu.nicadd.suv1.p:2009.executive::Application.lid(0) <> - Changed Log level to INFO
+05 Dec 2018 22:15:25.503 [140696757811392] INFO  edu.niu.nicadd.suv1.p:2009.pt::http::PeerTransportHTTP.lid(1) <> - No security policies on this server
+05 Dec 2018 22:15:26.047 [140696757811392] INFO  edu.niu.nicadd.suv1.p:2009 <> - CoreSupervisors version: 03.00.00, compiled on Dec  4 2018 at 23:28:15
+LogDebug:ConfigurationBase-ConfigurationGroupMetadata:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationBase.cc [1145]	Configuration: ConfigurationGroupMetadata
+LogDebug:ConfigurationBase-ConfigurationGroupMetadata:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationBase.cc [1148]	Num of Views: 0 (Temporary Views: 0)
+LogDebug:ConfigurationBase-ConfigurationGroupMetadata:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationBase.cc [1174]	Using Mock-up view
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [170]	ACTIVE_GROUP_FILENAME = /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/ServiceData/ActiveConfigurationGroups.cfg
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [171]	ARTDAQ_DATABASE_URI = filesystemdb:///work/otsdaq/srcs/otsdaq_drs4ftbf/database
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [978]	StringMacros::mapToString(aliasMap) = 
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1048]	------------------------------------- init start    	 [for all plug-ins in Context group 'T992Context(2)']
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/MessageFacilityConfiguration_configuration.cc [89]	Opened.. /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/MessageFacilityConfigurations/MessageFacilityGen.fcl
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/MessageFacilityConfiguration_configuration.cc [143]	Forwarding to Web GUI with UDP forward MesageFacility configuration.
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1192]	------------------------------------- init complete 	 [for all plug-ins in Context group 'T992Context(2)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1048]	------------------------------------- init start    	 [for all plug-ins in Backbone group 'GroupAliasTreeEditWizBackbone(4)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1192]	------------------------------------- init complete 	 [for all plug-ins in Backbone group 'GroupAliasTreeEditWizBackbone(4)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [978]	StringMacros::mapToString(aliasMap) = 
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1048]	------------------------------------- init start    	 [for all plug-ins in Iterate group 'iterateDefaultGroup(3)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1192]	------------------------------------- init complete 	 [for all plug-ins in Iterate group 'iterateDefaultGroup(3)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [978]	StringMacros::mapToString(aliasMap) = 
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1048]	------------------------------------- init start    	 [for all plug-ins in Configuration group 'T992Config(1)']
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/FESlowControlsConfiguration_configuration.cc [50]	*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/FESlowControlsConfiguration_configuration.cc [51]	FESlowControlsConfiguration
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/FESlowControlsConfiguration_configuration.cc [61]	BurstDataCount
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/FESlowControlsConfiguration_configuration.cc [63]	childType=unsigned long long
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1192]	------------------------------------- init complete 	 [for all plug-ins in Configuration group 'T992Config(1)']
+LogDebug:ots:otsdaq/otsdaq-core/MessageFacility/MessageFacility.h [37]	Configuring message facility with /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/MessageFacilityConfigurations/MessageFacilityGen.fcl
+LogDebug:ots-FESupervisor:otsdaq/otsdaq-core/CoreSupervisors/CorePropertySupervisorBase.cc [19]	application->getApplicationContext()->getContextDescriptor()->getURL() = http://suv1.nicadd.niu.edu:2009
+LogDebug:ots-FESupervisor:otsdaq/otsdaq-core/CoreSupervisors/CorePropertySupervisorBase.cc [20]	application->getApplicationDescriptor()->getLocalId() = 403
+LogDebug:ots-FESupervisor:otsdaq/otsdaq-core/CoreSupervisors/CorePropertySupervisorBase.cc [21]	supervisorClass_ = ots::FESupervisor
+LogDebug:ots-FESupervisor:otsdaq/otsdaq-core/CoreSupervisors/CorePropertySupervisorBase.cc [22]	supervisorClassNoNamespace_ = FESupervisor
+LogDebug:ots:otsdaq/otsdaq-core/SupervisorInfo/AllSupervisorInfo.cc [54]	Initializing info based on XDAQ context...
+LogDebug:ots:otsdaq/otsdaq-core/SupervisorInfo/SupervisorDescriptorInfoBase.cc [42]	Init
+LogDebug:ots:otsdaq/otsdaq-core/SupervisorInfo/AllSupervisorInfo.cc [198]	Initializing info for Normal mode XDAQ context...
+LogDebug:ConfigurationBase-ConfigurationGroupMetadata:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationBase.cc [1145]	Configuration: ConfigurationGroupMetadata
+LogDebug:ConfigurationBase-ConfigurationGroupMetadata:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationBase.cc [1148]	Num of Views: 0 (Temporary Views: 0)
+LogDebug:ConfigurationBase-ConfigurationGroupMetadata:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationBase.cc [1174]	Using Mock-up view
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [170]	ACTIVE_GROUP_FILENAME = /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/ServiceData/ActiveConfigurationGroups.cfg
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [171]	ARTDAQ_DATABASE_URI = filesystemdb:///work/otsdaq/srcs/otsdaq_drs4ftbf/database
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [978]	StringMacros::mapToString(aliasMap) = 
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1048]	------------------------------------- init start    	 [for all plug-ins in Context group 'T992Context(2)']
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/MessageFacilityConfiguration_configuration.cc [89]	Opened.. /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/MessageFacilityConfigurations/MessageFacilityGen.fcl
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/MessageFacilityConfiguration_configuration.cc [143]	Forwarding to Web GUI with UDP forward MesageFacility configuration.
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1192]	------------------------------------- init complete 	 [for all plug-ins in Context group 'T992Context(2)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1048]	------------------------------------- init start    	 [for all plug-ins in Backbone group 'GroupAliasTreeEditWizBackbone(4)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1192]	------------------------------------- init complete 	 [for all plug-ins in Backbone group 'GroupAliasTreeEditWizBackbone(4)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [978]	StringMacros::mapToString(aliasMap) = 
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1048]	------------------------------------- init start    	 [for all plug-ins in Iterate group 'iterateDefaultGroup(3)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1192]	------------------------------------- init complete 	 [for all plug-ins in Iterate group 'iterateDefaultGroup(3)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [978]	StringMacros::mapToString(aliasMap) = 
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1048]	------------------------------------- init start    	 [for all plug-ins in Configuration group 'T992Config(1)']
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/FESlowControlsConfiguration_configuration.cc [50]	*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/FESlowControlsConfiguration_configuration.cc [51]	FESlowControlsConfiguration
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/FESlowControlsConfiguration_configuration.cc [61]	BurstDataCount
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/FESlowControlsConfiguration_configuration.cc [63]	childType=unsigned long long
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1192]	------------------------------------- init complete 	 [for all plug-ins in Configuration group 'T992Config(1)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [340]	Destroying Configuration Key: 1
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [351]	Destroying Backbone Key: 4
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [360]	Destroying Iterate Key: 3
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [369]	Destroying Context Key: 2
+LogDebug:ots:otsdaq/otsdaq-core/SupervisorInfo/AllSupervisorInfo.cc [309]	Init complete
+LogDebug:ots-FESupervisor:otsdaq/otsdaq-core/CoreSupervisors/CorePropertySupervisorBase.cc [35]	Getting configuration specific info for supervisor 'DRS4FTBFFEVMESupervisor' of class ots::FESupervisor.
+LogDebug:ots-FESupervisor:otsdaq/otsdaq-core/CoreSupervisors/CorePropertySupervisorBase.cc [77]	CorePropertySupervisorBase::supervisorContextUID_ = DRS4FTBFContext
+LogDebug:ots-FESupervisor:otsdaq/otsdaq-core/CoreSupervisors/CorePropertySupervisorBase.cc [78]	CorePropertySupervisorBase::supervisorApplicationUID_ = DRS4FTBFFEVMESupervisor
+LogDebug:ots-FESupervisor:otsdaq/otsdaq-core/CoreSupervisors/CorePropertySupervisorBase.cc [79]	CorePropertySupervisorBase::supervisorConfigurationPath_ = /DRS4FTBFContext/LinkToApplicationConfiguration/DRS4FTBFFEVMESupervisor/LinkToSupervisorConfiguration
+LogDebug:FSM-FESupervisor:DRS4FTBFFEVMESupervisor:otsdaq/otsdaq-core/FiniteStateMachine/FiniteStateMachine.cc [24]	Constructing FiniteStateMachine
+LogDebug:ots:otsdaq/otsdaq-core/MessageFacility/MessageFacility.h [37]	Configuring message facility with /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/MessageFacilityConfigurations/MessageFacilityGen.fcl
+LogDebug:FSM-FESupervisor:DRS4FTBFFEVMESupervisor:otsdaq/otsdaq-core/FiniteStateMachine/RunControlStateMachine.cc [97]	Resetting RunControlStateMachine with name 'FESupervisor:DRS4FTBFFEVMESupervisor'...
+LogDebug:ots:otsdaq/otsdaq-core/WorkLoopManager/WorkLoopManager.cc [24]	Request name: StateMachine jobName: StateMachine
+LogDebug:ots:otsdaq/otsdaq-core/MessageFacility/MessageFacility.h [37]	Configuring message facility with /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/MessageFacilityConfigurations/MessageFacilityGen.fcl
+LogDebug:ots-FESupervisor:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [28]	Begin!
+LogDebug:ots-DRS4FTBFFEVMESupervisor:Configurable
+05 Dec 2018 22:15:26.873 [140696757811392] INFO  edu.niu.nicadd.suv1.p:2009 <> - Ready.
+LogDebug:FSM-FESupervisor:DRS4FTBFFEVMESupervisor:otsdaq/otsdaq-core/FiniteStateMachine/RunControlStateMachine.cc [138]	Received... 	Command: Initialize Par 0 Name: commandId Value: 0, Par 0 Name: xmlns:xdaq Value: urn:xdaq-soap:3.0,
+LogDebug:FSM-FESupervisor:DRS4FTBFFEVMESupervisor:otsdaq/otsdaq-core/FiniteStateMachine/RunControlStateMachine.cc [152]	Defaulting iteration index to 0.
+LogDebug:FSM-FESupervisor:DRS4FTBFFEVMESupervisor:otsdaq/otsdaq-core/FiniteStateMachine/RunControlStateMachine.cc [163]	Defaulting subIterationIndex_ index to 0.
+LogDebug:FSM-FESupervisor:DRS4FTBFFEVMESupervisor:otsdaq/otsdaq-core/FiniteStateMachine/RunControlStateMachine.cc [203]	Starting state for FESupervisor:DRS4FTBFFEVMESupervisor is Initial and attempting to Initialize
+LogDebug:FSM-FESupervisor:DRS4FTBFFEVMESupervisor:otsdaq/otsdaq-core/FiniteStateMachine/FiniteStateMachine.cc [137]	transition = Initialize
+LogDebug:ots-FESupervisor:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [622]	transitionInitializing
+LogDebug:ots-FESupervisor:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [282]	CoreSupervisorBase::stateHalted
+LogDebug:FSM-FESupervisor:DRS4FTBFFEVMESupervisor:otsdaq/otsdaq-core/FiniteStateMachine/RunControlStateMachine.cc [373]	Ending state for FESupervisor:DRS4FTBFFEVMESupervisor is Halted
+LogDebug:FSM-FESupervisor:DRS4FTBFFEVMESupervisor:otsdaq/otsdaq-core/FiniteStateMachine/RunControlStateMachine.cc [375]	result = InitializeDone
+LogDebug:FSM-FESupervisor:DRS4FTBFFEVMESupervisor:otsdaq/otsdaq-core/FiniteStateMachine/RunControlStateMachine.cc [138]	Received... 	Command: Configure Par 0 Name: ConfigurationAlias Value: T992Config, Par 0 Name: ConfigurationGroupKey Value: 1, Par 0 Name: ConfigurationGroupName Value: T992Config, Par 0 Name: commandId Value: 1, Par 0 Name: xmlns:xdaq Value: urn:xdaq-soap:3.0,
+LogDebug:FSM-FESupervisor:DRS4FTBFFEVMESupervisor:otsdaq/otsdaq-core/FiniteStateMachine/RunControlStateMachine.cc [152]	Defaulting iteration index to 0.
+LogDebug:FSM-FESupervisor:DRS4FTBFFEVMESupervisor:otsdaq/otsdaq-core/FiniteStateMachine/RunControlStateMachine.cc [163]	Defaulting subIterationIndex_ index to 0.
+LogDebug:FSM-FESupervisor:DRS4FTBFFEVMESupervisor:otsdaq/otsdaq-core/FiniteStateMachine/RunControlStateMachine.cc [203]	Starting state for FESupervisor:DRS4FTBFFEVMESupervisor is Halted and attempting to Configure
+LogDebug:FSM-FESupervisor:DRS4FTBFFEVMESupervisor:otsdaq/otsdaq-core/FiniteStateMachine/FiniteStateMachine.cc [137]	transition = Configure
+LogDebug:ots-FESupervisor:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [429]	transitionConfiguring
+LogDebug:ots-FESupervisor:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [441]	Configuration group name: T992Config key: 1
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [978]	StringMacros::mapToString(aliasMap) = 
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1048]	------------------------------------- init start    	 [for all plug-ins in Configuration group 'T992Config(1)']
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [297]	Deactivating Configuration group: T992Config
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [340]	Destroying Configuration Key: 1
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/FESlowControlsConfiguration_configuration.cc [50]	*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/FESlowControlsConfiguration_configuration.cc [51]	FESlowControlsConfiguration
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/FESlowControlsConfiguration_configuration.cc [61]	BurstDataCount
+LogDebug:ots:otsdaq/otsdaq-core/ConfigurationPluginDataFormats/FESlowControlsConfiguration_configuration.cc [63]	childType=unsigned long long
+LogDebug:ConfigurationManager:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManager.cc [1192]	------------------------------------- init complete 	 [for all plug-ins in Configuration group 'T992Config(1)']
+LogDebug:ots-FESupervisor:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [456]	Configuring all state machine implementations...
+LogDebug:ots-FESupervisor:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [376]	theStateMachineImplementation Iteration 0.0
+LogDebug:ots:otsdaq/otsdaq-core/FECore/FEVInterfacesManager.cc [51]	Path: /DRS4FTBFContext/LinkToApplicationConfiguration/DRS4FTBFFEVMESupervisor/LinkToSupervisorConfiguration/LinkToFEInterfaceConfiguration
+LogDebug:ConfigurationView-FE_INTERFACE_CONFIGURATION:v1:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationView.cc [845]	Column Types: 
+GroupID-0() FEInterfaceGroupID
+UID() FEInterfaceUID
+OnOff() Status
+FixedChoiceData() FEInterfacePluginName
+ChildLink-0() LinkToFETypeConfiguration
+ChildLinkUID-0() LinkToFETypeUID
+ChildLink-FEToDetector() LinkToFEToDetectorConfiguration
+ChildLinkGroupID-FEToDetector() LinkToFEToDetectorGroupID
+ChildLink-SlowControlChannels() LinkToSlowControlChannelsConfiguration
+ChildLinkGroupID-SlowControlChannels() LinkToSlowControlChannelsGroupID
+ChildLink-SlowControlsMonitor() LinkToSlowControlsMonitorConfiguration
+ChildLinkUID-SlowControlsMonitor() LinkToSlowControlsMonitorUID
+Data() SlowControlsTxSocketIPAddress
+Data() SlowControlsTxSocketPort
+YesNo() SlowControlsLocalAggregateSavingEnabled
+Data() SlowControlsLocalFilePath
+Data() SlowControlsRadixFileName
+TrueFalse() SlowControlsSaveBinaryFile
+Comment() CommentDescription
+Author() Author
+Timestamp() RecordInsertionTime
+LogError:ConfigurationView-FE_INTERFACE_CONFIGURATION:v1:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationView.cc [852]	
+:ConfigurationView-FE_INTERFACE_CONFIGURATION:v1:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationView.cc [849]	Missing Priority Column in config named FE_INTERFACE_CONFIGURATION. (Possibly ConfigurationView was just not initialized?This is the const call so can not alter class members)
+LogWarning:ConfigurationTree:otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationTree.cc [1933]	Error identifying priority. Assuming all children have equal priority (Error: :ConfigurationView-FE_INTERFACE_CONFIGURATION:v1:otsdaq/otsdaq-core/ConfigurationDataFormats/ConfigurationView.cc [849]	Missing Priority Column in config named FE_INTERFACE_CONFIGURATION. (Possibly ConfigurationView was just not initialized?This is the const call so can not alter class members)
+
+LogDebug:ots:otsdaq/otsdaq-core/FECore/FEVInterfacesManager.cc [62]	StringMacros::vectorToString(theFENamesByPriority_) = DRS4FTBF
+LogDebug:ots:otsdaq/otsdaq-core/FECore/FEVInterfacesManager.cc [75]	Interface Plugin Name: FEDRS4FTBFInterface
+LogDebug:ots:otsdaq/otsdaq-core/FECore/FEVInterfacesManager.cc [76]	Interface Name: DRS4FTBF
+LogDebug:ots:otsdaq/otsdaq-core/FECore/FEVInterfacesManager.cc [77]	XDAQContext Node: XDAQContextConfiguration
+LogDebug:ots:otsdaq/otsdaq-core/FECore/FEVInterfacesManager.cc [78]	Path to configuration: /DRS4FTBFContext/LinkToApplicationConfiguration/DRS4FTBFFEVMESupervisor/LinkToSupervisorConfiguration/LinkToFEInterfaceConfiguration/DRS4FTBF/LinkToFETypeConfiguration
+Process [22090] on node suv1.nicadd.niu.edu terminates abnormally at 2018-12-05T16:16:02.822455-06:00. Caught signal 6 at address [0x3e80000564a]
+Stacktrace follows:
+/cvmfs/fermilab.opensciencegrid.org/products/artdaq/xdaq/v14_4_0b/Linux64bit+3.10-2.17-e15-prof/lib/libtoolbox.so(_ZN7toolbox10stacktraceEiRSo+0x3f) [0x7ff6832fd6cf]
+/cvmfs/fermilab.opensciencegrid.org/products/artdaq/xdaq/v14_4_0b/Linux64bit+3.10-2.17-e15-prof/lib/libtoolbox.so(_ZN7toolbox18signalSEGVCallbackEiP9siginfo_tPv+0x242) [0x7ff6832fea62]
+/lib64/libpthread.so.0(+0xf680) [0x7ff683deb680]
+/lib64/libc.so.6(gsignal+0x37) [0x7ff6809fd207]
+/lib64/libc.so.6(abort+0x148) [0x7ff6809fe8f8]
+/lib64/libc.so.6(+0x78cc7) [0x7ff680a3fcc7]
+/lib64/libc.so.6(+0x81429) [0x7ff680a48429]
+/work/otsdaq/build_slf7.x86_64/otsdaq_drs4ftbf/lib/libdrs506.so(_ZN8wxStringD1Ev+0x19) [0x7ff62fc88c39]
+/lib64/libwx_baseu-3.0.so.0(+0x135868) [0x7ff62da3b868]
+/lib64/libwx_baseu-3.0.so.0(_ZNK8wxCSConv8DoCreateEv+0x913) [0x7ff62da3ec33]
+/lib64/libwx_baseu-3.0.so.0(_ZN8wxCSConvC2E14wxFontEncoding+0x83) [0x7ff62da40013]
+/lib64/libwx_baseu-3.0.so.0(_Z20wxGet_wxConvLocalPtrv+0x49) [0x7ff62da40089]
+/lib64/libwx_baseu-3.0.so.0(+0x6de9e) [0x7ff62d973e9e]
+/lib64/ld-linux-x86-64.so.2(+0xfac3) [0x7ff684291ac3]
+/lib64/ld-linux-x86-64.so.2(+0x1469e) [0x7ff68429669e]
+/lib64/ld-linux-x86-64.so.2(+0xf8d4) [0x7ff6842918d4]
+/lib64/ld-linux-x86-64.so.2(+0x13c8b) [0x7ff684295c8b]
+/lib64/libdl.so.2(+0xeeb) [0x7ff683bd8eeb]
+/lib64/ld-linux-x86-64.so.2(+0xf8d4) [0x7ff6842918d4]
+/lib64/libdl.so.2(+0x14ed) [0x7ff683bd94ed]

@@ -1,0 +1,315 @@
+%MSG-i configureMessageFacility:  RunControlStateMachine  29-Nov-2018 16:16:54 CST pre-events configureMessageFacility.cc:286
+Message Facility Application RunControlStateMachine configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/RunControlStateMachine" pattern:"RunControlStateMachine-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i _TCPConnect:  RunControlStateMachine 29-Nov-2018 16:16:54 CST pre-events TCPConnect.cc:334
+Resolving host 127.0.0.1, on port 30000
+%MSG
+%MSG-i _TCPConnect:  RunControlStateMachine 29-Nov-2018 16:16:54 CST pre-events TCPConnect.cc:241
+Resolving ip suv1.nicadd.niu.edu
+%MSG
+%MSG-i configureMessageFacility:  CorePropertySupervisorBase  29-Nov-2018 16:16:54 CST pre-events configureMessageFacility.cc:286
+Message Facility Application CorePropertySupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CorePropertySupervisorBase" pattern:"CorePropertySupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i WebUsers:  CorePropertySupervisorBase-suv1-0 29-Nov-2018 16:16:55 CST  pre-events
+otsdaq/otsdaq-core/WebUsersUtilities/WebUsers.cc [2803]	User 'admin' has locked out the system!
+%MSG
+%MSG-d Iterator:  CorePropertySupervisorBase-suv1-0 29-Nov-2018 16:16:55 CST  pre-events
+otsdaq/otsdaq-core/GatewaySupervisor/Iterator.cc [28]	Iterator constructed.
+%MSG
+%MSG-i configureMessageFacility:  GatewaySupervisor 29-Nov-2018 16:16:55 CST  pre-events configureMessageFacility.cc:286
+Message Facility Application GatewaySupervisor configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/GatewaySupervisor" pattern:"GatewaySupervisor-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CorePropertySupervisorBase  29-Nov-2018 16:16:55 CST pre-events configureMessageFacility.cc:286
+Message Facility Application CorePropertySupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CorePropertySupervisorBase" pattern:"CorePropertySupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  RunControlStateMachine  29-Nov-2018 16:16:55 CST pre-events configureMessageFacility.cc:286
+Message Facility Application RunControlStateMachine configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/RunControlStateMachine" pattern:"RunControlStateMachine-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CoreSupervisorBase 29-Nov-2018 16:16:55 CST  pre-events configureMessageFacility.cc:286
+Message Facility Application CoreSupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CoreSupervisorBase" pattern:"CoreSupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  ChatSupervisor 29-Nov-2018 16:16:55 CST  pre-events configureMessageFacility.cc:286
+Message Facility Application ChatSupervisor configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/ChatSupervisor" pattern:"ChatSupervisor-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CorePropertySupervisorBase  29-Nov-2018 16:16:56 CST pre-events configureMessageFacility.cc:286
+Message Facility Application CorePropertySupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CorePropertySupervisorBase" pattern:"CorePropertySupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  RunControlStateMachine  29-Nov-2018 16:16:56 CST pre-events configureMessageFacility.cc:286
+Message Facility Application RunControlStateMachine configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/RunControlStateMachine" pattern:"RunControlStateMachine-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CoreSupervisorBase 29-Nov-2018 16:16:56 CST  pre-events configureMessageFacility.cc:286
+Message Facility Application CoreSupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CoreSupervisorBase" pattern:"CoreSupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  LogbookSupervisor 29-Nov-2018 16:16:56 CST  pre-events configureMessageFacility.cc:286
+Message Facility Application LogbookSupervisor configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/LogbookSupervisor" pattern:"LogbookSupervisor-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CorePropertySupervisorBase  29-Nov-2018 16:16:56 CST pre-events configureMessageFacility.cc:286
+Message Facility Application CorePropertySupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CorePropertySupervisorBase" pattern:"CorePropertySupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  RunControlStateMachine  29-Nov-2018 16:16:56 CST pre-events configureMessageFacility.cc:286
+Message Facility Application RunControlStateMachine configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/RunControlStateMachine" pattern:"RunControlStateMachine-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CoreSupervisorBase 29-Nov-2018 16:16:56 CST  pre-events configureMessageFacility.cc:286
+Message Facility Application CoreSupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CoreSupervisorBase" pattern:"CoreSupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  VisualSupervisor 29-Nov-2018 16:16:56 CST  pre-events configureMessageFacility.cc:286
+Message Facility Application VisualSupervisor configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/VisualSupervisor" pattern:"VisualSupervisor-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CorePropertySupervisorBase  29-Nov-2018 16:16:57 CST pre-events configureMessageFacility.cc:286
+Message Facility Application CorePropertySupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CorePropertySupervisorBase" pattern:"CorePropertySupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  RunControlStateMachine  29-Nov-2018 16:16:57 CST pre-events configureMessageFacility.cc:286
+Message Facility Application RunControlStateMachine configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/RunControlStateMachine" pattern:"RunControlStateMachine-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CoreSupervisorBase 29-Nov-2018 16:16:57 CST  pre-events configureMessageFacility.cc:286
+Message Facility Application CoreSupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CoreSupervisorBase" pattern:"CoreSupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  ConfigurationGUI 29-Nov-2018 16:16:57 CST  pre-events configureMessageFacility.cc:286
+Message Facility Application ConfigurationGUI configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/ConfigurationGUI" pattern:"ConfigurationGUI-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CorePropertySupervisorBase  29-Nov-2018 16:16:57 CST pre-events configureMessageFacility.cc:286
+Message Facility Application CorePropertySupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CorePropertySupervisorBase" pattern:"CorePropertySupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  RunControlStateMachine  29-Nov-2018 16:16:58 CST pre-events configureMessageFacility.cc:286
+Message Facility Application RunControlStateMachine configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/RunControlStateMachine" pattern:"RunControlStateMachine-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  CoreSupervisorBase 29-Nov-2018 16:16:58 CST  pre-events configureMessageFacility.cc:286
+Message Facility Application CoreSupervisorBase configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/CoreSupervisorBase" pattern:"CoreSupervisorBase-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-i configureMessageFacility:  MacroMaker 29-Nov-2018 16:16:58 CST pre-events configureMessageFacility.cc:286
+Message Facility Application MacroMaker configured with: debugModules:["*"] destinations:{file:{append:false directory:"/work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/Logs/MacroMaker" pattern:"MacroMaker-%?H%t-%p.log" seperator:"-" threshold:"DEBUG" timestamp_pattern:"%Y%m%d%H%M%S" type:"GenFile"} udp:{host:"127.0.0.1" port:30000 threshold:"DEBUG" type:"UDP"}}
+%MSG
+%MSG-d GatewaySupervisor:  Early 29-Nov-2018 16:17:00 CST pre-events
+otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [453]	Making logbook entry: ots started.
+%MSG
+%MSG-d GatewaySupervisor:  Early 29-Nov-2018 16:17:00 CST pre-events
+otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [453]	Making logbook entry: admin logged in.
+%MSG
+%MSG-d GatewaySupervisor:  Early 29-Nov-2018 16:17:07 CST pre-events
+otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [453]	Making logbook entry: Configuring 'T992Config' which translates to T992Config (45).
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:17:08 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [336]	Updating persistent active groups to /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/ServiceData/ActiveConfigurationGroups.cfg ...
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:17:08 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [359]	Active Context: T992Context(46)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:17:08 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [361]	Active Backbone: GroupAliasTreeEditWizBackbone(58)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:17:08 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [363]	Active Iterate: iterateDefaultGroup(4)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:17:08 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [365]	Active Configuration: T992Config(45)
+%MSG
+%MSG-e otsVisualSupervisor0:  Early 29-Nov-2018 16:17:08 CST pre-events
+otsdaq/otsdaq-core/DataManager/DataManager.cc [175]	:ots-VisualSupervisor0:otsdaq/otsdaq-core/DataManager/DataManager.cc [170]	Failed to instantiate plugin named 'VBFSSRDQMHistos' of type 'FSSRDQMHistosConsumer' due to the following error: 
+---- Configuration BEGIN
+  UnknownPlugin
+  ---- Configuration BEGIN
+    Library specification "FSSRDQMHistosConsumer": does not correspond to any library in LD_LIBRARY_PATH of type "processor"
+  ---- Configuration END
+  Plugin FSSRDQMHistosConsumer with version Unknown was not registered.
+  Perhaps your plugin type is misspelled or is not a plugin recognized by this
+  system.
+---- Configuration END
+
+
+%MSG
+%MSG-e GatewaySupervisor:  Early 29-Nov-2018 16:17:08 CST pre-events
+otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [1745]	:GatewaySupervisor:otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [1737]	Error! Gateway Supervisor can NOT Configure Supervisor instance = 'VisualSupervisor' [LID=270] in Context 'MainContext' [URL=http://suv1.nicadd.niu.edu:2000].
+
+Fault
+%MSG
+%MSG-e GatewaySupervisor:  Early 29-Nov-2018 16:17:08 CST pre-events
+otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [1778]	:GatewaySupervisor:otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [1770]	Received error from Supervisor instance = 'VisualSupervisor' [LID=270] in Context 'MainContext' [URL=http://suv1.nicadd.niu.edu:2000].
+
+ Error Message = :ots-VisualSupervisor:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [477]	Error was caught while configuring: :ots-VisualSupervisor0:otsdaq/otsdaq-core/DataManager/DataManager.cc [170]	Failed to instantiate plugin named 'VBFSSRDQMHistos' of type 'FSSRDQMHistosConsumer' due to the following error: 
+---- Configuration BEGIN
+  UnknownPlugin
+  ---- Configuration BEGIN
+    Library specification "FSSRDQMHistosConsumer": does not correspond to any library in LD_LIBRARY_PATH of type "processor"
+  ---- Configuration END
+  Plugin FSSRDQMHistosConsumer with version Unknown was not registered.
+  Perhaps your plugin type is misspelled or is not a plugin recognized by this
+  system.
+---- Configuration END
+
+
+
+
+%MSG
+%MSG-e GatewaySupervisor:  Early 29-Nov-2018 16:17:08 CST pre-events
+otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [869]	:GatewaySupervisor:otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [866]	Failure to send Workloop transition command 'Configure!' An error response 'Fault' was received.
+
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:18:57 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [336]	Updating persistent active groups to /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/ServiceData/ActiveConfigurationGroups.cfg ...
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:18:57 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [359]	Active Context: T992Context(46)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:18:57 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [361]	Active Backbone: GroupAliasTreeEditWizBackbone(58)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:18:57 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [363]	Active Iterate: iterateDefaultGroup(4)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:18:57 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [365]	Active Configuration: T992Config(46)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:18:59 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [336]	Updating persistent active groups to /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/ServiceData/ActiveConfigurationGroups.cfg ...
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:18:59 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [359]	Active Context: T992Context(46)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:18:59 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [361]	Active Backbone: GroupAliasTreeEditWizBackbone(59)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:18:59 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [363]	Active Iterate: iterateDefaultGroup(4)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:18:59 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [365]	Active Configuration: T992Config(46)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:19:26 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [336]	Updating persistent active groups to /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/ServiceData/ActiveConfigurationGroups.cfg ...
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:19:26 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [359]	Active Context: T992Context(47)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:19:26 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [361]	Active Backbone: GroupAliasTreeEditWizBackbone(59)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:19:26 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [363]	Active Iterate: iterateDefaultGroup(4)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:19:26 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [365]	Active Configuration: T992Config(46)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:19:28 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [336]	Updating persistent active groups to /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/ServiceData/ActiveConfigurationGroups.cfg ...
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:19:28 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [359]	Active Context: T992Context(47)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:19:28 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [361]	Active Backbone: GroupAliasTreeEditWizBackbone(60)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:19:28 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [363]	Active Iterate: iterateDefaultGroup(4)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:19:28 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [365]	Active Configuration: T992Config(46)
+%MSG
+%MSG-d GatewaySupervisor:  Early 29-Nov-2018 16:19:37 CST pre-events
+otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [453]	Making logbook entry: Run halting.
+%MSG
+%MSG-d GatewaySupervisor:  Early 29-Nov-2018 16:19:41 CST pre-events
+otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [453]	Making logbook entry: Configuring 'T992Config' which translates to T992Config (46).
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:19:42 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [336]	Updating persistent active groups to /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/ServiceData/ActiveConfigurationGroups.cfg ...
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:19:42 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [359]	Active Context: T992Context(47)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:19:42 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [361]	Active Backbone: GroupAliasTreeEditWizBackbone(60)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:19:42 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [363]	Active Iterate: iterateDefaultGroup(4)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:19:42 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [365]	Active Configuration: T992Config(46)
+%MSG
+%MSG-e GatewaySupervisor:  Early 29-Nov-2018 16:19:42 CST pre-events
+otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [1745]	:GatewaySupervisor:otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [1737]	Error! Gateway Supervisor can NOT Configure Supervisor instance = 'DRS4FTBFFEVMESupervisor' [LID=403] in Context 'DRS4FTBFContext' [URL=http://suv1.nicadd.niu.edu:2009].
+
+Fault
+%MSG
+%MSG-e GatewaySupervisor:  Early 29-Nov-2018 16:19:42 CST pre-events
+otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [1778]	:GatewaySupervisor:otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [1770]	Received error from Supervisor instance = 'DRS4FTBFFEVMESupervisor' [LID=403] in Context 'DRS4FTBFContext' [URL=http://suv1.nicadd.niu.edu:2009].
+
+ Error Message = :ots-FESupervisor:otsdaq/otsdaq-core/CoreSupervisors/CoreSupervisorBase.cc [477]	Error was caught while configuring: :ots:otsdaq/otsdaq-core/FECore/FEVInterfacesManager.cc [94]	Failed to instantiate plugin named 'DRS4FTBF' of type 'FEDRS4FTBFTimingInterface' due to the following error: 
+---- Configuration BEGIN
+  UnknownPlugin
+  ---- Configuration BEGIN
+    Library specification "FEDRS4FTBFTimingInterface": does not correspond to any library in LD_LIBRARY_PATH of type "interface"
+  ---- Configuration END
+  Plugin FEDRS4FTBFTimingInterface with version Unknown was not registered.
+  Perhaps your plugin type is misspelled or is not a plugin recognized by this
+  system.
+---- Configuration END
+
+
+
+
+%MSG
+%MSG-e GatewaySupervisor:  Early 29-Nov-2018 16:19:43 CST pre-events
+otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [869]	:GatewaySupervisor:otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [866]	Failure to send Workloop transition command 'Configure!' An error response 'Fault' was received.
+
+%MSG
+%MSG-d GatewaySupervisor:  Early 29-Nov-2018 16:19:57 CST pre-events
+otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [453]	Making logbook entry: System shutting down.
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:20:44 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [336]	Updating persistent active groups to /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/ServiceData/ActiveConfigurationGroups.cfg ...
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:20:44 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [359]	Active Context: T992Context(47)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:20:44 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [361]	Active Backbone: GroupAliasTreeEditWizBackbone(60)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:20:44 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [363]	Active Iterate: iterateDefaultGroup(4)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:20:44 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [365]	Active Configuration: T992Config(47)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:20:46 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [336]	Updating persistent active groups to /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/ServiceData/ActiveConfigurationGroups.cfg ...
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:20:46 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [359]	Active Context: T992Context(47)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:20:46 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [361]	Active Backbone: GroupAliasTreeEditWizBackbone(61)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:20:46 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [363]	Active Iterate: iterateDefaultGroup(4)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:20:46 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [365]	Active Configuration: T992Config(47)
+%MSG
+%MSG-d GatewaySupervisor:  Early 29-Nov-2018 16:20:53 CST pre-events
+otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [453]	Making logbook entry: System starting up.
+%MSG
+%MSG-d GatewaySupervisor:  Early 29-Nov-2018 16:21:07 CST pre-events
+otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [453]	Making logbook entry: Configuring 'T992Config' which translates to T992Config (47).
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:21:08 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [336]	Updating persistent active groups to /work/otsdaq/srcs/otsdaq_drs4ftbf/userdata/ServiceData/ActiveConfigurationGroups.cfg ...
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:21:08 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [359]	Active Context: T992Context(47)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:21:08 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [361]	Active Backbone: GroupAliasTreeEditWizBackbone(61)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:21:08 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [363]	Active Iterate: iterateDefaultGroup(4)
+%MSG
+%MSG-i ConfigurationManagerRW:  Early 29-Nov-2018 16:21:08 CST pre-events
+otsdaq/otsdaq-core/ConfigurationInterface/ConfigurationManagerRW.cc [365]	Active Configuration: T992Config(47)
+%MSG
+%MSG-e GatewaySupervisor:  Early 29-Nov-2018 16:21:10 CST pre-events
+otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [869]	:GatewaySupervisor:otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [866]	Failure to send Workloop transition command 'Start!' An error response 'Fault' was received.
+
+%MSG
+%MSG-d GatewaySupervisor:  Early 29-Nov-2018 16:21:19 CST pre-events
+otsdaq/otsdaq-core/GatewaySupervisor/GatewaySupervisor.cc [453]	Making logbook entry: Run halting.
+%MSG
