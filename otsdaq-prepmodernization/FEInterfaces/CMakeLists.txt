@@ -1,7 +1,7 @@
- simple_plugin(FENIMPlusInterface "interface"	
+ basic_plugin(FENIMPlusInterface "interface"	
 	otsdaq_components::otsdaq-components_FEInterfaces_FEOtsUDPTemplateInterface_interface
 )
 
-simple_plugin(FENIMPlusInterfaceV1 "interface"
+basic_plugin(FENIMPlusInterfaceV1 "interface"
  otsdaq_components::otsdaq-components_FEInterfaces_FEOtsUDPTemplateInterface_interface
 )
