@@ -1,6 +1,6 @@
 
 
-simple_plugin(BurstDataAndTimeSaverConsumer "processor"
+basic_plugin(BurstDataAndTimeSaverConsumer "processor"
 	otsdaq::DataManager
   )
   
