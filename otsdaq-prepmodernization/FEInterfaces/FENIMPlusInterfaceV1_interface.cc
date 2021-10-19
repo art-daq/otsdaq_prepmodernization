@@ -656,7 +656,7 @@ void FENIMPlusInterfaceV1::configure(void)
 		__CFG_COUT__ << " sel_ctl_register_: 3" << std::bitset<16>(sel_ctl_register_) << std::endl;
 
 		//Signal Generator configuration
-		if (false && optionalLink.getNode("SignalGeneratorEnable").getValue<bool>())
+		if (true && optionalLink.getNode("SignalGeneratorEnable").getValue<bool>())
 		{
 			configureSignalGenerator(
 					optionalLink.getNode  ("SignalGeneratorPulseCount")    .getValue<unsigned int>()
@@ -976,7 +976,8 @@ bool FENIMPlusInterfaceV1::running(void)
 		if(usingOptionalParameters)
 		{
 			//Sending trigger pattern
-			if(optionalLink.getNode("SignalGeneratorEnable").getValue<bool>())//THIS IS A SUPER PATCH TO RUN JIM FREEMAN STUFF! I have put false on all places where the variable SignalGeneratorEnable is used!
+			//THIS IS A SUPER PATCH TO RUN JIM FREEMAN STUFF! I have put false on all places where the variable SignalGeneratorEnable is used!
+			if(false && optionalLink.getNode("SignalGeneratorEnable").getValue<bool>())
 			{
 				sendPatternTrigger(0xFFF000FFFFFF,"Channel1");
 				__CFG_COUT__ << "Sending trigger pattern!" << __E__;
@@ -994,7 +995,7 @@ bool FENIMPlusInterfaceV1::running(void)
 
 		}
 		//Using signal generator or logic
-		if (false && usingOptionalParameters && optionalLink.getNode("SignalGeneratorEnable").getValue<bool>() )
+		if (true && usingOptionalParameters && optionalLink.getNode("SignalGeneratorEnable").getValue<bool>() )
 		{
 			__CFG_COUT__ << "Enabling signal generator!" << __E__;
 			startSignalGenerator();
