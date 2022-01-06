@@ -39,11 +39,25 @@ class FENIMPlusInterface : public FEOtsUDPTemplateInterface
 	/////////////////////////////////////
 
   private:
+	void configureSignalGenerator(
+			unsigned int signalGeneratorPulseCount
+			, unsigned int signalGeneratorHighPeriod
+			, unsigned int signalGeneratorLowPeriod
+			, bool         signalGeneratorInvertPolarity
+	);
+	void startSignalGenerator     (void);
+	void stopSignalGenerator      (void);
+	void enableSignalGenerator    (bool enable);
+
+	void sendPatternTrigger       (uint64_t patternToSend, std::string channelName);
+	unsigned int selectOutputChannelSource(unsigned int value);
+
 	std::string runNumber_;
 	uint64_t    sel_ctl_register_;
 	uint64_t    addrOffset = 0;
 	// bitsets for enables and resets
 	std::bitset<16> nimResets_, nimEnables_;
+	std::array<std::string,3> outChannelNames_ = {"Channel0","Channel1","Channel2"};
 };
 }
 

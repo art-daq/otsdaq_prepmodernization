@@ -1223,10 +1223,26 @@ bool FENIMPlusInterface::running(void)
 			//Sending trigger pattern
 			if(optionalLink.getNode("SignalGeneratorEnable").getValue<bool>())//THIS IS A SUPER PATCH TO RUN JIM FREEMAN STUFF! I have put false on all places where the variable SignalGeneratorEnable is used!
 			{
-				__CFG_COUT__
-				    << "Ingore missing SecondsDelayBeforeStartingTriggers field..."
-				    << __E__;
-			}	void changeDACLevelv2(const std::string& channelName, unsigned int value);
+				sendPatternTrigger(0xFFF000FFFFFF,"Channel1");
+				__CFG_COUT__ << "Sending trigger pattern!" << __E__;
+			}
+
+			//Sleeping some time
+			unsigned int sleepSeconds = optionalLink.getNode("SecondsDelayBeforeStartingTriggers").getValue<unsigned int>();
+			__CFG_COUT__ << "Sleeping for " << sleepSeconds << " seconds..." << __E__;
+			for(unsigned int second=0; second<sleepSeconds*10; second++)
+			{
+				if(WorkLoop::continueWorkLoop_ == false)
+					return false;
+				usleep(100000);//100ms so sleepSeconds*10
+			}
+			//Sending trigger pattern
+			// if(optionalLink.getNode("SignalGeneratorEnable").getValue<bool>())//THIS IS A SUPER PATCH TO RUN JIM FREEMAN STUFF! I have put false on all places where the variable SignalGeneratorEnable is used!
+			// {
+			// 	__CFG_COUT__
+			// 	    << "Ingore missing SecondsDelayBeforeStartingTriggers field..."
+			// 	    << __E__;
+			// }	void changeDACLevelv2(const std::string& channelName, unsigned int value);
 		}
 
 		// if(!sleepSeconds) sleepSeconds = 22;
@@ -1436,6 +1452,7 @@ void FENIMPlusInterface::changeDACLevelv1(const std::string& channelName, unsign
 
 }
 
+//========================================================================================================================
 void FENIMPlusInterface::changeDACLevelv2(const std::string& channelName, unsigned int dacValue)//Sets DAC values for a Nim+ v2 Board - WILL NOT SET CORRECTLY FOR OTHER VERSIONS, MUST USE SPECIFIC BOARD VERSION FUNCTION!
 {
 	std::string writeBuffer;
@@ -1489,6 +1506,7 @@ void FENIMPlusInterface::changeDACLevelv2(const std::string& channelName, unsign
 
 }
 
+//========================================================================================================================
 void FENIMPlusInterface::initDAC(void)
 {
 	std::string writeBuffer;
@@ -1542,6 +1560,206 @@ void FENIMPlusInterface::initDAC(void)
 	OtsUDPHardware::write(writeBuffer);
 }
 
+//========================================================================================================================
+void FENIMPlusInterface::configureSignalGenerator(
+		unsigned int signalGeneratorPulseCount
+		, unsigned int signalGeneratorHighPeriod
+		, unsigned int signalGeneratorLowPeriod
+		, bool signalGeneratorInvertPolarity)
+{
+	stopSignalGenerator();
+	__CFG_COUT__ << "Resets all for sig gen!" << std::endl;
+
+	//signal generator setup
+	std::string writeBuffer;
+	writeBuffer.resize(0);
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18005, signalGeneratorPulseCount); //sig gen pulse count
+	OtsUDPHardware::write(writeBuffer);
+	writeBuffer.resize(0);
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18006, signalGeneratorHighPeriod); //sig gen high per
+	OtsUDPHardware::write(writeBuffer);
+	writeBuffer.resize(0);
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18007, signalGeneratorLowPeriod); //sig gen low per
+	OtsUDPHardware::write(writeBuffer);
+	writeBuffer.resize(0);
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x1800D, (signalGeneratorInvertPolarity?1:0)); //sig gen polarity
+	OtsUDPHardware::write(writeBuffer);
+}
+
+//========================================================================================================================
+void FENIMPlusInterface::startSignalGenerator(void)
+{
+	std::string writeBuffer;
+	nimResets_.set(5); //set bit 5 in resets to 1 to force a sig gen reset
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, nimResets_.to_ulong()); //reset sig gen
+	OtsUDPHardware::write(writeBuffer);
+
+	nimResets_.reset(5); //set bit 5 in resets to 0 to start pulses!
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, nimResets_.to_ulong()); //reset sig gen
+	OtsUDPHardware::write(writeBuffer);
+}
+
+//========================================================================================================================
+void FENIMPlusInterface::stopSignalGenerator (void)
+{
+	nimResets_.set(5); //set bit 5 in resets to 1 to force a sig gen reset
+	std::string writeBuffer;
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18000, nimResets_.to_ulong()); //reset sig gen
+	OtsUDPHardware::write(writeBuffer);
+}
+
+//========================================================================================================================
+void FENIMPlusInterface::enableSignalGenerator(bool enable)
+{
+	if(enable)
+		nimEnables_.set(5); //set bit 5 in enables to 1 to enable sig gen
+	else
+		nimEnables_.reset(5); //set bit 5 in enables to 1 to enable sig gen
+
+	std::string writeBuffer;
+	OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18001, nimEnables_.to_ulong()); //enable or disable sig gen
+	OtsUDPHardware::write(writeBuffer);
+}
+
+//========================================================================================================================
+unsigned int FENIMPlusInterface::selectOutputChannelSource(unsigned int value)
+{
+	//The register accepts 0 for SigLog, 1 for SigNorm
+	//Is default which we assume to be SigLog
+	//If the configuration value is 1 = SigLog  => register value = 0
+	//If the configuration value is 2 = SigNorm => register value = 1
+	//If the configuration value is 3 = SignalGenerator => register value = 2
+	if(value > 0)
+		return value-1;
+	return value;
+}
+
+//========================================================================================================================
+void FENIMPlusInterface::sendPatternTrigger(uint64_t patternToSend, std::string channelName)
+{
+
+	ConfigurationTree optionalLink = theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode("LinkToOptionalParameters");
+	bool usingOptionalParams = !optionalLink.isDisconnected();
+	if(!usingOptionalParams) return;
+
+	__CFG_COUT__ << "Setting up output channels..." << std::endl;
+	//there are 3 output channels (alias: signorm, sigcms1, sigcms2)
+	unsigned int channelNumber = 0;
+	for(const auto &tmpChannelName : outChannelNames_)
+	{
+		if(channelName == tmpChannelName) break;
+		++channelNumber;
+	}
+	__CFG_COUT__ << "Channel: " << channelName << " is  number " << channelNumber << std::endl;
+
+	std::string writeBuffer;
+	try
+	{
+		//select signal generator (0x80 for sigNorm)
+		if(channelNumber == 0)
+		{
+			//WARNING IF YOU SET A PATTERN ON SIGNORM THEN YOU RESET THE EVENTUAL PATTERN ON
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18018, 0x80);
+			OtsUDPHardware::write(writeBuffer);
+		}
+		else
+		{
+			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, (0x18018 + channelNumber - 1), 0x2);
+			OtsUDPHardware::write(writeBuffer);
+		}
+		//setting the pattern to be send out
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelNumber==0?0x2:(0x18002 + channelNumber - 1), patternToSend);
+		OtsUDPHardware::write(writeBuffer);
+		__CFG_COUT__ << "Output word for " << channelName << " is " << std::bitset<64>(patternToSend) << std::endl;
+
+		configureSignalGenerator(1,2,2,true);
+		enableSignalGenerator(true);
+		startSignalGenerator();
+		stopSignalGenerator();
+		enableSignalGenerator(false);
+
+
+		//Restore channels to their configuration values
+		unsigned int tmpChannelNumber = 0;
+		for(const auto &tmpChannelName : outChannelNames_)
+		{
+			unsigned int outputChannelSourceSelect = selectOutputChannelSource(theXDAQContextConfigTree_.getNode(theConfigurationPath_).getNode(
+					"TriggerInput" + channelName).getValue<unsigned int>()); //0: sig_log   or    1: sig_norm/ch0
+			if(tmpChannelNumber == 0)
+			{
+				OtsUDPFirmwareCore::writeAdvanced(writeBuffer, 0x18018, 0x0);
+				OtsUDPHardware::write(writeBuffer);
+				__CFG_COUT__ << "Output channel select for " << tmpChannelName << " is " << std::hex << 0 << std::dec << std::endl;
+			}
+			else
+			{
+				OtsUDPFirmwareCore::writeAdvanced(writeBuffer, (0x18018 + channelNumber - 1), outputChannelSourceSelect);
+				OtsUDPHardware::write(writeBuffer);
+				__CFG_COUT__ << "Output channel select for " << tmpChannelName << " is " << std::hex << outputChannelSourceSelect << std::dec << std::endl;
+			}
+			++tmpChannelNumber;
+		}
+
+		uint64_t outputWidth = optionalLink.getNode("WidthTriggerOutput" + channelName).getValue<uint64_t>();
+		uint64_t outputModMask;
+		unsigned int outputDelay     = optionalLink.getNode("DelayTriggerOutput" + channelName).getValue<unsigned int>();
+		unsigned int outputWidthMask = 0;
+
+		if(outputWidth != 0)
+		{
+			if(outputWidth > 64)
+				outputWidthMask = 64;
+			else
+			{
+				outputWidthMask = outputWidth;
+				outputWidth = 0;
+			}
+			outputModMask = (0xFFFFFFFFFFFFFFFF >> (64-outputWidthMask)) << outputDelay;
+		}
+		else //outputWidth == 0
+			outputModMask = 0; //disables output!
+		__CFG_COUT__ << std::hex << "CHANNEL: " << channelName << " OUTPUT MASK: " << outputModMask <<  std::dec << std::endl;
+		//THIS IS DONE IN CASE YOU WANT TO HAVE A PATTERN AND WORKED FOR THE STRIP TELESCOPE WHEN RUNNING ON KC705
+		// if(channelName == "Channel1")
+		// 	outputModMask = 0xFFF000FFF;
+		
+		//set output channel back to its default
+		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelNumber==0?0x2:(0x18002 + channelNumber - 1), outputModMask);
+		OtsUDPHardware::write(writeBuffer);
+		__CFG_COUT__ << "Writing back pattern for " << channelName << " is " << std::hex << outputModMask << std::dec << std::endl;
+
+		//Signal Generator configuration
+		if (false && optionalLink.getNode("SignalGeneratorEnable").getValue<bool>())
+		{
+			configureSignalGenerator(
+					optionalLink.getNode  ("SignalGeneratorPulseCount")    .getValue<unsigned int>()
+					, optionalLink.getNode("SignalGeneratorHighPeriod")    .getValue<unsigned int>()
+					, optionalLink.getNode("SignalGeneratorLowPeriod")     .getValue<unsigned int>()
+					, optionalLink.getNode("SignalGeneratorInvertPolarity").getValue<bool>()
+			);
+
+			__CFG_COUT__
+			<< "Configured signal generator with a count of " << optionalLink.getNode("SignalGeneratorPulseCount").getValue<unsigned int>()
+			<< " (0 is continuous output), a high period of " << optionalLink.getNode("SignalGeneratorHighPeriod").getValue<unsigned int>()
+			<< ", a low period of " <<  optionalLink.getNode("SignalGeneratorLowPeriod").getValue<unsigned int>()
+			<< ", and output inversion set to " << optionalLink.getNode("SignalGeneratorInvertPolarity").getValue<bool>()
+			<< std::endl;
+
+			enableSignalGenerator(true);
+			__CFG_COUT__ << "Signal Generator enabled" << std::endl;
+		}
+		else
+		{
+			enableSignalGenerator(false);
+			__CFG_COUT__ << "Signal Generator disabled" << std::endl;
+		}
+	}
+	catch(const std::runtime_error &e)
+	{
+		__CFG_COUT__ << "Failed to send trigger pattern pulse!\n" << e.what() << std::endl;
+		throw;
+	}
+}
 
 
 DEFINE_OTS_INTERFACE(FENIMPlusInterface)
