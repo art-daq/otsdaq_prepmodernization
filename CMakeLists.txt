@@ -8,20 +8,11 @@
 
 
 # use cmake 3.17 or later
-cmake_minimum_required (VERSION 3.17)
+cmake_minimum_required (VERSION 3.19 FATAL_ERROR)
 
-find_package(cetmodules)
-set(CET_CETBUILDTOOLS_COMPAT TRUE)
-include(Compatibility)
-set(CET_WARN_DEPRECATED)
+find_package(cetmodules 3.16.00 REQUIRED)
 
-project(otsdaq_prepmodernization VERSION 2.06.05)
-
-set(CMAKE_MODULE_PATH
-        $ENV{XDAQ_DIR}/Modules
-        $ENV{ARTDAQ_UTILITIES_DIR}/Modules
-        ${CMAKE_MODULE_PATH})
-message(STATUS "CMAKE_MODULE_PATH is ${CMAKE_MODULE_PATH}")
+project(otsdaq_prepmodernization VERSION 2.06.06)
 
 include(CetCMakeEnv)
 cet_cmake_env()
@@ -32,36 +23,13 @@ cet_set_compiler_flags(DIAGS VIGILANT
  EXTRA_FLAGS -pedantic -D_LIBCPP_ENABLE_CXX17_REMOVED_FEATURES=1
  )
 
-#string(TOUPPER ${CMAKE_BUILD_TYPE} BTYPE_UC )
-#if( ${BTYPE_UC} MATCHES "DEBUG" )
-#  cet_add_compiler_flags(-fsanitize=address)
-#endif()
-
 cet_report_compiler_flags()
 
-# these are minimum required versions, not the actual product versions
-#find_ups_product( epics v3_15_2 )
-find_ups_product( cetbuildtools v3_03_00 )
-find_ups_product( artdaq v0_04_02 )
-find_ups_product( artdaq_core v1_00_00 )
-find_ups_product( artdaq_utilities v1_00_00 )
-find_ups_product( art v1_06_00 )
-find_ups_product( fhiclcpp v2_16_00 )
-find_ups_product( messagefacility v1_10_00 )
-find_ups_product( cetlib v1_03_00 )
-find_ups_product( otsdaq v1_00_00 )
-find_ups_product( otsdaq_utilities v1_00_00 )
-find_ups_product( otsdaq_components v1_00_00 )
-find_ups_product( xdaq v16_7_0_1)
-find_ups_product( TRACE v3_17_00 )
-find_ups_root( v5_34_00 )
-find_ups_boost( v1_50_0 filesystem
-                        program_options
-                        unit_test_framework
- )
- 
+find_package(otsdaq 2.06.06 REQUIRED)
+find_package(otsdaq_components 2.06.06 REQUIRED)
+
  # XDAQ Extra setup
- include_directories($ENV{XDAQ_INC}/linux)
+ include_directories($ENV{XDAQ_INC}/linux $ENV{XDAQ_INC})
 link_directories($ENV{XDAQ_LIB})
 link_directories($ENV{ARTDAQ_DATABASE_LIB})
  set(XDAQ_BASIC_LIB_LIST 
@@ -73,12 +41,6 @@ link_directories($ENV{ARTDAQ_DATABASE_LIB})
    cgicc
  )
  set(XDAQ_XERCES-C xerces-c)
-
-# macros for art_dictionary and simple_plugin
-#include(ArtDictionary)
-include(ArtMake)
-include(BuildPlugins)
-include(CetTest)
 
 # Code
 add_subdirectory(otsdaq-prepmodernization)

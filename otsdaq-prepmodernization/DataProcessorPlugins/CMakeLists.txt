@@ -1,7 +1,7 @@
 
+include(otsdaq::dataProcessor)
 
-basic_plugin(BurstDataAndTimeSaverConsumer "processor"
-	otsdaq::DataManager
+cet_build_plugin(BurstDataAndTimeSaverConsumer otsdaq::dataProcessor
   )
   
 

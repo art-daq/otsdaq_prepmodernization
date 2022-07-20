@@ -14,3 +14,4 @@ UserWebGUI/UserWebGUI
 *.tmp
 *.bk
 *.tmp
+CMakePresets.json

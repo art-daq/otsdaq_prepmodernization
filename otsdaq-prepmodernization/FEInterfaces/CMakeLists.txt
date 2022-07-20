@@ -1,7 +1,5 @@
- basic_plugin(FENIMPlusInterface "interface"	
-	otsdaq_components::otsdaq-components_FEInterfaces_FEOtsUDPTemplateInterface_interface
-)
+ include(otsdaq::FEInterface)
+ 
+ cet_build_plugin(FENIMPlusInterface otsdaq::FEInterface	LIBRARIES REG otsdaq_components::FEOtsUDPTemplateInterface)
 
-basic_plugin(FENIMPlusInterfaceV1 "interface"
- otsdaq_components::otsdaq-components_FEInterfaces_FEOtsUDPTemplateInterface_interface
-)
+cet_build_plugin(FENIMPlusInterfaceV1 otsdaq::FEInterface LIBRARIES REG otsdaq_components::FEOtsUDPTemplateInterface)
