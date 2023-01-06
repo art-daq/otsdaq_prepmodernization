@@ -4048,7 +4048,7 @@ static void work_a_3598191524_2126700906_p_28(char* t0)
 	char*         t20;
 	char*         t21;
 	static char*  nl0[] = {
-        &&LAB13, &&LAB13, &&LAB11, &&LAB12, &&LAB13, &&LAB13, &&LAB13, &&LAB13, &&LAB13};
+	     &&LAB13, &&LAB13, &&LAB11, &&LAB12, &&LAB13, &&LAB13, &&LAB13, &&LAB13, &&LAB13};
 
 LAB0:
 	xsi_set_current_line(530, ng0);

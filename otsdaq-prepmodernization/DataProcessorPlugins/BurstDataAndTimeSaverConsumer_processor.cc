@@ -1,5 +1,5 @@
-#include "otsdaq/Macros/ProcessorPluginMacros.h"
 #include "otsdaq-prepmodernization/DataProcessorPlugins/BurstDataAndTimeSaverConsumer.h"
+#include "otsdaq/Macros/ProcessorPluginMacros.h"
 
 using namespace ots;
 

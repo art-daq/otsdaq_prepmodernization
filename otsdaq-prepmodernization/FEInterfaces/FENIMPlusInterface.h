@@ -25,10 +25,10 @@ class FENIMPlusInterface : public FEOtsUDPTemplateInterface
 	void start(std::string runNumber) override;
 	bool running(void) override;
 	void stop(void) override;
-	
+
 	void changeDACLevelv1(const std::string& channelName, unsigned int value);
 	void changeDACLevelv2(const std::string& channelName, unsigned int value);
-	void initDAC(void);		
+	void initDAC(void);
 
 	/////////////////////////////////////
 	// start declaration of FE Macros
@@ -39,26 +39,24 @@ class FENIMPlusInterface : public FEOtsUDPTemplateInterface
 	/////////////////////////////////////
 
   private:
-	void configureSignalGenerator(
-			unsigned int signalGeneratorPulseCount
-			, unsigned int signalGeneratorHighPeriod
-			, unsigned int signalGeneratorLowPeriod
-			, bool         signalGeneratorInvertPolarity
-	);
-	void startSignalGenerator     (void);
-	void stopSignalGenerator      (void);
-	void enableSignalGenerator    (bool enable);
+	void configureSignalGenerator(unsigned int signalGeneratorPulseCount,
+	                              unsigned int signalGeneratorHighPeriod,
+	                              unsigned int signalGeneratorLowPeriod,
+	                              bool         signalGeneratorInvertPolarity);
+	void startSignalGenerator(void);
+	void stopSignalGenerator(void);
+	void enableSignalGenerator(bool enable);
 
-	void sendPatternTrigger       (uint64_t patternToSend, std::string channelName);
+	void         sendPatternTrigger(uint64_t patternToSend, std::string channelName);
 	unsigned int selectOutputChannelSource(unsigned int value);
 
 	std::string runNumber_;
 	uint64_t    sel_ctl_register_;
 	uint64_t    addrOffset = 0;
 	// bitsets for enables and resets
-	std::bitset<16> nimResets_, nimEnables_;
-	std::array<std::string,3> outChannelNames_ = {"Channel0","Channel1","Channel2"};
+	std::bitset<16>            nimResets_, nimEnables_;
+	std::array<std::string, 3> outChannelNames_ = {"Channel0", "Channel1", "Channel2"};
 };
-}
+}  // namespace ots
 
 #endif

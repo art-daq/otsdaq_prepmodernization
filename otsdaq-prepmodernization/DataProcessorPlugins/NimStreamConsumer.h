@@ -53,6 +53,6 @@ class NimStreamConsumer : public VisualVConsumer
 
 	std::string data_str;
 };
-}
+}  // namespace ots
 
 #endif
