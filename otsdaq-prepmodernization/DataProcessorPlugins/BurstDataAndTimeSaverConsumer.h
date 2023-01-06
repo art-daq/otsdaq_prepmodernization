@@ -24,6 +24,6 @@ class BurstDataAndTimeSaverConsumer : public RawDataSaverConsumerBase
   protected:
 	void writePacketHeader(const std::string& data) override;
 };
-}
+}  // namespace ots
 
 #endif
