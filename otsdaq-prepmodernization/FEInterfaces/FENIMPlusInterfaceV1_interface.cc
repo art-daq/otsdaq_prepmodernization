@@ -126,9 +126,10 @@ void FENIMPlusInterfaceV1::configure(void)
 
 	//	{ //debug read
 	//		//read NIM+ version (for debugging)
-	//		OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x5);//This can be removed when you
-	//want 		OtsUDPHardware::read(writeBuffer,readBuffer);//This can be removed when you
-	//want
+	//		OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x5);//This can be removed when
+	//you
+	// want 		OtsUDPHardware::read(writeBuffer,readBuffer);//This can be removed when
+	// you want
 	//
 	//		//read back clock lock loss status
 	//		OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x10);
@@ -142,15 +143,19 @@ void FENIMPlusInterfaceV1::configure(void)
 	//			__CFG_COUT__ << "Re-locking clocks..." << std::endl;
 	//			//reset clock PLLs
 	//			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x999, /*data*/
-	//0x7); //reset wiz0, wiz1, and nimDacClk 			OtsUDPHardware::write(writeBuffer);
+	// 0x7); //reset wiz0, wiz1, and nimDacClk OtsUDPHardware::write(writeBuffer);
 	//			usleep(100000); //micro seconds
-	//			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x999, /*data*/ 0);
-	////unreset 			OtsUDPHardware::write(writeBuffer); 			usleep(100000); //micro seconds
 	//			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x999, /*data*/
-	//0x8); //reset phase shift output clock 			OtsUDPHardware::write(writeBuffer);
+	//0);
+	////unreset 			OtsUDPHardware::write(writeBuffer); 			usleep(100000); //micro
+	///seconds
+	//			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x999, /*data*/
+	// 0x8); //reset phase shift output clock OtsUDPHardware::write(writeBuffer);
 	//			usleep(100000); //micro seconds
-	//			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x999, /*data*/ 0);
-	////unreset 			OtsUDPHardware::write(writeBuffer); 			usleep(100000); //micro seconds
+	//			OtsUDPFirmwareCore::writeAdvanced(writeBuffer, /*address*/ 0x999, /*data*/
+	//0);
+	////unreset 			OtsUDPHardware::write(writeBuffer); 			usleep(100000); //micro
+	///seconds
 	//
 	//			//read back clock lock loss status
 	//			OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x10);
@@ -159,9 +164,10 @@ void FENIMPlusInterfaceV1::configure(void)
 	//		}
 	//
 	//		//read NIM+ version (for debugging)
-	//		OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x5);//This can be removed when you
-	//want 		OtsUDPHardware::read(writeBuffer,readBuffer);//This can be removed when you
-	//want
+	//		OtsUDPFirmwareCore::readAdvanced(writeBuffer,0x5);//This can be removed when
+	//you
+	// want 		OtsUDPHardware::read(writeBuffer,readBuffer);//This can be removed when
+	// you want
 	//	}
 
 	// Run Configure Sequence Commands
@@ -799,7 +805,7 @@ void FENIMPlusInterfaceV1::configure(void)
 		__CFG_COUT__ << "Selection Logic word is bit: "
 		             << std::bitset<16>(coincidenceLogicWord) << std::endl;
 		//__CFG_COUT__ << "Selection Logic word is int: " << coincidenceLogicWord <<
-		//std::endl;
+		// std::endl;
 
 		// NOTE: Consider commenting this out and NOT enabling sig_log during configure
 		// (wait until running)
@@ -1000,10 +1006,11 @@ void FENIMPlusInterfaceV1::stop(void)
 				filename += "_" + runNumber_ + ".cnt";
 
 				__CFG_COUT__ << "Attempting to save counts to " << filename << __E__;
-				FILE* fp = fopen(  //("/data/TestBeam/2017_12_December/NimPlus/TriggerCount_"
-				                   //+ runNumber_ + ".cnt").c_str()
-				    filename.c_str(),
-				    "w");
+				FILE* fp =
+				    fopen(  //("/data/TestBeam/2017_12_December/NimPlus/TriggerCount_"
+				            //+ runNumber_ + ".cnt").c_str()
+				        filename.c_str(),
+				        "w");
 				if(fp)
 				{
 					__CFG_COUT__ << "Saving counts to " << filename << __E__;
@@ -1212,9 +1219,9 @@ bool FENIMPlusInterfaceV1::running(void)
 //
 //	unsigned int numberOfTriggers =
 //			FEVInterface::getFEMacroInputArgument<unsigned
-//int>(argsIn,"numberOfTriggers"); 	unsigned int clocksOfDelayBetweenTriggers =
+// int>(argsIn,"numberOfTriggers"); 	unsigned int clocksOfDelayBetweenTriggers =
 //			FEVInterface::getFEMacroInputArgument<unsigned
-//int>(argsIn,"clocksOfDelayBetweenTriggers"); 	std::string& triggersWereLaunched =
+// int>(argsIn,"clocksOfDelayBetweenTriggers"); 	std::string& triggersWereLaunched =
 //			FEVInterface::getFEMacroOutputArgument(argsOut,"triggersWereLaunched");
 //
 //	unsigned int numberOfTriggersStr =
@@ -1325,8 +1332,8 @@ void FENIMPlusInterfaceV1::changeDACLevel(const std::string& channelName,
 	//	__CFG_COUT__ << "DAC NAME:-" << channelName
 	//			<< "-has value: " << (int)dacValue
 	//			<< std::hex << " hex: " << (unsigned int)dacValue
-	//			<< " Writing: " << std::hex << (channelNameToAddressMap[channelName] << 12) |
-	//(dacValue & 0xFFF)
+	//			<< " Writing: " << std::hex << (channelNameToAddressMap[channelName] << 12)
+	//| (dacValue & 0xFFF)
 	//			<< " only register: " << channelNameToAddressMap[channelName]
 	//			<< std::dec
 	//			<< std::endl;
