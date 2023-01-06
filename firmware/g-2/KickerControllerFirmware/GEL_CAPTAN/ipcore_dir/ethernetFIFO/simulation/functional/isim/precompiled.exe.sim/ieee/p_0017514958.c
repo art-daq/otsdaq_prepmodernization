@@ -1889,7 +1889,7 @@ char* ieee_p_0017514958_sub_3238471574_1861681735(char*         t1,
 	unsigned int  t82;
 	char*         t83;
 	static char*  nl0[] = {
-        &&LAB14, &&LAB11, &&LAB9, &&LAB10, &&LAB13, &&LAB12, &&LAB9, &&LAB10, &&LAB15};
+	     &&LAB14, &&LAB11, &&LAB9, &&LAB10, &&LAB13, &&LAB12, &&LAB9, &&LAB10, &&LAB15};
 
 LAB0:
 	t15                   = (t4 + 12U);
@@ -2415,7 +2415,7 @@ char* ieee_p_0017514958_sub_3008817869_1861681735(char*         t1,
 	unsigned int  t82;
 	char*         t83;
 	static char*  nl0[] = {
-        &&LAB14, &&LAB11, &&LAB9, &&LAB10, &&LAB13, &&LAB12, &&LAB9, &&LAB10, &&LAB15};
+	     &&LAB14, &&LAB11, &&LAB9, &&LAB10, &&LAB13, &&LAB12, &&LAB9, &&LAB10, &&LAB15};
 
 LAB0:
 	t15                   = (t4 + 12U);
@@ -2889,7 +2889,7 @@ unsigned char ieee_p_0017514958_sub_3317430977_1861681735(char*         t1,
 	char*         t30;
 	unsigned char t31;
 	static char*  nl0[] = {
-        &&LAB8, &&LAB5, &&LAB3, &&LAB4, &&LAB7, &&LAB6, &&LAB3, &&LAB4, &&LAB9};
+	     &&LAB8, &&LAB5, &&LAB3, &&LAB4, &&LAB7, &&LAB6, &&LAB3, &&LAB4, &&LAB9};
 
 LAB0:
 	t13            = (t11 + 4U);

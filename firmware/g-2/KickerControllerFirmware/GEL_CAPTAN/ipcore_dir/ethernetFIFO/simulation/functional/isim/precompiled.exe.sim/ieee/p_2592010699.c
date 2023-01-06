@@ -4594,7 +4594,7 @@ unsigned char ieee_p_2592010699_sub_1594292773_503743352(char*         t1,
 	char*         t7;
 	char*         t8;
 	static char*  nl0[] = {
-        &&LAB5, &&LAB5, &&LAB3, &&LAB4, &&LAB5, &&LAB5, &&LAB3, &&LAB4, &&LAB5};
+	     &&LAB5, &&LAB5, &&LAB3, &&LAB4, &&LAB5, &&LAB5, &&LAB3, &&LAB4, &&LAB5};
 
 LAB0:
 	t6                    = (t5 + 4U);
@@ -4701,7 +4701,7 @@ char* ieee_p_2592010699_sub_3293060193_503743352(
 	unsigned int  t68;
 	char*         t69;
 	static char*  nl0[] = {
-        &&LAB11, &&LAB11, &&LAB9, &&LAB10, &&LAB11, &&LAB11, &&LAB9, &&LAB10, &&LAB11};
+	     &&LAB11, &&LAB11, &&LAB9, &&LAB10, &&LAB11, &&LAB11, &&LAB9, &&LAB10, &&LAB11};
 
 LAB0:
 	t9                    = (t4 + 12U);
@@ -4958,7 +4958,7 @@ char* ieee_p_2592010699_sub_3680442889_503743352(
 	unsigned int  t68;
 	char*         t69;
 	static char*  nl0[] = {
-        &&LAB11, &&LAB11, &&LAB9, &&LAB10, &&LAB11, &&LAB11, &&LAB9, &&LAB10, &&LAB11};
+	     &&LAB11, &&LAB11, &&LAB9, &&LAB10, &&LAB11, &&LAB11, &&LAB9, &&LAB10, &&LAB11};
 
 LAB0:
 	t9                    = (t4 + 12U);
@@ -9139,7 +9139,7 @@ unsigned char ieee_p_2592010699_sub_1722410384_503743352(char* t1, char* t2, cha
 	unsigned char t28;
 	char*         t29;
 	static char*  nl0[] = {
-        &&LAB9, &&LAB9, &&LAB10, &&LAB10, &&LAB9, &&LAB9, &&LAB10, &&LAB10, &&LAB9};
+	     &&LAB9, &&LAB9, &&LAB10, &&LAB10, &&LAB9, &&LAB9, &&LAB10, &&LAB10, &&LAB9};
 
 LAB0:
 	t6 = (t5 + 4U);
@@ -9242,7 +9242,7 @@ unsigned char ieee_p_2592010699_sub_1600845279_503743352(char* t1, char* t2, cha
 	unsigned char t28;
 	char*         t29;
 	static char*  nl0[] = {
-        &&LAB9, &&LAB9, &&LAB10, &&LAB10, &&LAB9, &&LAB9, &&LAB10, &&LAB10, &&LAB9};
+	     &&LAB9, &&LAB9, &&LAB10, &&LAB10, &&LAB9, &&LAB9, &&LAB10, &&LAB10, &&LAB9};
 
 LAB0:
 	t6 = (t5 + 4U);
@@ -9323,7 +9323,7 @@ unsigned char ieee_p_2592010699_sub_1665218837_503743352(char* t1, unsigned char
 	char*         t5;
 	char*         t6;
 	static char*  nl0[] = {
-        &&LAB3, &&LAB3, &&LAB4, &&LAB4, &&LAB3, &&LAB3, &&LAB4, &&LAB4, &&LAB3};
+	     &&LAB3, &&LAB3, &&LAB4, &&LAB4, &&LAB3, &&LAB3, &&LAB4, &&LAB4, &&LAB3};
 
 LAB0:
 	t5                    = (t4 + 4U);
