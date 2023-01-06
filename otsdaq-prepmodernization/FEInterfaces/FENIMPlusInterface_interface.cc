@@ -1528,8 +1528,8 @@ void FENIMPlusInterface::changeDACLevelv1(
 	//	__CFG_COUT__ << "DAC NAME:-" << channelName
 	//			<< "-has value: " << (int)dacValue
 	//			<< std::hex << " hex: " << (unsigned int)dacValue
-	//			<< " Writing: " << std::hex << (channelNameToAddressMap[channelName] << 12) |
-	//(dacValue & 0xFFF)
+	//			<< " Writing: " << std::hex << (channelNameToAddressMap[channelName] << 12)
+	//| (dacValue & 0xFFF)
 	//			<< " only register: " << channelNameToAddressMap[channelName]
 	//			<< std::dec
 	//			<< std::endl;
@@ -1594,8 +1594,8 @@ void FENIMPlusInterface::changeDACLevelv2(
 	//	__CFG_COUT__ << "DAC NAME:-" << channelName
 	//			<< "-has value: " << (int)dacValue
 	//			<< std::hex << " hex: " << (unsigned int)dacValue
-	//			<< " Writing: " << std::hex << (channelNameToAddressMap[channelName] << 12) |
-	//(dacValue & 0xFFF)
+	//			<< " Writing: " << std::hex << (channelNameToAddressMap[channelName] << 12)
+	//| (dacValue & 0xFFF)
 	//			<< " only register: " << channelNameToAddressMap[channelName]
 	//			<< std::dec
 	//			<< std::endl;
