@@ -1223,7 +1223,8 @@ bool FENIMPlusInterface::running(void)
 			//Sending trigger pattern
 			if(optionalLink.getNode("SignalGeneratorEnable").getValue<bool>())//THIS IS A SUPER PATCH TO RUN JIM FREEMAN STUFF! I have put false on all places where the variable SignalGeneratorEnable is used!
 			{
-				sendPatternTrigger(0xFFF000FFFFFF,"Channel1");
+				//sendPatternTrigger(0xFFF000FFFFFF,"Channel1");13MHz
+				sendPatternTrigger(0xFC0FFF,"Channel1");
 				__CFG_COUT__ << "Sending trigger pattern!" << __E__;
 			}
 
@@ -1721,7 +1722,10 @@ void FENIMPlusInterface::sendPatternTrigger(uint64_t patternToSend, std::string 
 		__CFG_COUT__ << std::hex << "CHANNEL: " << channelName << " OUTPUT MASK: " << outputModMask <<  std::dec << std::endl;
 		//THIS IS DONE IN CASE YOU WANT TO HAVE A PATTERN AND WORKED FOR THE STRIP TELESCOPE WHEN RUNNING ON KC705
 		// if(channelName == "Channel1")
-		// 	outputModMask = 0xFFF000FFF;
+		// {
+		// // 	outputModMask = 0xFFF000FFF;//13MHz
+		//  	outputModMask = 0xFC0FC;
+		// }
 		
 		//set output channel back to its default
 		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelNumber==0?0x2:(0x18002 + channelNumber - 1), outputModMask);
