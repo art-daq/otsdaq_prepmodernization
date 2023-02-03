@@ -89,7 +89,7 @@ unsigned char ieee_p_3499444699_sub_3141295106_3536714472(char* t1, char* t2, ch
 	unsigned char t38;
 	char*         t39;
 	static char*  nl0[] = {
-        &&LAB10, &&LAB10, &&LAB9, &&LAB9, &&LAB10, &&LAB10, &&LAB9, &&LAB9, &&LAB10};
+	     &&LAB10, &&LAB10, &&LAB9, &&LAB9, &&LAB10, &&LAB10, &&LAB9, &&LAB9, &&LAB10};
 
 LAB0:
 	t6                    = (t3 + 12U);
@@ -22306,7 +22306,7 @@ char* ieee_p_3499444699_sub_2251616255_3536714472(
 	unsigned int  t59;
 	unsigned int  t60;
 	static char*  nl0[] = {
-        &&LAB14, &&LAB14, &&LAB17, &&LAB17, &&LAB14, &&LAB14, &&LAB15, &&LAB16, &&LAB14};
+	     &&LAB14, &&LAB14, &&LAB17, &&LAB17, &&LAB14, &&LAB14, &&LAB15, &&LAB16, &&LAB14};
 
 LAB0:
 	t8                    = (t5 - 1);
