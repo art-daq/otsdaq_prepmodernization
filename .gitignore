@@ -15,3 +15,4 @@ UserWebGUI/UserWebGUI
 *.bk
 *.tmp
 spack-build-*
+build-linux-*
