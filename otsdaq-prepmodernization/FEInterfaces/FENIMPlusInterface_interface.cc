@@ -1403,8 +1403,8 @@ bool FENIMPlusInterface::running(void)
 }  // end running()
 
 ////==============================================================================
-// void FENIMPlusInterface::FEMacroGenerateTriggers(FEVInterface::frontEndMacroInArgs_t
-// argsIn, 		FEVInterface::frontEndMacroOutArgs_t argsOut)
+/// void FENIMPlusInterface::FEMacroGenerateTriggers(FEVInterface::frontEndMacroInArgs_t
+/// argsIn, 		FEVInterface::frontEndMacroOutArgs_t argsOut)
 //{
 //	__CFG_COUT__ << "FEMacroGenerateTriggers" << __E__;
 //
