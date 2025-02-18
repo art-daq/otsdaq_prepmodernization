@@ -23,7 +23,7 @@ BurstDataAndTimeSaverConsumer::BurstDataAndTimeSaverConsumer(
 BurstDataAndTimeSaverConsumer::~BurstDataAndTimeSaverConsumer(void) {}
 
 //==============================================================================
-// write header to file before each packet
+/// write header to file before each packet
 void BurstDataAndTimeSaverConsumer::writePacketHeader(const std::string& data)
 {
 	// write

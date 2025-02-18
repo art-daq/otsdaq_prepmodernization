@@ -18,8 +18,8 @@ NimStreamConsumer::NimStreamConsumer(std::string              supervisorApplicat
                       processorUID,
                       theXDAQContextConfigTree,
                       configurationPath)
-//, DataConsumer(supervisorApplicationUID, bufferUID, processorUID, LowConsumerPriority)
-//, Configurable(theXDAQContextConfigTree, configurationPath)
+///, DataConsumer(supervisorApplicationUID, bufferUID, processorUID, LowConsumerPriority)
+///, Configurable(theXDAQContextConfigTree, configurationPath)
 {
 }
 
@@ -27,13 +27,13 @@ NimStreamConsumer::NimStreamConsumer(std::string              supervisorApplicat
 NimStreamConsumer::~NimStreamConsumer(void) { timeline.clear(); }
 
 //==============================================================================
-// void NimStreamConsumer::startProcessingData(std::string runNumber)
+/// void NimStreamConsumer::startProcessingData(std::string runNumber)
 // {
 // 	DataConsumer::startProcessingData(runNumber);
 // }
 //
-// //==============================================================================
-// void NimStreamConsumer::stopProcessingData(void)
+/// //==============================================================================
+/// void NimStreamConsumer::stopProcessingData(void)
 // {
 // 	DataConsumer::stopProcessingData();
 // }
