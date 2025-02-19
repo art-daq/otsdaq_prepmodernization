@@ -24,7 +24,7 @@ class NimStreamConsumer : public VisualVConsumer
 
 	virtual std::string getNext(std::map<std::string, std::string>);
 
-	// structure to hold state change data
+	/// structure to hold state change data
 	struct timeline_pt
 	{
 		int timestamp;
@@ -34,7 +34,7 @@ class NimStreamConsumer : public VisualVConsumer
 		int y_3;
 	};
 
-	// Timeline of state change data
+	/// Timeline of state change data
 	std::vector<timeline_pt> timeline;
 
 	const std::vector<std::string> getTimelineData(int timestamp, int count);
@@ -44,10 +44,10 @@ class NimStreamConsumer : public VisualVConsumer
 	void fastRead(void) override;
 	void slowRead(void) override;
 
-	// For fast read
+	/// For fast read
 	std::string*                        dataP_;
 	std::map<std::string, std::string>* headerP_;
-	// For slow read
+	/// For slow read
 	std::string                        data_;
 	std::map<std::string, std::string> header_;
 

@@ -1,16 +1,16 @@
 --------------------------------------------------------------------------------
 --
--- FIFO Generator Core Demo Testbench 
+-- FIFO Generator Core Demo Testbench
 --
 --------------------------------------------------------------------------------
 --
 -- (c) Copyright 2009 - 2010 Xilinx, Inc. All rights reserved.
--- 
+--
 -- This file contains confidential and proprietary information
 -- of Xilinx, Inc. and is protected under U.S. and
 -- international copyright and other intellectual property
 -- laws.
--- 
+--
 -- DISCLAIMER
 -- This disclaimer is not a license and does not grant any
 -- rights to the materials distributed herewith. Except as
@@ -32,7 +32,7 @@
 -- by a third party) even if such damage or loss was
 -- reasonably foreseeable or Xilinx had been advised of the
 -- possibility of the same.
--- 
+--
 -- CRITICAL APPLICATIONS
 -- Xilinx products are not designed or intended to be fail-
 -- safe, or for use in any application requiring fail-safe
@@ -46,7 +46,7 @@
 -- liability of any use of Xilinx products in Critical
 -- Applications, subject only to applicable laws and
 -- regulations governing limitations on product liability.
--- 
+--
 -- THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS
 -- PART OF THIS FILE AT ALL TIMES.
 --------------------------------------------------------------------------------
@@ -70,32 +70,32 @@ USE work.INFO_FIFO_0_pkg.ALL;
 
 ENTITY INFO_FIFO_0_dgen IS
   GENERIC (
-	    C_DIN_WIDTH   : INTEGER := 32;
-	    C_DOUT_WIDTH  : INTEGER := 32;
-	    C_CH_TYPE     : INTEGER := 0;
-	    TB_SEED       : INTEGER := 2
+		C_DIN_WIDTH   : INTEGER := 32;
+		C_DOUT_WIDTH  : INTEGER := 32;
+		C_CH_TYPE     : INTEGER := 0;
+		TB_SEED       : INTEGER := 2
 	 );
   PORT (
-        RESET     : IN STD_LOGIC;
-        WR_CLK    : IN STD_LOGIC;
-        PRC_WR_EN : IN STD_LOGIC;
-        FULL      : IN STD_LOGIC;  
-        WR_EN     : OUT STD_LOGIC;      
-        WR_DATA   : OUT STD_LOGIC_VECTOR(C_DIN_WIDTH-1 DOWNTO 0)
-       );
+		RESET     : IN STD_LOGIC;
+		WR_CLK    : IN STD_LOGIC;
+		PRC_WR_EN : IN STD_LOGIC;
+		FULL      : IN STD_LOGIC;
+		WR_EN     : OUT STD_LOGIC;
+		WR_DATA   : OUT STD_LOGIC_VECTOR(C_DIN_WIDTH-1 DOWNTO 0)
+	   );
 END ENTITY;
 
 
 ARCHITECTURE fg_dg_arch OF INFO_FIFO_0_dgen IS
- 
+
   CONSTANT C_DATA_WIDTH : INTEGER := if_then_else(C_DIN_WIDTH > C_DOUT_WIDTH,C_DIN_WIDTH,C_DOUT_WIDTH);
   CONSTANT LOOP_COUNT   : INTEGER := divroundup(C_DATA_WIDTH,8);
-  
+
   SIGNAL pr_w_en        : STD_LOGIC := '0';
   SIGNAL rand_num       : STD_LOGIC_VECTOR(8*LOOP_COUNT-1 DOWNTO 0);
   SIGNAL wr_data_i      : STD_LOGIC_VECTOR(C_DIN_WIDTH-1 DOWNTO 0);
  BEGIN
-  
+
    WR_EN   <= PRC_WR_EN ;
    WR_DATA <= wr_data_i AFTER 50 ns;
 
@@ -103,21 +103,21 @@ ARCHITECTURE fg_dg_arch OF INFO_FIFO_0_dgen IS
   -- Generation of DATA
   ----------------------------------------------
   gen_stim:FOR N IN LOOP_COUNT-1 DOWNTO 0 GENERATE
-    rd_gen_inst1:INFO_FIFO_0_rng
-    GENERIC MAP(
-    	       WIDTH => 8,
-               SEED  => TB_SEED+N
-               )
-    PORT MAP(
-              CLK        => WR_CLK,
-	      RESET      => RESET,
-              RANDOM_NUM => rand_num(8*(N+1)-1 downto 8*N),
-              ENABLE     => pr_w_en
-            );
-  END GENERATE; 
+	rd_gen_inst1:INFO_FIFO_0_rng
+	GENERIC MAP(
+			   WIDTH => 8,
+			   SEED  => TB_SEED+N
+			   )
+	PORT MAP(
+			  CLK        => WR_CLK,
+		  RESET      => RESET,
+			  RANDOM_NUM => rand_num(8*(N+1)-1 downto 8*N),
+			  ENABLE     => pr_w_en
+			);
+  END GENERATE;
 
-     pr_w_en <= PRC_WR_EN AND NOT FULL;
-     wr_data_i <= rand_num(C_DIN_WIDTH-1 DOWNTO 0);
+	 pr_w_en <= PRC_WR_EN AND NOT FULL;
+	 wr_data_i <= rand_num(C_DIN_WIDTH-1 DOWNTO 0);
 
 
 END ARCHITECTURE;

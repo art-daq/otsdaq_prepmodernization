@@ -1,20 +1,20 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date:    10:59:20 08/16/2012 
--- Design Name: 
--- Module Name:    reset_mgr - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
--- Description: 
+-- Company:
+-- Engineer:
 --
--- Dependencies: 
+-- Create Date:    10:59:20 08/16/2012
+-- Design Name:
+-- Module Name:    reset_mgr - Behavioral
+-- Project Name:
+-- Target Devices:
+-- Tool versions:
+-- Description:
 --
--- Revision: 
+-- Dependencies:
+--
+-- Revision:
 -- Revision 0.01 - File Created
--- Additional Comments: 
+-- Additional Comments:
 --
 ----------------------------------------------------------------------------------
 library IEEE;
@@ -37,24 +37,23 @@ begin
 
 	process(slow_clk)
 	begin
-	
+
 		if rising_edge(slow_clk) then
-		
-			reset <= '0';			   
+
+			reset <= '0';
 			old_reset_start <= reset_start;
-			
+
 			if cnt < 100 then -- 100 -- currently reseting
 					reset <= '1';
 					cnt <= cnt + 1;
 			elsif old_reset_start = '0' and reset_start = '1' then
-					cnt <= (others => '0');			
+					cnt <= (others => '0');
 					reset <= '1';
-			end if;		
-		
+			end if;
+
 		end if;
-		
-	
+
+
 	end process;
 
 end Behavioral;
-

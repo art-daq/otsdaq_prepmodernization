@@ -1,17 +1,17 @@
 
 --------------------------------------------------------------------------------
 --
--- FIFO Generator Core Demo Testbench 
+-- FIFO Generator Core Demo Testbench
 --
 --------------------------------------------------------------------------------
 --
 -- (c) Copyright 2009 - 2010 Xilinx, Inc. All rights reserved.
--- 
+--
 -- This file contains confidential and proprietary information
 -- of Xilinx, Inc. and is protected under U.S. and
 -- international copyright and other intellectual property
 -- laws.
--- 
+--
 -- DISCLAIMER
 -- This disclaimer is not a license and does not grant any
 -- rights to the materials distributed herewith. Except as
@@ -33,7 +33,7 @@
 -- by a third party) even if such damage or loss was
 -- reasonably foreseeable or Xilinx had been advised of the
 -- possibility of the same.
--- 
+--
 -- CRITICAL APPLICATIONS
 -- Xilinx products are not designed or intended to be fail-
 -- safe, or for use in any application requiring fail-safe
@@ -47,7 +47,7 @@
 -- liability of any use of Xilinx products in Critical
 -- Applications, subject only to applicable laws and
 -- regulations governing limitations on product liability.
--- 
+--
 -- THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS
 -- PART OF THIS FILE AT ALL TIMES.
 --------------------------------------------------------------------------------
@@ -104,7 +104,7 @@ END ENTITY;
 
 
 ARCHITECTURE fg_pc_arch OF INFO_FIFO_0_pctrl IS
- 
+
  CONSTANT C_DATA_WIDTH   : INTEGER := if_then_else(C_DIN_WIDTH > C_DOUT_WIDTH,C_DIN_WIDTH,C_DOUT_WIDTH);
  CONSTANT LOOP_COUNT     : INTEGER := divroundup(C_DATA_WIDTH,8);
  CONSTANT D_WIDTH_DIFF   :   INTEGER := log2roundup(C_DOUT_WIDTH/C_DIN_WIDTH);
@@ -119,9 +119,9 @@ ARCHITECTURE fg_pc_arch OF INFO_FIFO_0_pctrl IS
  SIGNAL wr_cntr          : STD_LOGIC_VECTOR(C_WR_PNTR_WIDTH-2 DOWNTO 0)   := (OTHERS => '0');
  SIGNAL full_as_timeout  : STD_LOGIC_VECTOR(C_WR_PNTR_WIDTH DOWNTO 0)   := (OTHERS => '0');
  SIGNAL full_ds_timeout  : STD_LOGIC_VECTOR(C_WR_PNTR_WIDTH DOWNTO 0) := (OTHERS => '0');
- SIGNAL rd_cntr          : STD_LOGIC_VECTOR(C_RD_PNTR_WIDTH-2 DOWNTO 0)   := (OTHERS => '0'); 
- SIGNAL empty_as_timeout : STD_LOGIC_VECTOR(C_RD_PNTR_WIDTH DOWNTO 0)  := (OTHERS => '0'); 
- SIGNAL empty_ds_timeout : STD_LOGIC_VECTOR(C_RD_PNTR_WIDTH DOWNTO 0):= (OTHERS => '0'); 
+ SIGNAL rd_cntr          : STD_LOGIC_VECTOR(C_RD_PNTR_WIDTH-2 DOWNTO 0)   := (OTHERS => '0');
+ SIGNAL empty_as_timeout : STD_LOGIC_VECTOR(C_RD_PNTR_WIDTH DOWNTO 0)  := (OTHERS => '0');
+ SIGNAL empty_ds_timeout : STD_LOGIC_VECTOR(C_RD_PNTR_WIDTH DOWNTO 0):= (OTHERS => '0');
  SIGNAL wr_en_i          : STD_LOGIC := '0';
  SIGNAL rd_en_i          : STD_LOGIC := '0';
  SIGNAL state            : STD_LOGIC := '0';
@@ -221,7 +221,7 @@ END PROCESS;
       post_rst_dly_rd <= post_rst_dly_rd-post_rst_dly_rd(4);
     END IF;
   END PROCESS;
-  
+
   PROCESS(WR_CLK,RESET_WR)
   BEGIN
     IF(RESET_WR = '1') THEN
@@ -233,7 +233,7 @@ END PROCESS;
 
 
   -- FULL de-assert Counter
-  PROCESS(WR_CLK,RESET_WR) 
+  PROCESS(WR_CLK,RESET_WR)
   BEGIN
     IF(RESET_WR = '1') THEN
       full_ds_timeout <= (OTHERS => '0');
@@ -247,10 +247,10 @@ END PROCESS;
       END IF;
     END IF;
   END PROCESS;
-   
- 
+
+
  -- EMPTY deassert counter
-  PROCESS(RD_CLK,RESET_RD) 
+  PROCESS(RD_CLK,RESET_RD)
   BEGIN
     IF(RESET_RD = '1') THEN
       empty_ds_timeout <= (OTHERS => '0');
@@ -266,7 +266,7 @@ END PROCESS;
   END PROCESS;
 
   -- Full check signal generation
-  PROCESS(WR_CLK,RESET_WR) 
+  PROCESS(WR_CLK,RESET_WR)
   BEGIN
     IF(RESET_WR = '1') THEN
       full_chk_i <= '0';
@@ -274,14 +274,14 @@ END PROCESS;
       IF(C_APPLICATION_TYPE = 1 AND (AXI_CHANNEL = "WACH" OR AXI_CHANNEL = "RACH" OR AXI_CHANNEL = "AXI4_Stream")) THEN
         full_chk_i <= '0';
       ELSE
-        full_chk_i <= AND_REDUCE(full_as_timeout) OR 
+        full_chk_i <= AND_REDUCE(full_as_timeout) OR
 		      AND_REDUCE(full_ds_timeout);
       END IF;
     END IF;
   END PROCESS;
 
   -- Empty checks
-  PROCESS(RD_CLK,RESET_RD) 
+  PROCESS(RD_CLK,RESET_RD)
   BEGIN
     IF(RESET_RD = '1') THEN
       empty_chk_i <= '0';
@@ -289,7 +289,7 @@ END PROCESS;
       IF(C_APPLICATION_TYPE = 1 AND (AXI_CHANNEL = "WACH" OR AXI_CHANNEL = "RACH" OR AXI_CHANNEL = "AXI4_Stream")) THEN
         empty_chk_i <= '0';
       ELSE
-        empty_chk_i <= AND_REDUCE(empty_as_timeout) OR 
+        empty_chk_i <= AND_REDUCE(empty_as_timeout) OR
 		       AND_REDUCE(empty_ds_timeout);
       END IF;
     END IF;
@@ -311,9 +311,9 @@ END PROCESS;
          state_d1  <= state;
      END IF;
    END PROCESS;
- 
 
-   data_fifo_en:IF(C_CH_TYPE /= 2) GENERATE  
+
+   data_fifo_en:IF(C_CH_TYPE /= 2) GENERATE
     -----------------------------------------------------
     -- WR_EN GENERATION
     -----------------------------------------------------
@@ -337,11 +337,11 @@ END PROCESS;
         IF(state = '1') THEN
           wr_en_i <= wr_en_gen(0) AND wr_en_gen(7) AND wr_en_gen(2) AND wr_control;
         ELSE
-          wr_en_i <= (wr_en_gen(3) OR wr_en_gen(4) OR wr_en_gen(2)) AND (NOT post_rst_dly_wr(4)); 
+          wr_en_i <= (wr_en_gen(3) OR wr_en_gen(4) OR wr_en_gen(2)) AND (NOT post_rst_dly_wr(4));
         END IF;
       END IF;
     END PROCESS;
-    
+
     -----------------------------------------------------
     -- WR_EN CONTROL
     -----------------------------------------------------
@@ -363,7 +363,7 @@ END PROCESS;
 	    IF(wr_en_i = '1') THEN
   	      full_as_timeout <= full_as_timeout + "1";
   	    END IF;
-	  ELSE 
+	  ELSE
 	    full_as_timeout <= (OTHERS => '0');
 	  END IF;
 	END IF;
@@ -422,11 +422,11 @@ END PROCESS;
 	    IF(rd_en_i = '1') THEN
   	      empty_as_timeout <= empty_as_timeout + "1";
   	    END IF;
-	  ELSE 
+	  ELSE
 	    empty_as_timeout <= (OTHERS => '0');
 	  END IF;
 	END IF;
-	
+
 	rd_control <= NOT rd_cntr(rd_cntr'high);
 
       END IF;
@@ -442,12 +442,12 @@ END PROCESS;
 	reset_en_i <= '0';
       ELSIF(WR_CLK'event AND WR_CLK='1') THEN
         CASE state IS
-          WHEN '0' => 
+          WHEN '0' =>
             IF(FULL = '1' AND EMPTY = '0') THEN
               state      <= '1';
 	      reset_en_i <= '0';
     	    END IF;
-          WHEN '1' => 
+          WHEN '1' =>
             IF(EMPTY = '1' AND FULL = '0') THEN
               state    	 <= '0';
 	      reset_en_i <= '1';

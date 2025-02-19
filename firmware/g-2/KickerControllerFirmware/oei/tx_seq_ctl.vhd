@@ -14,7 +14,7 @@
 --
 -------------------------------------------------------------------------------
 --
--- Description : 
+-- Description :
 --
 -------------------------------------------------------------------------------
 
@@ -23,7 +23,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.NUMERIC_STD.all;
 use work.params_package.all;
 
-entity tx_seq_ctl is 
+entity tx_seq_ctl is
 	port (
 		clk: in STD_LOGIC;
 		ctrl_info_fifo_empty: in STD_LOGIC;
@@ -60,7 +60,7 @@ signal tx_data_count: UNSIGNED (10 downto 0);
 -- BINARY ENCODED state machine: Sreg0
 attribute ENUM_ENCODING: string;
 type Sreg0_type is (
-    S7, S1, savecount, read_Ififo, S2, idle, txmtdone, chk_busy, S5, trgrd
+	S7, S1, savecount, read_Ififo, S2, idle, txmtdone, chk_busy, S5, trgrd
 );
 attribute ENUM_ENCODING of Sreg0_type: type is
 	"0000 " &		-- S7
@@ -152,7 +152,7 @@ begin
 						tx_data_count <= unsigned(info_fifo_rd_data(15 downto 8) & "000");
 						if (unsigned(info_fifo_rd_data(15 downto 8)) /= 0) then
 						-- read a data quad word for initialization
-						  	data_fifo_rden_sig <= '1';
+							data_fifo_rden_sig <= '1';
 						end if;
 					when read_Ififo =>
 						Sreg0 <= savecount;
@@ -196,7 +196,7 @@ begin
 							if (byte_count = 7) then	--ready for next quadword
 							-- register next quad word from data fifo
 								data_fifo_rd_data_reg <= data_fifo_rd_data;
-							    qw_count <= qw_count - 1;
+								qw_count <= qw_count - 1;
 							else 	-- on current quadword
 							-- shift next byte into position
 								data_fifo_rd_data_reg <= x"00" & data_fifo_rd_data_reg(63 downto 8);

@@ -14,15 +14,15 @@
 --
 -------------------------------------------------------------------------------
 --
--- Description : 
+-- Description :
 --
 -------------------------------------------------------------------------------
 
 library IEEE;
 use IEEE.std_logic_1164.all;
-use ieee.numeric_std.all;		
+use ieee.numeric_std.all;
 
-entity icmp_ping_checksum_calc is 
+entity icmp_ping_checksum_calc is
 	port (
 		clk: in STD_LOGIC;
 		req_chk_sum: in STD_LOGIC_VECTOR (15 downto 0);
@@ -38,7 +38,7 @@ signal req_chk_sum_sig: UNSIGNED (16 downto 0);
 
 -- SYMBOLIC ENCODED state machine: Sreg0
 type Sreg0_type is (
-    Init, S1, S2, S3, S4
+	Init, S1, S2, S3, S4
 );
 -- attribute ENUM_ENCODING of Sreg0_type: type is ... -- enum_encoding attribute is not supported for symbolic encoding
 
@@ -73,8 +73,8 @@ begin
 				when S2 =>
 					Sreg0 <= S3;
 					if req_chk_sum_sig(16) = '1' then
-					  	req_chk_sum_sig(15 downto 0) <= req_chk_sum_sig(15 downto 0) + 1;
-					  	req_chk_sum_sig(16) <= '0';
+						req_chk_sum_sig(15 downto 0) <= req_chk_sum_sig(15 downto 0) + 1;
+						req_chk_sum_sig(16) <= '0';
 					end if;
 				when S3 =>
 					Sreg0 <= S4;

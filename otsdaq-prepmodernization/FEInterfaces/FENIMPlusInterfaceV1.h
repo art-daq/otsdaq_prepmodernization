@@ -29,13 +29,13 @@ class FENIMPlusInterfaceV1 : public FEOtsUDPTemplateInterface
 	void changeDACLevel(const std::string& channelName, unsigned int value);
 
 	/////////////////////////////////////
-	// start declaration of FE Macros
-
+	/// start declaration of FE Macros
+	///
 	void FEMacroGenerateTriggers(__ARGS__);
 
-	// end declaration of FE Macros
+	/// end declaration of FE Macros
 	/////////////////////////////////////
-
+	///
   private:
 	void configureSignalGenerator(unsigned int signalGeneratorPulseCount,
 	                              unsigned int signalGeneratorHighPeriod,
@@ -50,7 +50,7 @@ class FENIMPlusInterfaceV1 : public FEOtsUDPTemplateInterface
 	std::string  runNumber_;
 	uint64_t     sel_ctl_register_;
 
-	// bitsets for enables and resets
+	/// bitsets for enables and resets
 	std::bitset<16>            nimResets_, nimEnables_;
 	std::array<std::string, 3> outChannelNames_ = {"Channel0", "Channel1", "Channel2"};
 };

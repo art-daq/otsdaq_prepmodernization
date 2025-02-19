@@ -1,10 +1,10 @@
 # (c) Copyright 2009 - 2010 Xilinx, Inc. All rights reserved.
-# 
+#
 # This file contains confidential and proprietary information
 # of Xilinx, Inc. and is protected under U.S. and
 # international copyright and other intellectual property
 # laws.
-# 
+#
 # DISCLAIMER
 # This disclaimer is not a license and does not grant any
 # rights to the materials distributed herewith. Except as
@@ -26,7 +26,7 @@
 # by a third party) even if such damage or loss was
 # reasonably foreseeable or Xilinx had been advised of the
 # possibility of the same.
-# 
+#
 # CRITICAL APPLICATIONS
 # Xilinx products are not designed or intended to be fail-
 # safe, or for use in any application requiring fail-safe
@@ -40,13 +40,13 @@
 # liability of any use of Xilinx products in Critical
 # Applications, subject only to applicable laws and
 # regulations governing limitations on product liability.
-# 
+#
 # THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS
 # PART OF THIS FILE AT ALL TIMES.
 #--------------------------------------------------------------------------------
 
-vlib work 
-vmap work work 
+vlib work
+vmap work work
 
 echo "Compiling Core VHDL UNISIM/Behavioral model"
 vcom  -work work ../../implement/results/routed.vhd
@@ -54,12 +54,12 @@ echo "Compiling Core Verilog UNISIM/Behavioral model"
 vlog -work work ../../implement/results/routed.v
 
 echo "Compiling Test Bench Files"
-vcom -work work ../INFO_FIFO_0_pkg.vhd  
-vcom -work work ../INFO_FIFO_0_rng.vhd 
+vcom -work work ../INFO_FIFO_0_pkg.vhd
+vcom -work work ../INFO_FIFO_0_rng.vhd
 vcom -work work ../INFO_FIFO_0_dgen.vhd
 vcom -work work ../INFO_FIFO_0_dverif.vhd
-vcom -work work ../INFO_FIFO_0_pctrl.vhd 
-vcom -work work ../INFO_FIFO_0_synth.vhd 
+vcom -work work ../INFO_FIFO_0_pctrl.vhd
+vcom -work work ../INFO_FIFO_0_synth.vhd
 vcom -work work ../INFO_FIFO_0_tb.vhd
 
 vsim  -t ps -voptargs="+acc" +transport_int_delays -L simprim -sdfmax /INFO_FIFO_0_tb/INFO_FIFO_0_synth_inst/INFO_FIFO_0_inst=../../implement/results/routed.sdf work.INFO_FIFO_0_tb
