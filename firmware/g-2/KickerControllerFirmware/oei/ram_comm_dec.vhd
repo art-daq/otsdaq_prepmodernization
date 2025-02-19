@@ -14,7 +14,7 @@
 --
 -------------------------------------------------------------------------------
 --
--- Description : 
+-- Description :
 --
 -------------------------------------------------------------------------------
 
@@ -23,7 +23,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.NUMERIC_STD.all;
 use work.params_package.all;
 
-entity ram_comm_dec is 
+entity ram_comm_dec is
 	port (
 		clock: in STD_LOGIC;
 		crc_err_flag: in STD_LOGIC;

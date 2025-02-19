@@ -1,16 +1,16 @@
 --------------------------------------------------------------------------------
 --
--- FIFO Generator Core Demo Testbench 
+-- FIFO Generator Core Demo Testbench
 --
 --------------------------------------------------------------------------------
 --
 -- (c) Copyright 2009 - 2010 Xilinx, Inc. All rights reserved.
--- 
+--
 -- This file contains confidential and proprietary information
 -- of Xilinx, Inc. and is protected under U.S. and
 -- international copyright and other intellectual property
 -- laws.
--- 
+--
 -- DISCLAIMER
 -- This disclaimer is not a license and does not grant any
 -- rights to the materials distributed herewith. Except as
@@ -32,7 +32,7 @@
 -- by a third party) even if such damage or loss was
 -- reasonably foreseeable or Xilinx had been advised of the
 -- possibility of the same.
--- 
+--
 -- CRITICAL APPLICATIONS
 -- Xilinx products are not designed or intended to be fail-
 -- safe, or for use in any application requiring fail-safe
@@ -46,7 +46,7 @@
 -- liability of any use of Xilinx products in Critical
 -- Applications, subject only to applicable laws and
 -- regulations governing limitations on product liability.
--- 
+--
 -- THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS
 -- PART OF THIS FILE AT ALL TIMES.
 --------------------------------------------------------------------------------
@@ -88,11 +88,11 @@ PACKAGE INFO_FIFO_0_pkg IS
    true_case : TIME;
    false_case : TIME)
  RETURN TIME;
- ------------------------ 
+ ------------------------
  FUNCTION log2roundup (
       data_value : INTEGER)
- RETURN INTEGER; 
- ------------------------ 
+ RETURN INTEGER;
+ ------------------------
  FUNCTION hexstr_to_std_logic_vec(
    arg1 : string;
    size : integer )
@@ -105,11 +105,11 @@ PACKAGE INFO_FIFO_0_pkg IS
       CLK : IN STD_LOGIC;
       RESET : IN STD_LOGIC;
       ENABLE : IN STD_LOGIC;
-      RANDOM_NUM : OUT STD_LOGIC_VECTOR (WIDTH-1 DOWNTO 0)         
+      RANDOM_NUM : OUT STD_LOGIC_VECTOR (WIDTH-1 DOWNTO 0)
      );
- END COMPONENT; 
- ------------------------ 
- 
+ END COMPONENT;
+ ------------------------
+
  COMPONENT INFO_FIFO_0_dgen IS
   GENERIC (
 	    C_DIN_WIDTH   : INTEGER := 32;
@@ -121,12 +121,12 @@ PACKAGE INFO_FIFO_0_pkg IS
         RESET     : IN STD_LOGIC;
         WR_CLK    : IN STD_LOGIC;
         PRC_WR_EN : IN STD_LOGIC;
-        FULL      : IN STD_LOGIC;  
-        WR_EN     : OUT STD_LOGIC;      
+        FULL      : IN STD_LOGIC;
+        WR_EN     : OUT STD_LOGIC;
         WR_DATA   : OUT STD_LOGIC_VECTOR(C_DIN_WIDTH-1 DOWNTO 0)
        );
  END COMPONENT;
- ------------------------ 
+ ------------------------
 
  COMPONENT INFO_FIFO_0_dverif IS
   GENERIC(
@@ -145,8 +145,8 @@ PACKAGE INFO_FIFO_0_pkg IS
        RD_EN       : OUT STD_LOGIC;
        DOUT_CHK    : OUT STD_LOGIC
       );
- END COMPONENT; 
- ------------------------ 
+ END COMPONENT;
+ ------------------------
 
  COMPONENT INFO_FIFO_0_pctrl IS
    GENERIC(
@@ -207,7 +207,7 @@ PACKAGE INFO_FIFO_0_pkg IS
            EMPTY                     : OUT std_logic);
 
  END COMPONENT;
- ------------------------ 
+ ------------------------
 
 
 END INFO_FIFO_0_pkg;
@@ -273,7 +273,7 @@ PACKAGE BODY INFO_FIFO_0_pkg IS
     END IF;
     RETURN retval;
   END if_then_else;
-  ------------------------------- 
+  -------------------------------
   FUNCTION log2roundup (
       data_value : INTEGER)
     RETURN INTEGER IS
@@ -296,9 +296,9 @@ PACKAGE BODY INFO_FIFO_0_pkg IS
   -- hexstr_to_std_logic_vec
   --  This function converts a hex string to a std_logic_vector
   ------------------------------------------------------------------------------
-  FUNCTION hexstr_to_std_logic_vec( 
-    arg1 : string; 
-    size : integer ) 
+  FUNCTION hexstr_to_std_logic_vec(
+    arg1 : string;
+    size : integer )
   RETURN std_logic_vector IS
     VARIABLE result : std_logic_vector(size-1 DOWNTO 0) := (OTHERS => '0');
     VARIABLE bin    : std_logic_vector(3 DOWNTO 0);

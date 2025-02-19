@@ -88,7 +88,7 @@ void FENIMPlusInterface::configure(void)
 	FEOtsUDPTemplateInterface::configure();  // sets up destination IP/port
 	if((optionalLink.getNode("PrimaryBoardConfig").getValue<bool>()))
 	{  // only configure clocks only if on "Primary" board config, to avoid configuring
-	   // clocks (among other things) more than once
+		// clocks (among other things) more than once
 		// NimPlus v2 Input/Output Mux control
 		// b7-b0 - FW Block A Input b15-b8 FW Block B Input
 		uint64_t iomux_config = 0x0;
@@ -1142,7 +1142,7 @@ void FENIMPlusInterface::stop(void)
 				__CFG_COUT__ << "Attempting to save counts to " << filename << __E__;
 				FILE* fp =
 				    fopen(  //("/data/TestBeam/2017_12_December/NimPlus/TriggerCount_" +
-				            // runNumber_ + ".cnt").c_str()
+				        // runNumber_ + ".cnt").c_str()
 				        filename.c_str(),
 				        "w");
 				if(fp)
@@ -1308,7 +1308,7 @@ bool FENIMPlusInterface::running(void)
 			                           // variable SignalGeneratorEnable is used!
 			{
 				//sendPatternTrigger(0xFFF000FFFFFF,"Channel1");13MHz
-				sendPatternTrigger(0xFC0FFF,"Channel1");
+				sendPatternTrigger(0xFC0FFF, "Channel1");
 				__CFG_COUT__ << "Sending trigger pattern!" << __E__;
 			}
 
@@ -1880,18 +1880,22 @@ void FENIMPlusInterface::sendPatternTrigger(uint64_t    patternToSend,
 			}
 			outputModMask = (0xFFFFFFFFFFFFFFFF >> (64 - outputWidthMask)) << outputDelay;
 		}
-		else //outputWidth == 0
-			outputModMask = 0; //disables output!
-		__CFG_COUT__ << std::hex << "CHANNEL: " << channelName << " OUTPUT MASK: " << outputModMask <<  std::dec << std::endl;
+		else                    //outputWidth == 0
+			outputModMask = 0;  //disables output!
+		__CFG_COUT__ << std::hex << "CHANNEL: " << channelName
+		             << " OUTPUT MASK: " << outputModMask << std::dec << std::endl;
 		//THIS IS DONE IN CASE YOU WANT TO HAVE A PATTERN AND WORKED FOR THE STRIP TELESCOPE WHEN RUNNING ON KC705
 		// if(channelName == "Channel1")
 		// {
 		// // 	outputModMask = 0xFFF000FFF;//13MHz
 		//  	outputModMask = 0xFC0FC;
 		// }
-		
+
 		//set output channel back to its default
-		OtsUDPFirmwareCore::writeAdvanced(writeBuffer, channelNumber==0?0x2:(0x18002 + channelNumber - 1), outputModMask);
+		OtsUDPFirmwareCore::writeAdvanced(
+		    writeBuffer,
+		    channelNumber == 0 ? 0x2 : (0x18002 + channelNumber - 1),
+		    outputModMask);
 		OtsUDPHardware::write(writeBuffer);
 		__CFG_COUT__ << "Writing back pattern for " << channelName << " is " << std::hex
 		             << outputModMask << std::dec << std::endl;

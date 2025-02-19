@@ -1008,7 +1008,7 @@ void FENIMPlusInterfaceV1::stop(void)
 				__CFG_COUT__ << "Attempting to save counts to " << filename << __E__;
 				FILE* fp =
 				    fopen(  //("/data/TestBeam/2017_12_December/NimPlus/TriggerCount_"
-				            //+ runNumber_ + ".cnt").c_str()
+				        //+ runNumber_ + ".cnt").c_str()
 				        filename.c_str(),
 				        "w");
 				if(fp)

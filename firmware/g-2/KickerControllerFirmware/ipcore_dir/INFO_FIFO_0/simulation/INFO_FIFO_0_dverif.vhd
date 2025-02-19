@@ -1,16 +1,16 @@
 --------------------------------------------------------------------------------
 --
--- FIFO Generator Core Demo Testbench 
+-- FIFO Generator Core Demo Testbench
 --
 --------------------------------------------------------------------------------
 --
 -- (c) Copyright 2009 - 2010 Xilinx, Inc. All rights reserved.
--- 
+--
 -- This file contains confidential and proprietary information
 -- of Xilinx, Inc. and is protected under U.S. and
 -- international copyright and other intellectual property
 -- laws.
--- 
+--
 -- DISCLAIMER
 -- This disclaimer is not a license and does not grant any
 -- rights to the materials distributed herewith. Except as
@@ -32,7 +32,7 @@
 -- by a third party) even if such damage or loss was
 -- reasonably foreseeable or Xilinx had been advised of the
 -- possibility of the same.
--- 
+--
 -- CRITICAL APPLICATIONS
 -- Xilinx products are not designed or intended to be fail-
 -- safe, or for use in any application requiring fail-safe
@@ -46,7 +46,7 @@
 -- liability of any use of Xilinx products in Critical
 -- Applications, subject only to applicable laws and
 -- regulations governing limitations on product liability.
--- 
+--
 -- THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS
 -- PART OF THIS FILE AT ALL TIMES.
 --------------------------------------------------------------------------------
@@ -77,19 +77,19 @@ ENTITY INFO_FIFO_0_dverif IS
    TB_SEED            : INTEGER := 2
   );
   PORT(
-       RESET          : IN STD_LOGIC;
-       RD_CLK         : IN STD_LOGIC;
-       PRC_RD_EN      : IN STD_LOGIC;
-       EMPTY          : IN STD_LOGIC;
-       DATA_OUT       : IN STD_LOGIC_VECTOR(C_DOUT_WIDTH-1 DOWNTO 0);
-       RD_EN          : OUT STD_LOGIC;
-       DOUT_CHK       : OUT STD_LOGIC
-      );
+	   RESET          : IN STD_LOGIC;
+	   RD_CLK         : IN STD_LOGIC;
+	   PRC_RD_EN      : IN STD_LOGIC;
+	   EMPTY          : IN STD_LOGIC;
+	   DATA_OUT       : IN STD_LOGIC_VECTOR(C_DOUT_WIDTH-1 DOWNTO 0);
+	   RD_EN          : OUT STD_LOGIC;
+	   DOUT_CHK       : OUT STD_LOGIC
+	  );
 END ENTITY;
 
 
 ARCHITECTURE fg_dv_arch OF INFO_FIFO_0_dverif IS
- 
+
  CONSTANT C_DATA_WIDTH    : INTEGER := if_then_else(C_DIN_WIDTH > C_DOUT_WIDTH,C_DIN_WIDTH,C_DOUT_WIDTH);
  CONSTANT EXTRA_WIDTH     : INTEGER := if_then_else(C_CH_TYPE = 2,1,0);
  CONSTANT LOOP_COUNT      : INTEGER := divroundup(C_DATA_WIDTH+EXTRA_WIDTH,8);
@@ -102,58 +102,58 @@ ARCHITECTURE fg_dv_arch OF INFO_FIFO_0_dverif IS
  SIGNAL rd_en_d1          : STD_LOGIC := '0';
 BEGIN
 
- 
+
   DOUT_CHK <= data_chk;
   RD_EN    <= rd_en_i;
   rd_en_i  <= PRC_RD_EN;
-  
- 
-  data_fifo_chk:IF(C_CH_TYPE /=2) GENERATE 
+
+
+  data_fifo_chk:IF(C_CH_TYPE /=2) GENERATE
   -------------------------------------------------------
   -- Expected data generation and checking for data_fifo
   -------------------------------------------------------
-      PROCESS (RD_CLK,RESET)
-      BEGIN
-        IF (RESET = '1') THEN
-          rd_en_d1 <= '0';
-        ELSIF (RD_CLK'event AND RD_CLK='1') THEN
-          IF(EMPTY = '0' AND rd_en_i='1' AND rd_en_d1 = '0') THEN
-            rd_en_d1 <= '1';
-          END IF;
-        END IF;
-      END PROCESS;
-   
-      pr_r_en       <= rd_en_i AND NOT EMPTY AND rd_en_d1;
-      expected_dout <= rand_num(C_DOUT_WIDTH-1 DOWNTO 0);
+	  PROCESS (RD_CLK,RESET)
+	  BEGIN
+		IF (RESET = '1') THEN
+		  rd_en_d1 <= '0';
+		ELSIF (RD_CLK'event AND RD_CLK='1') THEN
+		  IF(EMPTY = '0' AND rd_en_i='1' AND rd_en_d1 = '0') THEN
+			rd_en_d1 <= '1';
+		  END IF;
+		END IF;
+	  END PROCESS;
 
-    gen_num:FOR N IN LOOP_COUNT-1 DOWNTO 0 GENERATE
-      rd_gen_inst2:INFO_FIFO_0_rng
-      GENERIC MAP(
-      	        WIDTH => 8,
-                SEED  => TB_SEED+N
-                 )
-      PORT MAP(
-                CLK        => RD_CLK,
-	        RESET      => RESET,
-                RANDOM_NUM => rand_num(8*(N+1)-1 downto 8*N),
-                ENABLE     => pr_r_en 	    
-              );
-    END GENERATE;    
-    
-      PROCESS (RD_CLK,RESET)
-      BEGIN
-        IF(RESET = '1') THEN
-          data_chk <= '0';
-        ELSIF (RD_CLK'event AND RD_CLK='1') THEN
-          IF((EMPTY = '0') AND (rd_en_i = '1' AND rd_en_d1 = '1')) THEN
-            IF(DATA_OUT = expected_dout) THEN
-              data_chk <= '0';
-            ELSE
-              data_chk <= '1';
-            END IF;
-          END IF;
-        END IF;
-      END PROCESS;
+	  pr_r_en       <= rd_en_i AND NOT EMPTY AND rd_en_d1;
+	  expected_dout <= rand_num(C_DOUT_WIDTH-1 DOWNTO 0);
+
+	gen_num:FOR N IN LOOP_COUNT-1 DOWNTO 0 GENERATE
+	  rd_gen_inst2:INFO_FIFO_0_rng
+	  GENERIC MAP(
+				WIDTH => 8,
+				SEED  => TB_SEED+N
+				 )
+	  PORT MAP(
+				CLK        => RD_CLK,
+			RESET      => RESET,
+				RANDOM_NUM => rand_num(8*(N+1)-1 downto 8*N),
+				ENABLE     => pr_r_en
+			  );
+	END GENERATE;
+
+	  PROCESS (RD_CLK,RESET)
+	  BEGIN
+		IF(RESET = '1') THEN
+		  data_chk <= '0';
+		ELSIF (RD_CLK'event AND RD_CLK='1') THEN
+		  IF((EMPTY = '0') AND (rd_en_i = '1' AND rd_en_d1 = '1')) THEN
+			IF(DATA_OUT = expected_dout) THEN
+			  data_chk <= '0';
+			ELSE
+			  data_chk <= '1';
+			END IF;
+		  END IF;
+		END IF;
+	  END PROCESS;
   END GENERATE data_fifo_chk;
 
 END ARCHITECTURE;

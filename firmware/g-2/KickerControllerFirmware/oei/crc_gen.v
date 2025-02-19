@@ -36,9 +36,9 @@
 //// from http://www.opencores.org/lgpl.shtml                     ////
 ////                                                              ////
 //////////////////////////////////////////////////////////////////////
-//                                                                    
-// CVS Revision History                                               
-//                                                                    
+//
+// CVS Revision History
+//
 // $Log: crc_gen.v,v $
 // Revision 1.3  2006/01/19 14:07:54  maverickist
 // verification is complete.
@@ -49,7 +49,7 @@
 //
 // Revision 1.1.1.1  2005/12/13 01:51:45  Administrator
 // no message
-//                                           
+//
 
 module crc_gen (
 Reset       ,
@@ -59,7 +59,7 @@ Frame_data  ,
 Data_en     ,
 CRC_rd      ,
 CRC_end     ,
-CRC_out     
+CRC_out
 
 );
 input           Reset       ;
@@ -71,8 +71,8 @@ input           CRC_rd      ;
 output  [7:0]   CRC_out     ;
 output          CRC_end     ;
 
-//******************************************************************************   
-//internal signals                                                              
+//******************************************************************************
+//internal signals
 //******************************************************************************
 reg [7:0]       CRC_out     ;
 reg [31:0]      CRC_reg;
@@ -132,7 +132,7 @@ always @ (posedge Clk or posedge Reset)
         CRC_reg     <=NextCRC(Frame_data,CRC_reg);
     else if (CRC_rd)
         CRC_reg     <={CRC_reg[23:0],8'hff};
-        
+
 always @ (CRC_rd or CRC_reg)
     if (CRC_rd)
         CRC_out     <=~{
@@ -147,17 +147,17 @@ always @ (CRC_rd or CRC_reg)
                         };
     else
         CRC_out     <=0;
-        
-//caculate CRC out length ,4 cycles     
+
+//caculate CRC out length ,4 cycles
 //CRC_end aligned to last CRC checksum data
 always @(posedge Clk or posedge Reset)
     if (Reset)
         Counter     <=0;
     else if (!CRC_rd)
         Counter     <=0;
-    else 
+    else
         Counter     <=Counter + 1;
-        
+
 always @ (Counter)
     if (Counter==3)
         CRC_end=1;
@@ -165,5 +165,3 @@ always @ (Counter)
         CRC_end=0;
 
 endmodule
-
-
