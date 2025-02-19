@@ -1,8 +1,8 @@
 console : {
- 	type : cout
- 	threshold : "DEBUG"
- 	format:
- 	{
+	type : cout
+	threshold : "DEBUG"
+	format:
+	{
 		timestamp: none
 		noLineBreaks: true
 	}
