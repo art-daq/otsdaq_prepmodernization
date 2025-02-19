@@ -38,4 +38,3 @@ begin
 	o <= i;
 
 end Behavioral;
-

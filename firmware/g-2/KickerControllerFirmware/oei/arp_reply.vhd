@@ -14,7 +14,7 @@
 --
 -------------------------------------------------------------------------------
 --
--- Description : 
+-- Description :
 --
 -------------------------------------------------------------------------------
 
@@ -23,7 +23,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.std_logic_arith.all;
 use IEEE.std_logic_unsigned.all;
 
-entity arp_reply is 
+entity arp_reply is
 	port (
 		addrs: in STD_LOGIC_VECTOR (31 downto 0);
 		arp_announce: in STD_LOGIC;

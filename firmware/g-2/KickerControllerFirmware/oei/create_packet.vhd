@@ -14,7 +14,7 @@
 --
 -------------------------------------------------------------------------------
 --
--- Description : 
+-- Description :
 --
 -------------------------------------------------------------------------------
 
@@ -24,7 +24,7 @@ use IEEE.std_logic_arith.all;
 use IEEE.std_logic_unsigned.all;
 
 use work.params_package.all;
-entity create_packet is 
+entity create_packet is
 	port (
 		addrs: in STD_LOGIC_VECTOR (31 downto 0);
 		arp_busy: in STD_LOGIC;
@@ -76,21 +76,21 @@ signal zero_fill_count: STD_LOGIC_VECTOR (10 downto 0);
 
 -- SYMBOLIC ENCODED state machine: Sreg0
 type Sreg0_type is (
-    SendPacket_Dest_S11, SendPacket_Dest_S12, SendPacket_Dest_S13, SendPacket_Dest_S14, SendPacket_Dest_S15, SendPacket_Src_S16, SendPacket_Src_S18,
-    SendPacket_Payload_IP_icmpProtocol, SendPacket_Src_S19, SendPacket_Src_S20, SendPacket_Src_S21, SendPacket_Src_S17, SendPacket_Type_S26,
-    SendPacket_Type_S29, SendPacket_Dest_S22, SendPacket_Payload_IP_TotLength2, SendPacket_Payload_IP_VersionAndHeader, SendPacket_Payload_IP_TotLength1,
-    SendPacket_Payload_IP_ToS1, SendPacket_Payload_UDP_SourcePort1, SendPacket_Payload_UDP_DestPort1, SendPacket_Payload_IP_ID2, SendPacket_Payload_IP_FlagsAndFrag,
-    SendPacket_Payload_IP_FragmentOffset, SendPacket_Payload_IP_icmpTotLength1, SendPacket_Payload_IP_TTL, SendPacket_Payload_IP_Protocol,
-    SendPacket_Payload_IP_Checksum1, SendPacket_Payload_IP_Checksum2, SendPacket_Payload_IP_SourceAddr1, SendPacket_Payload_IP_icmpTotLength2,
-    SendPacket_Payload_IP_SourceAddr2, SendPacket_Payload_IP_SourceAddr3, SendPacket_Payload_IP_ID1, SendPacket_Payload_IP_SourceAddr4,
-    SendPacket_Payload_IP_DestAddr1, SendPacket_Payload_IP_DestAddr2, SendPacket_Payload_IP_DestAddr3, SendPacket_Payload_IP_DestAddr4,
-    SendPacket_Payload_UDP_Length1, SendPacket_Payload_UDP_DestPort2, SendPacket_Payload_UDP_SourcePort2, SendPacket_Payload_UDP_Length2,
-    SendPacket_Payload_UDP_Checksum1, SendPacket_Payload_UDP_Checksum2, SendPacket_Payload_UDP_DataLoop, Idle, sleep, CheckBusy, SendPacket_Preamble_S58,
-    SendPacket_Preamble_S57, SendPacket_CRC_crc4, SendPacket_CRC_crc3, SendPacket_CRC_crc2, SendPacket_CRC_S59, SendPacket_CRC_crc1,
-    SendPacket_CRC_S1, SendPacket_Payload_ICMP_Type, SendPacket_Payload_ICMP_Code, SendPacket_Payload_ICMP_Checksum1, SendPacket_Payload_ICMP_ID1,
-    SendPacket_Payload_ICMP_Checksum2, SendPacket_Payload_ICMP_ID2, SendPacket_Payload_ICMP_SeqNum1, SendPacket_Payload_ICMP_SeqNum2,
-    SendPacket_Payload_ICMP_DataLoop, SendPacket_Dest_S60, SendPacket_Dest_S61, SendPacket_Dest_S62, SendPacket_Dest_S63, SendPacket_Dest_S64,
-    SendPacket_Dest_S65, SendPacket_Payload_IP_DestAddr6, SendPacket_Payload_IP_DestAddr5, SendPacket_Payload_IP_DestAddr8, SendPacket_Payload_IP_DestAddr7
+	SendPacket_Dest_S11, SendPacket_Dest_S12, SendPacket_Dest_S13, SendPacket_Dest_S14, SendPacket_Dest_S15, SendPacket_Src_S16, SendPacket_Src_S18,
+	SendPacket_Payload_IP_icmpProtocol, SendPacket_Src_S19, SendPacket_Src_S20, SendPacket_Src_S21, SendPacket_Src_S17, SendPacket_Type_S26,
+	SendPacket_Type_S29, SendPacket_Dest_S22, SendPacket_Payload_IP_TotLength2, SendPacket_Payload_IP_VersionAndHeader, SendPacket_Payload_IP_TotLength1,
+	SendPacket_Payload_IP_ToS1, SendPacket_Payload_UDP_SourcePort1, SendPacket_Payload_UDP_DestPort1, SendPacket_Payload_IP_ID2, SendPacket_Payload_IP_FlagsAndFrag,
+	SendPacket_Payload_IP_FragmentOffset, SendPacket_Payload_IP_icmpTotLength1, SendPacket_Payload_IP_TTL, SendPacket_Payload_IP_Protocol,
+	SendPacket_Payload_IP_Checksum1, SendPacket_Payload_IP_Checksum2, SendPacket_Payload_IP_SourceAddr1, SendPacket_Payload_IP_icmpTotLength2,
+	SendPacket_Payload_IP_SourceAddr2, SendPacket_Payload_IP_SourceAddr3, SendPacket_Payload_IP_ID1, SendPacket_Payload_IP_SourceAddr4,
+	SendPacket_Payload_IP_DestAddr1, SendPacket_Payload_IP_DestAddr2, SendPacket_Payload_IP_DestAddr3, SendPacket_Payload_IP_DestAddr4,
+	SendPacket_Payload_UDP_Length1, SendPacket_Payload_UDP_DestPort2, SendPacket_Payload_UDP_SourcePort2, SendPacket_Payload_UDP_Length2,
+	SendPacket_Payload_UDP_Checksum1, SendPacket_Payload_UDP_Checksum2, SendPacket_Payload_UDP_DataLoop, Idle, sleep, CheckBusy, SendPacket_Preamble_S58,
+	SendPacket_Preamble_S57, SendPacket_CRC_crc4, SendPacket_CRC_crc3, SendPacket_CRC_crc2, SendPacket_CRC_S59, SendPacket_CRC_crc1,
+	SendPacket_CRC_S1, SendPacket_Payload_ICMP_Type, SendPacket_Payload_ICMP_Code, SendPacket_Payload_ICMP_Checksum1, SendPacket_Payload_ICMP_ID1,
+	SendPacket_Payload_ICMP_Checksum2, SendPacket_Payload_ICMP_ID2, SendPacket_Payload_ICMP_SeqNum1, SendPacket_Payload_ICMP_SeqNum2,
+	SendPacket_Payload_ICMP_DataLoop, SendPacket_Dest_S60, SendPacket_Dest_S61, SendPacket_Dest_S62, SendPacket_Dest_S63, SendPacket_Dest_S64,
+	SendPacket_Dest_S65, SendPacket_Payload_IP_DestAddr6, SendPacket_Payload_IP_DestAddr5, SendPacket_Payload_IP_DestAddr8, SendPacket_Payload_IP_DestAddr7
 );
 -- attribute ENUM_ENCODING of Sreg0_type: type is ... -- enum_encoding attribute is not supported for symbolic encoding
 
@@ -329,8 +329,8 @@ begin
 					when SendPacket_Payload_UDP_DataLoop =>
 						length_count <= length_count - 1;
 						if test_data = x"5A" then	 -- if Z
-						 	test_data <= x"41";
-						 	-- A
+							test_data <= x"41";
+							-- A
 						else
 							test_data <= ETH_CONTROLLER_VERSION(7 downto 0);
 							----test_data + 1;

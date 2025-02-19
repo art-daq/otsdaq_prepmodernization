@@ -36,9 +36,9 @@
 //// from http://www.opencores.org/lgpl.shtml                     ////
 ////                                                              ////
 //////////////////////////////////////////////////////////////////////
-//                                                                    
-// CVS Revision History                                               
-//                                                                    
+//
+// CVS Revision History
+//
 // $Log: CRC_chk.v,v $
 // Revision 1.3  2006/01/19 14:07:54  maverickist
 // verification is complete.
@@ -49,7 +49,7 @@
 //
 // Revision 1.1.1.1  2005/12/13 01:51:45  Administrator
 // no message
-//                                           
+//
 
 module crc_chk(
 Reset       ,
@@ -57,9 +57,9 @@ Clk         ,
 CRC_data    ,
 CRC_init    ,
 CRC_en      ,
-//From CPU  
+//From CPU
 CRC_chk_en  ,
-CRC_err     
+CRC_err
 );
 input       Reset       ;
 input       Clk         ;
@@ -68,9 +68,9 @@ input       CRC_init    ;
 input       CRC_en      ;
             //From CPU
 input       CRC_chk_en  ;
-output      CRC_err     ; 
-//******************************************************************************   
-//internal signals                                                              
+output      CRC_err     ;
+//******************************************************************************
+//internal signals
 //******************************************************************************
 reg [31:0]  CRC_reg;
 wire[31:0]  Next_CRC;

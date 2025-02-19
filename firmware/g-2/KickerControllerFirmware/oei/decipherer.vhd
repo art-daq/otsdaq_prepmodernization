@@ -14,7 +14,7 @@
 --
 -------------------------------------------------------------------------------
 --
--- Description : 
+-- Description :
 --
 -------------------------------------------------------------------------------
 
@@ -23,7 +23,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.std_logic_arith.all;
 use IEEE.std_logic_unsigned.all;
 
-entity decipherer is 
+entity decipherer is
 	port (
 		clk: in STD_LOGIC;
 		data_in: in STD_LOGIC_VECTOR (7 downto 0);

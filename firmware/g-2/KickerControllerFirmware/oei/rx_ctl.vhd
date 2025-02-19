@@ -14,16 +14,16 @@
 --
 -------------------------------------------------------------------------------
 --
--- Description : 
+-- Description :
 --
 -------------------------------------------------------------------------------
 
 library IEEE;
-use IEEE.std_logic_1164.all;  		
+use IEEE.std_logic_1164.all;
 use ieee.numeric_std.all;
 use work.params_package.all;
 
-entity rx_ctl is 
+entity rx_ctl is
 	port (
 		clear_crc_err_flag: in STD_LOGIC;
 		clock: in STD_LOGIC;
@@ -55,7 +55,7 @@ signal q_w_counter: UNSIGNED (7 downto 0);
 -- BINARY ENCODED state machine: Sreg0
 attribute ENUM_ENCODING: string;
 type Sreg0_type is (
-    idle, insert_crc, rcvdone, S13, S3_S4, S3_S9, S3_S8, S3_S7, S3_S6, S3_S5, S3_S11, S3_S10
+	idle, insert_crc, rcvdone, S13, S3_S4, S3_S9, S3_S8, S3_S7, S3_S6, S3_S5, S3_S11, S3_S10
 );
 attribute ENUM_ENCODING of Sreg0_type: type is
 	"0000 " &		-- idle
@@ -101,11 +101,11 @@ begin
 			crc_err_reg <= '0';
 			crc_err_flag <= '0';
 		elsif (user_crc_err = '1') then
-		  	crc_err_reg <= '1';
-		  	--stay high until reset to indicate there was an error ever
+			crc_err_reg <= '1';
+			--stay high until reset to indicate there was an error ever
 			crc_err_flag <= '1';
 		elsif (clear_crc_err_flag = '1') then -- command handler clears err flag after reseting fifos
-		   	crc_err_flag <= '0';
+			crc_err_flag <= '0';
 		end if;
 	end if;
 end process;
@@ -178,7 +178,7 @@ begin
 							-- writes the starting address first plus the
 							-- data
 							else -- all other commands only have 1
-							    q_w_count <= (0=>'1',others => '0');
+								q_w_count <= (0=>'1',others => '0');
 							-- This will cause only the address word
 							-- to be written to the data fifo.
 							end if;

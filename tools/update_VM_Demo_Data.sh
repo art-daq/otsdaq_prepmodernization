@@ -1,4 +1,4 @@
-  
+
   #code to update existing installs will be here
   if [[ $(diff -rq ${MRB_SOURCE}/otsdaq_prepmodernization/Data/ConfigurationInfo ${MRB_SOURCE}/otsdaq_prepmodernization/NoGitData/ConfigurationInfo | grep otsdaq_prepmodernization/Data/ConfigurationInfo) ]]; then
   #copy database data for *only* new databases (doesn't copy/modify existing data)
