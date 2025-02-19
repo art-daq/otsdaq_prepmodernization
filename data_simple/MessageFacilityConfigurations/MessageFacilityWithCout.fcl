@@ -1,5 +1,5 @@
-console : { 
- 	type : cout 
+console : {
+ 	type : cout
  	threshold : "DEBUG"
  	format:
  	{
@@ -9,8 +9,8 @@ console : {
 }
 
 #file: {
-#	type: "file" 
-#	filename: "/dev/null" 
+#	type: "file"
+#	filename: "/dev/null"
 #}
 file:""
 udp : {}

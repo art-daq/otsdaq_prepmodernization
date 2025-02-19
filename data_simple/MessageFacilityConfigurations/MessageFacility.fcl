@@ -1,11 +1,11 @@
-udp: { 
-	type: 					UDP 
-	threshold: 				DEBUG 
-	port: 					30000 
-	host: 					"127.0.0.1" 
+udp: {
+	type: 					UDP
+	threshold: 				DEBUG
+	port: 					30000
+	host: 					"127.0.0.1"
 }
 
-console: { 
+console: {
 	type: 					OTS
 	threshold: 				DEBUG
 	filename_delimit: 		"/srcs/"
@@ -13,8 +13,8 @@ console: {
 }
 
 #file: {
-#	type: "file" 
-#	filename: "/dev/null" 
+#	type: "file"
+#	filename: "/dev/null"
 #}
 file:""
 

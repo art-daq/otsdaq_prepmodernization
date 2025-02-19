@@ -33,7 +33,7 @@ daq: {
 		port: 40005
 		ip: "127.0.0.1"
 		wire_chamber_hostname: ftbfwc01	 # Hostname of the connected MWPC Controller
-		
+
 		destinations: {
 			d3: { transferPluginType: MPI destination_rank: 4294967295 max_fragment_size_words: 2097152}
 		}
@@ -51,4 +51,3 @@ daq: {
 	}
 
 }
-
