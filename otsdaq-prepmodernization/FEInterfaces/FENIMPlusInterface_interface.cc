@@ -751,8 +751,8 @@ void FENIMPlusInterface::configure(void)
 			{
 				__COUTV__(trigClkOutBankName);
 
-				ConfigurationTree::BitMap bankSelectionMap =
-				    optionalLink.getNode(trigClkOutBankName).getValueAsBitMap();
+				auto bankSelectionMap =
+				    optionalLink.getNode(trigClkOutBankName).getValueAsBitMap<uint32_t>();
 
 				// 0-5 are 53MHz
 				// 6-8 are 40MHz
