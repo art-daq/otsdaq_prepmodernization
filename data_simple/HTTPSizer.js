@@ -1,11 +1,11 @@
-﻿#!node
+#!node
 // serverbase.js : v0.5 : Node HTTPS Server
 // Author: Eric Flumerfelt, FNAL RSI
 // Last Modified: June 3, 2015
 // Modified By: Eric Flumerfelt
 //
 // serverbase sets up a basic HTTPS server and directs requests
-// to one of its submodules. 
+// to one of its submodules.
 //
 // Implementation Notes: modules should assign their emitter to the module_holder[<modulename>] object
 // modules will emit 'data' and 'end' signals and implement the function MasterInitFunction()
@@ -122,7 +122,7 @@ if (cluster.isMaster) {
         ca: LoadCerts("./certs/certificates"),
         crl: LoadCRLs("./certs/certificates"),
         requestCert: true,
-        rejectUnauthorized: false
+        rejectUnauthorized: true
     };
     var authlist = " " + fs.readFileSync("./certs/authorized_users");
     console.log("Done setting up options");
