@@ -122,7 +122,7 @@ if (cluster.isMaster) {
         ca: LoadCerts("./certs/certificates"),
         crl: LoadCRLs("./certs/certificates"),
         requestCert: true,
-        rejectUnauthorized: false
+        rejectUnauthorized: true
     };
     var authlist = " " + fs.readFileSync("./certs/authorized_users");
     console.log("Done setting up options");
