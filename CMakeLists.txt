@@ -15,6 +15,10 @@ find_package(cetmodules 3.16.00 REQUIRED)
 project(otsdaq-prepmodernization VERSION 3.01.00)
 
 include(CetCMakeEnv)
+include(SetCompilerFlags)
+include(InstallHeaders)
+include(InstallSource)
+include(InstallFhicl)
 cet_cmake_env()
 SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
